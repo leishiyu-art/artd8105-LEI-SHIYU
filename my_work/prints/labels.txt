@@ -1,0 +1,78 @@
+ARTD8105 · Session 2 · wall labels
+ISO portrait · one A2 + two A4
+Every mark from my_work/tools/tool.html. No post-processing.
+Fill the name. Fill seed and slider values from the tool readout at the moment you press Download SVG.
+The three sheets must be three different points in the parameter space, not three seeds of one setting.
+------------------------------------------------
+共用 / Shared
+姓名 / Name
+[填写你的姓名]
+[YOUR NAME]
+标题 / Title
+triangles, overlaping, reverse once
+triangles, overlapping, reverse once
+指令版本 / Instruction version
+版本 5（2026-08-30）
+Version 5 (30 August 2026)
+指令 / Instruction
+画图案：三角形，重叠，随机但连续，对比色，反转一次。痕迹穿过画面。中点处三角形可反向旋转。颜色来自海绵宝宝，调色板 C。沿序列渐隐。每第 N 个三角形更大。
+drawing a patterns: triangles, overlaping, draw at random but in consequences, reverse once. Trace across the page. Reverse at halfway by count. Palette C — SpongeBob character + Patrick Star Pink. Fade along the sequence. Composition beat: every Nth triangle larger.
+调色板 C / Palette C
+#FFD040 #E8B800 #FAFAFA #CC2800 #704214 #6BB8D4 #1A1A1A #FF808B
+固定决定 / Fixed decisions
+起点左上 / start top-left
+三角形：自由三点，填充+深色描边 / free three points, fill + dark outline
+有清晰痕迹线 / rather clear line-trace
+画面铺满可印区域（10 mm 边距内） / fills the drawable page inside a 10 mm margin
+后处理：无 / Post-processing: none — every mark from the generator
+------------------------------------------------
+印张 1 · A2 竖版 / Print 1 · A2 portrait
+文件 / File
+[ ]  my_work/prints/
+seed
+count
+size min–max
+overlap last N
+overlap amount
+colour run (1 = one by one, 2 = two by two)
+correlation
+max turn (degrees)
+trace weight (mm)
+outline weight (mm)
+fade
+composition beat
+reverse (on/off)
+------------------------------------------------
+印张 2 · A4 竖版 / Print 2 · A4 portrait
+文件 / File
+[ ]  my_work/prints/
+seed
+count
+size min–max
+overlap last N
+overlap amount
+colour run
+correlation
+max turn (degrees)
+trace weight (mm)
+outline weight (mm)
+fade
+composition beat
+reverse (on/off)
+------------------------------------------------
+印张 3 · A4 竖版 / Print 3 · A4 portrait
+文件 / File
+[ ]  my_work/prints/
+seed
+count
+size min–max
+overlap last N
+overlap amount
+colour run
+correlation
+max turn (degrees)
+trace weight (mm)
+outline weight (mm)
+fade
+composition beat
+reverse (on/off)

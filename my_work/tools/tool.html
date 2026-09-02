@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>ARTD8105 — overlapping triangles</title>
+  <style>
+    :root {
+      --ink: #1a1a1a;
+      --paper: #f4f1ea;
+      --panel: #2a2a28;
+      --muted: #b8b4a8;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      background: var(--paper);
+      color: var(--ink);
+      display: grid;
+      grid-template-columns: minmax(280px, 340px) 1fr;
+      min-height: 100%;
+    }
+    aside {
+      background: var(--panel);
+      color: #f4f1ea;
+      padding: 1.1rem 1.2rem 2rem;
+      overflow: auto;
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 13px;
+    }
+    aside h1 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin: 0 0 0.35rem;
+      letter-spacing: 0.02em;
+    }
+    .instruction {
+      font-size: 12px;
+      line-height: 1.45;
+      color: #ddd8cc;
+      margin: 0 0 1rem;
+      white-space: pre-wrap;
+    }
+    label.ctrl {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.15rem 0.6rem;
+      align-items: center;
+      margin: 0.65rem 0;
+    }
+    label.ctrl span.name { color: #eeeae0; }
+    label.ctrl span.val {
+      color: #fff56c;
+      font-variant-numeric: tabular-nums;
+      font-size: 12px;
+    }
+    label.ctrl input[type="range"] { grid-column: 1 / -1; width: 100%; }
+    label.ctrl input[type="number"] {
+      grid-column: 1 / -1;
+      width: 100%;
+      padding: 0.35rem 0.4rem;
+      background: #1c1c1a;
+      color: #fff;
+      border: 1px solid #555;
+    }
+    .check {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0.7rem 0;
+    }
+    button {
+      font: inherit;
+      cursor: pointer;
+      background: #fff56c;
+      color: #1a1a1a;
+      border: 0;
+      padding: 0.55rem 0.75rem;
+      margin: 0.25rem 0.35rem 0.25rem 0;
+      font-weight: 600;
+    }
+    button.ghost {
+      background: transparent;
+      color: #fff56c;
+      border: 1px solid #fff56c;
+    }
+    .swatches { display: flex; flex-wrap: wrap; gap: 4px; margin: 0.4rem 0 0.8rem; }
+    .swatches i {
+      width: 18px; height: 18px;
+      display: block;
+      border: 1px solid #000;
+    }
+    .readout {
+      margin-top: 1rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid #555;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+    .hint { color: var(--muted); font-size: 11px; margin: 0.2rem 0 0.8rem; }
+    main {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    #artwork {
+      width: min(100%, calc(90vh * 420 / 594));
+      height: auto;
+      background: #fff;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+    }
+  </style>
+</head>
+<body>
+  <aside>
+    <h1>Session 2 generator</h1>
+    <p class="instruction" id="instructionText"></p>
+
+    <p class="hint">ISO portrait A2 (420 × 594 mm). Same proportion as A4. 10 mm margin. Clip to the sheet. The sequence starts top-left and fills the drawable page.</p>
+
+    <label class="ctrl">
+      <span class="name">Seed</span>
+      <span class="val" id="seedVal"></span>
+      <input type="number" id="seed" min="0" step="1" />
+    </label>
+    <button type="button" id="newSeed" class="ghost">New seed</button>
+
+    <!-- "many triangles" → a count in 100–150 -->
+    <label class="ctrl">
+      <span class="name">Triangle count</span>
+      <span class="val" id="countVal"></span>
+      <input type="range" id="count" min="100" max="150" step="1" value="125" />
+    </label>
+    <p class="hint">Opens at 125, the middle of your 100–150 range. Change it.</p>
+
+    <!-- "random means the size" → fraction of the page width -->
+    <label class="ctrl">
+      <span class="name">Size min (page fraction)</span>
+      <span class="val" id="sizeMinVal"></span>
+      <input type="range" id="sizeMin" min="0.01" max="0.10" step="0.005" value="0.01" />
+    </label>
+    <label class="ctrl">
+      <span class="name">Size max (page fraction)</span>
+      <span class="val" id="sizeMaxVal"></span>
+      <input type="range" id="sizeMax" min="0.01" max="0.10" step="0.005" value="0.10" />
+    </label>
+
+    <!-- "2–3 overlap" → how many previous triangles to meet -->
+    <label class="ctrl">
+      <span class="name">Overlap last N triangles</span>
+      <span class="val" id="overlapVal"></span>
+      <input type="range" id="overlapCount" min="2" max="3" step="1" value="2" />
+    </label>
+    <label class="ctrl">
+      <span class="name">Overlap amount</span>
+      <span class="val" id="overlapAmtVal"></span>
+      <input type="range" id="overlapAmt" min="0.20" max="0.92" step="0.01" value="0.40" />
+    </label>
+    <p class="hint">Lower = they only share a corner or a part, not piled on top. You asked for not too overlap.</p>
+
+    <label class="ctrl">
+      <span class="name">Colour run (one by one / two by two)</span>
+      <span class="val" id="colourRunVal"></span>
+      <input type="range" id="colourRun" min="1" max="2" step="1" value="1" />
+    </label>
+    <p class="hint">1 = a new palette colour every triangle. 2 = two triangles the same colour, then the next colour.</p>
+
+    <label class="ctrl">
+      <span class="name">Correlation along the sequence</span>
+      <span class="val" id="corrVal"></span>
+      <input type="range" id="correlation" min="0.15" max="0.95" step="0.01" value="0.72" />
+    </label>
+    <p class="hint">Size, colour and heading stay related to the previous triangle. Low = independent jumps (the grid look). High = consecutive change.</p>
+
+    <!-- "a wandering path that may turn" / "any turn is ok" -->
+    <label class="ctrl">
+      <span class="name">Max turn per step (degrees)</span>
+      <span class="val" id="turnVal"></span>
+      <input type="range" id="maxTurn" min="10" max="180" step="1" value="180" />
+    </label>
+
+    <!-- "it suppose have some trace" / "rather clear line-trace" -->
+    <label class="ctrl">
+      <span class="name">Trace weight (mm)</span>
+      <span class="val" id="traceVal"></span>
+      <input type="range" id="traceWeight" min="0.3" max="2.5" step="0.1" value="1.2" />
+    </label>
+
+    <!-- fill plus dark outline -->
+    <label class="ctrl">
+      <span class="name">Outline weight (mm)</span>
+      <span class="val" id="outlineVal"></span>
+      <input type="range" id="outlineWeight" min="0.15" max="1.2" step="0.05" value="0.35" />
+    </label>
+
+    <!-- "reverse half by count maybe" -->
+    <label class="check">
+      <input type="checkbox" id="reverseOn" checked />
+      Reverse rotation after halfway (by count)
+    </label>
+
+    <label class="ctrl">
+      <span class="name">Fade along the sequence</span>
+      <span class="val" id="fadeVal"></span>
+      <input type="range" id="fade" min="0" max="0.85" step="0.01" value="0.50" />
+    </label>
+    <p class="hint">Later triangles grow more transparent. 0 = no fade. The trace stays readable.</p>
+
+    <label class="ctrl">
+      <span class="name">Composition beat (every Nth larger)</span>
+      <span class="val" id="beatVal"></span>
+      <input type="range" id="beat" min="0" max="8" step="1" value="4" />
+    </label>
+    <p class="hint">0 = off. 4 = every fourth triangle is a larger mark — a rhythm, not extra shapes.</p>
+
+    <p class="hint">Palette C — colours step through this set one-by-one or two-by-two, not a fresh random pick each time.</p>
+    <div class="swatches" id="swatches"></div>
+
+    <button type="button" id="redraw">Redraw</button>
+    <button type="button" id="download">Download SVG</button>
+
+    <div class="readout" id="readout"></div>
+  </aside>
+
+  <main>
+    <svg id="artwork" viewBox="0 0 420 594" width="420mm" height="594mm" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="pageClip">
+          <rect x="10" y="10" width="400" height="574" />
+        </clipPath>
+      </defs>
+      <rect x="0" y="0" width="420" height="594" fill="#ffffff" />
+      <rect x="10" y="10" width="400" height="574" fill="none" stroke="#eeeeee" stroke-width="0.2" />
+      <g id="drawing" clip-path="url(#pageClip)"></g>
+    </svg>
+  </main>
+
+  <script>
+    const PAGE_W = 420;
+    const PAGE_H = 594;
+    const MARGIN = 10;
+    const INNER_W = PAGE_W - MARGIN * 2;
+    const INNER_H = PAGE_H - MARGIN * 2;
+
+    // "seven colour in contrast colour" / SpongeBob + Patrick — palette C
+    const PALETTE = [
+      { name: "body yellow", hex: "#FFD040" },
+      { name: "pore gold", hex: "#E8B800" },
+      { name: "shirt", hex: "#FAFAFA" },
+      { name: "tie red", hex: "#CC2800" },
+      { name: "pants brown", hex: "#704214" },
+      { name: "eye blue", hex: "#6BB8D4" },
+      { name: "outline black", hex: "#1A1A1A" },
+      { name: "Patrick Star Pink", hex: "#FF808B" }
+    ];
+
+    const INSTRUCTION = `drawing a patterns: triangles, overlaping, draw at random but in consequences, use seven colour in contrast colour, reverse once.
+
+The pattern / trace goes across the canvas; there is supposed to be some trace.
+Reverse: at a middle point, the triangle may rotate in the reverse direction.
+
+Colour: SpongeBob SquarePants, palette C (character + Patrick).`;
+
+    document.getElementById("instructionText").textContent = INSTRUCTION;
+
+    const swatchBox = document.getElementById("swatches");
+    PALETTE.forEach(function (c) {
+      const i = document.createElement("i");
+      i.style.background = c.hex;
+      i.title = c.name + " " + c.hex;
+      swatchBox.appendChild(i);
+    });
+
+    // Small deterministic PRNG — same seed, same drawing
+    function mulberry32(seed) {
+      let a = seed >>> 0;
+      return function () {
+        a |= 0;
+        a = (a + 0x6D2B79F5) | 0;
+        let t = Math.imul(a ^ (a >>> 15), 1 | a);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+
+    function pickInt(rng, n) {
+      return Math.floor(rng() * n);
+    }
+
+    function triangleCentroid(pts) {
+      return [
+        (pts[0][0] + pts[1][0] + pts[2][0]) / 3,
+        (pts[0][1] + pts[1][1] + pts[2][1]) / 3
+      ];
+    }
+
+    function el(id) { return document.getElementById(id); }
+
+    function currentParams() {
+      let sizeMin = parseFloat(el("sizeMin").value);
+      let sizeMax = parseFloat(el("sizeMax").value);
+      if (sizeMin > sizeMax) {
+        const t = sizeMin;
+        sizeMin = sizeMax;
+        sizeMax = t;
+      }
+      return {
+        seed: parseInt(el("seed").value, 10) || 0,
+        count: parseInt(el("count").value, 10),
+        sizeMin: sizeMin,
+        sizeMax: sizeMax,
+        overlapCount: parseInt(el("overlapCount").value, 10),
+        overlapAmt: parseFloat(el("overlapAmt").value),
+        colourRun: parseInt(el("colourRun").value, 10),
+        correlation: parseFloat(el("correlation").value),
+        maxTurn: parseFloat(el("maxTurn").value),
+        traceWeight: parseFloat(el("traceWeight").value),
+        outlineWeight: parseFloat(el("outlineWeight").value),
+        reverseOn: el("reverseOn").checked,
+        fade: parseFloat(el("fade").value),
+        beat: parseInt(el("beat").value, 10)
+      };
+    }
+
+    function updateLabels(p) {
+      el("seedVal").textContent = String(p.seed);
+      el("countVal").textContent = String(p.count);
+      el("sizeMinVal").textContent = "1/" + Math.round(1 / p.sizeMin);
+      el("sizeMaxVal").textContent = "1/" + Math.round(1 / p.sizeMax);
+      el("overlapVal").textContent = String(p.overlapCount);
+      el("overlapAmtVal").textContent = p.overlapAmt.toFixed(2);
+      el("colourRunVal").textContent = p.colourRun === 1 ? "1 (one by one)" : "2 (two by two)";
+      el("corrVal").textContent = p.correlation.toFixed(2);
+      el("turnVal").textContent = String(Math.round(p.maxTurn));
+      el("traceVal").textContent = p.traceWeight.toFixed(1);
+      el("outlineVal").textContent = p.outlineWeight.toFixed(2);
+      el("fadeVal").textContent = p.fade.toFixed(2);
+      el("beatVal").textContent = p.beat === 0 ? "off" : "every " + p.beat;
+      el("readout").textContent =
+        "seed " + p.seed +
+        "\ncount " + p.count +
+        "\nsize " + p.sizeMin.toFixed(3) + "–" + p.sizeMax.toFixed(3) + " of page width" +
+        "\noverlap last " + p.overlapCount +
+        " · amount " + p.overlapAmt.toFixed(2) +
+        "\ncolour run " + p.colourRun +
+        "\ncorrelation " + p.correlation.toFixed(2) +
+        "\nmax turn " + Math.round(p.maxTurn) + "°" +
+        "\ntrace " + p.traceWeight + " mm" +
+        "\noutline " + p.outlineWeight + " mm" +
+        "\nfade " + p.fade.toFixed(2) +
+        "\nbeat " + (p.beat === 0 ? "off" : "every " + p.beat) +
+        "\nreverse " + (p.reverseOn ? "on after half count" : "off") +
+        "\npalette C · fill + dark outline · start top-left · fills the sheet";
+    }
+
+    // "the whole pattern need to be full of the canvas"
+    function bounceWalk(x, y, heading, pad) {
+      const minX = MARGIN + pad;
+      const maxX = MARGIN + INNER_W - pad;
+      const minY = MARGIN + pad;
+      const maxY = MARGIN + INNER_H - pad;
+      if (x < minX) { x = minX; heading = Math.PI - heading; }
+      if (x > maxX) { x = maxX; heading = Math.PI - heading; }
+      if (y < minY) { y = minY; heading = -heading; }
+      if (y > maxY) { y = maxY; heading = -heading; }
+      return { x: x, y: y, heading: heading };
+    }
+
+    function draw() {
+      const p = currentParams();
+      el("seed").value = String(p.seed);
+      updateLabels(p);
+
+      const rng = mulberry32(p.seed);
+      const drawing = el("drawing");
+      drawing.innerHTML = "";
+
+      const triangles = [];
+      const centres = [];
+      let heading = Math.PI / 4;
+      let cx = MARGIN + 24;
+      let cy = MARGIN + 24;
+      let sizeFrac = (p.sizeMin + p.sizeMax) / 2;
+      const colourStart = pickInt(rng, PALETTE.length);
+
+      for (let g = 0; g < p.count; g++) {
+        const pastMid = p.reverseOn && g >= Math.floor(p.count / 2);
+        const turnSign = pastMid ? -1 : 1;
+
+        // "at random but in consequences" — correlated size
+        const independentFrac = p.sizeMin + rng() * (p.sizeMax - p.sizeMin);
+        sizeFrac = p.correlation * sizeFrac + (1 - p.correlation) * independentFrac;
+        const size = PAGE_W * sizeFrac;
+
+        // "the colour can be changed maybe one by one or two by two"
+        const colourIndex = (colourStart + Math.floor(g / p.colourRun)) % PALETTE.length;
+        const fill = PALETTE[colourIndex].hex;
+
+        // "add more composition" — every Nth triangle is a larger mark
+        let drawSize = size;
+        if (p.beat > 0 && g % p.beat === 0) {
+          drawSize = size * 1.55;
+        }
+
+        if (g > 0) {
+          // wandering heading, damped by correlation so it is not a new random angle every step
+          const turnScale = (1 - 0.65 * p.correlation);
+          heading += turnSign * (rng() - 0.5) * 2 * (p.maxTurn * Math.PI / 180) * turnScale;
+          const step = size * (1.02 - p.overlapAmt);
+          cx += Math.cos(heading) * step;
+          cy += Math.sin(heading) * step;
+          const bounced = bounceWalk(cx, cy, heading, Math.min(size * 0.2, 16));
+          cx = bounced.x;
+          cy = bounced.y;
+          heading = bounced.heading;
+        }
+
+        let pts = freeThreePoints(cx, cy, drawSize, rng, turnSign);
+
+        if (g > 0) {
+          const prev = triangles[g - 1];
+          const share = p.overlapAmt * (0.45 + rng() * 0.15);
+          const anchorA = prev[pickInt(rng, 3)];
+          pts[0] = [
+            pts[0][0] * (1 - share) + anchorA[0] * share,
+            pts[0][1] * (1 - share) + anchorA[1] * share
+          ];
+          const anchorB = prev[(pickInt(rng, 3))];
+          const shareEdge = share * 0.55;
+          pts[1] = [
+            pts[1][0] * (1 - shareEdge) + anchorB[0] * shareEdge,
+            pts[1][1] * (1 - shareEdge) + anchorB[1] * shareEdge
+          ];
+
+          if (p.overlapCount >= 3 && g >= 2) {
+            const older = triangles[g - 2];
+            const olderCorner = older[pickInt(rng, 3)];
+            const shareOld = p.overlapAmt * 0.35;
+            pts[2] = [
+              pts[2][0] * (1 - shareOld) + olderCorner[0] * shareOld,
+              pts[2][1] * (1 - shareOld) + olderCorner[1] * shareOld
+            ];
+          }
+        }
+
+        triangles.push(pts);
+        centres.push(triangleCentroid(pts));
+        triangles[g].fill = fill;
+        triangles[g].fadeT = p.count <= 1 ? 0 : g / (p.count - 1);
+      }
+
+      const fitted = fillTheSheet(triangles, centres);
+
+      for (let g = 0; g < fitted.triangles.length; g++) {
+        const pts = fitted.triangles[g];
+        const poly = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+        poly.setAttribute(
+          "points",
+          pts.map(function (pt) { return pt[0].toFixed(3) + "," + pt[1].toFixed(3); }).join(" ")
+        );
+        poly.setAttribute("fill", triangles[g].fill);
+        poly.setAttribute("stroke", "#1A1A1A");
+        poly.setAttribute("stroke-width", String(p.outlineWeight));
+        poly.setAttribute("stroke-linejoin", "round");
+        // "add some fade effect" — later fills recede; outline stays stronger
+        const fillOp = Math.max(0.08, 1 - p.fade * triangles[g].fadeT);
+        const strokeOp = Math.max(0.25, 1 - p.fade * triangles[g].fadeT * 0.45);
+        poly.setAttribute("fill-opacity", fillOp.toFixed(3));
+        poly.setAttribute("stroke-opacity", strokeOp.toFixed(3));
+        drawing.appendChild(poly);
+      }
+
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
+      path.setAttribute(
+        "points",
+        fitted.centres.map(function (c) { return c[0].toFixed(3) + "," + c[1].toFixed(3); }).join(" ")
+      );
+      path.setAttribute("fill", "none");
+      path.setAttribute("stroke", "#1A1A1A");
+      path.setAttribute("stroke-width", String(p.traceWeight));
+      path.setAttribute("stroke-linejoin", "round");
+      path.setAttribute("stroke-linecap", "round");
+      path.setAttribute("opacity", "0.85");
+      drawing.appendChild(path);
+    }
+
+    function bboxOf(triangles, centres) {
+      let minX = Infinity;
+      let minY = Infinity;
+      let maxX = -Infinity;
+      let maxY = -Infinity;
+      function eat(p) {
+        minX = Math.min(minX, p[0]);
+        minY = Math.min(minY, p[1]);
+        maxX = Math.max(maxX, p[0]);
+        maxY = Math.max(maxY, p[1]);
+      }
+      triangles.forEach(function (tri) {
+        tri.forEach(eat);
+      });
+      centres.forEach(eat);
+      return { minX: minX, minY: minY, maxX: maxX, maxY: maxY };
+    }
+
+    // "the whole pattern need to be full of the canvas"
+    // Stretch the finished drawing so its bounding box is the drawable page.
+    function fillTheSheet(triangles, centres) {
+      const box = bboxOf(triangles, centres);
+      const spanX = Math.max(0.001, box.maxX - box.minX);
+      const spanY = Math.max(0.001, box.maxY - box.minY);
+      const scaleX = INNER_W / spanX;
+      const scaleY = INNER_H / spanY;
+      function mapPt(p) {
+        return [
+          MARGIN + (p[0] - box.minX) * scaleX,
+          MARGIN + (p[1] - box.minY) * scaleY
+        ];
+      }
+      return {
+        triangles: triangles.map(function (tri) {
+          return tri.map(mapPt);
+        }),
+        centres: centres.map(mapPt)
+      };
+    }
+
+    // "triangle kind can be free three points"
+    function freeThreePoints(cx, cy, size, rng, turnSign) {
+      const pts = [];
+      for (let k = 0; k < 3; k++) {
+        const base = turnSign * ((k / 3) * Math.PI * 2);
+        const ang = base + (rng() - 0.5) * 1.4;
+        const r = size * (0.35 + rng() * 0.65);
+        pts.push([cx + Math.cos(ang) * r, cy + Math.sin(ang) * r]);
+      }
+      return pts;
+    }
+
+    function downloadSvg() {
+      const svg = el("artwork");
+      const clone = svg.cloneNode(true);
+      clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+      clone.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
+      const text = '<?xml version="1.0" encoding="UTF-8"?>\n' + clone.outerHTML;
+      const blob = new Blob([text], { type: "image/svg+xml" });
+      const a = document.createElement("a");
+      const p = currentParams();
+      a.href = URL.createObjectURL(blob);
+      a.download = "triangles_seed-" + p.seed + "_n-" + p.count + ".svg";
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    function bind() {
+      if (!el("seed").value) el("seed").value = "1";
+      const ids = ["seed", "count", "sizeMin", "sizeMax", "overlapCount", "overlapAmt", "colourRun", "correlation", "maxTurn", "traceWeight", "outlineWeight", "reverseOn", "fade", "beat"];
+      ids.forEach(function (id) {
+        el(id).addEventListener("input", draw);
+      });
+      el("newSeed").addEventListener("click", function () {
+        el("seed").value = String(Math.floor(Math.random() * 99999));
+        draw();
+      });
+      el("redraw").addEventListener("click", draw);
+      el("download").addEventListener("click", downloadSvg);
+      draw();
+    }
+
+    bind();
+  </script>
+</body>
+</html>
