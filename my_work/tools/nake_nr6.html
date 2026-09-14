@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <title>ARTD8105 — Nake Nr. 6</title>
+  <style>
+    :root {
+      --ink: #111111;
+      --paper: #ffffff;
+      --bench: #9a958c;
+      --panel: #171717;
+      --muted: #9a958c;
+      --line: #3a3a3a;
+      --you: #ece8e0;
+      --rng: #d2ec3a;
+      --pen-green: #b6fe02;
+      --pen-purple: #8053fc;
+      --pen-pink: #ff3dbe;
+      --pen-black: #242834;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body {
+      font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+      background: var(--bench);
+      color: var(--ink);
+      display: grid;
+      grid-template-columns: minmax(320px, 380px) 1fr;
+      min-height: 100%;
+    }
+    aside {
+      background: var(--panel);
+      color: var(--you);
+      padding: 1rem 1.1rem 2.4rem;
+      overflow: auto;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+    aside h1 {
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin: 0 0 0.2rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .lede {
+      color: var(--muted);
+      margin: 0 0 1rem;
+      font-size: 11px;
+    }
+    .lede strong { color: var(--you); font-weight: 600; }
+    h2 {
+      margin: 1.15rem 0 0.45rem;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      padding-top: 0.75rem;
+    }
+    .card {
+      border: 1px solid var(--line);
+      padding: 0.7rem 0.75rem 0.55rem;
+      margin: 0 0 0.55rem;
+    }
+    .card.ceded { border-left: 3px solid var(--rng); }
+    .card.held { border-left: 3px solid var(--you); }
+    .card-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.6rem;
+      align-items: flex-start;
+    }
+    .idx { color: var(--muted); margin-right: 0.25rem; }
+    .card h3 {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+    }
+    .card .en {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 400;
+      margin-top: 0.12rem;
+    }
+    .toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      white-space: nowrap;
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      user-select: none;
+    }
+    .toggle input { accent-color: var(--rng); }
+    .card.ceded .toggle { color: var(--rng); }
+    label.ctrl {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.1rem 0.5rem;
+      align-items: center;
+      margin: 0.45rem 0 0;
+    }
+    label.ctrl span.name { color: #cfcabe; font-size: 11px; }
+    label.ctrl span.val {
+      color: var(--rng);
+      font-variant-numeric: tabular-nums;
+      font-size: 11px;
+    }
+    label.ctrl input[type="range"],
+    label.ctrl input[type="number"] { grid-column: 1 / -1; width: 100%; }
+    label.ctrl input[type="number"],
+    select {
+      padding: 0.32rem 0.4rem;
+      background: #0e0e0e;
+      color: #fff;
+      border: 1px solid #555;
+      font: inherit;
+    }
+    select { width: 100%; margin-top: 0.4rem; }
+    .hint { color: var(--muted); font-size: 10px; margin: 0.35rem 0 0; }
+    .row-btns { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.45rem 0 0; }
+    button {
+      font: inherit;
+      cursor: pointer;
+      background: var(--you);
+      color: #111;
+      border: 0;
+      padding: 0.5rem 0.7rem;
+      font-weight: 600;
+    }
+    button.ghost {
+      background: transparent;
+      color: var(--you);
+      border: 1px solid #666;
+    }
+    button.nake {
+      background: var(--rng);
+      color: #111;
+    }
+    .field-map {
+      display: grid;
+      gap: 3px;
+      margin-top: 0.5rem;
+    }
+    .field-map button {
+      aspect-ratio: 1;
+      padding: 0;
+      min-height: 18px;
+      background: #0e0e0e;
+      border: 1px solid #555;
+      color: transparent;
+      font-size: 9px;
+    }
+    .field-map button.on {
+      background: var(--you);
+      border-color: var(--you);
+      color: #111;
+    }
+    .field-map.locked button { cursor: default; }
+    .field-map.clickable button { cursor: pointer; }
+    .pens { display: flex; gap: 8px; margin-top: 0.45rem; flex-wrap: wrap; }
+    .pens i {
+      width: 18px; height: 18px;
+      display: block;
+      border: 1px solid #000;
+    }
+    .pen-weights { margin-top: 0.35rem; }
+    .sym-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.35rem 0.5rem;
+      margin-top: 0.55rem;
+    }
+    .sym-grid label {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: #cfcabe;
+      cursor: pointer;
+      font-size: 11px;
+    }
+    .sym-grid input { accent-color: var(--you); }
+    .card.variation { border-left: 3px solid #7a9bb8; }
+    .check {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin: 0.55rem 0;
+      color: #cfcabe;
+      cursor: pointer;
+    }
+    .readout {
+      margin-top: 0.9rem;
+      padding-top: 0.7rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.55;
+      white-space: pre-wrap;
+    }
+    main {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.6rem;
+    }
+    #artwork {
+      width: min(100%, 90vh);
+      height: auto;
+      background: var(--paper);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.28);
+    }
+  </style>
+</head>
+<body>
+  <aside>
+    <h1>Nake · Nr. 6</h1>
+    <p class="lede">
+      Felder mit Rechteckschraffuren · 02/09/1965<br>
+      七项来自 PI-21 p.10。开 = <strong>交给随机</strong>，关 = <strong>你来定</strong>。<br>
+      Seed 是引擎，不是第八项。第 08 项符号库是你的变体。
+    </p>
+
+    <h2>引擎 / Engine</h2>
+    <label class="ctrl">
+      <span class="name">Seed</span>
+      <span class="val" id="seedVal"></span>
+      <input type="number" id="seed" min="0" step="1" />
+    </label>
+    <div class="row-btns">
+      <button type="button" id="newSeed" class="ghost">New seed</button>
+      <button type="button" id="allRandom" class="nake">七项全开 · Nake mode</button>
+    </div>
+
+    <h2>结构补全 / Not in PI-21</h2>
+    <label class="ctrl">
+      <span class="name">Field 网格（边长）</span>
+      <span class="val" id="gridVal"></span>
+      <input type="range" id="gridN" min="2" max="8" step="1" value="4" />
+    </label>
+    <p class="hint">原作是「Felder」，必须先分区。几乘几文献没写。</p>
+    <label class="check">
+      <input type="checkbox" id="showGrid" />
+      显示 field 边界（只为看结构，不是原作）
+    </label>
+
+    <h2>七项 / The seven</h2>
+
+    <div class="card ceded" id="card-nFields">
+      <div class="card-head">
+        <h3><span class="idx">01</span>填几个 field<span class="en">Amount of fields to be filled</span></h3>
+        <label class="toggle"><input type="checkbox" id="rnd-nFields" checked /> 交给随机</label>
+      </div>
+      <div data-when="random">
+        <label class="ctrl"><span class="name">最少</span><span class="val" id="nFieldsMinVal"></span>
+          <input type="range" id="nFieldsMin" min="1" max="16" step="1" value="6" /></label>
+        <label class="ctrl"><span class="name">最多</span><span class="val" id="nFieldsMaxVal"></span>
+          <input type="range" id="nFieldsMax" min="1" max="16" step="1" value="12" /></label>
+      </div>
+      <div data-when="manual">
+        <label class="ctrl"><span class="name">固定数量</span><span class="val" id="nFieldsVal"></span>
+          <input type="range" id="nFields" min="1" max="16" step="1" value="8" /></label>
+      </div>
+    </div>
+
+    <div class="card ceded" id="card-select">
+      <div class="card-head">
+        <h3><span class="idx">02</span>选哪些 field<span class="en">Selection of these fields</span></h3>
+        <label class="toggle"><input type="checkbox" id="rnd-select" checked /> 交给随机</label>
+      </div>
+      <p class="hint" id="selectHint"></p>
+      <div class="field-map" id="fieldMap"></div>
+    </div>
+
+    <div class="card ceded" id="card-nSquares">
+      <div class="card-head">
+        <h3><span class="idx">03</span>每个 field 里几个 square<span class="en">Amount of squares in each field</span></h3>
+        <label class="toggle"><input type="checkbox" id="rnd-nSquares" checked /> 交给随机</label>
+      </div>
+      <div data-when="random">
+        <label class="ctrl"><span class="name">最少</span><span class="val" id="nSquaresMinVal"></span>
+          <input type="range" id="nSquaresMin" min="1" max="12" step="1" value="3" /></label>
+        <label class="ctrl"><span class="name">最多</span><span class="val" id="nSquaresMaxVal"></span>
+          <input type="range" id="nSquaresMax" min="1" max="12" step="1" value="7" /></label>
+      </div>
+      <div data-when="manual">
+        <label class="ctrl"><span class="name">每格固定</span><span class="val" id="nSquaresVal"></span>
+          <input type="range" id="nSquares" min="1" max="12" step="1" value="4" /></label>
+      </div>
+    </div>
+
+    <div class="card ceded" id="card-size">
+      <div class="card-head">
+        <h3><span class="idx">04</span>square 的大小<span class="en">Size of the squares · fraction of field</span></h3>
+        <label class="toggle"><input type="checkbox" id="rnd-size" checked /> 交给随机</label>
+      </div>
+      <div data-when="random">
+        <label class="ctrl"><span class="name">最小</span><span class="val" id="sizeMinVal"></span>
+          <input type="range" id="sizeMin" min="0.20" max="1" step="0.01" value="0.35" /></label>
+        <label class="ctrl"><span class="name">最大</span><span class="val" id="sizeMaxVal"></span>
+          <input type="range" id="sizeMax" min="0.20" max="1" step="0.01" value="0.85" /></label>
+      </div>
+      <div data-when="manual">
+        <label class="ctrl"><span class="name">固定比例</span><span class="val" id="sizeVal"></span>
+          <input type="range" id="size" min="0.20" max="1" step="0.01" value="0.55" /></label>
+      </div>
+    </div>
+
+    <div class="card ceded" id="card-density">
+      <div class="card-head">
+        <h3><span class="idx">05</span>影线密度<span class="en">Density · spacing between lines, mm</span></h3>
+        <label class="toggle"><input type="checkbox" id="rnd-density" checked /> 交给随机</label>
+      </div>
+      <p class="hint">数字越小越密。</p>
+      <div data-when="random">
+        <label class="ctrl"><span class="name">最密（小线距）</span><span class="val" id="denMinVal"></span>
+          <input type="range" id="denMin" min="0.6" max="8" step="0.1" value="1.2" /></label>
+        <label class="ctrl"><span class="name">最疏（大线距）</span><span class="val" id="denMaxVal"></span>
+          <input type="range" id="denMax" min="0.6" max="8" step="0.1" value="4.0" /></label>
+      </div>
+      <div data-when="manual">
+        <label class="ctrl"><span class="name">固定线距</span><span class="val" id="denVal"></span>
+          <input type="range" id="den" min="0.6" max="8" step="0.1" value="2.0" /></label>
+      </div>
+    </div>
+
+    <div class="card ceded" id="card-dir">
+      <div class="card-head">
+        <h3><span class="idx">06</span>影线方向<span class="en">Horizontal or vertical · PI-21</span></h3>
+        <label class="toggle"><input type="checkbox" id="rnd-dir" checked /> 交给随机</label>
+      </div>
+      <div data-when="manual">
+        <select id="dir">
+          <option value="h">强制只要横影线</option>
+          <option value="v">强制只要竖影线</option>
+        </select>
+      </div>
+      <p class="hint" data-when="random">符号库若同时勾了横+竖，两者都可出现。</p>
+      <p class="hint" data-when="manual">关掉后：即使库里勾了两种影线，也只保留你选的那一种。</p>
+    </div>
+
+    <div class="card ceded" id="card-pen">
+      <div class="card-head">
+        <h3><span class="idx">07</span>用哪支笔<span class="en">Choice of drawing pen · EVA-01 变体</span></h3>
+        <label class="toggle"><input type="checkbox" id="rnd-pen" checked /> 交给随机</label>
+      </div>
+      <div class="pens">
+        <i style="background:#242834" title="黑 #242834"></i>
+        <i style="background:#b6fe02" title="荧光绿 #b6fe02"></i>
+        <i style="background:#8053fc" title="紫 #8053fc"></i>
+        <i style="background:#ff3dbe" title="荧光粉 #ff3dbe"></i>
+      </div>
+      <p class="hint">纸仍为白。绿/紫/黑取自色板；荧光粉是你加的第四支笔。</p>
+      <div class="pen-weights" data-when="random">
+        <label class="ctrl"><span class="name">黑 · portion</span><span class="val" id="wBlackVal"></span>
+          <input type="range" id="wBlack" min="0" max="20" step="1" value="5" /></label>
+        <label class="ctrl"><span class="name">荧光绿 · portion</span><span class="val" id="wGreenVal"></span>
+          <input type="range" id="wGreen" min="0" max="20" step="1" value="5" /></label>
+        <label class="ctrl"><span class="name">紫 · portion</span><span class="val" id="wPurpleVal"></span>
+          <input type="range" id="wPurple" min="0" max="20" step="1" value="5" /></label>
+        <label class="ctrl"><span class="name">荧光粉 · portion</span><span class="val" id="wPinkVal"></span>
+          <input type="range" id="wPink" min="0" max="20" step="1" value="5" /></label>
+        <p class="hint">相对比例。某个为 0 = 这支笔不出现。全 0 时退回四色均等。</p>
+      </div>
+      <div data-when="manual">
+        <select id="pen">
+          <option value="black">全部黑</option>
+          <option value="green">全部荧光绿</option>
+          <option value="purple">全部紫</option>
+          <option value="pink">全部荧光粉</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="card variation held" id="card-palette">
+      <div class="card-head">
+        <h3><span class="idx">08</span>符号库<span class="en">Symbol palette · 你的变体，不是 PI-21</span></h3>
+      </div>
+      <p class="hint">手定用哪几种。每个 square 再从勾选里抽。默认只有横/竖影线 = 贴近原作。</p>
+      <div class="sym-grid">
+        <label><input type="checkbox" id="sym-h" checked /> 横影线</label>
+        <label><input type="checkbox" id="sym-v" checked /> 竖影线</label>
+        <label><input type="checkbox" id="sym-solid" /> 实心</label>
+        <label><input type="checkbox" id="sym-frame" /> 空框</label>
+        <label><input type="checkbox" id="sym-heart" /> 爱心</label>
+        <label><input type="checkbox" id="sym-inf" /> ∞ infinity</label>
+      </div>
+      <div class="row-btns">
+        <button type="button" id="paletteNake" class="ghost">只要影线 · 原作</button>
+        <button type="button" id="paletteAll" class="ghost">六种全开</button>
+      </div>
+    </div>
+
+    <div class="row-btns">
+      <button type="button" id="redraw">Redraw</button>
+      <button type="button" id="download">Download SVG</button>
+    </div>
+    <div class="readout" id="readout"></div>
+  </aside>
+
+  <main>
+    <svg id="artwork" viewBox="0 0 400 400" width="400mm" height="400mm" xmlns="http://www.w3.org/2000/svg">
+      <rect class="sheet" x="0" y="0" width="400" height="400" fill="#ffffff" />
+      <g id="drawing"></g>
+    </svg>
+  </main>
+
+  <script>
+    const PAGE = 400;
+    const MARGIN = 18;
+    const INNER = PAGE - MARGIN * 2;
+    const PENS = {
+      black: "#242834",
+      green: "#b6fe02",
+      purple: "#8053fc",
+      pink: "#ff3dbe"
+    };
+    const PEN_KEYS = ["black", "green", "purple", "pink"];
+    const STROKE = 0.35;
+    const KEYS = ["nFields", "select", "nSquares", "size", "density", "dir", "pen"];
+    const SYM_IDS = [
+      { id: "sym-h", key: "h", label: "横影线" },
+      { id: "sym-v", key: "v", label: "竖影线" },
+      { id: "sym-solid", key: "solid", label: "实心" },
+      { id: "sym-frame", key: "frame", label: "空框" },
+      { id: "sym-heart", key: "heart", label: "爱心" },
+      { id: "sym-inf", key: "inf", label: "∞" }
+    ];
+
+    function el(id) { return document.getElementById(id); }
+
+    function mulberry32(seed) {
+      let a = seed >>> 0;
+      return function () {
+        a |= 0;
+        a = (a + 0x6D2B79F5) | 0;
+        let t = Math.imul(a ^ (a >>> 15), 1 | a);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+
+    function randInt(rng, lo, hi) {
+      if (hi < lo) { const t = lo; lo = hi; hi = t; }
+      return lo + Math.floor(rng() * (hi - lo + 1));
+    }
+
+    function shuffle(rng, arr) {
+      const a = arr.slice();
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        const t = a[i]; a[i] = a[j]; a[j] = t;
+      }
+      return a;
+    }
+
+    let manualSelected = [];
+    let lastSelected = [];
+
+    function isRnd(key) { return el("rnd-" + key).checked; }
+
+    function readPaletteRaw() {
+      return SYM_IDS.filter(function (s) { return el(s.id).checked; }).map(function (s) { return s.key; });
+    }
+
+    function ensurePalette() {
+      if (readPaletteRaw().length === 0) {
+        el("sym-h").checked = true;
+        el("sym-v").checked = true;
+      }
+    }
+
+    /** Apply item 06 as a filter on hatch symbols when direction is locked. */
+    function effectivePalette(p) {
+      let list = p.palette.slice();
+      if (!p.rnd.dir) {
+        if (p.dir === "h") list = list.filter(function (k) { return k !== "v"; });
+        if (p.dir === "v") list = list.filter(function (k) { return k !== "h"; });
+      }
+      if (list.length === 0) {
+        list = p.rnd.dir ? ["h", "v"] : [p.dir === "v" ? "v" : "h"];
+      }
+      return list;
+    }
+
+    function currentParams() {
+      ensurePalette();
+      const gridN = parseInt(el("gridN").value, 10);
+      const total = gridN * gridN;
+      function clampPair(a, b, cap) {
+        a = Math.min(Math.max(1, a), cap);
+        b = Math.min(Math.max(1, b), cap);
+        if (a > b) { const t = a; a = b; b = t; }
+        return [a, b];
+      }
+      let sizeMin = parseFloat(el("sizeMin").value);
+      let sizeMax = parseFloat(el("sizeMax").value);
+      if (sizeMin > sizeMax) { const t = sizeMin; sizeMin = sizeMax; sizeMax = t; }
+      let denMin = parseFloat(el("denMin").value);
+      let denMax = parseFloat(el("denMax").value);
+      if (denMin > denMax) { const t = denMin; denMin = denMax; denMax = t; }
+      const nFieldsMinMax = clampPair(
+        parseInt(el("nFieldsMin").value, 10),
+        parseInt(el("nFieldsMax").value, 10),
+        total
+      );
+      return {
+        seed: parseInt(el("seed").value, 10) || 0,
+        gridN: gridN,
+        total: total,
+        showGrid: el("showGrid").checked,
+        rnd: {
+          nFields: isRnd("nFields"),
+          select: isRnd("select"),
+          nSquares: isRnd("nSquares"),
+          size: isRnd("size"),
+          density: isRnd("density"),
+          dir: isRnd("dir"),
+          pen: isRnd("pen")
+        },
+        nFieldsMin: nFieldsMinMax[0],
+        nFieldsMax: nFieldsMinMax[1],
+        nFields: Math.min(total, Math.max(1, parseInt(el("nFields").value, 10))),
+        nSquaresMin: Math.min(parseInt(el("nSquaresMin").value, 10), parseInt(el("nSquaresMax").value, 10)),
+        nSquaresMax: Math.max(parseInt(el("nSquaresMin").value, 10), parseInt(el("nSquaresMax").value, 10)),
+        nSquares: parseInt(el("nSquares").value, 10),
+        sizeMin: sizeMin,
+        sizeMax: sizeMax,
+        size: parseFloat(el("size").value),
+        denMin: denMin,
+        denMax: denMax,
+        den: parseFloat(el("den").value),
+        dir: el("dir").value,
+        pen: el("pen").value,
+        weights: {
+          black: parseInt(el("wBlack").value, 10),
+          green: parseInt(el("wGreen").value, 10),
+          purple: parseInt(el("wPurple").value, 10),
+          pink: parseInt(el("wPink").value, 10)
+        },
+        palette: readPaletteRaw()
+      };
+    }
+
+    function pickPen(rng, p) {
+      if (!p.rnd.pen) return p.pen;
+      const w = p.weights;
+      let total = 0;
+      PEN_KEYS.forEach(function (k) { total += Math.max(0, w[k]); });
+      if (total <= 0) {
+        return PEN_KEYS[randInt(rng, 0, PEN_KEYS.length - 1)];
+      }
+      let r = rng() * total;
+      for (let i = 0; i < PEN_KEYS.length; i++) {
+        r -= Math.max(0, w[PEN_KEYS[i]]);
+        if (r < 0) return PEN_KEYS[i];
+      }
+      return PEN_KEYS[PEN_KEYS.length - 1];
+    }
+
+    function pct(n) { return Math.round(n * 100) + "%"; }
+    function mm(n) { return n.toFixed(1) + " mm"; }
+
+    function updateCardModes(p) {
+      KEYS.forEach(function (key) {
+        const card = el("card-" + key);
+        const on = p.rnd[key];
+        card.classList.toggle("ceded", on);
+        card.classList.toggle("held", !on);
+        card.querySelectorAll("[data-when]").forEach(function (node) {
+          const show = node.getAttribute("data-when") === (on ? "random" : "manual");
+          node.hidden = !show;
+        });
+      });
+    }
+
+    function capFieldSliders(total) {
+      ["nFieldsMin", "nFieldsMax", "nFields"].forEach(function (id) {
+        const node = el(id);
+        node.max = String(total);
+        if (parseInt(node.value, 10) > total) node.value = String(total);
+      });
+    }
+
+    function renderFieldMap(p, selected) {
+      const map = el("fieldMap");
+      map.style.gridTemplateColumns = "repeat(" + p.gridN + ", 1fr)";
+      map.classList.toggle("clickable", !p.rnd.select);
+      map.classList.toggle("locked", p.rnd.select);
+      const chosen = {};
+      selected.forEach(function (i) { chosen[i] = true; });
+      map.innerHTML = "";
+      for (let i = 0; i < p.total; i++) {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.textContent = chosen[i] ? "1" : "";
+        b.className = chosen[i] ? "on" : "";
+        b.dataset.index = String(i);
+        map.appendChild(b);
+      }
+      if (p.rnd.select) {
+        el("selectHint").textContent = "随机抽哪些格。地图只显示结果。";
+      } else {
+        el("selectHint").textContent = "点格子来选。数量跟你点的格数走，第 01 项此时无效。";
+      }
+    }
+
+    function updateLabels(p, stats) {
+      el("seedVal").textContent = String(p.seed);
+      el("gridVal").textContent = p.gridN + " × " + p.gridN + " = " + p.total;
+      el("nFieldsMinVal").textContent = String(p.nFieldsMin);
+      el("nFieldsMaxVal").textContent = String(p.nFieldsMax);
+      el("nFieldsVal").textContent = String(p.nFields);
+      el("nSquaresMinVal").textContent = String(p.nSquaresMin);
+      el("nSquaresMaxVal").textContent = String(p.nSquaresMax);
+      el("nSquaresVal").textContent = String(p.nSquares);
+      el("sizeMinVal").textContent = pct(p.sizeMin);
+      el("sizeMaxVal").textContent = pct(p.sizeMax);
+      el("sizeVal").textContent = pct(p.size);
+      el("denMinVal").textContent = mm(p.denMin);
+      el("denMaxVal").textContent = mm(p.denMax);
+      el("denVal").textContent = mm(p.den);
+      el("wBlackVal").textContent = String(p.weights.black);
+      el("wGreenVal").textContent = String(p.weights.green);
+      el("wPurpleVal").textContent = String(p.weights.purple);
+      el("wPinkVal").textContent = String(p.weights.pink);
+
+      const held = KEYS.filter(function (k) { return !p.rnd[k]; });
+      const ceded = KEYS.filter(function (k) { return p.rnd[k]; });
+      const eff = effectivePalette(p);
+      const wSum = PEN_KEYS.reduce(function (s, k) { return s + Math.max(0, p.weights[k]); }, 0);
+      const portions = PEN_KEYS.map(function (k) {
+        const pct = wSum <= 0 ? 25 : Math.round(100 * Math.max(0, p.weights[k]) / wSum);
+        return k + " " + pct + "%";
+      }).join(" · ");
+      el("readout").textContent =
+        "seed " + p.seed +
+        "\ngrid " + p.gridN + "×" + p.gridN +
+        "\nfilled " + (stats ? stats.filled : "—") + " / " + p.total +
+        "\nsquares drawn " + (stats ? stats.squares : "—") +
+        "\npaper white · pens EVA-01 variant" +
+        "\nportions " + portions +
+        "\npalette " + p.palette.join(", ") +
+        "\neffective " + eff.join(", ") +
+        "\nceded  " + (ceded.length ? ceded.join(", ") : "none") +
+        "\nheld   " + (held.length ? held.join(", ") : "none") +
+        "\nposition-in-field: always from seed (supplement)";
+    }
+
+    function hatchSquare(parent, x, y, size, spacing, dir, color) {
+      const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      const n = Math.max(2, Math.floor(size / spacing) + 1);
+      const step = size / (n - 1);
+      for (let i = 0; i < n; i++) {
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        if (dir === "h") {
+          const yy = y + i * step;
+          line.setAttribute("x1", x.toFixed(3));
+          line.setAttribute("y1", yy.toFixed(3));
+          line.setAttribute("x2", (x + size).toFixed(3));
+          line.setAttribute("y2", yy.toFixed(3));
+        } else {
+          const xx = x + i * step;
+          line.setAttribute("x1", xx.toFixed(3));
+          line.setAttribute("y1", y.toFixed(3));
+          line.setAttribute("x2", xx.toFixed(3));
+          line.setAttribute("y2", (y + size).toFixed(3));
+        }
+        line.setAttribute("stroke", color);
+        line.setAttribute("stroke-width", String(STROKE));
+        line.setAttribute("stroke-linecap", "butt");
+        g.appendChild(line);
+      }
+      parent.appendChild(g);
+    }
+
+    function solidSquare(parent, x, y, size, color) {
+      const r = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      r.setAttribute("x", x.toFixed(3));
+      r.setAttribute("y", y.toFixed(3));
+      r.setAttribute("width", size.toFixed(3));
+      r.setAttribute("height", size.toFixed(3));
+      r.setAttribute("fill", color);
+      r.setAttribute("stroke", "none");
+      parent.appendChild(r);
+    }
+
+    function frameSquare(parent, x, y, size, color) {
+      const r = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      r.setAttribute("x", x.toFixed(3));
+      r.setAttribute("y", y.toFixed(3));
+      r.setAttribute("width", size.toFixed(3));
+      r.setAttribute("height", size.toFixed(3));
+      r.setAttribute("fill", "none");
+      r.setAttribute("stroke", color);
+      r.setAttribute("stroke-width", String(STROKE));
+      parent.appendChild(r);
+    }
+
+    function heartPath(x, y, size) {
+      // Material-style heart in 24×24, mapped into the square with padding
+      const pad = size * 0.08;
+      const s = size - 2 * pad;
+      const ox = x + pad;
+      const oy = y + pad;
+      function map(px, py) {
+        return (ox + (px / 24) * s).toFixed(3) + "," + (oy + (py / 24) * s).toFixed(3);
+      }
+      return (
+        "M " + map(12, 21.35) +
+        " L " + map(10.55, 20.03) +
+        " C " + map(5.4, 15.36) + " " + map(2, 12.28) + " " + map(2, 8.5) +
+        " C " + map(2, 5.42) + " " + map(4.42, 3) + " " + map(7.5, 3) +
+        " C " + map(9.24, 3) + " " + map(10.91, 3.81) + " " + map(12, 5.09) +
+        " C " + map(13.09, 3.81) + " " + map(14.76, 3) + " " + map(16.5, 3) +
+        " C " + map(19.58, 3) + " " + map(22, 5.42) + " " + map(22, 8.5) +
+        " C " + map(22, 12.28) + " " + map(18.6, 15.36) + " " + map(13.45, 20.03) +
+        " Z"
+      );
+    }
+
+    function heartSymbol(parent, x, y, size, color) {
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", heartPath(x, y, size));
+      path.setAttribute("fill", "none");
+      path.setAttribute("stroke", color);
+      path.setAttribute("stroke-width", String(STROKE));
+      path.setAttribute("stroke-linejoin", "round");
+      parent.appendChild(path);
+    }
+
+    function infinitySymbol(parent, x, y, size, color) {
+      // Lemniscate of Bernoulli, sampled as a closed polyline
+      const cx = x + size / 2;
+      const cy = y + size / 2;
+      const a = size * 0.38;
+      const pts = [];
+      const steps = 96;
+      for (let i = 0; i <= steps; i++) {
+        const t = (i / steps) * Math.PI * 2;
+        const s = Math.sin(t);
+        const c = Math.cos(t);
+        const d = 1 + s * s;
+        const px = cx + (a * c) / d;
+        const py = cy + (a * s * c) / d;
+        pts.push(px.toFixed(3) + "," + py.toFixed(3));
+      }
+      const poly = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
+      poly.setAttribute("points", pts.join(" "));
+      poly.setAttribute("fill", "none");
+      poly.setAttribute("stroke", color);
+      poly.setAttribute("stroke-width", String(STROKE));
+      poly.setAttribute("stroke-linejoin", "round");
+      poly.setAttribute("stroke-linecap", "round");
+      parent.appendChild(poly);
+    }
+
+    function drawSymbol(parent, kind, x, y, size, spacing, color) {
+      if (kind === "h") hatchSquare(parent, x, y, size, spacing, "h", color);
+      else if (kind === "v") hatchSquare(parent, x, y, size, spacing, "v", color);
+      else if (kind === "solid") solidSquare(parent, x, y, size, color);
+      else if (kind === "frame") frameSquare(parent, x, y, size, color);
+      else if (kind === "heart") heartSymbol(parent, x, y, size, color);
+      else if (kind === "inf") infinitySymbol(parent, x, y, size, color);
+    }
+
+    function draw() {
+      const p = currentParams();
+      el("seed").value = String(p.seed);
+      capFieldSliders(p.total);
+      updateCardModes(p);
+
+      const rng = mulberry32(p.seed);
+      const drawing = el("drawing");
+      drawing.innerHTML = "";
+      const palette = effectivePalette(p);
+
+      const cell = INNER / p.gridN;
+      const all = [];
+      for (let i = 0; i < p.total; i++) all.push(i);
+
+      let selected;
+      if (!p.rnd.select) {
+        selected = manualSelected.filter(function (i) { return i < p.total; });
+        if (selected.length === 0) {
+          selected = all.slice(0, Math.min(p.nFields, p.total));
+          manualSelected = selected.slice();
+        }
+      } else {
+        const count = p.rnd.nFields
+          ? randInt(rng, p.nFieldsMin, Math.min(p.nFieldsMax, p.total))
+          : Math.min(p.nFields, p.total);
+        selected = shuffle(rng, all).slice(0, count).sort(function (a, b) { return a - b; });
+      }
+      lastSelected = selected.slice();
+      renderFieldMap(p, selected);
+
+      if (p.showGrid) {
+        const grid = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        for (let i = 0; i <= p.gridN; i++) {
+          const h = document.createElementNS("http://www.w3.org/2000/svg", "line");
+          const o = MARGIN + i * cell;
+          h.setAttribute("x1", MARGIN);
+          h.setAttribute("y1", o);
+          h.setAttribute("x2", MARGIN + INNER);
+          h.setAttribute("y2", o);
+          h.setAttribute("stroke", "#d0ccc4");
+          h.setAttribute("stroke-width", "0.2");
+          grid.appendChild(h);
+          const v = document.createElementNS("http://www.w3.org/2000/svg", "line");
+          v.setAttribute("x1", o);
+          v.setAttribute("y1", MARGIN);
+          v.setAttribute("x2", o);
+          v.setAttribute("y2", MARGIN + INNER);
+          v.setAttribute("stroke", "#d0ccc4");
+          v.setAttribute("stroke-width", "0.2");
+          grid.appendChild(v);
+        }
+        drawing.appendChild(grid);
+      }
+
+      let squareCount = 0;
+      selected.forEach(function (idx) {
+        const col = idx % p.gridN;
+        const row = Math.floor(idx / p.gridN);
+        const fx = MARGIN + col * cell;
+        const fy = MARGIN + row * cell;
+        const nSq = p.rnd.nSquares ? randInt(rng, p.nSquaresMin, p.nSquaresMax) : p.nSquares;
+        for (let s = 0; s < nSq; s++) {
+          const frac = p.rnd.size
+            ? p.sizeMin + rng() * (p.sizeMax - p.sizeMin)
+            : p.size;
+          const size = Math.max(2, frac * cell);
+          const maxOrigin = Math.max(0, cell - size);
+          const x = fx + rng() * maxOrigin;
+          const y = fy + rng() * maxOrigin;
+          const spacing = p.rnd.density
+            ? p.denMin + rng() * (p.denMax - p.denMin)
+            : p.den;
+          const kind = palette[randInt(rng, 0, palette.length - 1)];
+          const pen = pickPen(rng, p);
+          drawSymbol(drawing, kind, x, y, size, spacing, PENS[pen]);
+          squareCount += 1;
+        }
+      });
+
+      updateLabels(p, { filled: selected.length, squares: squareCount });
+    }
+
+    function downloadSvg() {
+      const svg = el("artwork");
+      const clone = svg.cloneNode(true);
+      clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+      const text = '<?xml version="1.0" encoding="UTF-8"?>\n' + clone.outerHTML;
+      const blob = new Blob([text], { type: "image/svg+xml" });
+      const a = document.createElement("a");
+      const p = currentParams();
+      a.href = URL.createObjectURL(blob);
+      a.download = "nake_nr6_seed-" + p.seed + "_grid-" + p.gridN + ".svg";
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    function setPalette(keys) {
+      const set = {};
+      keys.forEach(function (k) { set[k] = true; });
+      SYM_IDS.forEach(function (s) {
+        el(s.id).checked = !!set[s.key];
+      });
+      ensurePalette();
+      draw();
+    }
+
+    function bind() {
+      if (!el("seed").value) el("seed").value = "20965";
+
+      const ids = [
+        "seed", "gridN", "showGrid",
+        "rnd-nFields", "nFieldsMin", "nFieldsMax", "nFields",
+        "rnd-select",
+        "rnd-nSquares", "nSquaresMin", "nSquaresMax", "nSquares",
+        "rnd-size", "sizeMin", "sizeMax", "size",
+        "rnd-density", "denMin", "denMax", "den",
+        "rnd-dir", "dir",
+        "rnd-pen", "pen", "wBlack", "wGreen", "wPurple", "wPink",
+        "sym-h", "sym-v", "sym-solid", "sym-frame", "sym-heart", "sym-inf"
+      ];
+      ids.forEach(function (id) {
+        el(id).addEventListener("input", draw);
+        el(id).addEventListener("change", function () {
+          if (id === "rnd-select" && !el("rnd-select").checked) {
+            manualSelected = lastSelected.slice();
+          }
+          draw();
+        });
+      });
+
+      el("fieldMap").addEventListener("click", function (ev) {
+        const btn = ev.target.closest("button");
+        if (!btn || isRnd("select")) return;
+        const i = parseInt(btn.dataset.index, 10);
+        const at = manualSelected.indexOf(i);
+        if (at === -1) manualSelected.push(i);
+        else manualSelected.splice(at, 1);
+        manualSelected.sort(function (a, b) { return a - b; });
+        draw();
+      });
+
+      el("newSeed").addEventListener("click", function () {
+        el("seed").value = String(Math.floor(Math.random() * 99999));
+        draw();
+      });
+      el("allRandom").addEventListener("click", function () {
+        KEYS.forEach(function (k) { el("rnd-" + k).checked = true; });
+        setPalette(["h", "v"]);
+      });
+      el("paletteNake").addEventListener("click", function () {
+        setPalette(["h", "v"]);
+      });
+      el("paletteAll").addEventListener("click", function () {
+        setPalette(["h", "v", "solid", "frame", "heart", "inf"]);
+      });
+      el("redraw").addEventListener("click", draw);
+      el("download").addEventListener("click", downloadSvg);
+      draw();
+    }
+
+    bind();
+  </script>
+</body>
+</html>
