@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>ARTD8105 — Co-Constraint v1</title>
+  <style>
+    :root {
+      --ink: #1a1a1a;
+      --paper: #ffffff;
+      --bench: #8b8680;
+      --panel: #141414;
+      --muted: #8e8982;
+      --line: #333;
+      --you: #e8e4dc;
+      --signal: #3d9b8f;
+      --ai: #c4a35a;
+      --warn: #c45c4a;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body {
+      font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+      background: var(--bench);
+      color: var(--ink);
+      display: grid;
+      grid-template-columns: minmax(300px, 360px) 1fr minmax(260px, 300px);
+      min-height: 100%;
+    }
+    aside, .ai-col {
+      background: var(--panel);
+      color: var(--you);
+      padding: 1rem 1.05rem 2rem;
+      overflow: auto;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+    h1 {
+      font-size: 0.9rem;
+      margin: 0 0 0.25rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .lede { color: var(--muted); font-size: 11px; margin: 0 0 0.9rem; }
+    .lede strong { color: var(--you); }
+    h2 {
+      margin: 1rem 0 0.4rem;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      padding-top: 0.7rem;
+    }
+    .card {
+      border: 1px solid var(--line);
+      padding: 0.65rem 0.7rem;
+      margin: 0 0 0.5rem;
+    }
+    .card.signal { border-left: 3px solid var(--signal); }
+    .card.human { border-left: 3px solid var(--you); }
+    .card.ai { border-left: 3px solid var(--ai); }
+    .card h3 { margin: 0 0 0.35rem; font-size: 12px; color: #fff; }
+    .card .en { display: block; color: var(--muted); font-size: 10px; font-weight: 400; margin-top: 0.1rem; }
+    label.ctrl {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.1rem 0.45rem;
+      margin: 0.4rem 0 0;
+      align-items: center;
+    }
+    label.ctrl .name { color: #cfcabe; font-size: 11px; }
+    label.ctrl .val { color: var(--signal); font-variant-numeric: tabular-nums; font-size: 11px; }
+    label.ctrl input[type="range"] { grid-column: 1 / -1; width: 100%; }
+    select, button {
+      font: inherit;
+      width: 100%;
+      margin-top: 0.4rem;
+    }
+    select {
+      background: #0e0e0e;
+      color: #fff;
+      border: 1px solid #555;
+      padding: 0.35rem;
+    }
+    button {
+      cursor: pointer;
+      background: var(--you);
+      color: #111;
+      border: 0;
+      padding: 0.5rem 0.65rem;
+      font-weight: 600;
+      width: auto;
+      margin: 0.25rem 0.3rem 0.25rem 0;
+    }
+    button.ghost {
+      background: transparent;
+      color: var(--you);
+      border: 1px solid #666;
+    }
+    button.ai-btn { background: var(--ai); color: #111; }
+    .check {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+      margin: 0.35rem 0;
+      color: #cfcabe;
+      cursor: pointer;
+    }
+    .hint { color: var(--muted); font-size: 10px; margin: 0.35rem 0 0; }
+    .live {
+      margin-top: 0.5rem;
+      padding: 0.45rem;
+      background: #0e0e0e;
+      border: 1px solid var(--line);
+      color: var(--signal);
+      font-size: 11px;
+      white-space: pre-wrap;
+    }
+    main {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      padding: 1.1rem;
+      gap: 0.75rem;
+      min-width: 0;
+    }
+    .signal-strip {
+      background: #111;
+      border: 1px solid #333;
+      padding: 0.5rem 0.65rem;
+      color: var(--you);
+    }
+    .signal-strip .lab { color: var(--muted); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
+    #signalCanvas { width: 100%; height: 56px; display: block; background: #0a0a0a; margin-top: 0.35rem; }
+    .stage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 0;
+    }
+    #draw {
+      width: min(100%, 70vh);
+      height: auto;
+      background: var(--paper);
+      box-shadow: 0 10px 36px rgba(0,0,0,0.28);
+    }
+    .ai-col h1 { color: var(--ai); }
+    #aiPrompt {
+      border: 1px solid #5a4a28;
+      background: #1a160e;
+      color: #f0e6c8;
+      padding: 0.85rem;
+      min-height: 8rem;
+      font-size: 12px;
+      line-height: 1.55;
+      white-space: pre-wrap;
+    }
+    #aiPrompt .tag {
+      display: inline-block;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ai);
+      border: 1px solid #5a4a28;
+      padding: 0.15rem 0.35rem;
+      margin-bottom: 0.5rem;
+    }
+    .refused {
+      margin-top: 0.75rem;
+      border: 1px dashed var(--warn);
+      color: #e8b4ac;
+      padding: 0.55rem;
+      font-size: 11px;
+    }
+    .map-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.3rem;
+      align-items: center;
+      margin: 0.3rem 0;
+      color: #cfcabe;
+      font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+  <aside>
+    <h1>Co-Constraint</h1>
+    <p class="lede">
+      v1 scaffold · cross-species generative system<br>
+      <strong>Signal</strong> rewrites params · <strong>AI</strong> prompts the human only<br>
+      No species translation. No “the animal said…”.
+    </p>
+
+    <h2>2 · Nonhuman channel</h2>
+    <div class="card signal">
+      <h3>External data (simulated)<span class="en">Replace later with real sensor / field recording</span></h3>
+      <label class="ctrl">
+        <span class="name">Signal source</span><span class="val" id="srcVal"></span>
+        <select id="source">
+          <option value="plant">Plant-side humidity-like (slow drift)</option>
+          <option value="field">Field amplitude (bursts)</option>
+          <option value="tide">Tide-like cycle</option>
+          <option value="noise">Noisy walk</option>
+        </select>
+      </label>
+      <label class="ctrl">
+        <span class="name">Signal speed</span><span class="val" id="speedVal"></span>
+        <input type="range" id="speed" min="0.2" max="2.5" step="0.1" value="1" />
+      </label>
+      <p class="hint">v1 uses simulation so the logic/UI can be tested before you fix the real channel + site.</p>
+    </div>
+
+    <h2>1 · Human protocol</h2>
+    <div class="card human">
+      <h3>Authored base rules<span class="en">You set kinds of decisions — not each mark</span></h3>
+      <label class="ctrl">
+        <span class="name">Base density</span><span class="val" id="denBaseVal"></span>
+        <input type="range" id="denBase" min="0.15" max="1" step="0.01" value="0.45" />
+      </label>
+      <label class="ctrl">
+        <span class="name">Base step (mark spacing)</span><span class="val" id="stepBaseVal"></span>
+        <input type="range" id="stepBase" min="2" max="18" step="0.5" value="7" />
+      </label>
+      <label class="ctrl">
+        <span class="name">Base turn</span><span class="val" id="turnBaseVal"></span>
+        <input type="range" id="turnBase" min="0" max="1" step="0.01" value="0.35" />
+      </label>
+      <label class="ctrl">
+        <span class="name">Allowed band (vertical fraction)</span><span class="val" id="bandBaseVal"></span>
+        <input type="range" id="bandBase" min="0.2" max="1" step="0.01" value="1" />
+      </label>
+      <p class="hint">While running, live values come from protocol × signal mapping. You cannot paint over the live stream to beautify.</p>
+    </div>
+
+    <h2>3 · Mapping table</h2>
+    <div class="card signal">
+      <h3>What the signal may rewrite<span class="en">Only checked params · shared control</span></h3>
+      <label class="check"><input type="checkbox" id="mapDen" checked /> Density</label>
+      <label class="check"><input type="checkbox" id="mapStep" checked /> Step / rhythm</label>
+      <label class="check"><input type="checkbox" id="mapTurn" /> Turn</label>
+      <label class="check"><input type="checkbox" id="mapBand" /> Allowed band (spatial permission)</label>
+      <label class="ctrl">
+        <span class="name">Influence strength</span><span class="val" id="inflVal"></span>
+        <input type="range" id="influence" min="0" max="1" step="0.01" value="0.7" />
+      </label>
+      <p class="hint">0 checked = human-only picture (AI will flag this as extractive / no encounter).</p>
+      <div class="live" id="liveReadout"></div>
+    </div>
+
+    <div style="margin-top:0.6rem">
+      <button type="button" id="btnStart">Start / Continue</button>
+      <button type="button" id="btnPause" class="ghost">Pause</button>
+      <button type="button" id="btnClear" class="ghost">Clear drawing</button>
+      <button type="button" id="btnExport" class="ghost">Export SVG</button>
+    </div>
+  </aside>
+
+  <main>
+    <div class="signal-strip">
+      <div class="lab">Nonhuman channel · raw signal (0–1) · not a species label</div>
+      <canvas id="signalCanvas" width="900" height="56"></canvas>
+    </div>
+    <div class="stage">
+      <svg id="draw" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="400" fill="#ffffff" />
+        <g id="marks"></g>
+        <rect id="bandMaskGuide" x="0" y="0" width="400" height="0" fill="none" stroke="#ddd" stroke-width="0.4" stroke-dasharray="3 3" />
+      </svg>
+    </div>
+  </main>
+
+  <div class="ai-col">
+    <h1>4 · AI → human</h1>
+    <p class="lede">Prompts <strong>you</strong> toward other agencies. Never speaks for the other.</p>
+    <div class="card ai">
+      <h3>Current prompt</h3>
+      <div id="aiPrompt"><span class="tag">waiting</span>Start the system. Prompts appear from the state of your mapping and edits — not from “reading” the signal as language.</div>
+      <button type="button" id="btnAi" class="ai-btn">Ask for a decentering prompt</button>
+      <p class="hint">v1 = scripted critique (rules). Later you may swap in a constrained LLM that inherits the same refusals.</p>
+    </div>
+    <div class="refused">
+      <strong>Hard refusals</strong><br>
+      · No “the animal/plant said …”<br>
+      · No emotion / species classification<br>
+      · No auto-beautify of the drawing<br>
+      · No sending the signal to be “translated”
+    </div>
+    <h2>Logic sketch</h2>
+    <p class="hint" style="color:#cfcabe">
+      effectiveParam = lerp(humanBase, signalShaped, influence) if mapped;<br>
+      else effectiveParam = humanBase.<br><br>
+      AI watches: mappedCount, which params, influence, whether you raise base while signal is low.
+    </p>
+  </div>
+
+  <script>
+    function el(id) { return document.getElementById(id); }
+
+    const state = {
+      running: false,
+      t: 0,
+      signal: 0.5,
+      history: [],
+      x: 40,
+      y: 200,
+      heading: 0,
+      lastAiKey: "",
+      ticks: 0
+    };
+
+    function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+    function lerp(a, b, t) { return a + (b - a) * t; }
+
+    function readUI() {
+      return {
+        source: el("source").value,
+        speed: parseFloat(el("speed").value),
+        denBase: parseFloat(el("denBase").value),
+        stepBase: parseFloat(el("stepBase").value),
+        turnBase: parseFloat(el("turnBase").value),
+        bandBase: parseFloat(el("bandBase").value),
+        mapDen: el("mapDen").checked,
+        mapStep: el("mapStep").checked,
+        mapTurn: el("mapTurn").checked,
+        mapBand: el("mapBand").checked,
+        influence: parseFloat(el("influence").value)
+      };
+    }
+
+    function mappedCount(p) {
+      return [p.mapDen, p.mapStep, p.mapTurn, p.mapBand].filter(Boolean).length;
+    }
+
+    /** Simulated nonhuman channel — replace with real stream later */
+    function sampleSignal(p, t) {
+      const s = t * p.speed;
+      if (p.source === "plant") {
+        return clamp(0.55 + 0.25 * Math.sin(s * 0.15) + 0.08 * Math.sin(s * 0.7 + 1.2), 0, 1);
+      }
+      if (p.source === "field") {
+        const burst = Math.max(0, Math.sin(s * 0.9)) ** 8;
+        return clamp(0.2 + 0.15 * Math.sin(s * 0.2) + 0.65 * burst, 0, 1);
+      }
+      if (p.source === "tide") {
+        return clamp(0.5 + 0.45 * Math.sin(s * 0.08), 0, 1);
+      }
+      // noisy walk (persist-ish via state.signal)
+      const n = state.signal + (Math.random() - 0.5) * 0.08 * p.speed;
+      return clamp(n, 0, 1);
+    }
+
+    function effective(p, signal) {
+      const infl = p.influence;
+      // shape: high signal → denser / smaller step / more turn / fuller band
+      const den = p.mapDen ? lerp(p.denBase, clamp(signal, 0.1, 1), infl) : p.denBase;
+      const step = p.mapStep ? lerp(p.stepBase, lerp(16, 2.5, signal), infl) : p.stepBase;
+      const turn = p.mapTurn ? lerp(p.turnBase, signal, infl) : p.turnBase;
+      const band = p.mapBand ? lerp(p.bandBase, clamp(0.25 + signal * 0.75, 0.2, 1), infl) : p.bandBase;
+      return { den: den, step: step, turn: turn, band: band, signal: signal };
+    }
+
+    function updateLabels(p, eff) {
+      el("srcVal").textContent = p.source;
+      el("speedVal").textContent = p.speed.toFixed(1);
+      el("denBaseVal").textContent = p.denBase.toFixed(2);
+      el("stepBaseVal").textContent = p.stepBase.toFixed(1);
+      el("turnBaseVal").textContent = p.turnBase.toFixed(2);
+      el("bandBaseVal").textContent = Math.round(p.bandBase * 100) + "%";
+      el("inflVal").textContent = p.influence.toFixed(2);
+      el("liveReadout").textContent =
+        "signal " + eff.signal.toFixed(3) +
+        "\nlive density " + eff.den.toFixed(3) + (p.mapDen ? " ← signal" : " (human only)") +
+        "\nlive step " + eff.step.toFixed(2) + (p.mapStep ? " ← signal" : " (human only)") +
+        "\nlive turn " + eff.turn.toFixed(3) + (p.mapTurn ? " ← signal" : " (human only)") +
+        "\nlive band " + eff.band.toFixed(3) + (p.mapBand ? " ← signal" : " (human only)") +
+        "\nmapped " + mappedCount(p) + "/4";
+    }
+
+    function drawSignalStrip() {
+      const c = el("signalCanvas");
+      const ctx = c.getContext("2d");
+      const w = c.width;
+      const h = c.height;
+      ctx.fillStyle = "#0a0a0a";
+      ctx.fillRect(0, 0, w, h);
+      ctx.strokeStyle = "#3d9b8f";
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      const hist = state.history;
+      for (let i = 0; i < hist.length; i++) {
+        const x = (i / Math.max(1, hist.length - 1)) * (w - 4) + 2;
+        const y = h - 4 - hist[i] * (h - 8);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    }
+
+    function setAiPrompt(tag, text) {
+      el("aiPrompt").innerHTML =
+        '<span class="tag">' + tag + "</span>" + text.replace(/\n/g, "<br>");
+    }
+
+    /** Human-facing AI only — scripted v1 */
+    function buildAiPrompt(p, eff, force) {
+      const n = mappedCount(p);
+      let key = "";
+      let tag = "decentering";
+      let text = "";
+
+      if (n === 0) {
+        key = "none";
+        tag = "flag · extractive";
+        text =
+          "Nothing on the mapping table is open to the nonhuman channel.\n\n" +
+          "You are generating alone. That can still be a drawing — but it is not yet an encounter.\n\n" +
+          "Prompt for you: which ONE parameter are you unwilling to share, and what does that refusal protect?";
+      } else if (n === 1 && p.mapDen && !p.mapBand && !p.mapStep && !p.mapTurn) {
+        key = "decor";
+        tag = "flag · decorative";
+        text =
+          "Only density is shared. The signal is modulating ‘how much ink’ — easy to read as decoration.\n\n" +
+          "Prompt for you: open spatial permission (band) or rhythm (step) instead of / as well as density. What changes in the politics of the picture?";
+      } else if (p.influence < 0.25 && n > 0) {
+        key = "weak";
+        tag = "flag · token share";
+        text =
+          "Influence is very low. The channel is present in name, almost absent in effect.\n\n" +
+          "Prompt for you: raise influence until the drawing becomes less flattering. Are you willing to keep that setting?";
+      } else if (eff.signal < 0.3 && p.denBase > 0.7 && !p.mapDen) {
+        key = "override";
+        tag = "slow · beautify urge";
+        text =
+          "Signal is low, yet your human base density is high and density is not mapped.\n\n" +
+          "It looks like you are compensating for the other. Prompt for you: map density, or lower your base, and sit with the quieter field.";
+      } else if (force || state.ticks % 180 === 0) {
+        key = "ask-" + Math.floor(state.ticks / 180);
+        tag = "question";
+        const qs = [
+          "Which constraint are you still keeping fully human — and why?",
+          "If the next run looked worse but shared more, would you keep that mapping?",
+          "Name one edit you want that would recentre you. Then don’t do it for one minute.",
+          "What would ‘communication’ mean here if no one translates the signal into language?"
+        ];
+        text = qs[Math.floor(state.ticks / 180) % qs.length];
+      } else {
+        return null;
+      }
+
+      if (!force && key === state.lastAiKey) return null;
+      state.lastAiKey = key;
+      setAiPrompt(tag, text);
+      return text;
+    }
+
+    function refuseTranslation() {
+      setAiPrompt(
+        "refusal",
+        "I will not say what the signal ‘means’ or what another species ‘wants’.\n\n" +
+        "I only prompt your authorship: what you share, withhold, or extract."
+      );
+    }
+
+    function stepDraw(eff) {
+      const marks = el("marks");
+      const mid = 200;
+      const half = (eff.band * 400) / 2;
+      const yMin = mid - half;
+      const yMax = mid + half;
+
+      // guide
+      const guide = el("bandMaskGuide");
+      guide.setAttribute("y", yMin);
+      guide.setAttribute("height", Math.max(0, yMax - yMin));
+
+      // move
+      state.heading += (Math.random() - 0.5) * eff.turn * 1.4;
+      state.x += Math.cos(state.heading) * eff.step;
+      state.y += Math.sin(state.heading) * eff.step;
+
+      // bounce in page + band
+      if (state.x < 12 || state.x > 388) {
+        state.heading = Math.PI - state.heading;
+        state.x = clamp(state.x, 12, 388);
+      }
+      if (state.y < yMin + 4 || state.y > yMax - 4) {
+        state.heading = -state.heading;
+        state.y = clamp(state.y, yMin + 4, yMax - 4);
+      }
+
+      // permission to mark from density
+      if (Math.random() > eff.den) return;
+
+      const len = 3 + eff.den * 10;
+      const x2 = state.x + Math.cos(state.heading) * len;
+      const y2 = state.y + Math.sin(state.heading) * len;
+      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line.setAttribute("x1", state.x.toFixed(2));
+      line.setAttribute("y1", state.y.toFixed(2));
+      line.setAttribute("x2", x2.toFixed(2));
+      line.setAttribute("y2", y2.toFixed(2));
+      line.setAttribute("stroke", "#1a1a1a");
+      line.setAttribute("stroke-width", String(0.35 + eff.den * 0.9));
+      line.setAttribute("stroke-linecap", "round");
+      line.setAttribute("opacity", String(0.35 + eff.den * 0.5));
+      marks.appendChild(line);
+
+      // soft cap DOM size
+      while (marks.childNodes.length > 4000) {
+        marks.removeChild(marks.firstChild);
+      }
+    }
+
+    function tick() {
+      if (!state.running) return;
+      const p = readUI();
+      state.t += 0.05;
+      state.ticks += 1;
+      state.signal = sampleSignal(p, state.t);
+      state.history.push(state.signal);
+      if (state.history.length > 120) state.history.shift();
+
+      const eff = effective(p, state.signal);
+      updateLabels(p, eff);
+      drawSignalStrip();
+      stepDraw(eff);
+      buildAiPrompt(p, eff, false);
+
+      requestAnimationFrame(tick);
+    }
+
+    function clearDrawing() {
+      el("marks").innerHTML = "";
+      state.x = 40;
+      state.y = 200;
+      state.heading = 0;
+    }
+
+    function exportSvg() {
+      const svg = el("draw");
+      const clone = svg.cloneNode(true);
+      clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+      const blob = new Blob(
+        ['<?xml version="1.0" encoding="UTF-8"?>\n' + clone.outerHTML],
+        { type: "image/svg+xml" }
+      );
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "co_constraint_" + Date.now() + ".svg";
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    function bind() {
+      ["source", "speed", "denBase", "stepBase", "turnBase", "bandBase",
+        "mapDen", "mapStep", "mapTurn", "mapBand", "influence"].forEach(function (id) {
+        el(id).addEventListener("input", function () {
+          const p = readUI();
+          const eff = effective(p, state.signal);
+          updateLabels(p, eff);
+        });
+      });
+
+      el("btnStart").addEventListener("click", function () {
+        if (!state.running) {
+          state.running = true;
+          tick();
+        }
+      });
+      el("btnPause").addEventListener("click", function () { state.running = false; });
+      el("btnClear").addEventListener("click", clearDrawing);
+      el("btnExport").addEventListener("click", exportSvg);
+      el("btnAi").addEventListener("click", function () {
+        const p = readUI();
+        const eff = effective(p, state.signal);
+        state.lastAiKey = "";
+        if (!buildAiPrompt(p, eff, true)) refuseTranslation();
+      });
+
+      // initial
+      const p = readUI();
+      state.signal = sampleSignal(p, 0);
+      for (let i = 0; i < 40; i++) {
+        state.history.push(sampleSignal(p, i * 0.05));
+      }
+      updateLabels(p, effective(p, state.signal));
+      drawSignalStrip();
+      setAiPrompt(
+        "ready",
+        "Start the run. I will prompt you about sharing and extraction.\n\nI will refuse to translate the signal into species-speech."
+      );
+    }
+
+    bind();
+  </script>
+</body>
+</html>

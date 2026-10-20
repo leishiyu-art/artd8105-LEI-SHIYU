@@ -1,0 +1,260 @@
+Excerpt_ID,Session,Condition,Tier,Speaker_ID,Timestamp,Excerpt_Text,Primary_Code,Secondary_Code,Coder_Notes
+CODING NOTES,,,,,,,,,"Revised rules: (1) 'no concept of my tier/identity' = Identity preception, NOT PERCEIVE-NoDifference. (2) Being killed = BEHAVIOR-Competition, not Death. Unit = one idea. Moderator prompts not coded. EX3 Breathless file header says Equal but talk is Unequal (no upward portal); coded Unequal. EX3 Technician is recall reconstruction. EX4 revealed as control/Equal. EX4 Breathless added 2026-09-09 from breathless_FG.docx (P4001/P4004/P4005)."
+EX1-T-01,EX1,Unequal,Technician,p1003,01:38,5号不断攻击我，夺走了我辛苦收集的约10–12个宝石。,BEHAVIOR-Competition / combat / Ambush / Plunder,,被杀/被抢 → Competition（修订规则）
+EX1-T-02,EX1,Unequal,Technician,p1003,02:10,发现可以攻击并拾取他人物品后，我停止搜寻，转而攻击其他玩家。,🚩Strategy Shift,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX1-T-03,EX1,Unequal,Technician,p1013,02:39,我走得较慢，主要看谁被谁杀的提示，自己在找宝箱。,BEHAVIOR- just observation / no behaviour,🚩Strategy - Risk Avoiding,
+EX1-T-04,EX1,Unequal,Technician,p1013,03:52,我不知道自己的身份／层级。,Identity preception,,修订：不知道自己是谁 ≠ NoDifference
+EX1-T-05,EX1,Unequal,Technician,P1012,03:52,我也不知道自己的身份／层级。,Identity preception,,
+EX1-T-06,EX1,Unequal,Technician,p0005,03:52,我是灰色的木铲子；名字前缀是蓝的？我被分到灰色。,Identity preception,PERCEIVE-Appearance 外观,皮肤/分组不一致，数据质量备注
+EX1-T-07,EX1,Unequal,Technician,p1013,04:31,我得的比较少，但无所谓，主要看体验过程。,APPRAISE-Ambivalent ,PERCEIVE-Resource 资源,
+EX1-T-08,EX1,Unequal,Technician,p1013,05:38,我觉得最终排名和付出大致相称。,APPRAISE-Fair ,,
+EX1-T-09,EX1,Unequal,Technician,p1003,05:44,第一名很少搜寻，靠信息差（大家不知道能打人）获胜，我觉得不公平。,APPRAISE-Unfair ,Mechanism Transparency,
+EX1-T-10,EX1,Unequal,Technician,p0005,06:35,我以为是团队合作，把箱子搜到的和抢来的都给了别人。,BEHAVIOR- Gift,MOTIVATION- holding,
+EX1-T-11,EX1,Unequal,Technician,p0005,07:00,付出和结果不对称，但我还能接受。,APPRAISE-Ambivalent ,,
+EX1-T-12,EX1,Unequal,Technician,p0005,07:44,牌子写着无产者不能往上走，蓝色可去中间和下层。,PERCEIVE-Access 权限,,
+EX1-T-13,EX1,Unequal,Technician,p0005,07:44,看到限制后，我决定攻击从上面下来的任何人。,BEHAVIOR-Competition / combat / Ambush / Plunder,🚩Strategy Shift,
+EX1-T-14,EX1,Unequal,Technician,p0005,08:11,上层下来的人出现在外围不在中间门，我就在外围追着打。,PERCEIVE-Spatial 空间,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX1-T-15,EX1,Unequal,Technician,P1012,08:30,打人规则是后来被打才知道的。,Mechanism Transparency,,
+EX1-T-16,EX1,Unequal,Technician,P1012,09:22,游戏没明确说明规则；攻击机制不好，是不公平设定。,APPRAISE-Unfair ,Mechanism Transparency,
+EX1-T-17,EX1,Unequal,Technician,P1012,10:01,我没有去掠夺，最后被打然后游戏结束。,BEHAVIOR-Competition / combat / Ambush / Plunder,,被杀→Competition
+EX1-T-18,EX1,Unequal,Technician,p1013,10:35,外观/位置没有告诉我关于他人的信息。,PERCEIVE-NoDifference,,Equal/null：没读到外观信号
+EX1-T-19,EX1,Unequal,Technician,p0005,10:37,有人皮肤是平民却是无产者，我没看成组别就把他打死了。,Identity preception,OTHER-Notable,皮肤–层级 mismatch；打人仍 Competition 作 secondary 可
+EX1-T-20,EX1,Unequal,Technician,p1013,11:16,选皮肤时以为随便选，后来才发现自己是蓝色；看到发光橙眼就绕开。,PERCEIVE-Appearance 外观,🚩Strategy - Risk Avoiding,
+EX1-T-21,EX1,Unequal,Technician,P1012,12:29,好像看不到其他玩家在做什么。,PERCEIVE-Spatial 空间,,可见性低，非 NoDifference（不是说没有不平等）
+EX1-T-22,EX1,Unequal,Technician,p0005,12:43,灰色层只能打同层，不能再往下。,PERCEIVE-Access 权限,,
+EX1-T-23,EX1,Unequal,Technician,P1012,13:32,资源方面是一种制衡。,PERCEIVE-Resource 资源,OTHER-Notable,表述短
+EX1-T-24,EX1,Unequal,Technician,p0005,13:37,资源看起来没啥特点，随机。,PERCEIVE-Resource 资源,PERCEIVE-NoDifference,同层内随机≠身份未知
+EX1-T-25,EX1,Unequal,Technician,p1013,13:52,竞争还好，因为没遇到几个人。,APPRAISE-Ambivalent ,,
+EX1-T-26,EX1,Unequal,Technician,p0005,14:31,我会和其他人比较（不只同层）。,COMPARE-Intertier,,原文「其他人」
+EX1-T-27,EX1,Unequal,Technician,p0005,17:45,我是灰色的，所以就打其他阵营。,COMPARE-Intertier,BEHAVIOR-Competition / combat / Ambush / Plunder,外观当阵营线索
+EX1-T-28,EX1,Unequal,Technician,p0005,18:35,我最先开始打人，以为这游戏就是要打人。,BEHAVIOR-Competition / combat / Ambush / Plunder,🚩Strategy holding,
+EX1-T-29,EX1,Unequal,Technician,P1012,19:15,一直找核心；被打、看到别人被打后害怕，就开始躲。,🚩Strategy Shift,BEHAVIOR-Withdrawal / Hiding,
+EX1-T-30,EX1,Unequal,Technician,p0005,20:08,把东西给别人然后自杀，在死亡点重生。,BEHAVIOR- Gift,🚩Strategy Shift,自杀是给予后的手段，主码 Gift
+EX1-T-31,EX1,Unequal,Technician,p1013,21:07,一开始不会做；找到一次核心后更想努力多找。,MOTIVATION-Shift,,
+EX1-T-32,EX1,Unequal,Technician,p0005,21:59,始终以为团队合作，直到最终排名才发现按个人。,MOTIVATION- holding,Mechanism Transparency,
+EX1-T-33,EX1,Unequal,Technician,p0005,22:31,即便知道不是团队，没饱食也会把东西给人，但会要求重生后还一些。,BEHAVIOR- Gift,MOTIVATION- holding,
+EX1-T-34,EX1,Unequal,Technician,P1012,23:08,找到资源后动力增加，想再多找。,MOTIVATION-Shift,,
+EX1-T-35,EX1,Unequal,Technician,p0005,23:58,我会适应这些条件。,Legimitate inequality by Player themselves,,
+EX1-B-01,EX1,Unequal,Breathless,P7,04:24,10分钟去传送处发现等级森严：中间能往下，上不去 top。,PERCEIVE-Access 权限,BEHAVIOR-CrossZoneMove,ASR: 7号
+EX1-B-02,EX1,Unequal,Breathless,P7,04:56,前10分钟一直在收集水晶。,🚩Strategy holding,,
+EX1-B-03,EX1,Unequal,Breathless,P8?,05:42,我被打死；想报仇打回去，怀疑上层血更厚。,BEHAVIOR-Competition / combat / Ambush / Plunder,PERCEIVE-Access 权限,被杀→Competition
+EX1-B-04,EX1,Unequal,Breathless,P8?,06:04,太不公平：下层没饱食跑不动，资源不够还被资源更多的人打死，19个遗物全掉。,APPRAISE-Unfair ,PERCEIVE-Resource 资源,
+EX1-B-05,EX1,Unequal,Breathless,P8?,07:06,5号突然把遗物给我；自己找到的11个算应得，别人给的不算。,APPRAISE-Ambivalent ,BEHAVIOR- Gift,
+EX1-B-06,EX1,Unequal,Breathless,P9,08:43,电脑卡，全程绕圈收集；看到别人在杀人；被15号追就跑、再藏。,BEHAVIOR-Withdrawal / Hiding,🚩Strategy - Risk Avoiding,
+EX1-B-07,EX1,Unequal,Breathless,P?,09:45,找了很多之后想藏；被打死重生后不想再找，只想复仇。,🚩Strategy Shift,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX1-B-08,EX1,Unequal,Breathless,P10,10:33,本层找箱子多劳多得还算公平；但存在信息差，不知道上层规则/箱子是否更多。,APPRAISE-Fair ,Mechanism Transparency,层内公平 vs 跨层未知
+EX1-B-09,EX1,Unequal,Breathless,P10,11:13,看到死人掉水晶后开始躲；到中间后会防御性先动手。,🚩Strategy Shift,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX1-B-10,EX1,Unequal,Breathless,P10,11:51,唯一觉得不公平的是不能传送到上层，发现传不了很失落。,APPRAISE-Unfair ,PERCEIVE-Access 权限,
+EX1-B-11,EX1,Unequal,Breathless,P10,13:12,破坏方块做不了；靠试错知道规则；没碰到NPC。,Mechanism Transparency,PERCEIVE-Access 权限,
+EX1-B-12,EX1,Unequal,Breathless,P9,17:47,靠衣服颜色分组：蓝色以为不能打我；05号不同阵营就绕开躲。,PERCEIVE-Appearance 外观,COMPARE-Intertier,
+EX1-B-13,EX1,Unequal,Breathless,P9,18:56,电脑卡所以不想打架，一直搜集。,🚩Strategy - Risk Avoiding,OTHER-Notable,卡顿作为行为约束
+EX1-A-01,EX1,Unequal,Architect,P1011,05:40,刚开始很懵，一直在上层绕，不太知道怎么下去。,PERCEIVE-Access 权限,Identity preception,
+EX1-A-02,EX1,Unequal,Architect,P1011,06:46,很多人上来直接攻击我，来不及沟通。,BEHAVIOR-Competition / combat / Ambush / Plunder,,被打→Competition
+EX1-A-03,EX1,Unequal,Architect,P1011,07:08,分辨不出他们是谁，上来就打我就觉得跟我不一样。,COMPARE-Intertier,PERCEIVE-Appearance 外观,
+EX1-A-04,EX1,Unequal,Architect,P1016,09:12,先把顶层大部分水晶收完，看到人就躲，等人下去再跟下去。,🚩Strategy - Risk Avoiding,BEHAVIOR-Withdrawal / Hiding,
+EX1-A-05,EX1,Unequal,Architect,P1016,09:46,付出和结果挺匹配；下去后按搜箱策略，后改帮同色标签的人打架，自己水晶最多。,APPRAISE-Fair ,BEHAVIOR-Competition / combat / Ambush / Plunder,同色≠同盟：误判
+EX1-A-06,EX1,Unequal,Architect,P1016,10:48,以为同颜色是阵营，结果同色也打我。,Identity preception,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX1-A-07,EX1,Unequal,Architect,P1016,11:11,中层能看到下层打架；等人离传送点远再下去偷袭。,PERCEIVE-Spatial 空间,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX1-A-08,EX1,Unequal,Architect,P1016,13:02,三层建筑风格不同；密度上层最小、越往下越高。,PERCEIVE-Resource 资源,PERCEIVE-Spatial 空间,
+EX1-A-09,EX1,Unequal,Architect,P1004,11:59,一开始觉得大家都一样没阶级；有人开始攻击后局面失控。,PERCEIVE-NoDifference,🚩Strategy Shift,先无差异后破裂
+EX1-A-10,EX1,Unequal,Architect,P1004,12:31,从互助变成猜忌，体验更消极。,MOTIVATION-Shift,,
+EX1-A-11,EX1,Unequal,Architect,P1016,14:06,看到头顶标签不一样就预感会打架，所以一直保守。,PERCEIVE-Appearance 外观,🚩Strategy holding,
+EX1-A-12,EX1,Unequal,Architect,P1015,15:26,我分到的皮肤像乞丐，和这层不像。,PERCEIVE-Appearance 外观,OTHER-Notable,皮肤–层级 mismatch
+EX1-A-13,EX1,Unequal,Architect,P1015,16:19,一开始立场不明确，不理解衣服和环境是否匹配。,Identity preception,,
+EX1-A-14,EX1,Unequal,Architect,P1015,20:39,没走到下层，个人体验没觉得有特别大差异。,PERCEIVE-NoDifference,,体验不全的 null
+EX1-A-15,EX1,Unequal,Architect,P1004,20:59,游戏本质不公平：底下少收上面两层资源，上层前期还能不打架。,APPRAISE-Unfair ,PERCEIVE-Resource 资源,
+EX1-A-16,EX1,Unequal,Architect,P1004,21:37,下面走一圈只有十几二十个；没法坐传送门上去，就知道有区别。,PERCEIVE-Access 权限,COMPARE-Intertier,
+EX1-A-17,EX1,Unequal,Architect,P1016,23:49,不平衡里有试图掰回公平的机制：顶层收完躲着可能排中游，下去可能全丢。,APPRAISE-Ambivalent ,Legimitate inequality by Player themselves,
+EX1-A-18,EX1,Unequal,Architect,P1004,21:58,身份分过几次，衣服从华丽变成没穿衣服，一脸疑惑。,Identity preception,OTHER-Notable,多次身份变动
+EX1-A-19,EX1,Unequal,Architect,P1015,16:43,上层几乎遇不到人；到中层明显感到战争爆发。,PERCEIVE-Spatial 空间,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX1-A-20,EX1,Unequal,Architect,P1015,18:05,目标变得可有可无，就随便攻击别人，想知道死了会怎样。,🚩Strategy Shift,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX2-T-01,EX2,Equal,Technician,P2011,00:00,开局被杀抢走东西；还手后对方还了两个，资源被平分。,BEHAVIOR-Competition / combat / Ambush / Plunder,BEHAVIOR- Gift,被杀→Competition
+EX2-T-02,EX2,Equal,Technician,P2011,00:00,大家知道可以杀人后，击杀频率明显上升。,Mechanism Transparency,🚩Strategy Shift,
+EX2-T-03,EX2,Equal,Technician,p2006,01:22,突然被攻击杀死全掉落；后来和另一人一起把204打倒。,BEHAVIOR-Competition / combat / Ambush / Plunder,BEHAVIOR-Cooperation,
+EX2-T-04,EX2,Equal,Technician,P2011,02:55,前期被打又迷路，大概只有三个核心，低于平均。,PERCEIVE-Resource 资源,,
+EX2-T-05,EX2,Equal,Technician,p2016,03:22,最终排名第七，数量大概中等。,COMPARE-Intratier,PERCEIVE-Resource 资源,
+EX2-T-06,EX2,Equal,Technician,p2016,03:52,最终成果和投入还可以、算相称。,APPRAISE-Fair ,,
+EX2-T-07,EX2,Equal,Technician,P2011,03:53,通过NPC找到别人没找到的东西，有成就感，最后的收集是应得的。,APPRAISE-Fair ,PERCEIVE-Access 权限,NPC=social capital/info
+EX2-T-08,EX2,Equal,Technician,p2006,05:00,最终成就和努力相称。,APPRAISE-Fair ,,
+EX2-T-09,EX2,Equal,Technician,p2006,05:24,多数建筑有1–2个核心，从外往内一圈圈收集。,PERCEIVE-Resource 资源,🚩Strategy holding,
+EX2-T-10,EX2,Equal,Technician,P2011,06:15,资源分布不均：起始岛和最后一岛贫乏，中间岛更丰富。,PERCEIVE-Resource 资源,,Equal 内的分布感知
+EX2-T-11,EX2,Equal,Technician,p2016,07:10,一进游戏就找箱子，没特别关注分布密度。,PERCEIVE-NoDifference,🚩Strategy holding,
+EX2-T-12,EX2,Equal,Technician,P2011,08:18,传送门像要多人触发，所以转向集体资源分配。,BEHAVIOR-Cooperation,🚩Strategy Shift,
+EX2-T-13,EX2,Equal,Technician,P2011,09:14,聊天叫人；唯一一次行为合作是一起进传送门。,BEHAVIOR-Cooperation,BEHAVIOR-CrossZoneMove,
+EX2-T-14,EX2,Equal,Technician,P2011,10:10,资源有限，一个人搜不完，需要集体。,BEHAVIOR-Cooperation,,
+EX2-T-15,EX2,Equal,Technician,P2011,12:08,没有注意到三种身份。,Identity preception,,不知道身份≠没看见差异
+EX2-T-16,EX2,Equal,Technician,p2016,12:10,还没搞明白三种身份是做什么用的。,Identity preception,,
+EX2-T-17,EX2,Equal,Technician,P2011,12:50,不知道身份信息有什么用，也不知道能选外观。,Identity preception,Mechanism Transparency,
+EX2-T-18,EX2,Equal,Technician,P2011,13:19,即便早知道，大致仍从集体出发，只是搜寻会更快。,🚩Strategy holding,BEHAVIOR-Cooperation,
+EX2-T-19,EX2,Equal,Technician,P2011,14:37,有人跟在后面会小心是不是要打我；看到合伙打人就路过离开。,BEHAVIOR- Risk Avoiding,BEHAVIOR- just observation / no behaviour,
+EX2-T-20,EX2,Equal,Technician,P2011,16:36,原以为地图一个大圈，后来发现还有别的大岛。,PERCEIVE-Spatial 空间,,
+EX2-T-21,EX2,Equal,Technician,P2011,17:05,不知道自己身份；见到的人都在找箱子，行为上没差异。,PERCEIVE-NoDifference,Identity preception,一句两意：身份未知+行为无差异
+EX2-T-22,EX2,Equal,Technician,p2006,19:52,游戏感觉混乱、不清晰。,Mechanism Transparency,,
+EX2-T-23,EX2,Equal,Technician,P2011,20:58,猜自己层级很差，因为资源很少。,PERCEIVE-Resource 资源,Identity preception,
+EX2-T-24,EX2,Equal,Technician,p2016,21:31,对自己的层级没有什么概念。,Identity preception,,修订规则示例句
+EX2-T-25,EX2,Equal,Technician,P2011,22:17,觉得大家都一样、目标一样，没有太不一样。,PERCEIVE-NoDifference,,
+EX2-T-26,EX2,Equal,Technician,P2011,22:54,后来才发现是被自动传送，不是自己进传送门。,BEHAVIOR-CrossZoneMove,,
+EX2-T-27,EX2,Equal,Technician,p2016,23:42,整个过程策略基本没变。,🚩Strategy holding,,
+EX2-T-28,EX2,Equal,Technician,p2016,23:53,动机或兴趣没有改变。,MOTIVATION- holding,,
+EX2-T-29,EX2,Equal,Technician,p2006,24:21,状态低时打不了；刷新后打了不少人。,🚩Strategy Shift,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX2-T-30,EX2,Equal,Technician,p2006,26:18,没感觉到有什么不同权限。,PERCEIVE-NoDifference,PERCEIVE-Access 权限,
+EX2-T-31,EX2,Equal,Technician,p2016,26:32,觉得大家都是平等的。,PERCEIVE-NoDifference,APPRAISE-Fair ,
+EX2-T-32,EX2,Equal,Technician,P2011,26:45,第三人岛有NPC别人说没有；结束时有人资源更多，觉得存在差异。,APPRAISE-Unfair ,PERCEIVE-Access 权限,Equal 内仍推断差异
+EX2-B-01,EX2,Equal,Breathless,p2002,03:56,一路找资源没碰到NPC，最后水晶很少，有点遗憾。,PERCEIVE-Resource 资源,,
+EX2-B-02,EX2,Equal,Breathless,p2003,05:07,一开始不知道有战斗，后来有人一直跟我打。,Mechanism Transparency,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX2-B-03,EX2,Equal,Breathless,P2004,05:59,最后10秒拿着15个水晶被打死，什么都没得到。,BEHAVIOR-Competition / combat / Ambush / Plunder,APPRAISE-Unfair ,被杀→Competition
+EX2-B-04,EX2,Equal,Breathless,P2004,06:00,无意中发现打死对方能拿水晶，后来就打人；没注意时间没能逃。,🚩Strategy Shift,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX2-B-05,EX2,Equal,Breathless,p2013,07:42,前面收集了十几个，后来被不知谁追着打，一直跑到结束。,BEHAVIOR-Withdrawal / Hiding,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX2-B-06,EX2,Equal,Breathless,p2002,09:21,聊天框有人说被杀死，才知道有战斗。,Mechanism Transparency,,
+EX2-B-07,EX2,Equal,Breathless,P2004,10:38,箱子找不到/开不了就放弃搜寻，抓着人打。,🚩Strategy Shift,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX2-A-01,EX2,Equal,Architect,P2007,05:34,被杀后才知道水晶被抢走；复活后箱子空了只能去杀别人。,BEHAVIOR-Competition / combat / Ambush / Plunder,🚩Strategy Shift,
+EX2-A-02,EX2,Equal,Architect,P2007,06:21,辛苦采集被抢走，很生气又无奈，只剩1分钟。,APPRAISE-Unfair ,MOTIVATION-Shift,
+EX2-A-03,EX2,Equal,Architect,P2007,07:15,杀人时不管对方穿什么衣服，只要拿水晶。,PERCEIVE-NoDifference,BEHAVIOR-Competition / combat / Ambush / Plunder,外观不作为区分
+EX2-A-04,EX2,Equal,Architect,p2005,07:57,三个颜色/称号代表三个出生岛；去别的岛基本没东西。,PERCEIVE-Spatial 空间,Identity preception,Equal：标签=出生点而非特权
+EX2-A-05,EX2,Equal,Architect,p2005,08:49,先验证死亡掉落；把抢来的还回去；把水晶藏木桶里自杀再取回。,BEHAVIOR- Gift,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX2-A-06,EX2,Equal,Architect,p2005,12:45,排名第二；若没把资源还人可能第一，但不后悔。,APPRAISE-Fair ,BEHAVIOR- Gift,
+EX2-A-07,EX2,Equal,Architect,P2012,14:13,饥饿值随机且管理员没按说好的恢复，这点不公平。,APPRAISE-Unfair ,Mechanism Transparency,
+EX2-A-08,EX2,Equal,Architect,P2012,15:09,以为职业能上楼/挖方块，试了很久没有，努力没换来回报。,Identity preception,MOTIVATION-Shift,对身份机制的错误推断
+EX2-A-09,EX2,Equal,Architect,P2012,16:40,先不关心个人排名、想找隐藏水晶公布；失败后有挫败；后来觉得职业人数不均也不公平。,APPRAISE-Unfair ,MOTIVATION-Shift,Equal 内的不公平叙事
+EX2-A-10,EX2,Equal,Architect,P2007,19:49,看到有人在天上飞，以为上层资源给能飞的人。,PERCEIVE-Access 权限,OTHER-Notable,可能是旁观/旁路
+EX2-A-11,EX2,Equal,Architect,p2005,20:39,先动手验证死亡掉落的猜测。,BEHAVIOR-Competition / combat / Ambush / Plunder,The way of Perceive- Predict/ Inferring 推测,
+EX3-T-01,EX3,Unequal,Technician,P1,,每个房子固定只刷新一个 Data Core。,PERCEIVE-Resource 资源,,Data nature: recall reconstruction
+EX3-T-02,EX3,Unequal,Technician,P2,,任务目标不明确；想登楼发现二楼根本上不去。,PERCEIVE-Access 权限,Mechanism Transparency,
+EX3-T-03,EX3,Unequal,Technician,P3,,小空间密度大、收集效率更高。,PERCEIVE-Resource 资源,🚩Strategy holding,
+EX3-T-04,EX3,Unequal,Technician,P1,,拿到的数量和想象中别人差不多，劳动和所得相符。,APPRAISE-Fair ,COMPARE-Intratier,
+EX3-T-05,EX3,Unequal,Technician,P3,,资源呈金字塔：越往下越多、越往上越少。,PERCEIVE-Resource 资源,COMPARE-Intertier,
+EX3-T-06,EX3,Unequal,Technician,P1,,Middle 层内部同一水平的基础分布还是一样的。,PERCEIVE-NoDifference,,层内无差异 vs 跨层金字塔
+EX3-T-07,EX3,Unequal,Technician,P2,,靠试错知道二楼无权限；同层规则一样，但访问被限制得很死。,PERCEIVE-Access 权限,Mechanism Transparency,
+EX3-T-08,EX3,Unequal,Technician,P1,,纯粹外观没告诉我太多。,PERCEIVE-NoDifference,PERCEIVE-Appearance 外观,
+EX3-T-09,EX3,Unequal,Technician,P2,,Title 分级能明显感到层级差距。,Identity preception,PERCEIVE-Appearance 外观,
+EX3-T-10,EX3,Unequal,Technician,P3,,平视看不太到别人；特殊地形可往下看。,PERCEIVE-Spatial 空间,,
+EX3-T-11,EX3,Unequal,Technician,P1/P2,,有人说NPC不刷新只给固定坐标，有人说会刷新且很有用。,OTHER-Notable,,NPC 报告冲突，技术核查
+EX3-T-12,EX3,Unequal,Technician,P3,,发现资源分布和访问权限差异时会感到不公平。,APPRAISE-Unfair ,PERCEIVE-Access 权限,
+EX3-T-13,EX3,Unequal,Technician,P2,,察觉异常就尾随观察其他玩家。,BEHAVIOR- just observation / no behaviour,🚩Strategy Shift,
+EX3-T-14,EX3,Unequal,Technician,P3,,起初寻求同层合作，发现没人愿意合作，挫败、兴趣下降。,MOTIVATION-Shift,BEHAVIOR-Cooperation,
+EX3-T-15,EX3,Unequal,Technician,P1,,策略没变，一直找资源。,🚩Strategy holding,,
+EX3-T-16,EX3,Unequal,Technician,P2,,最高层或资源最密的层级最有优势；看法基本一致。,COMPARE-Intertier,PERCEIVE-Access 权限,
+EX3-A-01,EX3,Unequal,Architect,P3008,00:00:19,本层有两个末影箱，可先把东西存上层再下去。,PERCEIVE-Access 权限,OTHER-Notable,存储/社交资本混合优势
+EX3-A-02,EX3,Unequal,Architect,P3008,00:01:32,把找到的都给其他 architect 再下去看，自己排最后。,BEHAVIOR- Gift,BEHAVIOR-CrossZoneMove,
+EX3-A-03,EX3,Unequal,Architect,P3003,00:02:47,一路没人理我；下来时队友扔水晶给我，很惊讶感动。,BEHAVIOR- Gift,BEHAVIOR-Cooperation,
+EX3-A-04,EX3,Unequal,Architect,P3008,00:03:25,理论上我们是能找到水晶最多的一批。,PERCEIVE-Resource 资源,COMPARE-Intertier,
+EX3-A-05,EX3,Unequal,Architect,P3008,00:03:45,我们可以下去找他们的水晶，又可以把水晶存在最上层。,PERCEIVE-Access 权限,,
+EX3-A-06,EX3,Unequal,Architect,P3012,00:04:03,第一名和第二名都是我们组的，因为找的多。,APPRAISE-Fair ,COMPARE-Intratier,
+EX3-A-07,EX3,Unequal,Architect,P3002,00:04:44,最底层箱子特别少。,PERCEIVE-Resource 资源,COMPARE-Intertier,
+EX3-A-08,EX3,Unequal,Architect,P3008,00:05:00,底层好像也没有提示 NPC。,PERCEIVE-Access 权限,COMPARE-Intertier,
+EX3-B-01,EX3,Unequal,Breathless,p3005,00:01:16,规则比较简单，可供评判的东西不多。,Mechanism Transparency,,页眉误标 Equal；内容为下层/传送限制
+EX3-B-02,EX3,Unequal,Breathless,P3010,00:01:38,显性规则是身份权限：用不了传送门只能等上面人下来；隐性是攻击/掠夺等涌现行为。,PERCEIVE-Access 权限,Mechanism Transparency,
+EX3-B-03,EX3,Unequal,Breathless,p3005,00:03:24,外观和不同层会不自然地把人分成阵营、合纵连横。,PERCEIVE-Appearance 外观,COMPARE-Intertier,
+EX3-B-04,EX3,Unequal,Breathless,P3010,00:05:21,本地资源收完后上层来掠夺，才对上面两层充满敌意；看消息栏我方击败蓝方会受鼓舞。,COMPARE-Intertier,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX3-B-05,EX3,Unequal,Breathless,p3014,00:06:39,下层形象和身份契合、辨识度高，暗示同伴合作、对手可攻击。,PERCEIVE-Appearance 外观,BEHAVIOR-Cooperation,
+EX3-B-06,EX3,Unequal,Breathless,p3005,00:07:57,视野受限；能透过玻璃和名牌猜上层也有冲突；下层没看到NPC。,PERCEIVE-Spatial 空间,The way of Perceive- Predict/ Inferring 推测,
+EX3-B-07,EX3,Unequal,Breathless,P3010,00:09:58,前期只顾找箱子；上层下来后才关注阵营冲突，潜行看名牌。,PERCEIVE-Spatial 空间,🚩Strategy Shift,
+EX3-B-08,EX3,Unequal,Breathless,p3014,00:11:19,他们下来时束手无策；攒到水晶后躲在二楼连脸都不敢露。,BEHAVIOR-Withdrawal / Hiding,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX3-B-09,EX3,Unequal,Breathless,p3005,00:13:19,第三层对游戏进程判断不准；小地图显示的是顶层白底，和实际不匹配。,PERCEIVE-Spatial 空间,Mechanism Transparency,
+EX3-B-10,EX3,Unequal,Breathless,p3005,00:17:16,先和同身份比（排第二高兴）；上层资源更多也合理，因为发展空间不同。,COMPARE-Intratier,APPRAISE-Fair ,合法化跨层差距
+EX3-B-11,EX3,Unequal,Breathless,p3005,00:18:34,最终结果符合你选抢还是躲，做好决定就为此负责。,Legimitate inequality by Player themselves,APPRAISE-Fair ,
+EX3-B-12,EX3,Unequal,Breathless,P3010,00:19:11,更在乎上层流通权限，我们只能被动等上层来决战。,PERCEIVE-Access 权限,COMPARE-Intertier,
+EX3-B-13,EX3,Unequal,Breathless,p3014,00:19:42,不想跟队友比，只希望同阶层排名都靠前。,COMPARE-Intratier,BEHAVIOR-Cooperation,
+EX3-B-14,EX3,Unequal,Breathless,p3005,00:20:36,身份随机所以谈不上分得公不公平；打架水平换资源是公平的。,APPRAISE-Fair ,Legimitate inequality by Player themselves,
+EX3-B-15,EX3,Unequal,Breathless,P3010,00:21:52,既来之则安之。,Legimitate inequality by Player themselves,,
+EX3-B-16,EX3,Unequal,Breathless,p3014,00:22:19,杀了13号拿走全部水晶，对他前期搜集很内疚，也觉得有点不公平。,APPRAISE-Unfair ,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX3-B-17,EX3,Unequal,Breathless,p3005,00:28:03,上层下来状态更好，只能躲；改变了原本绕圈找水晶的轨迹。,🚩Strategy Shift,BEHAVIOR-Withdrawal / Hiding,
+EX3-B-18,EX3,Unequal,Breathless,P3010,00:33:40,我们这身份传不上去，传送门对无产者是威胁不是交换渠道，所以躲起来。,PERCEIVE-Access 权限,BEHAVIOR-CrossZoneMove,
+EX3-B-19,EX3,Unequal,Breathless,p3014,00:34:31,想在传送门伏击；站上去没反应，才知道这层不能往上爬。,PERCEIVE-Access 权限,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX3-B-20,EX3,Unequal,Breathless,p3005,00:35:23,从大胆找 → 发现能死人后猥琐下楼 → 发现可抢后更保守躲二楼。,🚩Strategy Shift,BEHAVIOR-Withdrawal / Hiding,
+EX3-B-21,EX3,Unequal,Breathless,p3014,00:36:28,跟队友打了别人抢到水晶后，见人就打。,🚩Strategy Shift,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX3-B-22,EX3,Unequal,Breathless,p3005,00:36:53,目标一直是保水晶；想抢但血太差作罢，从头到尾明哲保身。,MOTIVATION- holding,🚩Strategy - Risk Avoiding,
+EX3-B-23,EX3,Unequal,Breathless,p3014,00:37:46,箱子空了之后发现打人能拿水晶，兴趣随进度上升。,MOTIVATION-Shift,,
+EX3-B-24,EX3,Unequal,Breathless,p3005,00:38:22,猜水晶我们层最多、起手优势顶层最大，中间层最难受。,COMPARE-Intertier,PERCEIVE-Resource 资源,
+EX3-B-25,EX3,Unequal,Breathless,p3014,00:39:49,顶层最舒服（打完可逃上去），中间两面受敌最难受。,COMPARE-Intertier,PERCEIVE-Access 权限,
+EX4-T-01,EX4,Equal,Technician,至上,02:27,有些楼很高但没电梯楼梯，三层以上玻璃封住找不到楼梯。,PERCEIVE-Access 权限,OTHER-Notable,可能是装饰空间
+EX4-T-02,EX4,Equal,Technician,至上,03:47,为什么有些箱子是空的？（得知被别人拿走）,PERCEIVE-Resource 资源,,
+EX4-T-03,EX4,Equal,Technician,至上,04:27,开始4分钟后才知道游戏已开始，群里没确切回复。,Mechanism Transparency,OTHER-Notable,流程事故
+EX4-T-04,EX4,Equal,Technician,4019,06:39,进得晚资源收完；和另外两人打架；看不出是不是一队，衣服颜色不一样。,PERCEIVE-Appearance 外观,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX4-T-05,EX4,Equal,Technician,4019,08:34,自己捡1个，打死人背包多了11个，结算时被打死又没了。,BEHAVIOR-Competition / combat / Ambush / Plunder,APPRAISE-Unfair ,被杀→Competition
+EX4-T-06,EX4,Equal,Technician,4019,14:18,挖不动方块；高处有空气墙；摔死像bug。,PERCEIVE-Access 权限,OTHER-Notable,
+EX4-T-07,EX4,Equal,Technician,4019,15:00,在传送门待着，不知道怎么传。,BEHAVIOR-CrossZoneMove,Mechanism Transparency,
+EX4-T-08,EX4,Equal,Technician,4019,16:27,在最下面看到上面四块地方都有人，觉得是不同队伍。,PERCEIVE-Spatial 空间,The way of Perceive- Predict/ Inferring 推测,
+EX4-T-09,EX4,Equal,Technician,4019,18:27,打架发生在出生点；另外两人服装一样我不同，以为他们一队。,PERCEIVE-Appearance 外观,Identity preception,
+EX4-T-10,EX4,Equal,Technician,至上,19:22,都不知道队友是谁。,Identity preception,,
+EX4-T-11,EX4,Equal,Technician,至上,20:00,资源不多，遇到人就互打。,PERCEIVE-Resource 资源,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX4-T-12,EX4,Equal,Technician,至上,20:26,一开始不知道进攻能掠夺，后来才知道打死会掉资源。,Mechanism Transparency,🚩Strategy Shift,
+EX4-T-13,EX4,Equal,Technician,至上,21:56,看到的人都在和我们一样找资源。,PERCEIVE-NoDifference,,
+EX4-T-14,EX4,Equal,Technician,至上,27:16,不搜寻只杀人拿资源这一点不太好；像职场成果被窃取。,APPRAISE-Unfair ,Mechanism Transparency,
+EX4-T-15,EX4,Equal,Technician,至上,28:47,各自和平探索会公平；没有和平探索则公平性彰显不了。,APPRAISE-Ambivalent ,,
+EX4-T-16,EX4,Equal,Technician,至上,29:39,身边资源没了就会想掠夺，以欺压他人获更高资源。,🚩Strategy Shift,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX4-A-01,EX4,Equal,Architect,p4002,00:00:34,弄了一行半水晶被人打死，白忙活。,BEHAVIOR-Competition / combat / Ambush / Plunder,,被杀→Competition；会后揭晓为对照组
+EX4-A-02,EX4,Equal,Architect,p4002,00:01:11,不合理：谁知道还能杀人；第一次玩头晕。,APPRAISE-Unfair ,Mechanism Transparency,
+EX4-A-03,EX4,Equal,Architect,p4002,00:01:35,没注意杀人者长得是否和我一样。,Identity preception,,
+EX4-A-04,EX4,Equal,Architect,p4009,00:02:19,无缘无故有人来杀你；最后被4002杀死，很无语莫名其妙。,BEHAVIOR-Competition / combat / Ambush / Plunder,APPRAISE-Unfair ,
+EX4-A-05,EX4,Equal,Architect,p4009,00:03:39,我没去主动攻击别人。,BEHAVIOR- just observation / no behaviour,,
+EX4-A-06,EX4,Equal,Architect,p4009,00:04:23,感觉4002颜色和我不一样。,PERCEIVE-Appearance 外观,,
+EX4-A-07,EX4,Equal,Architect,p4002,00:04:43,我都不知道什么阵营不阵营。,Identity preception,,修订：无概念→Identity
+EX4-A-08,EX4,Equal,Architect,jiabei,00:05:28,晚到10多分钟，后面箱子都空，心态崩溃。,PERCEIVE-Resource 资源,APPRAISE-Unfair ,
+EX4-A-09,EX4,Equal,Architect,p4008,00:06:37,前面不知道左键开箱；回头发现有人跟在后面把水晶捡走。,Mechanism Transparency,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX4-A-10,EX4,Equal,Architect,jiabei,00:07:25,不公平：来得晚概率少；收集/能杀人都是看聊天才知道。,APPRAISE-Unfair ,Mechanism Transparency,
+EX4-A-11,EX4,Equal,Architect,p4008,00:08:14,大家自己找还好；杀人有点虐掠夺性。,APPRAISE-Ambivalent ,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX4-A-12,EX4,Equal,Architect,p4002,00:08:50,一开始捡得觉得公平；知道能追着杀人后觉得不公平，规则没讲透。,APPRAISE-Unfair ,Mechanism Transparency,
+EX4-A-13,EX4,Equal,Architect,jiabei,00:11:48,每个人都能杀人，后来者有机会，这样想又挺公平；纯捡也没玩头。,APPRAISE-Ambivalent ,,
+EX4-A-14,EX4,Equal,Architect,p4008,00:12:32,感觉是公平的。,APPRAISE-Fair ,,
+EX4-A-15,EX4,Equal,Architect,p4002,00:13:15,不知道自己啥颜色，看别人是蓝色。,Identity preception,PERCEIVE-Appearance 外观,
+EX4-A-16,EX4,Equal,Architect,p4008,00:13:51,我好像是黄色，遇到的是蓝色，但能力玩法感觉都一样。,PERCEIVE-Appearance 外观,PERCEIVE-NoDifference,
+EX4-A-17,EX4,Equal,Architect,p4002,00:15:00,其他玩家就捡箱子、追着人杀、或站着不动。,The way of Perceive- Observation 观察到,,
+EX4-A-18,EX4,Equal,Architect,p4009,00:15:46,过来打我了肯定是敌对的；出手前不觉得危险。,COMPARE-Intertier,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX4-A-19,EX4,Equal,Architect,p4008,00:16:43,传过去继续捡箱子；人不一样场景一样。,BEHAVIOR-CrossZoneMove,,
+EX4-A-20,EX4,Equal,Architect,p4008,00:17:16,第一次有人被杀后觉得没人和我一队，要警惕；被打了再还手。,🚩Strategy Shift,BEHAVIOR- Risk Avoiding,
+EX4-A-21,EX4,Equal,Architect,p4002,00:18:19,看见传送门提示但还没找到就被杀了。,BEHAVIOR-CrossZoneMove,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX4-B-01,EX4,Equal,Breathless,P4001,08:31,找东西时被人打；还手，跳楼后打不过对方。,BEHAVIOR-Competition / combat / Ambush / Plunder,,被打→Competition
+EX4-B-02,EX4,Equal,Breathless,P4004,09:09,不知道为什么被摔死，没从高处跳却死了。,OTHER-Notable,,疑似环境/bug；非 Death 码
+EX4-B-03,EX4,Equal,Breathless,P4001,09:22,主要在找东西时被偷袭；跳楼掉血后互锤，打不过。,BEHAVIOR-Competition / combat / Ambush / Plunder,🚩Strategy holding,
+EX4-B-04,EX4,Equal,Breathless,P4001,09:49,开局等太久先关了录屏；进游戏捡了一两个宝石才想起开录。,OTHER-Notable,Mechanism Transparency,流程等待
+EX4-B-05,EX4,Equal,Breathless,P4004,10:17,等很久；开始后过了两分钟才知道已经进去。,Mechanism Transparency,,
+EX4-B-06,EX4,Equal,Breathless,p4005,10:32,一上来就找箱子，感觉跟捡钱一样、挺多，刚开始没有空箱。,PERCEIVE-Resource 资源,🚩Strategy holding,
+EX4-B-07,EX4,Equal,Breathless,P4001,11:08,排名第四、找得挺多；公屏提议联合先干掉打人的再分区找。,BEHAVIOR-Cooperation,COMPARE-Intratier,平等：反掠夺联盟，非阶层认同
+EX4-B-08,EX4,Equal,Breathless,P4004,11:46,没有联合；后面发现1号，打不过就跑了。,BEHAVIOR-Withdrawal / Hiding,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX4-B-09,EX4,Equal,Breathless,p4005,12:00,一看见人就躲；传送门走两圈，多人传送时多传几次甩掉对方，去没人处找。,BEHAVIOR-Withdrawal / Hiding,BEHAVIOR-CrossZoneMove,
+EX4-B-10,EX4,Equal,Breathless,P4001,12:35,成果还行；曾把水晶丢进箱子再去打架，最后还是算了。,APPRAISE-Fair ,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX4-B-11,EX4,Equal,Breathless,P4004,12:52,不觉得相称：死掉后回不去原来的地方，后面只找到一个。,APPRAISE-Unfair ,PERCEIVE-Spatial 空间,
+EX4-B-12,EX4,Equal,Breathless,p4005,13:04,找了很多、翻很多空箱；付出多、收获大概一半。,APPRAISE-Unfair ,PERCEIVE-Resource 资源,
+EX4-B-13,EX4,Equal,Breathless,P4001,13:35,开局到处都有；现代楼里少/空，阁楼木质楼一层二层基本都有。,PERCEIVE-Resource 资源,PERCEIVE-Spatial 空间,Equal 内建筑类型差，非层级门
+EX4-B-14,EX4,Equal,Breathless,P4001,14:02,越到后面越少，不知是被搜过还是没东西。,PERCEIVE-Resource 资源,,
+EX4-B-15,EX4,Equal,Breathless,P4004,14:18,进去晚，觉得大概都被收过；摆放位置挺明显。,PERCEIVE-Resource 资源,,迟到效应
+EX4-B-16,EX4,Equal,Breathless,p4005,14:34,传送门一开始传不过去，等了约17秒才传；过去后不确定自己来过没有。,BEHAVIOR-CrossZoneMove,Mechanism Transparency,
+EX4-B-17,EX4,Equal,Breathless,P4001,15:15,没想过能做什么：先只找水晶，后加打架，最后是找水晶+打架+躲人。,🚩Strategy Shift,,三阶段；平等风险轨迹
+EX4-B-18,EX4,Equal,Breathless,p4005,15:39,想破坏方块破坏不了；小门/按钮/铁门能用。,PERCEIVE-Access 权限,Mechanism Transparency,试错；非阶层单向门
+EX4-B-19,EX4,Equal,Breathless,P4001,16:16,默认不能打；被打后才知道能打；当时不知水晶会不会掉，看结果才知道会掉。,Mechanism Transparency,BEHAVIOR-Competition / combat / Ambush / Plunder,T4：掠夺规则被发现
+EX4-B-20,EX4,Equal,Breathless,P4004,16:53,找不到水晶就看到人打；刚好看到1号就打了。,BEHAVIOR-Competition / combat / Ambush / Plunder,🚩Strategy Shift,
+EX4-B-21,EX4,Equal,Breathless,p4005,17:13,刚开始打英文字母玩家两下，觉得没有伤害；看公屏有人死了才发现能打人。,Mechanism Transparency,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX4-B-22,EX4,Equal,Breathless,P4001,17:47,打架不是目的，目的是找水晶；除了排名，不知道排名后面有没有用。,MOTIVATION- holding,,
+EX4-B-23,EX4,Equal,Breathless,p4005,18:15,感觉没什么规则；没说不让打人；不能破坏则大家都破坏不了。,PERCEIVE-NoDifference,Mechanism Transparency,规则对所有人一样
+EX4-B-24,EX4,Equal,Breathless,P4001,18:44,外观大部分是蓝色、没太大区别；没法靠外观或字母分辨是谁打的。,PERCEIVE-Appearance 外观,PERCEIVE-NoDifference,T1/T3：标签无结构含义
+EX4-B-25,EX4,Equal,Breathless,P4004,19:27,遇到人不多；后面有人追，不知道是谁。,Identity preception,BEHAVIOR-Competition / combat / Ambush / Plunder,
+EX4-B-26,EX4,Equal,Breathless,p4005,19:38,都觉得都一样，看起来没什么区别。,PERCEIVE-NoDifference,PERCEIVE-Appearance 外观,
+EX4-B-27,EX4,Equal,Breathless,P4001,19:56,几乎看不到别人在做什么；开局人少，后面有人死后复活乱打才多见一点，地图仍空。,PERCEIVE-Spatial 空间,PERCEIVE-NoDifference,
+EX4-B-28,EX4,Equal,Breathless,P4001,20:46,前5分钟找东西，后几分钟互殴完就躲人；血不回、东西不多。,🚩Strategy Shift,BEHAVIOR-Withdrawal / Hiding,
+EX4-B-29,EX4,Equal,Breathless,P4001,22:07,没找到NPC；和传送门互动踩了半天才传过去；看见有人被铁傀儡打死。,PERCEIVE-Access 权限,OTHER-Notable,
+EX4-B-30,EX4,Equal,Breathless,P4004,22:37,见到傀儡把人打死，没有见到NPC。,OTHER-Notable,,
+EX4-B-31,EX4,Equal,Breathless,P4001,23:10,地图比较乱；甚至不知道自己在哪，乱传送，没什么地图概念。,PERCEIVE-Spatial 空间,,
+EX4-B-32,EX4,Equal,Breathless,P4001,24:00,和「其他人」比；觉得没有同层级的人，就是一排排排名。,COMPARE-Intratier,Identity preception,无阶层比较对象=标签空洞
+EX4-B-33,EX4,Equal,Breathless,P4004,24:30,和比较下面的人比；死过两次没抱希望，没想到还能在中间。,COMPARE-Intratier,APPRAISE-Ambivalent ,
+EX4-B-34,EX4,Equal,Breathless,p4005,24:47,看排名自己大概第三，和第一第二比，他们三十多个觉得自己少。,COMPARE-Intratier,PERCEIVE-Resource 资源,
+EX4-B-35,EX4,Equal,Breathless,P4001,25:23,不太公平：有人毫无规则随便打；不清楚的人会被偷背身扣血。,APPRAISE-Unfair ,Mechanism Transparency,T4：不公是掠夺规则不是门
+EX4-B-36,EX4,Equal,Breathless,P4001,26:25,游戏有点乱、突然；等很久，进去还不太知道要干什么。,Mechanism Transparency,,
+EX4-B-37,EX4,Equal,Breathless,p4005,26:49,限制太多；想弄方块不行，感觉不自由。,PERCEIVE-Access 权限,APPRAISE-Unfair ,全局建造限制≠阶层access
+EX4-B-38,EX4,Equal,Breathless,P4001,27:28,前面看到其他人还行；后面发现血量不回，就稍微躲着点。,🚩Strategy Shift,BEHAVIOR-Withdrawal / Hiding,
+EX4-B-39,EX4,Equal,Breathless,P4004,27:46,一开始追着打；看到很多人死了就躲；有人追也一直躲。,🚩Strategy Shift,BEHAVIOR-Withdrawal / Hiding,
+EX4-B-40,EX4,Equal,Breathless,p4005,28:04,一开始没遇到人；后边遇到两三人也一直躲、没有接触。,BEHAVIOR-Withdrawal / Hiding,🚩Strategy - Risk Avoiding,
+EX4-B-41,EX4,Equal,Breathless,P4001,28:35,不知道「跨层移动」是什么。,Identity preception,BEHAVIOR-CrossZoneMove,T1：平等下层无层级门概念
+EX4-B-42,EX4,Equal,Breathless,P4001,28:41,传送是去别处找水晶；看到人也可以传过来再传回去躲开。,BEHAVIOR-CrossZoneMove,BEHAVIOR-Withdrawal / Hiding,门=搜索/躲避工具，非威胁
+EX4-B-43,EX4,Equal,Breathless,P4004,29:07,莫名其妙被送回去，又找不到方式再回去。,BEHAVIOR-CrossZoneMove,Mechanism Transparency,
+EX4-B-44,EX4,Equal,Breathless,p4005,29:21,看到十几号同班，对看一眼对方就传走；英文地名不记得，传到哪儿就随便走。,BEHAVIOR-CrossZoneMove,PERCEIVE-NoDifference,
+EX4-B-45,EX4,Equal,Breathless,P4001,29:59,一开始大大方方找；后面畏缩着找；找得差不多就藏起来。,🚩Strategy Shift,BEHAVIOR-Withdrawal / Hiding,T2 Equal 风险轨迹
+EX4-B-46,EX4,Equal,Breathless,P4004,30:16,一开始找；被摔死后不知道去哪、有点摆烂；后面随便找因为都被找过。,MOTIVATION-Shift,🚩Strategy Shift,
+EX4-B-47,EX4,Equal,Breathless,p4005,30:31,一开始一直找；看到有人死后就躲着人找。,🚩Strategy Shift,BEHAVIOR-Withdrawal / Hiding,
+EX4-B-48,EX4,Equal,Breathless,P4001,30:54,动力一直是找水晶；结尾变成活下去、别被打没了。,MOTIVATION-Shift,,
+EX4-B-49,EX4,Equal,Breathless,P4004,31:18,从积极变成摆烂。,MOTIVATION-Shift,,
+EX4-B-50,EX4,Equal,Breathless,p4005,31:26,空箱多了兴趣和动力少一点，但仍在翻。,MOTIVATION-Shift,PERCEIVE-Resource 资源,
+EX4-B-51,EX4,Equal,Breathless,P4001,32:05,猜更有优势的是皮肤、攻击力是否更强；「我们都是蓝色的」，别的没太注意。,Identity preception,PERCEIVE-Appearance 外观,用皮肤猜优势但本组同色
+EX4-B-52,EX4,Equal,Breathless,P4004,32:26,没注意谁更有优势，因为见不到几个人。,PERCEIVE-NoDifference,,
+EX4-B-53,EX4,Equal,Breathless,p4005,32:35,猜第一第二有优势，因为自己第三和他们差一半水晶。,COMPARE-Intratier,PERCEIVE-Resource 资源,比的是排名/数量不是层
+EX4-B-54,EX4,Equal,Breathless,p4005,33:31,建议不守时的不能参加；等了半小时像在为别人错误买单。,OTHER-Notable,APPRAISE-Unfair ,流程不公不是结构不公

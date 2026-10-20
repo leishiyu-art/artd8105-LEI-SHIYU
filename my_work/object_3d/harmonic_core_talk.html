@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Planetary Crust Archive — Topographical Harmonic Resonator</title>
+  <style>
+    :root {
+      --ink: #d7e4e1;
+      --paper: #0a0b0e;
+      --panel: #12161c;
+      --you: #d7e4e1;
+      --muted: #7d8b90;
+      --line: #243036;
+      --cyan: #6fe3d6;
+      --teal: #6fe3d6;
+      --gold: #6fe3d6;
+      --warn: #e08a72;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      min-height: 100%;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+      display: grid;
+      grid-template-columns: minmax(420px, 1.15fr) minmax(340px, 0.85fr);
+    }
+    header.stage {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 1.25rem 1.4rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      background:
+        radial-gradient(ellipse 68% 52% at 50% 46%, #142228 0%, rgba(10, 11, 14, 0) 70%),
+        var(--paper);
+      border-right: 1px solid var(--line);
+    }
+    .kicker {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin: 0;
+    }
+    h1 { font-size: 1.35rem; font-weight: 500; letter-spacing: 0.12em; margin: 0; }
+    .sub { margin: 0.15rem 0 0; color: var(--muted); font-size: 11px; letter-spacing: 0.08em; }
+    .specimen {
+      margin: 0;
+      max-width: 40rem;
+      font-family: "Iowan Old Style", Palatino, "Songti SC", serif;
+      font-size: 0.98rem;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+    .specimen .en {
+      display: block;
+      margin-top: 0.35rem;
+      font-family: ui-monospace, Menlo, Consolas, monospace;
+      font-size: 11px;
+      line-height: 1.45;
+      color: var(--muted);
+    }
+    .view {
+      position: relative;
+      flex: 1;
+      min-height: 280px;
+      background: transparent;
+      border: 1px solid rgba(111, 227, 214, 0.28);
+    }
+    .reticle, .tensor {
+      position: absolute;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .reticle { display: block; width: 16px; height: 16px; }
+    .reticle.tl { top: 8px; left: 8px; border-top: 1px solid var(--cyan); border-left: 1px solid var(--cyan); }
+    .reticle.tr { top: 8px; right: 8px; border-top: 1px solid var(--cyan); border-right: 1px solid var(--cyan); }
+    .reticle.bl { bottom: 8px; left: 8px; border-bottom: 1px solid var(--cyan); border-left: 1px solid var(--cyan); }
+    .reticle.br { bottom: 8px; right: 8px; border-bottom: 1px solid var(--cyan); border-right: 1px solid var(--cyan); }
+    .tensor {
+      top: 10px;
+      left: 32px;
+      margin: 0;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--cyan);
+    }
+    #solid {
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: transparent;
+      border: 0;
+      cursor: grab;
+      touch-action: none;
+    }
+    #solid:active { cursor: grabbing; }
+    .hint {
+      position: absolute;
+      left: 0.7rem;
+      bottom: 0.5rem;
+      margin: 0;
+      font-family: ui-monospace, Menlo, Consolas, monospace;
+      font-size: 11px;
+      color: var(--muted);
+      pointer-events: none;
+    }
+    .plots {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr 0.85fr;
+      gap: 0.45rem;
+      height: 148px;
+      flex: none;
+    }
+    .scope {
+      position: relative;
+      min-height: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #07080b;
+    }
+    .scope-label {
+      position: absolute;
+      top: 6px;
+      left: 8px;
+      z-index: 2;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--cyan);
+      pointer-events: none;
+    }
+    .scan {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 2px;
+      background: linear-gradient(transparent, rgba(111, 227, 214, 0.85), transparent);
+      box-shadow: 0 0 12px rgba(111, 227, 214, 0.45);
+      animation: sweep 4.8s linear infinite;
+      pointer-events: none;
+      z-index: 2;
+    }
+    @keyframes sweep {
+      from { left: 0; }
+      to { left: 100%; }
+    }
+    canvas.plot {
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      border: 0;
+      display: block;
+    }
+    .readout {
+      font-family: ui-monospace, Menlo, Consolas, monospace;
+      font-size: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1.2rem;
+    }
+    .readout b {
+      font-weight: 500;
+      color: #d9fff9;
+      text-shadow: 0 0 8px rgba(111, 227, 214, 0.55);
+    }
+    main {
+      padding: 1.4rem 1.5rem 3rem;
+      max-width: 46rem;
+    }
+    h2 {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin: 1.5rem 0 0.55rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid var(--line);
+    }
+    h2 span { color: var(--muted); letter-spacing: 0.06em; text-transform: none; }
+    p, li { line-height: 1.5; }
+    .formula {
+      font-family: ui-monospace, Menlo, Consolas, monospace;
+      font-size: 12.5px;
+      background: var(--panel);
+      color: var(--you);
+      padding: 0.75rem 0.85rem;
+      line-height: 1.55;
+      overflow-x: auto;
+    }
+    .steps { list-style: none; padding: 0; margin: 0.4rem 0 0; }
+    .steps button {
+      width: 100%;
+      text-align: left;
+      font: inherit;
+      background: transparent;
+      border: 0;
+      border-top: 1px solid var(--line);
+      padding: 0.55rem 0.2rem;
+      cursor: pointer;
+      color: inherit;
+    }
+    .steps li:last-child button { border-bottom: 1px solid var(--line); }
+    .steps button.on { background: rgba(126, 200, 190, 0.12); }
+    .steps small { display: block; color: var(--muted); font-size: 0.92rem; }
+    label.slider {
+      display: grid;
+      grid-template-columns: 8.4rem 1fr 4.6rem;
+      gap: 0.4rem;
+      align-items: center;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      margin: 0.45rem 0;
+    }
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 18px;
+      background:
+        repeating-linear-gradient(90deg, rgba(111, 227, 214, 0.55) 0 1px, transparent 1px 7px) center / 100% 7px no-repeat,
+        linear-gradient(var(--cyan), var(--cyan)) center / 100% 1px no-repeat;
+      cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 8px;
+      height: 16px;
+      background: var(--cyan);
+      box-shadow: 0 0 8px rgba(111, 227, 214, 0.85);
+      border: 0;
+    }
+    label.slider span {
+      color: #d9fff9;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      text-shadow: 0 0 8px rgba(111, 227, 214, 0.45);
+    }
+    .row { display: flex; gap: 0.5rem; align-items: center; margin: 0.6rem 0; }
+    button.play {
+      font: inherit;
+      letter-spacing: 0.14em;
+      background: transparent;
+      color: var(--cyan);
+      border: 1px solid var(--cyan);
+      padding: 0.4rem 0.75rem;
+      cursor: pointer;
+    }
+    .note { color: var(--muted); font-size: 0.95rem; }
+    blockquote {
+      margin: 0.6rem 0;
+      padding: 0.2rem 0 0.2rem 0.8rem;
+      border-left: 3px solid var(--cyan);
+    }
+    details.spec { margin-top: 1.4rem; border-top: 1px solid var(--line); }
+    details.spec summary {
+      cursor: pointer;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 11px;
+      color: var(--cyan);
+      padding: 0.8rem 0;
+    }
+    details.spec .spec-body { padding-bottom: 0.6rem; }
+    textarea {
+      width: 100%;
+      min-height: 6.5rem;
+      font: inherit;
+      padding: 0.6rem;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      background: #0c141e;
+    }
+    .process {
+      display: flex;
+      gap: 0.35rem;
+      overflow-x: auto;
+      flex: none;
+    }
+    .process button {
+      font: inherit;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      background: transparent;
+      border: 1px solid var(--line);
+      padding: 0.32rem 0.45rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .process button.on { color: #d9fff9; border-color: var(--cyan); }
+    .warn { color: var(--warn); }
+    @media (max-width: 980px) {
+      body { grid-template-columns: 1fr; }
+      header.stage { position: relative; height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+      .view { height: 58vh; }
+      .plots { height: 120px; grid-template-columns: 1fr 1fr; }
+      #petal { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="stage">
+    <p class="kicker">Archive ID: FDS-UMD // SEC-07.83Hz</p>
+    <h1>行星地壳档案</h1>
+    <p class="sub">Planetary Crust Archive · Topographical Harmonic Resonator</p>
+    <p class="specimen">捕捉地壳电磁脉冲与舒曼共振（7.83 Hz）的动态拓扑结晶。由数学函数演化的自支撑单体，记录超越人类尺度的行星低频共振。
+      <span class="en">A dynamic topological crystal of crustal electromagnetic pulses and the Schumann resonance (7.83 Hz). A self-supporting solid evolved from mathematical functions, recording planetary low-frequency resonance beyond the human scale.</span>
+    </p>
+    <nav class="process" id="process">
+      <button type="button" data-exhibit="trace">01 三角管</button>
+      <button type="button" data-exhibit="net">02 管网</button>
+      <button type="button" data-exhibit="organic">03 有机壳</button>
+      <button type="button" data-exhibit="schumann">04 舒曼钟</button>
+      <button type="button" data-exhibit="topo">05 等高线</button>
+      <button type="button" data-exhibit="monolith">06 三叶台阶</button>
+      <button type="button" data-exhibit="spire">07 尖塔</button>
+      <button type="button" data-exhibit="core" class="on">08 地壳档案</button>
+    </nav>
+    <div class="view">
+      <i class="reticle tl"></i>
+      <i class="reticle tr"></i>
+      <i class="reticle bl"></i>
+      <i class="reticle br"></i>
+      <p class="tensor" id="bay">08 地壳档案 · TENSOR  X / Y / Z</p>
+      <canvas id="solid"></canvas>
+      <p class="hint">DRAG ORBIT · SCROLL RANGE · Z RINGS 480 / 960</p>
+    </div>
+    <div class="plots">
+      <div class="scope"><span class="scope-label">STRATA</span><canvas class="plot" id="side" width="720" height="280"></canvas><i class="scan"></i></div>
+      <div class="scope"><span class="scope-label">SEISMOGRAPH</span><canvas class="plot" id="wave" width="420" height="280"></canvas><i class="scan"></i></div>
+      <div class="scope"><span class="scope-label">APERTURE</span><canvas class="plot" id="petal" width="420" height="280"></canvas><i class="scan"></i></div>
+    </div>
+    <div class="readout">
+      <span>T <b id="tv">0</b></span>
+      <span>PULSE <b id="bv">0</b></span>
+      <span>WAIST <b id="wv">–</b></span>
+      <span>HEIGHT <b id="hv">–</b></span>
+    </div>
+  </header>
+  <main>
+    <h2>Temporal Dynamics <span>// 时间轴演化</span></h2>
+    <div class="row">
+      <button class="play" id="play" type="button">RUN</button>
+      <label class="slider" style="flex:1">Frame <input id="frame" type="range" min="1" max="360" value="1" /> <span id="frameN" data-prefix="FRM ">1</span></label>
+    </div>
+    <label class="slider">Time Scale <input id="scale" type="range" min="8" max="60" value="30" /> <span id="scaleN" data-prefix="SCL ">30</span></label>
+    <label class="slider">Breath Amplitude <input id="bamp" type="range" min="0" max="8" step="0.1" value="4" /> <span id="bampN" data-prefix="AMP +">4.0</span></label>
+    <label class="slider">Shape Amount <input id="shape" type="range" min="0" max="0.4" step="0.01" value="0.12" /> <span id="shapeN" data-prefix="SHP ">0.12</span></label>
+
+    <h2>Stratigraphic Profile <span>// 地层学剖面函数</span></h2>
+    <label class="slider">Base <input id="base" type="range" min="18" max="45" step="0.1" value="33.7" /> <span id="baseN" data-prefix="BAS ">33.7</span></label>
+    <label class="slider">Waist <input id="waist" type="range" min="12" max="36" step="0.1" value="24.2" /> <span id="waistN" data-prefix="WST ">24.2</span></label>
+    <label class="slider">Core <input id="core" type="range" min="16" max="42" step="0.1" value="28.8" /> <span id="coreN" data-prefix="COR ">28.8</span></label>
+    <label class="slider">Top <input id="top" type="range" min="10" max="36" step="0.1" value="24" /> <span id="topN" data-prefix="TOP ">24.0</span></label>
+    <label class="slider">Height <input id="height" type="range" min="70" max="100" step="0.1" value="80" /> <span id="heightN" data-prefix="HGT ">80.0</span></label>
+
+    <h2>Pulse Frequency <span>// 地磁场呼吸律动</span></h2>
+    <p class="note">口径增益 1.80。腰、核心、高度增益 1。BreathFactor 只加在约 14%–90% 高度。</p>
+
+    <h2>Harmonic Relief <span>// 谐波地形</span></h2>
+    <label class="slider">Frequency <input id="freq" type="range" min="5" max="32" step="1" value="20" /> <span id="freqN" data-prefix="FRQ ">20</span></label>
+    <label class="slider">Petal Count <input id="petals" type="range" min="3" max="8" step="1" value="5" /> <span id="petalsN" data-prefix="PET ">5</span></label>
+
+    <details class="spec">
+      <summary>Technical Specifications // 技术规格</summary>
+      <div class="spec-body">
+        <p class="note">空格开始或停下。Time Scale 默认 30。Blender 面板若仍是 20，那边更快。</p>
+        <p>三段 smoothstep 接在一起。相接的地方斜率是 0。30% 是腰，70% 是鼓起，顶是口。</p>
+        <pre class="formula">R = Base
+  + (Waist − Base) · s(0.05, 0.30)
+  + (Core − Waist) · s(0.30, 0.70)
+  + (Top − Core) · s(0.70, 0.96)</pre>
+        <p>整体大小用一条正弦。腰和鼓起再加一拍：慢的正弦加上更快的绝对值余弦。</p>
+        <pre class="formula">t = Frame / Time Scale
+BreathFactor = sin(t · 0.5) · 0.7 + abs(cos(t · 1.5)) · 0.3
+腰和鼓起 += BreathFactor · Breath Amplitude</pre>
+        <p>肋是余弦。扭转只发生在 30% 到 70%，两端转速为 0，再加 t · 0.1。顶和底是整数瓣，底面仍在 z = 0。</p>
+        <pre class="formula">φ = θ + Helix · s(0.30, 0.70) + t · 0.1 · s(0.30, 0.70)
+rib = cos(Frequency · φ)
+petal = cos(Petal Count · (θ + crank))</pre>
+        <p class="note">剖面仍是示意。实体另有 Crest Radius。扭转角用的是 Blender 里现在的约 298°。档案编号里的 7.83 Hz 是这件标本的参照频率，不是一条正在接入的测量。</p>
+        <p class="note">点一步，剖面会把那一层画重。实体始终是完整的一帧。</p>
+        <ol class="steps" id="steps">
+          <li><button type="button" data-step="profile" class="on">1 轮廓<small>圆柱条带按高度重新落成三段 smoothstep。</small></button></li>
+          <li><button type="button" data-step="wall">2 壁<small>内壁是外壁半径减去 Wall Thickness。不用 Solidify。</small></button></li>
+          <li><button type="button" data-step="ribs">3 肋与扭转<small>同一条余弦。扭转角在中段从 0 走到滑杆，再加 t·0.1。</small></button></li>
+          <li><button type="button" data-step="petals">4 花瓣<small>顶和底各一圈。整数瓣数，接缝才闭。底面保持在 z = 0。</small></button></li>
+          <li><button type="button" data-step="breath">5 呼吸<small>整颗按正弦缩放。腰和鼓起再按 BreathFactor 外扩或收回。</small></button></li>
+          <li><button type="button" data-step="close">6 闭合<small>上下焊成一个壳。Smooth by Angle 60°。Blender 外圈 960 层。</small></button></li>
+        </ol>
+        <ul>
+          <li>它是一个闭合壳：一个连通体，边界为 0。暂停在某一帧，网格仍然闭合。</li>
+          <li class="warn">扭转段的外侧面会超过 45°，那里的壁也会薄于 1.5 mm。闭合不等于这一帧一定能无支撑地打出来。</li>
+          <li>肋数必须是整数。小数会在背面的接缝裂开。</li>
+        </ul>
+      </div>
+    </details>
+
+    <h2>Field Record <span>// 现场记录</span></h2>
+    <p>这里不替你写主张。先分清两件已经写下来的事。</p>
+    <ul>
+      <li>这个壳体里的肋、呼吸和花瓣，是写在几何节点里的函数。舒曼共振没有作为实时测量接进来。</li>
+      <li>你的 proposal 是另一套系统：一条非人数据改少数参数，AI 只对你说话，不去翻译对方。眼前这个物体还不是那套系统。</li>
+    </ul>
+    <blockquote>
+      <p>I would make Co-Constraint: a small generative drawing system where (1) one nonhuman/environmental data stream rewrites a few authored parameters, and (2) an AI layer prompts me to reorient toward other agencies — without claiming to know what the other species is saying.</p>
+      <p class="note">topic.md · 你已经写的一句</p>
+    </blockquote>
+    <label>课堂上你自己讲的一句
+      <textarea id="line" placeholder="写在这里。只留在这台电脑的浏览器里。"></textarea>
+    </label>
+  </main>
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const state = {
+      frame: 1, scale: 30, bamp: 4, shape: 0.12,
+      base: 33.7, waist: 24.2, core: 28.8, top: 24, height: 80,
+      freq: 20, petals: 5, wall: 2, fin: 5.3,
+      step: "profile", playing: false, exhibit: "core"
+    };
+
+    function smooth(e0, e1, x) {
+      if (x <= e0) return 0;
+      if (x >= e1) return 1;
+      const u = (x - e0) / (e1 - e0);
+      return u * u * (3 - 2 * u);
+    }
+    function breathFactor(tt) {
+      return Math.sin(tt * 0.5) * 0.7 + Math.abs(Math.cos(tt * 1.5)) * 0.3;
+    }
+    function sample(tt) {
+      const s = Math.sin(tt);
+      const sc = 1 + state.shape * s;
+      const so = 1 + state.shape * 1.8 * s;
+      const H = state.height * sc;
+      const base = state.base * so;
+      const waist = state.waist * sc;
+      const core = state.core * sc;
+      const top = state.top * so;
+      const bf = breathFactor(tt);
+      const pts = [];
+      for (let i = 0; i <= 160; i++) {
+        const t = i / 160;
+        let R = base
+          + (waist - base) * smooth(0.05, 0.30, t)
+          + (core - waist) * smooth(0.30, 0.70, t)
+          + (top - core) * smooth(0.70, 0.96, t);
+        const mask = smooth(0.14, 0.30, t) * (1 - smooth(0.72, 0.90, t));
+        R += bf * state.bamp * mask;
+        const body = smooth(0.08, 0.18, t) * (1 - smooth(0.84, 0.94, t));
+        const mid = smooth(0.30, 0.36, t) * (1 - smooth(0.64, 0.72, t));
+        const deep = Math.min(state.fin, 1.5 * Math.max(R, 1) / state.freq);
+        const twistA = Math.min(deep, 0.8 * Math.max(R, 1) / state.freq);
+        const rib = Math.max(deep * body * (1 - mid), twistA * mid);
+        const foot = 1 - smooth(0.04, 0.22, t);
+        const crown = smooth(0.78, 0.96, t);
+        const petal = Math.min(4.2, 0.15 * Math.max(R, 1)) * (foot + crown);
+        pts.push({ t, z: H * t, R, rib, petal, foot, crown, mid });
+      }
+      return { H, bf, pts, topR: pts[pts.length - 1].R, baseR: pts[0].R };
+    }
+
+    function fit(pts, H) {
+      let rMax = 8;
+      for (const p of pts) rMax = Math.max(rMax, p.R + p.rib + p.petal + state.wall);
+      return { rMax: rMax * 1.08, zMax: Math.max(H, 1) };
+    }
+
+    function scopeGrid(g, w, h) {
+      g.fillStyle = "#07080b";
+      g.fillRect(0, 0, w, h);
+      g.strokeStyle = "rgba(111, 227, 214, 0.14)";
+      g.lineWidth = 1;
+      g.beginPath();
+      for (let x = 0; x <= w; x += 36) { g.moveTo(x + 0.5, 0); g.lineTo(x + 0.5, h); }
+      for (let y = 0; y <= h; y += 28) { g.moveTo(0, y + 0.5); g.lineTo(w, y + 0.5); }
+      g.stroke();
+    }
+
+    function drawSide(S) {
+      const c = $("side");
+      const g = c.getContext("2d");
+      const w = c.width, h = c.height;
+      scopeGrid(g, w, h);
+      const { rMax, zMax } = fit(S.pts, S.H);
+      const pad = 46;
+      const x0 = w * 0.50;
+      const sx = (w * 0.40) / rMax;
+      const yOf = (z) => pad + (1 - z / zMax) * (h - pad * 2);
+      const X = (r) => x0 + r * sx;
+
+      if (state.step === "breath" || state.step === "profile") {
+        g.fillStyle = "rgba(126,200,190,0.16)";
+        g.beginPath();
+        S.pts.forEach((p, i) => {
+          if (p.mid < 0.2 && p.t < 0.2) return;
+          const m = smooth(0.14, 0.30, p.t) * (1 - smooth(0.72, 0.90, p.t));
+          if (i === 0 || m <= 0) g.moveTo(X(p.R), yOf(p.z));
+          else g.lineTo(X(p.R), yOf(p.z));
+        });
+        for (let i = S.pts.length - 1; i >= 0; i--) {
+          const p = S.pts[i];
+          const m = smooth(0.14, 0.30, p.t) * (1 - smooth(0.72, 0.90, p.t));
+          if (m > 0) g.lineTo(X(-p.R), yOf(p.z));
+        }
+        g.fill();
+      }
+
+      const outer = S.pts.map((p) => [X(p.R), yOf(p.z)]);
+      const inner = [...S.pts].reverse().map((p) => [X(-(Math.max(p.R - state.wall, 1))), yOf(p.z)]);
+      // shell on the right, mirrored
+      function shell(sign) {
+        g.beginPath();
+        S.pts.forEach((p, i) => {
+          const x = x0 + sign * p.R * sx;
+          if (i === 0) g.moveTo(x, yOf(p.z));
+          else g.lineTo(x, yOf(p.z));
+        });
+        for (let i = S.pts.length - 1; i >= 0; i--) {
+          const p = S.pts[i];
+          g.lineTo(x0 + sign * Math.max(p.R - state.wall, 1) * sx, yOf(p.z));
+        }
+        g.closePath();
+        g.fillStyle = state.step === "wall" ? "rgba(231,225,214,0.16)" : "rgba(231,225,214,0.07)";
+        g.fill();
+        g.strokeStyle = "#9af6ee";
+        g.lineWidth = state.step === "profile" || state.step === "close" ? 2.4 : 1.4;
+        g.stroke();
+      }
+      shell(1);
+      shell(-1);
+
+      if (state.step === "ribs" || state.step === "close") {
+        g.beginPath();
+        S.pts.forEach((p, i) => {
+          const x = X(p.R + p.rib);
+          if (i === 0) g.moveTo(x, yOf(p.z));
+          else g.lineTo(x, yOf(p.z));
+        });
+        g.strokeStyle = "#7ec8be";
+        g.lineWidth = 1.6;
+        g.stroke();
+        g.beginPath();
+        S.pts.forEach((p, i) => {
+          const x = X(p.R - p.rib);
+          if (i === 0) g.moveTo(x, yOf(p.z));
+          else g.lineTo(x, yOf(p.z));
+        });
+        g.stroke();
+      }
+
+      if (state.step === "petals" || state.step === "close") {
+        g.strokeStyle = "#6fe3d6";
+        g.lineWidth = 2;
+        for (const which of ["foot", "crown"]) {
+          g.beginPath();
+          S.pts.forEach((p, i) => {
+            if ((which === "foot" ? p.foot : p.crown) <= 0) return;
+            const x = X(p.R + p.petal);
+            if (i === 0 || (which === "foot" ? S.pts[i - 1].foot : S.pts[i - 1].crown) <= 0) g.moveTo(x, yOf(p.z));
+            else g.lineTo(x, yOf(p.z));
+          });
+          g.stroke();
+        }
+      }
+
+      g.fillStyle = "#6fe3d6";
+      g.font = "18px ui-monospace, Menlo, monospace";
+      g.fillText("Z 0", 18, yOf(0) - 8);
+      void outer; void inner;
+    }
+
+    function drawWave(tt) {
+      const c = $("wave");
+      const g = c.getContext("2d");
+      const w = c.width, h = c.height;
+      scopeGrid(g, w, h);
+      g.strokeStyle = "rgba(111, 227, 214, 0.28)";
+      g.beginPath();
+      g.moveTo(28, h / 2);
+      g.lineTo(w - 16, h / 2);
+      g.stroke();
+      g.beginPath();
+      const n = 240;
+      for (let i = 0; i <= n; i++) {
+        const u = i / n;
+        const t = u * 12;
+        const y = h / 2 - breathFactor(t) * (h * 0.36);
+        const x = 28 + u * (w - 44);
+        if (i === 0) g.moveTo(x, y);
+        else g.lineTo(x, y);
+      }
+      g.strokeStyle = "#9af6ee";
+      g.lineWidth = 2;
+      g.shadowColor = "rgba(111, 227, 214, 0.7)";
+      g.shadowBlur = 8;
+      g.stroke();
+      g.shadowBlur = 0;
+      const x = 28 + (Math.min(tt, 12) / 12) * (w - 44);
+      const y = h / 2 - breathFactor(tt) * (h * 0.36);
+      g.fillStyle = "#d9fff9";
+      g.beginPath();
+      g.arc(x, y, 4, 0, Math.PI * 2);
+      g.fill();
+    }
+
+    function drawPetal(S) {
+      const c = $("petal");
+      const g = c.getContext("2d");
+      const w = c.width, h = c.height;
+      scopeGrid(g, w, h);
+      const cx = w / 2, cy = h / 2 + 8;
+      const R = S.topR;
+      const A = Math.min(4.2, 0.15 * R);
+      const sc = Math.min(cx, cy) * 0.78 / (R + A + 2);
+      g.beginPath();
+      for (let i = 0; i <= 180; i++) {
+        const th = (i / 180) * Math.PI * 2;
+        const r = (R + A * Math.cos(state.petals * th)) * sc;
+        const x = cx + Math.cos(th) * r;
+        const y = cy + Math.sin(th) * r;
+        if (i === 0) g.moveTo(x, y);
+        else g.lineTo(x, y);
+      }
+      g.closePath();
+      g.fillStyle = "rgba(111,227,214,0.16)";
+      g.fill();
+      g.strokeStyle = "#9af6ee";
+      g.lineWidth = 2;
+      g.stroke();
+      g.beginPath();
+      g.arc(cx, cy, Math.max(R - state.wall, 1) * sc, 0, Math.PI * 2);
+      g.strokeStyle = "rgba(217,255,249,0.7)";
+      g.lineWidth = 1;
+      g.stroke();
+    }
+
+    const HELIX = 298 * Math.PI / 180;
+    const FIN = 5.26;
+    const CREST = 1.5;
+    const WALL0 = 2;
+    const SPIN = 0.2;
+    const PULSE = 0.7;
+    const RINGS = 480;
+    const SEGS = 160;
+
+    function shellAt(t, theta, tt) {
+      const s = Math.sin(tt);
+      const shape = state.shape;
+      const base = state.base * (1 + shape * 1.8 * s);
+      const top = state.top * (1 + shape * 1.8 * s);
+      const waist = state.waist * (1 + shape * s);
+      const core = state.core * (1 + shape * s);
+      const height = state.height * (1 + shape * s);
+      const helix = HELIX * (1 + shape * 0.35 * s);
+      const fin = FIN * (1 + shape * 0.4 * s);
+      const crest = Math.max(CREST * (1 + shape * 0.2 * s), 0.2);
+      const wall = WALL0 * (1 + shape * 0.12 * s);
+      let R = base
+        + (waist - base) * smooth(0.05, 0.30, t)
+        + (core - waist) * smooth(0.30, 0.70, t)
+        + (top - core) * smooth(0.70, 0.96, t);
+      const mask = smooth(0.14, 0.30, t) * (1 - smooth(0.72, 0.90, t));
+      R += breathFactor(tt) * state.bamp * mask;
+      const n = Math.max(1, state.freq);
+      const aThick = 1.5 * R / n;
+      const aDeep = Math.min(fin, aThick);
+      const u = Math.min(1, Math.max(0, (t - 0.30) / 0.40));
+      const dsdu = 6 * u * (1 - u);
+      const rateZ = helix * (dsdu / 0.40) / Math.max(height, 1);
+      const invR = 1 / Math.max(R, 0.5);
+      const grad2 = n * n * (invR * invR + rateZ * rateZ);
+      const aRound = 1 / Math.max(crest * grad2, 1e-5);
+      const body = smooth(0.08, 0.18, t) * (1 - smooth(0.84, 0.94, t));
+      const mid = smooth(0.30, 0.36, t) * (1 - smooth(0.64, 0.72, t));
+      const aEff = Math.max(Math.min(aDeep, aRound) * body, Math.min(aDeep, 0.8 * R / n) * mid);
+      const pulseUse = Math.min(PULSE, 0.45 * aEff);
+      let aLive = aEff - pulseUse + Math.sin(tt) * pulseUse;
+      aLive = Math.min(Math.max(aLive, 0), aEff);
+      const twist = (helix + tt * 0.1) * smooth(0.30, 0.70, t);
+      const phi = theta + twist + tt * SPIN;
+      let disp = aLive * Math.cos(n * phi);
+      const foot = 1 - smooth(0.04, 0.22, t);
+      const crown = smooth(0.78, 0.96, t);
+      const aPetal = Math.min(4.2, 0.15 * Math.max(R, 1)) * (foot + crown);
+      const crank = crown * (Math.PI / state.petals + 0.70) + foot * 0.70 + tt * SPIN;
+      disp += aPetal * Math.cos(state.petals * (theta + crank));
+      const Ro = Math.max(R + disp, wall + 1);
+      const Ri = Math.max(Ro - wall, 1);
+      return { Ro, Ri, z: height * t };
+    }
+
+    function createSolid(canvas) {
+      const gl = canvas.getContext("webgl", { antialias: true, alpha: true, premultipliedAlpha: false });
+      if (!gl) {
+        canvas.replaceWith(Object.assign(document.createElement("p"), {
+          className: "note",
+          textContent: "这个浏览器没有 WebGL，实体画不出来。剖面还在。"
+        }));
+        return { sync() {}, draw() {} };
+      }
+      const vs = gl.createShader(gl.VERTEX_SHADER);
+      gl.shaderSource(vs, `
+        attribute vec3 aPos;
+        attribute vec3 aNrm;
+        uniform mat4 uMvp;
+        uniform mat3 uN;
+        varying vec3 vN;
+        void main() {
+          vN = normalize(uN * aNrm);
+          gl_Position = uMvp * vec4(aPos, 1.0);
+        }
+      `);
+      gl.compileShader(vs);
+      const fs = gl.createShader(gl.FRAGMENT_SHADER);
+      gl.shaderSource(fs, `
+        precision mediump float;
+        varying vec3 vN;
+        void main() {
+          vec3 n = normalize(vN);
+          vec3 L = normalize(vec3(0.45, 0.72, 0.52));
+          float key = max(dot(n, L), 0.0);
+          float rim = pow(1.0 - abs(n.z), 2.0);
+          vec3 night = vec3(0.04, 0.06, 0.07);
+          vec3 day = vec3(0.70, 0.80, 0.78);
+          vec3 atmo = vec3(0.30, 0.95, 0.88);
+          vec3 c = mix(night, day, 0.14 + 0.86 * key);
+          c += atmo * rim * 0.8;
+          gl_FragColor = vec4(c, 1.0);
+        }
+      `);
+      gl.compileShader(fs);
+      const prog = gl.createProgram();
+      gl.attachShader(prog, vs);
+      gl.attachShader(prog, fs);
+      gl.linkProgram(prog);
+      if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+        canvas.replaceWith(Object.assign(document.createElement("p"), {
+          className: "note",
+          textContent: "实体着色没有编过。"
+        }));
+        return { sync() {}, draw() {} };
+      }
+      gl.useProgram(prog);
+      const rows = RINGS + 1;
+      const outerCount = rows * SEGS;
+      const vertCount = outerCount * 2;
+      const pos = new Float32Array(vertCount * 3);
+      const nrm = new Float32Array(vertCount * 3);
+      const idx = [];
+      const vid = (inner, i, j) => (inner ? outerCount : 0) + i * SEGS + j;
+      for (let i = 0; i < RINGS; i++) {
+        for (let j = 0; j < SEGS; j++) {
+          const j1 = (j + 1) % SEGS;
+          const o00 = vid(0, i, j), o01 = vid(0, i, j1), o10 = vid(0, i + 1, j), o11 = vid(0, i + 1, j1);
+          idx.push(o00, o01, o10, o01, o11, o10);
+          const i00 = vid(1, i, j), i01 = vid(1, i, j1), i10 = vid(1, i + 1, j), i11 = vid(1, i + 1, j1);
+          idx.push(i00, i10, i01, i10, i11, i01);
+        }
+      }
+      for (let j = 0; j < SEGS; j++) {
+        const j1 = (j + 1) % SEGS;
+        const o0 = vid(0, 0, j), o1 = vid(0, 0, j1), i0 = vid(1, 0, j), i1 = vid(1, 0, j1);
+        idx.push(o0, i0, o1, o1, i0, i1);
+        const O0 = vid(0, RINGS, j), O1 = vid(0, RINGS, j1), I0 = vid(1, RINGS, j), I1 = vid(1, RINGS, j1);
+        idx.push(O0, O1, I0, O1, I1, I0);
+      }
+      const indices = new Uint32Array(idx);
+      const indexType = gl.getExtension("OES_element_index_uint") ? gl.UNSIGNED_INT : 0;
+      const posBuf = gl.createBuffer();
+      const nrmBuf = gl.createBuffer();
+      const idxBuf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, posBuf);
+      gl.bufferData(gl.ARRAY_BUFFER, pos.byteLength, gl.DYNAMIC_DRAW);
+      gl.bindBuffer(gl.ARRAY_BUFFER, nrmBuf);
+      gl.bufferData(gl.ARRAY_BUFFER, nrm.byteLength, gl.DYNAMIC_DRAW);
+      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, idxBuf);
+      gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, indices, gl.STATIC_DRAW);
+      const aPos = gl.getAttribLocation(prog, "aPos");
+      const aNrm = gl.getAttribLocation(prog, "aNrm");
+      const uMvp = gl.getUniformLocation(prog, "uMvp");
+      const uN = gl.getUniformLocation(prog, "uN");
+      gl.enableVertexAttribArray(aPos);
+      gl.enableVertexAttribArray(aNrm);
+      gl.enable(gl.DEPTH_TEST);
+      let drawCount = indices.length;
+      let shown = "core";
+      const exhibitCache = {};
+      let yaw = 0.55, pitch = 0.28, dist = 230;
+      let dragging = false, lx = 0, ly = 0;
+      canvas.addEventListener("pointerdown", (e) => {
+        dragging = true;
+        lx = e.clientX;
+        ly = e.clientY;
+        canvas.setPointerCapture(e.pointerId);
+      });
+      canvas.addEventListener("pointerup", () => { dragging = false; });
+      canvas.addEventListener("pointermove", (e) => {
+        if (!dragging) return;
+        yaw += (e.clientX - lx) * 0.008;
+        pitch = Math.max(-0.2, Math.min(1.15, pitch + (e.clientY - ly) * 0.006));
+        lx = e.clientX;
+        ly = e.clientY;
+        draw();
+      });
+      canvas.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        dist = Math.max(90, Math.min(520, dist * (1 + Math.sign(e.deltaY) * 0.08)));
+        draw();
+      }, { passive: false });
+
+      function v3(x, y, z) { return [x, y, z]; }
+      function nrm3(v) {
+        const l = Math.hypot(v[0], v[1], v[2]) || 1;
+        return [v[0] / l, v[1] / l, v[2] / l];
+      }
+      function cross3(a, b) {
+        return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+      }
+      function pushVert(list, p) { list.push(p[0], p[1], p[2]); }
+      function shellQuads(rings, segs, sample) {
+        const xyz = [];
+        const idx = [];
+        const at = (inner, i, j) => (inner ? (rings + 1) * segs : 0) + i * segs + j;
+        for (let i = 0; i <= rings; i++) {
+          for (let j = 0; j < segs; j++) {
+            const s = sample(i / rings, (j / segs) * Math.PI * 2);
+            const c = Math.cos((j / segs) * Math.PI * 2);
+            const sn = Math.sin((j / segs) * Math.PI * 2);
+            pushVert(xyz, [s.Ro * c, s.z, s.Ro * sn]);
+          }
+        }
+        for (let i = 0; i <= rings; i++) {
+          for (let j = 0; j < segs; j++) {
+            const s = sample(i / rings, (j / segs) * Math.PI * 2);
+            const c = Math.cos((j / segs) * Math.PI * 2);
+            const sn = Math.sin((j / segs) * Math.PI * 2);
+            pushVert(xyz, [s.Ri * c, s.z, s.Ri * sn]);
+          }
+        }
+        for (let i = 0; i < rings; i++) {
+          for (let j = 0; j < segs; j++) {
+            const j1 = (j + 1) % segs;
+            const o00 = at(0, i, j), o01 = at(0, i, j1), o10 = at(0, i + 1, j), o11 = at(0, i + 1, j1);
+            idx.push(o00, o01, o10, o01, o11, o10);
+            const i00 = at(1, i, j), i01 = at(1, i, j1), i10 = at(1, i + 1, j), i11 = at(1, i + 1, j1);
+            idx.push(i00, i10, i01, i10, i11, i01);
+          }
+        }
+        for (let j = 0; j < segs; j++) {
+          const j1 = (j + 1) % segs;
+          idx.push(at(0, 0, j), at(1, 0, j), at(0, 0, j1), at(0, 0, j1), at(1, 0, j), at(1, 0, j1));
+          idx.push(at(0, rings, j), at(0, rings, j1), at(1, rings, j), at(0, rings, j1), at(1, rings, j1), at(1, rings, j));
+        }
+        return { xyz, idx };
+      }
+      function exhibitMesh(id) {
+        if (id === "schumann") {
+          return shellQuads(72, 96, (t, th) => {
+            const z = t * 80;
+            const R0 = 4 + 21 * (1 + Math.cos(Math.PI * t)) / 2;
+            const env = Math.sin(Math.PI * t) ** 2;
+            const phi = th + (60 * Math.PI / 180) * t;
+            const wave = (Math.cos(7 * phi) + 0.5 * Math.cos(14 * phi) + Math.cos(21 * phi) / 3) / (1 + 0.5 + 1 / 3);
+            const Ro = Math.max(R0 + 1.5 * env * wave, 2);
+            return { Ro, Ri: Math.max(Ro - 2, 1), z };
+          });
+        }
+        if (id === "topo") {
+          return shellQuads(80, 96, (t, th) => {
+            const z = Math.floor(t * 80 / 0.6) * 0.6;
+            const u = z / 80;
+            const R0 = 4 + 26 * (1 + Math.cos(Math.PI * u)) / 2;
+            const env = Math.sin(Math.PI * u) ** 2;
+            const phi = th + (36 * Math.PI / 180) * u;
+            const wave = (Math.cos(7 * phi) + 0.5 * Math.cos(14 * phi) + Math.cos(21 * phi) / 3) / (1 + 0.5 + 1 / 3);
+            const Ro = Math.max(R0 + 1.6 * env * wave + 0.8 * env * Math.cos(th), 2);
+            return { Ro, Ri: Math.max(Ro - 2, 1), z: t * 80 };
+          });
+        }
+        if (id === "monolith") {
+          return shellQuads(80, 90, (t, th) => {
+            const zStep = Math.floor(t * 80 / 2) * 2;
+            const R = 32 + (16 - 32) * (zStep / 80);
+            let Ro = Math.max(R * (1 + 0.22 * Math.cos(3 * th)), 2);
+            let Ri = Math.max(Ro - 2.5, 1);
+            if (t > 0.92) { Ro *= (1 - t) / 0.08; Ri = Math.min(Ri, Ro * 0.15); }
+            return { Ro, Ri, z: t * 80 };
+          });
+        }
+        if (id === "spire") {
+          return shellQuads(80, 84, (t, th) => {
+            const s1 = smooth(0.06, 0.42, t);
+            const s2 = smooth(0.42, 0.55, t);
+            let R = 28 + (16 - 28) * s1 + (24 - 16) * s2;
+            if (t > 0.55) R = 24 * (1 - (t - 0.55) / 0.45);
+            const env = smooth(0.04, 0.14, t) * (1 - smooth(0.9, 1, t));
+            const A = Math.min(2.2, 1.4 * Math.max(R, 0.2) / 7) * env;
+            const Ro = Math.max(R + A * Math.cos(7 * th), 0.15);
+            const Ri = t > 0.9 ? Ro * 0.2 : Math.max(Ro - 2.2, 0.4);
+            return { Ro, Ri, z: t * 90 };
+          });
+        }
+        if (id === "organic") {
+          return shellQuads(64, 80, (t, th) => {
+            const z = (1 - t) * 60;
+            const lat = Math.sin(Math.PI * t);
+            const lobe = 7 * Math.cos(Math.PI * (z / 30 - 1));
+            const Ro = Math.max(lat * 30 + lobe * lat, 1.2);
+            const Ri = t < 0.08 || t > 0.92 ? Ro * 0.2 : Math.max(Ro - 2, 1);
+            return { Ro, Ri, z: z + 10 };
+          });
+        }
+        if (id === "trace") {
+          const N = 64, S = 3;
+          const xyz = [];
+          const idx = [];
+          const at = (inner, i, j) => (inner ? (N + 1) * S : 0) + i * S + (j % S);
+          for (let inner = 0; inner < 2; inner++) {
+            const rad = inner ? 2.6 : 5.2;
+            for (let i = 0; i <= N; i++) {
+              const u = i / N;
+              const a = u * Math.PI * 2;
+              const p = v3(16 * Math.cos(a), 8 + u * 32, 16 * Math.sin(a));
+              const T = nrm3(v3(-16 * Math.sin(a), 32 / (Math.PI * 2), 16 * Math.cos(a)));
+              const radial = v3(Math.cos(a), 0, Math.sin(a));
+              const B = nrm3(cross3(T, radial));
+              const Nn = nrm3(cross3(B, T));
+              const spin = Math.sin(Math.PI * u) * (240 * Math.PI / 180);
+              for (let k = 0; k < S; k++) {
+                const q = spin + (k / S) * Math.PI * 2;
+                const c = Math.cos(q), sn = Math.sin(q);
+                pushVert(xyz, [
+                  p[0] + Nn[0] * rad * c + B[0] * rad * sn,
+                  p[1] + Nn[1] * rad * c + B[1] * rad * sn,
+                  p[2] + Nn[2] * rad * c + B[2] * rad * sn
+                ]);
+              }
+            }
+          }
+          for (let i = 0; i < N; i++) {
+            for (let j = 0; j < S; j++) {
+              const j1 = (j + 1) % S;
+              idx.push(at(0, i, j), at(0, i, j1), at(0, i + 1, j), at(0, i, j1), at(0, i + 1, j1), at(0, i + 1, j));
+              idx.push(at(1, i, j), at(1, i + 1, j), at(1, i, j1), at(1, i, j1), at(1, i + 1, j), at(1, i + 1, j1));
+            }
+          }
+          for (let j = 0; j < S; j++) {
+            const j1 = (j + 1) % S;
+            idx.push(at(0, 0, j), at(1, 0, j), at(0, 0, j1), at(0, 0, j1), at(1, 0, j), at(1, 0, j1));
+            idx.push(at(0, N, j), at(0, N, j1), at(1, N, j), at(0, N, j1), at(1, N, j1), at(1, N, j));
+          }
+          return { xyz, idx };
+        }
+        const phi = (1 + Math.sqrt(5)) / 2;
+        const base = [[-1, phi, 0], [1, phi, 0], [-1, -phi, 0], [1, -phi, 0], [0, -1, phi], [0, 1, phi], [0, -1, -phi], [0, 1, -phi], [phi, 0, -1], [phi, 0, 1], [-phi, 0, -1], [-phi, 0, 1]].map((p) => nrm3(p).map((x) => x * 28));
+        const faces = [[0, 11, 5], [0, 5, 1], [0, 1, 7], [0, 7, 10], [0, 10, 11], [1, 5, 9], [5, 11, 4], [11, 10, 2], [10, 7, 6], [7, 1, 8], [3, 9, 4], [3, 4, 2], [3, 2, 6], [3, 6, 8], [3, 8, 9], [4, 9, 5], [2, 4, 11], [6, 2, 10], [8, 6, 7], [9, 8, 1]];
+        const edges = [];
+        const seen = {};
+        faces.forEach((f) => {
+          [[0, 1], [1, 2], [2, 0]].forEach((e) => {
+            const a = f[e[0]], b = f[e[1]];
+            const key = Math.min(a, b) + "-" + Math.max(a, b);
+            if (!seen[key]) { seen[key] = 1; edges.push([a, b]); }
+          });
+        });
+        const sides = 8, steps = 5, rad = 1.8;
+        const xyz = [];
+        const idx = [];
+        edges.forEach((e, ei) => {
+          const A = base[e[0]], Bv = base[e[1]];
+          const T = nrm3([Bv[0] - A[0], Bv[1] - A[1], Bv[2] - A[2]]);
+          let up = Math.abs(T[1]) > 0.9 ? v3(1, 0, 0) : v3(0, 1, 0);
+          const Nn = nrm3(cross3(T, up));
+          const Bn = nrm3(cross3(T, Nn));
+          const start = ei * (steps + 1) * sides;
+          for (let i = 0; i <= steps; i++) {
+            const u = i / steps;
+            const p = [A[0] + (Bv[0] - A[0]) * u, 40 + A[1] + (Bv[1] - A[1]) * u, A[2] + (Bv[2] - A[2]) * u];
+            for (let k = 0; k < sides; k++) {
+              const q = (k / sides) * Math.PI * 2;
+              pushVert(xyz, [
+                p[0] + (Nn[0] * Math.cos(q) + Bn[0] * Math.sin(q)) * rad,
+                p[1] + (Nn[1] * Math.cos(q) + Bn[1] * Math.sin(q)) * rad,
+                p[2] + (Nn[2] * Math.cos(q) + Bn[2] * Math.sin(q)) * rad
+              ]);
+            }
+          }
+          for (let i = 0; i < steps; i++) {
+            for (let k = 0; k < sides; k++) {
+              const k1 = (k + 1) % sides;
+              const a0 = start + i * sides + k, b0 = start + i * sides + k1;
+              const a1 = start + (i + 1) * sides + k, b1 = start + (i + 1) * sides + k1;
+              idx.push(a0, b0, a1, b0, b1, a1);
+            }
+          }
+        });
+        return { xyz, idx };
+      }
+      function baked(id) {
+        if (!exhibitCache[id]) exhibitCache[id] = exhibitMesh(id);
+        return exhibitCache[id];
+      }
+      function normalsOf(index, count, source) {
+        nrm.fill(0);
+        for (let f = 0; f < count; f += 3) {
+          const ia = index[f] * 3, ib = index[f + 1] * 3, ic = index[f + 2] * 3;
+          const abx = source[ib] - source[ia], aby = source[ib + 1] - source[ia + 1], abz = source[ib + 2] - source[ia + 2];
+          const acx = source[ic] - source[ia], acy = source[ic + 1] - source[ia + 1], acz = source[ic + 2] - source[ia + 2];
+          const nx = aby * acz - abz * acy, ny = abz * acx - abx * acz, nz = abx * acy - aby * acx;
+          nrm[ia] += nx; nrm[ia + 1] += ny; nrm[ia + 2] += nz;
+          nrm[ib] += nx; nrm[ib + 1] += ny; nrm[ib + 2] += nz;
+          nrm[ic] += nx; nrm[ic + 1] += ny; nrm[ic + 2] += nz;
+        }
+      }
+      function sync(tt) {
+        const ex = state.exhibit || "core";
+        if (ex !== "core") {
+          const mesh = baked(ex);
+          pos.fill(0);
+          mesh.xyz.forEach((v, i) => { pos[i] = v; });
+          const index = new Uint32Array(mesh.idx);
+          normalsOf(index, index.length, pos);
+          if (shown !== ex) {
+            gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, idxBuf);
+            gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, index, gl.STATIC_DRAW);
+            drawCount = index.length;
+            shown = ex;
+          }
+          gl.bindBuffer(gl.ARRAY_BUFFER, posBuf);
+          gl.bufferSubData(gl.ARRAY_BUFFER, 0, pos);
+          gl.bindBuffer(gl.ARRAY_BUFFER, nrmBuf);
+          gl.bufferSubData(gl.ARRAY_BUFFER, 0, nrm);
+          return;
+        }
+        if (shown !== "core") {
+          gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, idxBuf);
+          gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, indices, gl.STATIC_DRAW);
+          drawCount = indices.length;
+          shown = "core";
+        }
+        nrm.fill(0);
+        for (let i = 0; i < rows; i++) {
+          const t = i / RINGS;
+          for (let j = 0; j < SEGS; j++) {
+            const th = (j / SEGS) * Math.PI * 2;
+            const s = shellAt(t, th, tt);
+            const c = Math.cos(th), sn = Math.sin(th);
+            const o = (i * SEGS + j) * 3;
+            pos[o] = s.Ro * c;
+            pos[o + 1] = s.z;
+            pos[o + 2] = s.Ro * sn;
+            const k = (outerCount + i * SEGS + j) * 3;
+            pos[k] = s.Ri * c;
+            pos[k + 1] = s.z;
+            pos[k + 2] = s.Ri * sn;
+          }
+        }
+        for (let f = 0; f < indices.length; f += 3) {
+          const ia = indices[f] * 3, ib = indices[f + 1] * 3, ic = indices[f + 2] * 3;
+          const abx = pos[ib] - pos[ia], aby = pos[ib + 1] - pos[ia + 1], abz = pos[ib + 2] - pos[ia + 2];
+          const acx = pos[ic] - pos[ia], acy = pos[ic + 1] - pos[ia + 1], acz = pos[ic + 2] - pos[ia + 2];
+          const nx = aby * acz - abz * acy;
+          const ny = abz * acx - abx * acz;
+          const nz = abx * acy - aby * acx;
+          nrm[ia] += nx; nrm[ia + 1] += ny; nrm[ia + 2] += nz;
+          nrm[ib] += nx; nrm[ib + 1] += ny; nrm[ib + 2] += nz;
+          nrm[ic] += nx; nrm[ic + 1] += ny; nrm[ic + 2] += nz;
+        }
+        gl.bindBuffer(gl.ARRAY_BUFFER, posBuf);
+        gl.bufferSubData(gl.ARRAY_BUFFER, 0, pos);
+        gl.bindBuffer(gl.ARRAY_BUFFER, nrmBuf);
+        gl.bufferSubData(gl.ARRAY_BUFFER, 0, nrm);
+      }
+
+      function mul(a, b) {
+        const o = new Float32Array(16);
+        for (let c = 0; c < 4; c++) {
+          for (let r = 0; r < 4; r++) {
+            o[c * 4 + r] = a[r] * b[c * 4] + a[4 + r] * b[c * 4 + 1] + a[8 + r] * b[c * 4 + 2] + a[12 + r] * b[c * 4 + 3];
+          }
+        }
+        return o;
+      }
+      function draw() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const w = Math.max(canvas.clientWidth, 2);
+        const h = Math.max(canvas.clientHeight, 2);
+        if (canvas.width !== Math.floor(w * dpr) || canvas.height !== Math.floor(h * dpr)) {
+          canvas.width = Math.floor(w * dpr);
+          canvas.height = Math.floor(h * dpr);
+        }
+        gl.viewport(0, 0, canvas.width, canvas.height);
+        gl.clearColor(0, 0, 0, 0);
+        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+        const cp = Math.cos(pitch), sp = Math.sin(pitch);
+        const cy = Math.cos(yaw), sy = Math.sin(yaw);
+        const targetY = 40;
+        const eye = [dist * cp * sy, targetY + dist * sp, dist * cp * cy];
+        const fx = -eye[0], fy = targetY - eye[1], fz = -eye[2];
+        const fl = Math.hypot(fx, fy, fz) || 1;
+        const f = [fx / fl, fy / fl, fz / fl];
+        const up = [0, 1, 0];
+        let sx = f[1] * up[2] - f[2] * up[1];
+        let syy = f[2] * up[0] - f[0] * up[2];
+        let sz = f[0] * up[1] - f[1] * up[0];
+        const sl = Math.hypot(sx, syy, sz) || 1;
+        sx /= sl; syy /= sl; sz /= sl;
+        const ux = syy * f[2] - sz * f[1];
+        const uy = sz * f[0] - sx * f[2];
+        const uz = sx * f[1] - syy * f[0];
+        const view = new Float32Array([
+          sx, ux, -f[0], 0,
+          syy, uy, -f[1], 0,
+          sz, uz, -f[2], 0,
+          -(sx * eye[0] + syy * eye[1] + sz * eye[2]),
+          -(ux * eye[0] + uy * eye[1] + uz * eye[2]),
+          f[0] * eye[0] + f[1] * eye[1] + f[2] * eye[2],
+          1
+        ]);
+        const fov = 0.55;
+        const aspect = canvas.width / canvas.height;
+        const near = 2, far = 2000;
+        const focal = 1 / Math.tan(fov / 2);
+        const nf = 1 / (near - far);
+        const proj = new Float32Array([
+          focal / aspect, 0, 0, 0,
+          0, focal, 0, 0,
+          0, 0, (far + near) * nf, -1,
+          0, 0, 2 * far * near * nf, 0
+        ]);
+        gl.uniformMatrix4fv(uMvp, false, mul(proj, view));
+        gl.uniformMatrix3fv(uN, false, new Float32Array([
+          view[0], view[1], view[2],
+          view[4], view[5], view[6],
+          view[8], view[9], view[10]
+        ]));
+        gl.bindBuffer(gl.ARRAY_BUFFER, posBuf);
+        gl.vertexAttribPointer(aPos, 3, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, nrmBuf);
+        gl.vertexAttribPointer(aNrm, 3, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, idxBuf);
+        if (!indexType) return;
+        gl.drawElements(gl.TRIANGLES, drawCount, indexType, 0);
+      }
+      new ResizeObserver(() => draw()).observe(canvas.parentElement);
+      return { sync, draw };
+    }
+
+    const solid = createSolid($("solid"));
+
+    function render() {
+      const tt = state.frame / state.scale;
+      const S = sample(tt);
+      drawSide(S);
+      drawWave(tt);
+      drawPetal(S);
+      solid.sync(tt);
+      solid.draw();
+      const waist = S.pts.reduce((a, p) => Math.abs(p.t - 0.32) < Math.abs(a.t - 0.32) ? p : a);
+      $("tv").textContent = tt.toFixed(2);
+      $("bv").textContent = S.bf.toFixed(2);
+      $("wv").textContent = waist.R.toFixed(1);
+      $("hv").textContent = S.H.toFixed(1);
+      $("frameN").textContent = "FRM " + state.frame;
+      $("frame").value = String(state.frame);
+    }
+
+    function bind(id, key, digits) {
+      const el = $(id);
+      const out = $(id + "N");
+      const apply = () => {
+        state[key] = Number(el.value);
+        if (out) {
+          const n = digits != null ? state[key].toFixed(digits) : String(state[key]);
+          out.textContent = (out.dataset.prefix || "") + n;
+        }
+        render();
+      };
+      el.addEventListener("input", apply);
+      apply();
+    }
+
+    bind("frame", "frame");
+    bind("scale", "scale");
+    bind("bamp", "bamp", 1);
+    bind("shape", "shape", 2);
+    bind("base", "base", 1);
+    bind("waist", "waist", 1);
+    bind("core", "core", 1);
+    bind("top", "top", 1);
+    bind("height", "height", 1);
+    bind("freq", "freq");
+    bind("petals", "petals");
+
+    const bayNames = {
+      trace: "01 三角管", net: "02 管网", organic: "03 有机壳", schumann: "04 舒曼钟",
+      topo: "05 等高线", monolith: "06 三叶台阶", spire: "07 尖塔", core: "08 地壳档案"
+    };
+    $("process").addEventListener("click", (e) => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+      state.exhibit = btn.dataset.exhibit;
+      for (const b of $("process").querySelectorAll("button")) b.classList.toggle("on", b === btn);
+      $("bay").textContent = bayNames[state.exhibit] + " · TENSOR  X / Y / Z";
+      document.querySelector(".hint").textContent = state.exhibit === "core"
+        ? "DRAG ORBIT · SCROLL RANGE · Z RINGS 480 / 960"
+        : "DRAG ORBIT · SCROLL RANGE · SCHEMATIC, NOT THE BLENDER MESH";
+      render();
+    });
+
+    $("steps").addEventListener("click", (e) => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+      state.step = btn.dataset.step;
+      for (const b of $("steps").querySelectorAll("button")) b.classList.toggle("on", b === btn);
+      render();
+    });
+
+    const playBtn = $("play");
+    let last = 0;
+    function loop(now) {
+      if (!state.playing) return;
+      if (now - last > 40) {
+        state.frame = state.frame >= 360 ? 1 : state.frame + 1;
+        last = now;
+        render();
+      }
+      requestAnimationFrame(loop);
+    }
+    function toggle() {
+      state.playing = !state.playing;
+      playBtn.textContent = state.playing ? "HOLD" : "RUN";
+      if (state.playing) requestAnimationFrame(loop);
+    }
+    playBtn.addEventListener("click", toggle);
+    window.addEventListener("keydown", (e) => {
+      if (e.code !== "Space" || e.target.tagName === "TEXTAREA") return;
+      e.preventDefault();
+      toggle();
+    });
+
+    const line = $("line");
+    const key = "harmonic-core-talk-line";
+    line.value = localStorage.getItem(key) || "";
+    line.addEventListener("input", () => localStorage.setItem(key, line.value));
+    render();
+  </script>
+</body>
+</html>
