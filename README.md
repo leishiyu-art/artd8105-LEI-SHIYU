@@ -5,6 +5,12 @@ Semester 1, 2026/27 · Section 001 · Atticus Sims
 
 This repository holds everything you need for the course. Open it in Cursor at the start of every working session and the agent picks up its instructions automatically.
 
+## Session 10 — 28 October
+
+- [Journal analysis and paper structure](projects/10_journal_to_structure/brief.md): use your records to test a finding and plan the paper.
+- [Paper drafting](projects/11_paper_draft/brief.md): develop your own draft one section at a time with agent critique.
+- **Draft v1 and figure plan are due 11 November, replacing 4 November.** Review and revision are scheduled for **18 November**; activity details will be confirmed separately.
+
 ---
 
 ## Setting it up — once, in session 2
@@ -56,8 +62,14 @@ git push                 # send your work to your own repository
 | `course/` | Guides and templates. **Read only.** |
 | `context/` | Reference the agent reads — rubric, logging spec, glossary. **Read only.** |
 | `.cursor/rules/` | Standing rules. Cursor loads these by itself. **Read only.** |
+| `AGENTS.md` | Automatic logging and agent instructions for this repository. **Read only.** |
 
 **Start with `course/guides/00_start_here.md`.** If you are setting up, or you joined after session 1, go to `course/guides/getting_the_course_repo.md` first.
+
+**Research logging starts automatically** while the agent works in your
+repository. Logs go in `my_work/_research_log/`. Review the weekly summary and
+commit and push your work for it to count. To recover earlier unlogged chats,
+follow `course/guides/catch_up_research_logs.md` in each original Cursor chat.
 
 ### ⛔ Do not edit anything outside `my_work/`
 

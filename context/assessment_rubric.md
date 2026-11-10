@@ -51,7 +51,7 @@ Everything is scored on a four-point scale. **2.75 is the threshold** — the le
 |---|---|
 | **23 Sep** | First successful 3D print — a checkpoint, deliberately low-stakes |
 | **7 Oct** | You commit to a research question, say what kind of contribution you are making, and defend both in class |
-| **11 Nov** | Presentation, the written review you give a peer, oral authorship check |
+| **Review/revision · 18 Nov — format to be confirmed** | Presentation, the written review you give a peer, oral authorship check |
 | **25 Nov** | Finished paper, your work record, your process journal, and a final critique of exhibition-ready work |
 
 Everything else is formative. You will get feedback constantly and marks rarely.
@@ -207,7 +207,7 @@ Your submission must state the tool, the version, the date, and the task. *"We u
 
 *Set up in session 2.*
 
-You keep a running record of your work with the agent — what you asked, what it produced, what you did with it. You do not write it by hand: you start each session with a short instruction and the agent writes the entries while you work. You review a summary once a week and correct anything wrong.
+You keep a running record of your work with the agent — what you asked, what it produced, what you did with it. You do not write it by hand: the repository's standing instructions tell the agent to start logging automatically and write entries while you work. You review a summary once a week and correct anything wrong. Earlier catch-up records must be marked as reconstructed.
 
 - **4** — You can point to any part of your work and say whether it was AI-assisted and how, backed by a record written at the time and matched by your saved version history.
 - **3** — Record kept through the term with weekly reviews; you can account for all the major pieces of work.
@@ -236,7 +236,7 @@ Beyond individual prompts, you can give the agent standing background — a docu
 
 ## D4 · Authorship — verified orally
 
-Checked in tutorial and at the 11 November presentation, not through a written form.
+Checked in tutorial and at the mock-review presentation, not through a written form.
 
 You may be asked to explain any line of submitted code, any sentence of your manuscript, or to identify which material was AI-assisted.
 
