@@ -15,9 +15,8 @@ date_read:
 
 # Designing Multispecies Worlds for Robots, Cats, and Humans
 
-PDF supplied from the student's Zotero library on 2026-10-11. Front matter and section 5 were checked against that file. Sections 1, 3, 4, 6 and 7 are still theirs.
-
 ## 1 · Why this paper
+
 This CHI ’24 Best Paper winner (Cat Royale) is a landmark example of Performance-led Research in the Wild for multispecies systems. It relates directly to Polyrhythm Loom’s interest in mediation and exhibition encounters—showing how an artist-led installation can unpack the messy human, technological, and nonhuman entanglements around an artifact without relying on a traditional lab user study.
 
 ## 2 · Summary
@@ -40,7 +39,7 @@ Sparks: Their concept of "world design"—that an interactive system is never ju
 New application: Borrowing their timestamped vignettes (Vignettes 5.1 & 5.2.2) and breakdown analysis (Fig. 8, where Clover disarms the robot), I can document moments where Polyrhythm Loom’s computational rules break down, stall, or get interrupted during exhibition encounters—treating those glitches as analytical gold rather than bugs.
 Alternative method: Instead of building an expensive, enclosed physical "utopia" for captive animals, Polyrhythm Loom works with situated ecological data streams from Macau’s Cotai mudflat—avoiding the ethical burden of animal captivity while still surfacing how human mediation shapes what becomes visible.
 
-## 5 · Form 
+## 5 · Form
 
 Length (excl. references): ~10,000–11,000 words across Sections 1–7 (~15–16 pages in ACM CHI format).
 Section proportions: Intro ~6%, Related Work ~18%, Approach ~7%, System/World Design (Sec 4) ~27%, Deployment Narrative/Vignettes (Sec 5) ~18%, Discussion & Limitations (Sec 6) ~22%, Conclusion ~2%.
@@ -57,18 +56,7 @@ Limitations: Subsection 6.3 ("Limitations", ~2% of main body)—concedes focusin
 
 ## 6 · Venue signal
 
-Length (excl. references): ~10,000–11,000 words across Sections 1–7 (~15–16 pages in ACM CHI format).
-Section proportions: Intro ~6%, Related Work ~18%, Approach ~7%, System/World Design (Sec 4) ~27%, Deployment Narrative/Vignettes (Sec 5) ~18%, Discussion & Limitations (Sec 6) ~22%, Conclusion ~2%.
-First contribution claim: Appears in Intro Para 4 (final paragraph of Section 1).
-Contribution sentence (verbatim):
-"We distil two key contributions. First, we highlight the importance of world design for robots; of designing key aspects of the places they inhabit alongside companion animals and humans... Second, we reveal how designing a robot to autonomously engage animals requires consideration of interspecies interactions, from spectating, to overseeing, to cleaning up the resulting mess."
-
-Artifact vs. analysis: Artifact/world design + deployment narrative lead (~45% across Sec 4–5), supported by ~22% ecological/design-implication discussion.
-Related work: Two-part gap-building—(2.1) reviews cat toys, digital screens, and ACI robots; (2.2) brings in HRI environments (Moxi, Fribo), digital ecologies (Lyle et al.), and Brand’s shearing layers to establish their analytical lens.
-Process evidence: Autoethnographic field notes, 2 timestamped Vignettes, concrete intervention counts (226 rejections, 17 requests), iteration photos (Fig 3), and a 6-frame breakdown sequence (Fig 8)—zero p-values or audience surveys.
-Figures: 8 figures, 0 tables (control room/enclosure/UI collage, gallery exhibitions, enclosure iterations, cat portraits, CV/decision engine/E-stop, 3D-printed end-effectors, manual 6-DOF UI, Clover overpowering robot). They document design craft, system orchestration, and live breakdown.
-Voice & tense: First-person plural ("we reflect", "we distil") paired with third-person references to "the artists"; past tense for the 12-day deployment, present tense for design principles.
-Limitations: Subsection 6.3 ("Limitations", ~2% of main body)—concedes focusing only on cats (omitting enclosure plants/insects) and lack of transferability to real homes "in the wild."
+Winning a **CHI ’24 Best Paper Award** with **no statistical user study** is a huge signal for **DIS**: Performance-led RtD and artist-led installations can win top-tier ACM recognition when they pair **rich documentary vignettes** (showing both routine operation and messy breakdowns) with **transferable intermediate-level concepts** (here, Brand’s *shearing layers*→→ *robot worlds*). For *Polyrhythm Loom* at DIS, structuring your exhibition section around concrete **vignettes of relational emergence and interruption** will carry far more weight than generic visitor satisfaction quotes.
 
 ## 7 · Take-home
 
