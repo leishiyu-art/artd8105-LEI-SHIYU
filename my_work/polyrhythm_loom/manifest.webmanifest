@@ -1,0 +1,8 @@
+{
+  "name": "Weaving With",
+  "short_name": "Weaving With",
+  "start_url": "tablet.html",
+  "display": "standalone",
+  "background_color": "#0B0D11",
+  "theme_color": "#0B0D11"
+}

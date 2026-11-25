@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>怎么织 · Weaving With</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  @page { size: A2 portrait; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: #2a2c31; font-family: "Noto Sans SC", "PingFang SC", sans-serif; }
+  .print-note { margin: 0; padding: 10px 16px; color: #F4F1E6; font: 500 13px/1.4 "Noto Sans SC", sans-serif; }
+  .print-note span { color: #D7E35C; }
+  .sheet {
+    width: 420mm; height: 594mm; margin: 0 auto 24px;
+    background: #07090D; color: #F4F1E6;
+    padding: 12mm 14mm 10mm; overflow: hidden;
+    display: grid; grid-template-rows: 78mm minmax(0, 1fr) 12mm; gap: 8mm;
+  }
+  .mast { display: grid; grid-template-columns: 62mm minmax(0, 1fr); gap: 10mm; min-height: 0; overflow: hidden; }
+  .mast img { width: 62mm; height: 78mm; object-fit: cover; object-position: center 12%; display: block; }
+  .mast-copy { display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+  .kicker { margin: 0 0 6mm; font: 500 4.2mm/1 Archivo, sans-serif; letter-spacing: .22em; color: #D7E35C; }
+  h1 { margin: 0; font-weight: 500; font-size: 22mm; line-height: .95; letter-spacing: .04em; }
+  .sub { margin: 4mm 0 0; font: 500 7mm/1.15 Archivo, sans-serif; color: #D7E35C; }
+  .lede { margin: 5mm 0 0; font-size: 4.6mm; line-height: 1.45; }
+  .lede .en { display: block; margin-top: 1.5mm; color: #B7B2A6; font-family: Archivo, sans-serif; font-size: 4.2mm; }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-rows: repeat(4, minmax(0, 1fr)); gap: 5mm; min-height: 0; }
+  .step { display: grid; grid-template-columns: 18mm 148mm minmax(0, 1fr); gap: 6mm; align-items: center; min-height: 0; }
+  .num { font: 500 12mm/1 Archivo, sans-serif; color: #D7E35C; }
+  .step figure { margin: 0; height: 100%; background: #07090D; overflow: hidden; }
+  .step img { width: 100%; height: 100%; object-fit: cover; object-position: center 42%; display: block; }
+  .step.treadle img { object-position: left center; }
+  h2 { margin: 0; font-weight: 500; font-size: 8.2mm; letter-spacing: .04em; line-height: 1.15; }
+  .en { margin: 1.4mm 0 0; color: #B7B2A6; font: 400 4mm/1.35 Archivo, sans-serif; }
+  .more { margin: 3.2mm 0 0; font-size: 4.4mm; line-height: 1.45; }
+  .foot {
+    display: flex; justify-content: space-between; align-items: end;
+    border-top: .4mm solid rgba(215,227,92,.7);
+    padding-top: 3mm;
+    font: 500 3.6mm/1.3 Archivo, "Noto Sans SC", sans-serif;
+    letter-spacing: .08em; color: #B7B2A6;
+  }
+  .foot b { color: #F4F1E6; font-weight: 500; letter-spacing: .14em; }
+  @media print {
+    .print-note { display: none; }
+    body { background: #07090D; }
+    .sheet { margin: 0; }
+  }
+</style>
+</head>
+<body>
+<p class="print-note">打印时纸张选 <span>A2 纵向</span>，边距选无。Print on A2, portrait, no margins.</p>
+<article class="sheet">
+  <header class="mast">
+    <img src="keyvisual.jpg" alt="Weaving With Polyrhythm Loom">
+    <div class="mast-copy">
+      <p class="kicker">COTAI MUDFLAT · MACAU</p>
+      <h1>怎么织</h1>
+      <p class="sub">How to weave</p>
+      <p class="lede">四步，一轮。结束后扫码带走。<span class="en">Four moves. One round. Then take it with you.</span></p>
+    </div>
+  </header>
+  <ol class="steps">
+    <li class="step">
+      <div class="num">01</div>
+      <figure><img src="step-start.jpg" alt="织机正面，布上写着张开手，停住"></figure>
+      <div>
+        <h2>张开手，停住</h2>
+        <p class="en">Open your hand, and hold still.</p>
+        <p class="more">布上出现这句话时，停大约一秒。这一轮才开始。</p>
+        <p class="en">When these words are on the cloth, hold for about a second. The round starts.</p>
+      </div>
+    </li>
+    <li class="step">
+      <div class="num">02</div>
+      <figure><img src="step-play.jpg" alt="布上的光点，点中仪器"></figure>
+      <div>
+        <h2>点到光点</h2>
+        <p class="en">Meet a light with the open hand.</p>
+        <p class="more">每个光点是一位行动者，点中就响一声。黑脸琵鹭会飞过。途中可以踩踏板。</p>
+        <p class="en">Each light is one actant and sounds once. The spoonbill flies past. The treadle counts during the round.</p>
+      </div>
+    </li>
+    <li class="step">
+      <div class="num">03</div>
+      <figure><img src="step-layers.jpg" alt="七层按时间尺度拉开"></figure>
+      <div>
+        <h2>抓住，左右移</h2>
+        <p class="en">Close your hand and move sideways.</p>
+        <p class="more">手抓住，左右移动，七层拉开。松开，就停在这一层。</p>
+        <p class="en">A closed hand pulls the seven layers apart. Release it to stay on one layer.</p>
+      </div>
+    </li>
+    <li class="step treadle">
+      <div class="num">04</div>
+      <figure><img src="step-treadle.jpg" alt="踩下踏板按钮，和布下方的踏板"></figure>
+      <div>
+        <h2>踩下踏板</h2>
+        <p class="en">Step on the treadle.</p>
+        <p class="more">这一下织进布里。一轮结束，扫码保存布和视频。再踩一下，回到织机。</p>
+        <p class="en">That press is woven in. At the end, scan to keep the cloth and the video. Step again to return.</p>
+      </div>
+    </li>
+  </ol>
+  <footer class="foot">
+    <span>路氹泥滩 · 澳门</span>
+    <b>WEAVING WITH</b>
+    <span>仪器 · 潮汐 · 红树林 · 大气 · 黑脸琵鹭 · 地震</span>
+  </footer>
+</article>
+</body>
+</html>

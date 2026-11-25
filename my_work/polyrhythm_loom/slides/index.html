@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weaving with · slides</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ground:#070C12; --lime:#D8E272; --white:#FFFDF4; --ink:#F3F0E6;
+    --muted:#9AA196; --dim:#6E746C; --madder:#D24E35;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:var(--ground);color:var(--ink);
+    font-family:"Noto Sans SC","PingFang SC",sans-serif}
+  .deck{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+  .slide{
+    height:100vh;scroll-snap-align:start;scroll-snap-stop:always;
+    position:relative;display:flex;flex-direction:column;
+    padding:32px 72px 96px;overflow:hidden;
+    background:
+      linear-gradient(180deg, rgba(216,226,114,.05), transparent 18%),
+      repeating-linear-gradient(180deg, transparent 0 3px, rgba(255,255,255,.015) 3px 4px),
+      var(--ground);
+  }
+  header{display:flex;justify-content:space-between;align-items:flex-start;height:54px}
+  .meta{font:500 12px "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.18em;color:var(--muted);text-align:right;line-height:1.7}
+  h1{margin:14px 0 0;font-weight:500;font-size:56px;letter-spacing:.06em;color:var(--white);line-height:1.08}
+  .kicker{margin:14px 0 0;font:400 15px Archivo,sans-serif;letter-spacing:.22em;color:var(--lime)}
+  .ask{margin:22px 0 0;max-width:920px;font-size:22px;font-weight:400;color:var(--ink);letter-spacing:.04em}
+  .ask em{font-style:normal;color:var(--muted);font-family:Archivo,sans-serif;font-size:16px;letter-spacing:.04em;display:block;margin-top:8px}
+  footer{
+    position:absolute;left:72px;right:72px;bottom:28px;
+    display:flex;align-items:flex-end;justify-content:space-between;
+  }
+  .who{display:flex;align-items:center;gap:14px}
+  .mark{width:28px;height:28px;position:relative}
+  .mark i{position:absolute;background:var(--lime)}
+  .mark i:first-child{left:0;top:0;width:8px;height:28px}
+  .mark i:last-child{left:0;bottom:0;width:28px;height:8px}
+  .who b{font-weight:500;font-size:16px}
+  .who span{display:block;font:400 11px Archivo,sans-serif;letter-spacing:.16em;color:var(--muted);margin-top:3px}
+  .keys{display:flex;gap:28px;align-items:flex-end;margin-top:36px}
+  .keys div{min-width:120px}
+  .keys strong{display:block;font-size:28px;font-weight:500;letter-spacing:.12em;color:var(--white)}
+  .keys span{display:block;margin-top:6px;font:400 13px Archivo,sans-serif;letter-spacing:.16em;color:var(--lime)}
+  .stage{margin-top:20px;flex:1 1 auto;min-height:0}
+  /* slide 1 threads */
+  .scales{height:100%;display:flex;flex-direction:column;justify-content:center;gap:10px}
+  .scales div{display:flex;align-items:baseline;gap:32px}
+  .scales b{font:500 54px "IBM Plex Mono",ui-monospace,monospace;color:var(--c);letter-spacing:.02em;min-width:300px}
+  .scales span{font-size:22px;letter-spacing:.24em}
+  /* map */
+  .map{display:grid;grid-template-columns:1.45fr .75fr;gap:48px;height:100%}
+  .section{position:relative;background:#10151c;min-height:0}
+  .section svg{width:100%;height:100%;display:block}
+  .section .tag{position:absolute;bottom:14px;font:500 13px "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.16em}
+  .section .tag.l{left:16px;color:#F3F0E6}
+  .section .tag.r{right:18px;color:#D8E272}
+  .agents{display:flex;flex-direction:column;justify-content:space-between}
+  .agent{display:grid;grid-template-columns:14px 1fr auto;gap:14px;align-items:center;border-bottom:1px solid rgba(255,255,255,.08);padding:8px 0}
+  .agent i{width:14px;height:28px;background:var(--c)}
+  .agent b{font-weight:500;font-size:22px;letter-spacing:.12em}
+  .agent span{font:400 13px "IBM Plex Mono",monospace;letter-spacing:.08em;color:var(--muted)}
+  /* binary */
+  .binary{height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:42px}
+  .bitrow{width:1240px;max-width:100%}
+  .bits,.clothline,.floatline{display:flex;gap:8px;align-items:center}
+  .bits s,.clothline s{width:56px;height:56px;background:transparent;border:1px solid rgba(216,226,114,.28)}
+  .bits s.on,.clothline s.on{background:var(--lime);border-color:var(--lime)}
+  .bits s.w,.clothline s.w{background:var(--white);border-color:var(--white)}
+  .clothline s.off{background:#1B3A4A;border-color:#1B3A4A}
+  .floatline{gap:0}
+  .floatline i{display:block;height:56px;background:var(--lime);margin-right:8px}
+  .floatline i:last-child{margin-right:0}
+  .floatline i.off{background:transparent}
+  .rowlabel{width:132px;font-weight:500;font-size:22px;letter-spacing:.16em}
+  .rowlabel em{display:block;margin-top:4px;font:400 12px Archivo,sans-serif;letter-spacing:.16em;color:var(--lime);font-style:normal}
+  .bitrow{display:flex;align-items:center;gap:28px}
+  /* times */
+  .times{display:grid;grid-template-columns:1.3fr 1.3fr .7fr;gap:22px;height:100%}
+  .panel{background:#10151c;padding:18px 18px 16px;display:flex;flex-direction:column;min-width:0}
+  .panel .tag{font:500 12px "IBM Plex Mono",monospace;letter-spacing:.18em;color:var(--lime)}
+  .panel strong{display:block;margin:8px 0 12px;font-size:28px;font-weight:500;letter-spacing:.08em}
+  .panel img{width:100%;height:100%;object-fit:cover;object-position:center;flex:1;min-height:0;background:#0B0D11}
+  .press{
+    flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+    border:1px solid rgba(210,78,53,.45)
+  }
+  .press i{width:72px;height:72px;background:var(--madder)}
+  .press em{font-style:normal;letter-spacing:.2em;color:var(--madder)}
+  /* grammar */
+  .grammar{height:100%;display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:center}
+  .steps{display:flex;flex-direction:column;justify-content:center;gap:32px}
+  .step{display:grid;grid-template-columns:72px 1fr;gap:18px;align-items:center}
+  .step .n{font:500 13px "IBM Plex Mono",monospace;letter-spacing:.16em;color:var(--lime)}
+  .step b{font-size:32px;font-weight:500;letter-spacing:.14em}
+  .step span{display:block;margin-top:4px;color:var(--muted);font:400 14px Archivo,sans-serif;letter-spacing:.12em}
+  .frame{background:#10151c}
+  .frame img{width:100%;height:auto;display:block}
+  /* situated */
+  .place{height:100%;display:flex;flex-direction:column;justify-content:space-between}
+  .coord{font:500 40px "IBM Plex Mono",monospace;letter-spacing:.08em;color:var(--white)}
+  .strip{width:100%;height:250px;object-fit:cover;object-position:center 45%}
+  .src{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+  .src div{border-top:2px solid var(--c);padding-top:14px}
+  .src b{display:block;font-size:22px;font-weight:500;letter-spacing:.08em}
+  .src span{display:block;margin-top:8px;color:var(--muted);font:400 13px Archivo,sans-serif;letter-spacing:.06em}
+  /* relation */
+  .rel{display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px;height:100%}
+  .rel article{display:flex;flex-direction:column;justify-content:flex-start;gap:28px;border-top:1px solid rgba(216,226,114,.4);padding-top:18px}
+  .rel b{font-size:36px;font-weight:500;letter-spacing:.14em}
+  .rel span{display:block;margin-top:8px;color:var(--lime);font:400 14px Archivo,sans-serif;letter-spacing:.2em}
+  .rel svg{width:100%;height:280px}
+  /* future */
+  .future{height:100%;display:grid;grid-template-columns:1.3fr .9fr;gap:28px;align-items:stretch}
+  .future article{display:flex;flex-direction:column;justify-content:flex-end;gap:22px;min-height:0}
+  .pair{display:grid;grid-template-columns:1fr 1.4fr;gap:16px;min-height:0;flex:1}
+  .pair svg,.pair img{width:100%;height:100%;display:block;background:#10151c}
+  .pair img{object-fit:cover}
+  .future .open{border:1px dashed rgba(216,226,114,.55);justify-content:flex-end;padding:28px}
+  .future b{font-size:48px;font-weight:500;letter-spacing:.12em}
+  .future span{display:block;margin-top:12px;color:var(--muted);letter-spacing:.16em;font:400 14px Archivo,sans-serif}
+  /* takeaway */
+  .take-slide .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.42;z-index:0}
+  .take-slide .veil{position:absolute;inset:0;z-index:1;background:linear-gradient(90deg, rgba(7,12,18,.94) 0 44%, rgba(7,12,18,.18))}
+  .take-slide header,.take-slide .stage{position:relative;z-index:2}
+  .take-slide footer{z-index:2}
+  @media (max-width:900px){
+    .slide{padding:24px}
+    h1{font-size:40px}
+    .map,.times,.grammar,.rel,.future,.src{grid-template-columns:1fr}
+    .stage{height:auto}
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <section class="slide">
+    <header>
+      <span class="pixel" data-pixel="WEAVING"></span>
+      <div class="meta">COTAI MUDFLAT<br>MACAU<br>01  /  09</div>
+    </header>
+    <h1>超出人的时间尺度</h1>
+    <p class="kicker">BEYOND HUMAN TIME</p>
+    <p class="ask">潮、一年、一次地震、踩下去的一下。
+      <em>Have you thought about what lies beyond the human time scale?</em>
+    </p>
+    <div class="stage scales">
+      <div style="--c:#4FB0BE"><b>12.4 h</b><span>潮</span></div>
+      <div style="--c:#B4BC57"><b>1 day</b><span>红树</span></div>
+      <div style="--c:#8FA6C6"><b>1 year</b><span>大气 · 琵鹭</span></div>
+      <div style="--c:#B06A3C"><b>event</b><span>地震</span></div>
+      <div style="--c:#D24E35"><b>press</b><span>观众</span></div>
+    </div>
+    <footer>
+      <div class="who"><span class="mark"><i></i><i></i></span><div><b>澳门大学</b><span>SHIYU LEI  ·  2026</span></div></div>
+      <span class="pixel" data-pixel="WITH" data-cell="3.2"></span>
+    </footer>
+  </section>
+
+  <section class="slide">
+    <header>
+      <span class="pixel" data-pixel="WEAVING"></span>
+      <div class="meta">COTAI MUDFLAT<br>MACAU<br>02  /  09</div>
+    </header>
+    <h1>路氹湿地</h1>
+    <p class="kicker">A SPECULATIVE MAP  ·  SEVEN AGENTS</p>
+    <div class="stage map">
+      <div class="section">
+        <svg viewBox="0 0 760 460" preserveAspectRatio="xMidYMid slice" aria-label="岸与水道">
+          <rect width="760" height="460" fill="#10151c"/>
+          <rect width="760" height="150" fill="#15202c"/>
+          <rect y="210" width="760" height="250" fill="#1a2216"/>
+          <polygon points="500,188 760,214 760,460 455,460" fill="#102830"/>
+          <line x1="478" y1="168" x2="455" y2="460" stroke="#FFFDF4" stroke-width="1.5" stroke-dasharray="1 7"/>
+          <rect x="40" y="52" width="680" height="8" fill="#8FA6C6"/>
+          <g fill="#C5CC78">
+            <rect x="56" y="132" width="16" height="16"/><rect x="76" y="132" width="16" height="16"/><rect x="96" y="132" width="16" height="16"/>
+            <rect x="66" y="152" width="16" height="16"/><rect x="86" y="152" width="16" height="16"/>
+            <rect x="156" y="118" width="16" height="16"/><rect x="176" y="118" width="16" height="16"/><rect x="196" y="118" width="16" height="16"/>
+            <rect x="166" y="138" width="16" height="16"/><rect x="186" y="138" width="16" height="16"/>
+            <rect x="256" y="140" width="16" height="16"/><rect x="276" y="140" width="16" height="16"/><rect x="296" y="140" width="16" height="16"/>
+            <rect x="266" y="160" width="16" height="16"/><rect x="286" y="160" width="16" height="16"/>
+            <rect x="348" y="124" width="16" height="16"/><rect x="368" y="124" width="16" height="16"/><rect x="388" y="124" width="16" height="16"/>
+            <rect x="358" y="144" width="16" height="16"/><rect x="378" y="144" width="16" height="16"/>
+          </g>
+          <g fill="#3e4c28">
+            <rect x="76" y="168" width="16" height="48"/><rect x="176" y="154" width="16" height="62"/>
+            <rect x="276" y="176" width="16" height="44"/><rect x="368" y="160" width="16" height="56"/>
+          </g>
+          <rect x="70" y="292" width="86" height="8" fill="#EFE7D6"/>
+          <rect x="188" y="318" width="48" height="8" fill="#EFE7D6"/>
+          <g fill="#4FB0BE">
+            <rect x="530" y="300" width="28" height="10"/><rect x="566" y="286" width="36" height="10"/>
+            <rect x="610" y="300" width="28" height="10"/><rect x="646" y="274" width="40" height="10"/>
+            <rect x="694" y="292" width="28" height="10"/>
+          </g>
+          <g fill="#B06A3C">
+            <rect x="468" y="36" width="8" height="8"/><rect x="468" y="64" width="8" height="8"/>
+            <rect x="466" y="120" width="8" height="8"/><rect x="462" y="188" width="8" height="8"/>
+            <rect x="458" y="250" width="8" height="8"/><rect x="454" y="320" width="8" height="8"/>
+            <rect x="450" y="388" width="8" height="8"/>
+          </g>
+        </svg>
+        <span class="tag l">岸 SHORE</span>
+        <span class="tag r">水道</span>
+      </div>
+      <div class="agents">
+        <div class="agent" style="--c:#8FA6C6"><i></i><b>大气</b><span>1 year</span></div>
+        <div class="agent" style="--c:#B4BC57"><i></i><b>红树</b><span>1 day</span></div>
+        <div class="agent" style="--c:#EFE7D6"><i></i><b>琵鹭</b><span>1 year</span></div>
+        <div class="agent" style="--c:#4FB0BE"><i></i><b>潮汐</b><span>12.4 h</span></div>
+        <div class="agent" style="--c:#B06A3C"><i></i><b>地震</b><span>event</span></div>
+        <div class="agent" style="--c:#C9CDD6"><i></i><b>仪器</b><span>1 s</span></div>
+        <div class="agent" style="--c:#D24E35"><i></i><b>观众</b><span>press</span></div>
+      </div>
+    </div>
+    <footer>
+      <div class="who"><span class="mark"><i></i><i></i></span><div><b>澳门大学</b><span>SHIYU LEI  ·  2026</span></div></div>
+      <span class="pixel" data-pixel="WITH" data-cell="3.2"></span>
+    </footer>
+  </section>
+
+  <section class="slide">
+    <header>
+      <span class="pixel" data-pixel="WEAVING"></span>
+      <div class="meta">COTAI MUDFLAT<br>MACAU<br>03  /  09</div>
+    </header>
+    <h1>为什么是织</h1>
+    <p class="kicker">BINARY  ·  TIME SCALE</p>
+    <div class="stage binary">
+      <div class="bitrow">
+        <div class="rowlabel">二进制<em>A CELL</em></div>
+        <div class="bits" id="bits"></div>
+      </div>
+      <div class="bitrow">
+        <div class="rowlabel">一纬<em>A PICK</em></div>
+        <div class="clothline" id="cloth"></div>
+      </div>
+      <div class="bitrow">
+        <div class="rowlabel">浮长<em>A FLOAT</em></div>
+        <div class="floatline" id="floatline"></div>
+      </div>
+    </div>
+    <footer>
+      <div class="who"><span class="mark"><i></i><i></i></span><div><b>澳门大学</b><span>SHIYU LEI  ·  2026</span></div></div>
+      <span class="pixel" data-pixel="WITH" data-cell="3.2"></span>
+    </footer>
+  </section>
+
+  <section class="slide">
+    <header>
+      <span class="pixel" data-pixel="WEAVING"></span>
+      <div class="meta">COTAI MUDFLAT<br>MACAU<br>04  /  09</div>
+    </header>
+    <h1>两种时间</h1>
+    <p class="kicker">WETLAND  ·  INTRINSIC  ·  PARTICIPATORY</p>
+    <div class="stage times">
+      <div class="panel">
+        <div class="tag">15 MIN</div>
+        <strong>湿地时间</strong>
+        <img src="../../paper/figures/patterns/mudflat/composite.png" alt="Mudflat cloth, one day">
+      </div>
+      <div class="panel">
+        <div class="tag">24 PICKS</div>
+        <strong>固有时间</strong>
+        <img src="../../paper/figures/patterns/intrinsic/composite.png" alt="Intrinsic cloth, 96 picks">
+      </div>
+      <div class="panel">
+        <div class="tag">PRESS</div>
+        <strong>参与</strong>
+        <div class="press"><i></i><em>踩踏</em></div>
+      </div>
+    </div>
+    <footer>
+      <div class="who"><span class="mark"><i></i><i></i></span><div><b>澳门大学</b><span>SHIYU LEI  ·  2026</span></div></div>
+      <span class="pixel" data-pixel="WITH" data-cell="3.2"></span>
+    </footer>
+  </section>
+
+  <section class="slide">
+    <header>
+      <span class="pixel" data-pixel="WEAVING"></span>
+      <div class="meta">COTAI MUDFLAT<br>MACAU<br>05  /  09</div>
+    </header>
+    <h1>编织语法</h1>
+    <p class="kicker">DATA  →  PARAMETER  →  PATTERN</p>
+    <div class="stage grammar">
+      <div class="steps">
+        <div class="step"><div class="n">01</div><div><b>数值</b><span>TIDE  ·  LIGHT  ·  CO₂</span></div></div>
+        <div class="step"><div class="n">02</div><div><b>参数</b><span>S  ·  V</span></div></div>
+        <div class="step"><div class="n">03</div><div><b>浮长</b><span>FLOAT</span></div></div>
+        <div class="step"><div class="n">04</div><div><b>缝合</b><span>STITCH</span></div></div>
+      </div>
+      <div class="frame"><img src="../../paper/figures/patterns/mudflat/hydro_with_ground.png" alt="Tide yarn on the ground weave"></div>
+    </div>
+    <footer>
+      <div class="who"><span class="mark"><i></i><i></i></span><div><b>澳门大学</b><span>SHIYU LEI  ·  2026</span></div></div>
+      <span class="pixel" data-pixel="WITH" data-cell="3.2"></span>
+    </footer>
+  </section>
+
+  <section class="slide">
+    <header>
+      <span class="pixel" data-pixel="WEAVING"></span>
+      <div class="meta">COTAI MUDFLAT<br>MACAU<br>06  /  09</div>
+    </header>
+    <h1>在场的数据</h1>
+    <p class="kicker">SITUATED ENVIRONMENTAL DATA</p>
+    <div class="stage place">
+      <div class="coord">22.135 N<br>113.555 E</div>
+      <img class="strip" src="../../paper/figures/patterns/mudflat/composite.png" alt="这一坐标上的一日">
+      <div class="src">
+        <div style="--c:#4FB0BE"><b>潮位</b><span>MARINE</span></div>
+        <div style="--c:#B4BC57"><b>日照</b><span>OPEN-METEO</span></div>
+        <div style="--c:#8FA6C6"><b>CO₂</b><span>CAMS</span></div>
+        <div style="--c:#B06A3C"><b>地震</b><span>USGS</span></div>
+        <div style="--c:#EFE7D6"><b>琵鹭</b><span>INATURALIST</span></div>
+      </div>
+    </div>
+    <footer>
+      <div class="who"><span class="mark"><i></i><i></i></span><div><b>澳门大学</b><span>SHIYU LEI  ·  2026</span></div></div>
+      <span class="pixel" data-pixel="WITH" data-cell="3.2"></span>
+    </footer>
+  </section>
+
+  <section class="slide">
+    <header>
+      <span class="pixel" data-pixel="WEAVING"></span>
+      <div class="meta">COTAI MUDFLAT<br>MACAU<br>07  /  09</div>
+    </header>
+    <h1>数据作为关系</h1>
+    <p class="kicker">CONNECTION  ·  MEDIATOR  ·  COMPOSITION</p>
+    <div class="stage rel">
+      <article>
+        <div><b>连接</b><span>CONNECTION</span></div>
+        <svg viewBox="0 0 320 200" aria-hidden="true">
+          <rect x="8" y="92" width="250" height="14" fill="#D8E272"/>
+          <rect x="148" y="16" width="14" height="168" fill="#4FB0BE"/>
+          <rect x="136" y="80" width="38" height="38" fill="#D8E272"/>
+        </svg>
+      </article>
+      <article>
+        <div><b>中介</b><span>MEDIATOR</span></div>
+        <svg viewBox="0 0 320 200" aria-hidden="true">
+          <rect x="16" y="36" width="100" height="12" fill="#8FA6C6"/>
+          <rect x="196" y="36" width="108" height="12" fill="#B4BC57"/>
+          <rect x="142" y="22" width="32" height="40" fill="#D8E272"/>
+          <rect x="64" y="128" width="150" height="12" fill="#4FB0BE"/>
+          <rect x="210" y="156" width="70" height="12" fill="#EFE7D6"/>
+        </svg>
+      </article>
+      <article>
+        <div><b>构成</b><span>COMPOSITION</span></div>
+        <svg viewBox="0 0 320 200" aria-hidden="true">
+          <rect x="16" y="28" width="288" height="12" fill="#D8E272"/>
+          <rect x="16" y="52" width="288" height="12" fill="#FFFDF4"/>
+          <rect x="16" y="76" width="288" height="12" fill="#4FB0BE"/>
+          <rect x="16" y="100" width="288" height="12" fill="#B4BC57"/>
+          <rect x="16" y="124" width="288" height="12" fill="#B06A3C"/>
+          <rect x="16" y="148" width="288" height="12" fill="#EFE7D6"/>
+          <rect x="168" y="68" width="28" height="28" fill="#D8E272"/>
+        </svg>
+      </article>
+    </div>
+    <footer>
+      <div class="who"><span class="mark"><i></i><i></i></span><div><b>澳门大学</b><span>SHIYU LEI  ·  2026</span></div></div>
+      <span class="pixel" data-pixel="WITH" data-cell="3.2"></span>
+    </footer>
+  </section>
+
+  <section class="slide">
+    <header>
+      <span class="pixel" data-pixel="WEAVING"></span>
+      <div class="meta">COTAI MUDFLAT<br>MACAU<br>08  /  09</div>
+    </header>
+    <h1>之后</h1>
+    <p class="kicker">CAD  ·  IMAGE  ·  COLLABORATION</p>
+    <div class="stage future">
+      <article>
+        <div class="pair">
+          <svg id="draft" viewBox="0 0 160 160" aria-label="底组织"></svg>
+          <img src="../../paper/figures/patterns/intrinsic/composite.png" alt="">
+        </div>
+        <div><b>CAD · 图像</b><span>PROCESSING</span></div>
+      </article>
+      <article class="open"><div><b>with</b><span>________</span></div></article>
+    </div>
+    <footer>
+      <div class="who"><span class="mark"><i></i><i></i></span><div><b>澳门大学</b><span>SHIYU LEI  ·  2026</span></div></div>
+      <span class="pixel" data-pixel="WITH" data-cell="3.2"></span>
+    </footer>
+  </section>
+
+  <section class="slide take-slide">
+    <img class="bg" src="../../paper/figures/patterns/mudflat/composite.png" alt="">
+    <div class="veil"></div>
+    <header>
+      <span class="pixel" data-pixel="WEAVING"></span>
+      <div class="meta">COTAI MUDFLAT<br>MACAU<br>09  /  09</div>
+    </header>
+    <div class="stage" style="display:flex;align-items:flex-end">
+      <div>
+        <h1 style="font-size:64px">一次交叉<br>不是同一时刻。</h1>
+        <p class="kicker">A CROSSING IS NOT ONE MOMENT</p>
+      </div>
+    </div>
+    <footer>
+      <div class="who"><span class="mark"><i></i><i></i></span><div><b>澳门大学</b><span>SHIYU LEI  ·  2026</span></div></div>
+      <span class="pixel" data-pixel="WITH" data-cell="3.2"></span>
+    </footer>
+  </section>
+
+</div>
+<script>
+const FONT = {
+  A:"01110,10001,10001,11111,10001,10001,10001",
+  C:"01111,10000,10000,10000,10000,10000,01111",
+  E:"11111,10000,10000,11110,10000,10000,11111",
+  G:"01111,10000,10000,10111,10001,10001,01110",
+  H:"10001,10001,10001,11111,10001,10001,10001",
+  I:"11111,00100,00100,00100,00100,00100,11111",
+  N:"10001,11001,10101,10011,10001,10001,10001",
+  T:"11111,00100,00100,00100,00100,00100,00100",
+  V:"10001,10001,10001,10001,01010,01010,00100",
+  W:"10001,10001,10001,10101,10101,11011,10001"
+};
+document.querySelectorAll(".pixel").forEach(el => {
+  const cell = +el.dataset.cell || 4.2, gap = 1.5, step = cell + gap;
+  let x = 0; const rects = [];
+  for (const g of el.dataset.pixel){
+    FONT[g].split(",").forEach((row, r) => {
+      [...row].forEach((bit, c) => {
+        if (bit === "1") rects.push(`<rect x="${(x+c*step).toFixed(1)}" y="${(r*step).toFixed(1)}" width="${cell}" height="${cell}" fill="#D8E272"/>`);
+      });
+    });
+    x += 5 * step + step * 1.6;
+  }
+  const h = 7 * step - gap;
+  el.innerHTML = `<svg width="${x.toFixed(1)}" height="${h.toFixed(1)}" viewBox="0 0 ${x.toFixed(1)} ${h.toFixed(1)}">${rects.join("")}</svg>`;
+});
+const pattern = "1001011100101110";
+const bits = document.getElementById("bits");
+const cloth = document.getElementById("cloth");
+const floats = document.getElementById("floatline");
+pattern.split("").forEach((b, i) => {
+  const s = document.createElement("s");
+  if (b === "1") s.className = i % 5 === 0 ? "w" : "on";
+  bits.appendChild(s);
+  const c = document.createElement("s");
+  c.className = b === "1" ? (i % 5 === 0 ? "w" : "on") : "off";
+  cloth.appendChild(c);
+});
+function flush(n, on){
+  const el = document.createElement("i");
+  el.style.width = (n * 56 + (n - 1) * 8) + "px";
+  if (!on) el.className = "off";
+  floats.appendChild(el);
+}
+{
+  let n = 0, on = pattern[0] === "1";
+  for (const b of pattern + "x"){
+    const next = b === "1";
+    if (b !== "x" && next === on) n++;
+    else { flush(n, on); n = 1; on = next; }
+  }
+}
+const draft = document.getElementById("draft");
+for (let j = 0; j < 8; j++){
+  for (let i = 0; i < 8; i++){
+    const on = ((i * 3 - j) % 8 + 8) % 8 < 1;
+    const r = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    r.setAttribute("x", i * 20); r.setAttribute("y", j * 20);
+    r.setAttribute("width", 16); r.setAttribute("height", 16);
+    r.setAttribute("fill", on ? "#D8E272" : "#1C2430");
+    draft.appendChild(r);
+  }
+}
+const slides = [...document.querySelectorAll(".slide")];
+let n = 0;
+function go(i){ n = Math.max(0, Math.min(slides.length - 1, i)); slides[n].scrollIntoView({behavior:"smooth"}); }
+const openAt = new URLSearchParams(location.search).get("n");
+if (openAt){
+  document.getElementById("deck").style.scrollBehavior = "auto";
+  n = Math.max(0, Math.min(slides.length - 1, +openAt));
+  slides[n].scrollIntoView();
+}
+addEventListener("keydown", e => {
+  if (["ArrowDown","ArrowRight","PageDown"," "].includes(e.key)){ e.preventDefault(); go(n + 1); }
+  if (["ArrowUp","ArrowLeft","PageUp","Backspace"].includes(e.key)){ e.preventDefault(); go(n - 1); }
+});
+</script>
+</body>
+</html>

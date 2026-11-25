@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="780" viewBox="0 0 1600 780">
+<rect width="1600" height="780" fill="#F3EFE6"/>
+<g id="header">
+<text x="56.00" y="48.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="start" letter-spacing="2.4">TABLE 1</text>
+<text x="1544.00" y="48.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="end" letter-spacing="1.6">SEVEN AGENTS</text>
+<rect x="56.00" y="62.00" width="42.00" height="3.00" fill="#D24E35" stroke="none" stroke-width="1"/>
+</g>
+<g id="title">
+<text x="56.00" y="108.00" fill="#1A1714" font-family="'PingFang SC', 'Noto Sans SC', 'Hiragino Sans GB', Helvetica, sans-serif" font-size="52" font-weight="500" text-anchor="start" letter-spacing="6">代理</text>
+<text x="56.00" y="140.00" fill="#6E665C" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="1.8">One line each. The section in Figure 1 is the same list, drawn.</text>
+</g>
+<g id="columns">
+<text x="56.00" y="210.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="11" font-weight="400" text-anchor="start" letter-spacing="1.2"></text>
+<text x="120.00" y="210.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="11" font-weight="400" text-anchor="start" letter-spacing="1.2">AGENT</text>
+<text x="340.00" y="210.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="11" font-weight="400" text-anchor="start" letter-spacing="1.2">PROXY</text>
+<text x="560.00" y="210.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="11" font-weight="400" text-anchor="start" letter-spacing="1.2">SOURCE</text>
+<text x="900.00" y="210.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="11" font-weight="400" text-anchor="start" letter-spacing="1.2">OWN PERIOD</text>
+<text x="1180.00" y="210.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="11" font-weight="400" text-anchor="start" letter-spacing="1.2">FLOAT</text>
+<line x1="56.00" y1="224.00" x2="1544.00" y2="224.00" stroke="#1A1714" stroke-width="1" stroke-linecap="square"/>
+<rect x="56.00" y="232.00" width="8.00" height="36.00" fill="#8FA6C6" stroke="none" stroke-width="0.5"/>
+<text x="120.00" y="250.00" fill="#1A1714" font-family="'PingFang SC', 'Noto Sans SC', 'Hiragino Sans GB', Helvetica, sans-serif" font-size="20" font-weight="400" text-anchor="start">大气</text>
+<text x="120.00" y="270.00" fill="#6E665C" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start" letter-spacing="0.6">Air</text>
+<text x="340.00" y="256.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="400" text-anchor="start">CO₂  ppm</text>
+<text x="560.00" y="256.00" fill="#1A1714" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" font-weight="400" text-anchor="start">CAMS</text>
+<text x="900.00" y="256.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="400" text-anchor="start">1 year</text>
+<text x="1180.00" y="256.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="20" font-weight="400" text-anchor="start">4</text>
+<text x="1260.00" y="256.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="13" font-weight="400" text-anchor="start">15 min</text>
+<line x1="56.00" y1="286.00" x2="1544.00" y2="286.00" stroke="#D4CBBC" stroke-width="1" stroke-linecap="square"/>
+<rect x="56.00" y="296.00" width="8.00" height="36.00" fill="#B4BC57" stroke="none" stroke-width="0.5"/>
+<text x="120.00" y="314.00" fill="#1A1714" font-family="'PingFang SC', 'Noto Sans SC', 'Hiragino Sans GB', Helvetica, sans-serif" font-size="20" font-weight="400" text-anchor="start">红树</text>
+<text x="120.00" y="334.00" fill="#6E665C" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start" letter-spacing="0.6">Mangrove</text>
+<text x="340.00" y="320.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="400" text-anchor="start">light  W/m²</text>
+<text x="560.00" y="320.00" fill="#1A1714" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" font-weight="400" text-anchor="start">Open-Meteo</text>
+<text x="900.00" y="320.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="400" text-anchor="start">1 day</text>
+<text x="1180.00" y="320.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="20" font-weight="400" text-anchor="start">3</text>
+<text x="1260.00" y="320.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="13" font-weight="400" text-anchor="start">15 min</text>
+<line x1="56.00" y1="350.00" x2="1544.00" y2="350.00" stroke="#D4CBBC" stroke-width="1" stroke-linecap="square"/>
+<rect x="56.00" y="360.00" width="8.00" height="36.00" fill="#EFE7D6" stroke="#1A1714" stroke-width="0.5"/>
+<text x="120.00" y="378.00" fill="#1A1714" font-family="'PingFang SC', 'Noto Sans SC', 'Hiragino Sans GB', Helvetica, sans-serif" font-size="20" font-weight="400" text-anchor="start">琵鹭</text>
+<text x="120.00" y="398.00" fill="#6E665C" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start" letter-spacing="0.6">Spoonbill</text>
+<text x="340.00" y="384.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="400" text-anchor="start">presence</text>
+<text x="560.00" y="384.00" fill="#1A1714" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" font-weight="400" text-anchor="start">iNaturalist</text>
+<text x="900.00" y="384.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="400" text-anchor="start">1 year</text>
+<text x="1180.00" y="384.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="20" font-weight="400" text-anchor="start">5</text>
+<text x="1260.00" y="384.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="13" font-weight="400" text-anchor="start">15 min</text>
+<line x1="56.00" y1="414.00" x2="1544.00" y2="414.00" stroke="#D4CBBC" stroke-width="1" stroke-linecap="square"/>
+<rect x="56.00" y="424.00" width="8.00" height="36.00" fill="#4FB0BE" stroke="none" stroke-width="0.5"/>
+<text x="120.00" y="442.00" fill="#1A1714" font-family="'PingFang SC', 'Noto Sans SC', 'Hiragino Sans GB', Helvetica, sans-serif" font-size="20" font-weight="400" text-anchor="start">潮汐</text>
+<text x="120.00" y="462.00" fill="#6E665C" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start" letter-spacing="0.6">Tide</text>
+<text x="340.00" y="448.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="400" text-anchor="start">level  m</text>
+<text x="560.00" y="448.00" fill="#1A1714" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" font-weight="400" text-anchor="start">Open-Meteo Marine</text>
+<text x="900.00" y="448.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="400" text-anchor="start">12.42 h</text>
+<text x="1180.00" y="448.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="20" font-weight="400" text-anchor="start">8</text>
+<text x="1260.00" y="448.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="13" font-weight="400" text-anchor="start">15 min</text>
+<line x1="56.00" y1="478.00" x2="1544.00" y2="478.00" stroke="#D4CBBC" stroke-width="1" stroke-linecap="square"/>
+<rect x="56.00" y="488.00" width="8.00" height="36.00" fill="#B06A3C" stroke="none" stroke-width="0.5"/>
+<text x="120.00" y="506.00" fill="#1A1714" font-family="'PingFang SC', 'Noto Sans SC', 'Hiragino Sans GB', Helvetica, sans-serif" font-size="20" font-weight="400" text-anchor="start">地震</text>
+<text x="120.00" y="526.00" fill="#6E665C" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start" letter-spacing="0.6">Quake</text>
+<text x="340.00" y="512.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="400" text-anchor="start">magnitude</text>
+<text x="560.00" y="512.00" fill="#1A1714" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" font-weight="400" text-anchor="start">USGS</text>
+<text x="900.00" y="512.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="400" text-anchor="start">event</text>
+<text x="1180.00" y="512.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="20" font-weight="400" text-anchor="start">3</text>
+<text x="1260.00" y="512.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="13" font-weight="400" text-anchor="start">15 min, or blank</text>
+<line x1="56.00" y1="542.00" x2="1544.00" y2="542.00" stroke="#D4CBBC" stroke-width="1" stroke-linecap="square"/>
+<rect x="56.00" y="552.00" width="8.00" height="36.00" fill="#C9CDD6" stroke="#1A1714" stroke-width="0.5"/>
+<text x="120.00" y="570.00" fill="#1A1714" font-family="'PingFang SC', 'Noto Sans SC', 'Hiragino Sans GB', Helvetica, sans-serif" font-size="20" font-weight="400" text-anchor="start">仪器</text>
+<text x="120.00" y="590.00" fill="#6E665C" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start" letter-spacing="0.6">Instrument</text>
+<text x="340.00" y="576.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="400" text-anchor="start">jitter</text>
+<text x="560.00" y="576.00" fill="#1A1714" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" font-weight="400" text-anchor="start">this machine</text>
+<text x="900.00" y="576.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="400" text-anchor="start">1 s</text>
+<text x="1180.00" y="576.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="20" font-weight="400" text-anchor="start">10</text>
+<text x="1260.00" y="576.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="13" font-weight="400" text-anchor="start">15 min</text>
+<line x1="56.00" y1="606.00" x2="1544.00" y2="606.00" stroke="#D4CBBC" stroke-width="1" stroke-linecap="square"/>
+<rect x="56.00" y="616.00" width="8.00" height="36.00" fill="#D24E35" stroke="none" stroke-width="0.5"/>
+<text x="120.00" y="634.00" fill="#1A1714" font-family="'PingFang SC', 'Noto Sans SC', 'Hiragino Sans GB', Helvetica, sans-serif" font-size="20" font-weight="400" text-anchor="start">观众</text>
+<text x="120.00" y="654.00" fill="#6E665C" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start" letter-spacing="0.6">Visitor</text>
+<text x="340.00" y="640.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="400" text-anchor="start">hold</text>
+<text x="560.00" y="640.00" fill="#1A1714" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" font-weight="400" text-anchor="start">treadle</text>
+<text x="900.00" y="640.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="400" text-anchor="start">—</text>
+<text x="1180.00" y="640.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="20" font-weight="400" text-anchor="start">6</text>
+<text x="1260.00" y="640.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="13" font-weight="400" text-anchor="start">the press</text>
+<line x1="56.00" y1="670.00" x2="1544.00" y2="670.00" stroke="#D4CBBC" stroke-width="1" stroke-linecap="square"/>
+</g>
+<g id="footer">
+<text x="56.00" y="752.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="11" font-weight="400" text-anchor="start" letter-spacing="0.4">On the mudflat clock every agent except the visitor advances 15 minutes a pick. Own period is the intrinsic cycle. Earthquakes, not mud.</text>
+</g>
+</svg>

@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Polyrhythm Loom · Cotai Mudflat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500&display=swap">
+<style>
+/* One cloth, three ways of looking, moved through by swiping: the front of the seven-layer cloth → the layers pulled apart along time scale → one layer at a time with its path and live data. Everything is one continuous canvas scene; nothing jumps. Single dark theme for the exhibition room. */
+:root{
+  --bg:#0B0D11; --ink:#ECE6D6; --muted:#8B909C; --faint:#3A3F4A; --panel:rgba(16,18,24,.72); --focus:#C9D5F7;
+  --a-atmos:#8FA6C6; --a-plant:#B4BC57; --a-animal:#EFE7D6; --a-hydro:#4FB0BE; --a-litho:#B06A3C; --a-tech:#C9CDD6; --a-human:#D24E35;
+  --sans:"Archivo","Noto Sans SC","Helvetica Neue",Arial,sans-serif; --zh:"Noto Sans SC","PingFang SC",sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%;height:100dvh;margin:0;overscroll-behavior:none}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:13px;line-height:1.45;overflow:hidden;touch-action:none;-webkit-font-smoothing:antialiased}
+.en{color:var(--muted);font-weight:400}
+#stage{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+#stage.drag{cursor:grabbing}
+.top{position:fixed;left:24px;right:24px;top:18px;display:flex;align-items:center;gap:16px;row-gap:8px;flex-wrap:wrap;pointer-events:none}
+.top>*{pointer-events:auto}
+.brand{display:flex;align-items:baseline;gap:10px;margin-right:auto}
+.brand .ey{font:500 10px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.brand h1{margin:0;font-stretch:78%;font-weight:700;font-size:19px;letter-spacing:.005em}
+.brand h1 span{font-family:var(--zh);font-weight:400;font-size:13px;color:var(--muted);margin-left:6px}
+.tg{display:inline-flex;border:1px solid var(--faint);border-radius:999px;overflow:hidden}
+.tg button,.ic{font:500 11.5px var(--sans);background:transparent;color:var(--muted);border:0;padding:5px 12px;cursor:pointer;white-space:nowrap}
+.tg button[aria-pressed="true"]{color:var(--ink);background:rgba(255,255,255,.08)}
+.ic{border:1px solid var(--faint);border-radius:999px}
+.ic[aria-pressed="true"]{color:var(--ink);border-color:var(--muted)}
+.usb-live{margin:0;font:500 10.5px var(--mono);color:var(--muted);letter-spacing:.02em;max-width:280px}
+button:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.title{position:fixed;left:50%;top:62px;transform:translateX(-50%);text-align:center;pointer-events:none;white-space:nowrap}
+.title b{display:block;font-weight:600;font-size:15px;letter-spacing:.01em}
+.title small{font:500 10.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.nav{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);display:flex;align-items:center;gap:10px}
+.nav button{width:10px;height:10px;padding:0;border-radius:50%;border:1px solid var(--muted);background:transparent;cursor:pointer;transition:transform .25s}
+.nav button.sq{border-radius:2px}
+.nav button[aria-current="true"]{background:var(--c,var(--ink));border-color:var(--c,var(--ink))}
+.nav .sep{width:14px;height:1px;background:var(--faint)}
+.boltl{position:fixed;left:24px;bottom:66px;margin:0;font:500 10px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.treadle{position:fixed;left:24px;bottom:20px;font:600 13px var(--sans);font-stretch:85%;padding:10px 18px;border-radius:999px;border:1px solid #8A6534;background:linear-gradient(#D5A869,#B8863F);color:#2A1A0A;cursor:pointer;display:flex;gap:8px;align-items:center;touch-action:none}
+.treadle.down{transform:translateY(1px);filter:brightness(.92)}
+.treadle kbd{font:500 10px var(--mono);border:1px solid #3A2614;border-radius:4px;padding:0 4px}
+.src{position:fixed;left:24px;bottom:84px;margin:0;font:500 10px var(--mono);letter-spacing:.06em;color:var(--muted);max-width:44vw}
+.src b{color:var(--ink);font-weight:500}
+.hint{position:fixed;right:24px;bottom:24px;font:500 11px var(--mono);color:var(--muted);letter-spacing:.06em;pointer-events:none}
+.lede{position:fixed;left:24px;top:78px;width:212px;font-size:12px;color:var(--muted);pointer-events:none}
+.lede b{color:var(--ink);font-weight:500}
+.info{position:fixed;right:24px;top:50%;width:300px;transform:translateY(-50%);padding:18px 20px;border-left:1px solid var(--faint);pointer-events:none}
+.info.on{pointer-events:auto}
+.info .nm{display:flex;align-items:baseline;gap:8px;margin:0}
+.info .nm b{font-size:22px;font-weight:600;font-stretch:85%}
+.info .nm i{width:10px;height:10px;border-radius:50%;background:var(--c);display:inline-block;align-self:center}
+.info .yarn{margin:2px 0 14px;color:var(--muted);font-size:12px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:0 0 14px;font-size:12px}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;font-family:var(--mono);font-size:11.5px;text-align:right}
+.lab{margin:0 0 6px;font:500 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.live{margin:0 0 14px;padding:10px 0;border-top:1px solid var(--faint);border-bottom:1px solid var(--faint)}
+.live .v{font:500 26px var(--mono);line-height:1.1}
+.live .t{font:500 11px var(--mono);color:var(--muted)}
+.info canvas{width:100%;height:56px;display:block;margin-bottom:12px}
+.meets{list-style:none;margin:0 0 14px;padding:0}
+.meets li{display:grid;grid-template-columns:8px 1fr auto;gap:8px;align-items:center;font-size:12px;padding:2px 0}
+.meets li i{width:7px;height:7px;border-radius:50%;background:var(--c)}
+.meets li span:last-child{font:500 11px var(--mono);color:var(--muted)}
+.voice{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--muted)}
+.voice label{border:1px solid var(--faint);border-radius:999px;padding:3px 10px;cursor:pointer;color:var(--ink)}
+.voice input{display:none}
+.toast{position:fixed;left:50%;top:110px;transform:translateX(-50%);padding:6px 14px;border-radius:999px;background:var(--ink);color:#12141A;font-weight:600;font-size:12px;opacity:0;transition:opacity .4s;pointer-events:none}
+.toast.on{opacity:1}
+.field-import{display:inline-flex;align-items:center;min-height:40px}
+.field-import input{display:none}
+.field{position:fixed;left:24px;bottom:112px;display:flex;gap:8px;align-items:center;z-index:3}
+.field .ic,.field .tg button{min-height:40px;padding:8px 14px}
+.field-state,.field-meta,.field-event{position:fixed;left:24px;margin:0;max-width:min(460px,48vw);font:500 10.5px var(--mono);letter-spacing:.03em;line-height:1.35;z-index:3}
+.field-state{bottom:198px;color:var(--ink)}
+.field-meta{bottom:176px;color:var(--muted)}
+.field-event{bottom:158px;color:var(--ink)}
+@media (max-width:900px){ .lede{display:none} .info{top:auto;bottom:70px;right:12px;left:12px;width:auto;transform:none;border-left:0;border-top:1px solid var(--faint);background:var(--panel)} .hint{display:none} .field,.field-state,.field-meta,.field-event{left:12px;right:12px;text-align:left} .field{top:56px;bottom:auto} .field-state{top:104px;bottom:auto} .field-meta{top:148px;bottom:auto} .field-event{top:176px;bottom:auto} }
+@media (prefers-reduced-motion:reduce){ .toast{transition:none} }
+</style>
+</head>
+<body>
+<canvas id="stage" aria-label="The Cotai mudflat woven as a seven-layer cloth, fifteen minutes per pick. Across the cloth runs the mudflat from the mangroves on the shore to the channel; down the cloth runs time. Swipe left to pull the layers apart, then to read one layer at a time."></canvas>
+<div class="top">
+  <div class="brand"><span class="ey">Weaving With</span><h1>Polyrhythm Loom<span>复节奏织机</span></h1></div>
+  <div class="tg" id="clock" role="group" aria-label="Clock"><button type="button" data-v="mudflat" aria-pressed="true">Mudflat 泥滩</button><button type="button" data-v="intrinsic" aria-pressed="false">Own time 固有</button></div>
+  <button class="ic" id="sound" type="button" aria-pressed="false">Sound 声音</button>
+  <button class="ic" id="full" type="button" aria-pressed="false">Full screen 全屏</button>
+  <label class="ic field-import" id="fieldImport">Field CSV 野外<input id="fieldFile" type="file" accept=".csv,text/csv,text/plain"></label>
+  <button class="ic" id="usb" type="button" aria-pressed="false">USB 踏板</button>
+  <p class="usb-live" id="usbLive">点 USB 踏板，把踏板插在这台 iPad 上</p>
+</div>
+<div class="title" id="title"><small id="tSmall">Front · 正面</small><b id="tBig">One mudflat, seven layers</b></div>
+<p class="lede" id="lede"><b>The Cotai mudflat, fifteen minutes per pick.</b> Across the cloth: from the mangroves on the shore to the channel. The water's edge moves with the tide; spoonbills follow it out to feed; mangroves take in light and the air gives up CO₂; a far quake runs through every layer. Layers are stitched only where these really meet.<br><span class="en">路氹城生态保护区的泥滩，一纬十五分钟。布的宽度是从岸边红树林到水道的一条剖面：水线随潮进退，琵鹭随水线出去觅食，红树吸收日光，空气中的 CO₂ 随之下降，远处的地震贯穿所有层。只有真实相遇处才缝合。</span></p>
+<aside class="info" id="info" aria-live="polite">
+  <p class="nm" id="iName"></p>
+  <p class="yarn" id="iYarn"></p>
+  <div class="live"><p class="lab">Now · 实时</p><div class="v" id="iVal">—</div><div class="t" id="iTime">—</div></div>
+  <dl class="kv" id="iKv"></dl>
+  <p class="lab">Its data in this cloth · 本段数据</p>
+  <canvas id="iSpark" width="600" height="112"></canvas>
+  <p class="lab">Stitched to · 与谁缝合</p>
+  <ul class="meets" id="iMeets"></ul>
+  <div class="voice"><span id="iVoice">Voice: synthesized · 合成声</span><label>Load recording 换录音<input type="file" accept="audio/*" id="iRec"></label></div>
+</aside>
+<nav class="nav" id="nav" aria-label="Views"></nav>
+<button class="treadle" id="treadle" type="button">Treadle 踩踏板 <kbd>Space</kbd></button>
+<div class="field" id="fieldBox" hidden>
+  <button class="ic" id="fieldPlay" type="button" aria-pressed="false">Play 播放</button>
+  <div class="tg" id="fieldRate" role="group" aria-label="Field session playback rate">
+    <button type="button" data-rate="1" aria-pressed="true">1×</button>
+    <button type="button" data-rate="10">10×</button>
+    <button type="button" data-rate="60">60×</button>
+  </div>
+</div>
+<p class="field-state" id="fieldState" hidden></p>
+<p class="field-meta" id="fieldMeta" hidden></p>
+<p class="field-event" id="fieldEvent" hidden></p>
+<p class="src" id="src">Data · 数据: loading… 读取中</p>
+<p class="boltl" id="bolt">Bolt 1 · 第 1 匹</p>
+<p class="hint" id="hint">← swipe · 滑动</p>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(() => {
+"use strict";
+const $ = id => document.getElementById(id);
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const TAU = Math.PI * 2, H = 3.6e6, D = 864e5, YR = 365.2422 * D, TZ = 8 * H;
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const ease = x => x < .5 ? 2 * x * x : 1 - (-2 * x + 2) ** 2 / 2;
+let NOW = Math.floor(Date.now() / 6e4) * 6e4;
+const hash = n => { const s = Math.sin(n * 12.9898 + 78.233) * 43758.5453; return s - Math.floor(s); };
+const snoise = x => { const i = Math.floor(x), f = x - i, u = f * f * (3 - 2 * f); return hash(i) * (1 - u) + hash(i + 1) * u; };
+function rng(a){ return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const quant = (arr, q) => { const s = Array.from(arr).filter(Number.isFinite).sort((a, b) => a - b); if (!s.length) return 0; return s[Math.min(s.length - 1, Math.max(0, Math.round(q * (s.length - 1))))]; };
+const std = arr => { const n = arr.length; if (!n) return 1; let m = 0; for (const v of arr) m += v; m /= n; let s = 0; for (const v of arr) s += (v - m) ** 2; return Math.sqrt(s / n) || 1e-9; };
+const p2 = n => String(n).padStart(2, "0");
+
+/* ---------- Macau-local time ---------- */
+const local = t => new Date(t + TZ);
+const doyOf = t => { const d = local(t); return (t + TZ - Date.UTC(d.getUTCFullYear(), 0, 1)) / D; };
+const yearFrac = t => local(t).getUTCFullYear() + doyOf(t) / 365.2422;
+function fmtTime(t, step){ const d = local(t);
+  if (step < 6e4) return `${p2(d.getUTCHours())}:${p2(d.getUTCMinutes())}:${p2(d.getUTCSeconds())}.${String(Math.floor(d.getUTCMilliseconds() / 10)).padStart(2, "0")}`;
+  if (step < D) return `${p2(d.getUTCMonth() + 1)}-${p2(d.getUTCDate())} ${p2(d.getUTCHours())}:${p2(d.getUTCMinutes())}`;
+  return `${d.getUTCFullYear()}-${p2(d.getUTCMonth() + 1)}-${p2(d.getUTCDate())}`; }
+function fmtDur(ms){ const a = Math.abs(ms), r = (v, n) => v.toFixed(n).replace(/\.0+$/, "");
+  if (a < 6e4) return { zh:`${r(a / 1000, a < 1000 ? 2 : a < 1e4 ? 1 : 0)} 秒`, en:`${r(a / 1000, a < 1000 ? 2 : a < 1e4 ? 1 : 0)} s` };
+  if (a < H) return { zh:`${Math.round(a / 6e4)} 分钟`, en:`${Math.round(a / 6e4)} min` };
+  if (a < D) return { zh:`${r(a / H, a / H < 10 ? 1 : 0)} 小时`, en:`${r(a / H, a / H < 10 ? 1 : 0)} h` };
+  if (a < YR) return { zh:`${r(a / D, a / D < 10 ? 1 : 0)} 天`, en:`${r(a / D, a / D < 10 ? 1 : 0)} days` };
+  return { zh:`${r(a / YR, a / YR < 10 ? 1 : 0)} 年`, en:`${r(a / YR, a / YR < 10 ? 1 : 0)} yr` }; }
+
+/* ---------- models (prototype stand-ins for the real sources) ---------- */
+function co2(t){ const y = yearFrac(t) - 1959, d = doyOf(t); return 316 + 0.8 * y + 0.0129 * y * y + 3.2 * Math.cos(TAU * (d - 135) / 365.24) + 0.7 * Math.cos(2 * TAU * (d - 60) / 365.24) + (snoise(t / (9 * D)) - .5) * .7; }
+function light(t){ const LAT = 22.2 * Math.PI / 180, d = doyOf(t), h = ((t + TZ) % D) / H - 0.43; const decl = 23.44 * Math.PI / 180 * Math.sin(TAU * (284 + d) / 365); const ha = (h - 12) * 15 * Math.PI / 180;
+  const s = Math.sin(LAT) * Math.sin(decl) + Math.cos(LAT) * Math.cos(decl) * Math.cos(ha); return s <= 0 ? 0 : 1050 * Math.pow(s, 1.15) * (0.5 + 0.5 * snoise(t / D * 1.3 + 7)); }
+function presence(t){ const d = doyOf(t), c = Math.cos(TAU * (d - 15) / 365.24), lim = Math.cos(TAU * 88 / 365.24); const x = clamp((c - lim) / (1 - lim) * 1.6); return x * x * (3 - 2 * x); }
+function spoon(t){ const y = yearFrac(t); const pop = 0.22 + 0.78 / (1 + Math.exp(-(y - 2012) / 4)); return 100 * pop * presence(t) * (0.9 + 0.2 * snoise(t / (20 * D))); }
+function tide(t){ const h = t / H; return 1.15 + 0.48 * Math.cos(TAU * h / 12.4206 + 0.6) + 0.20 * Math.cos(TAU * h / 12 + 1.9) + 0.36 * Math.cos(TAU * h / 23.9345 + 0.4) + 0.28 * Math.cos(TAU * h / 25.8193 + 2.6) + (snoise(h / 30) - .5) * 0.12; }
+let QUAKES = []; const mkQuakes = (() => { const r = rng(20261115), ev = []; let t = NOW; while (t > NOW - 3200 * D){ t -= -Math.log(1 - r()) * 2.5 * D; ev.unshift({ t, mag: Math.min(7.4, 4.5 - Math.log(1 - r()) * 0.434) }); } return ev; }); QUAKES = mkQuakes();
+
+
+/* ---------- the site: Cotai Ecological Zone mudflat, Macau ---------- */
+const SITE = { lat:22.135, lon:113.555 };
+const STEP = 15 * 6e4, PAST = 384, FUT = 96;      // one pick = 15 min; 4 days woven, 1 day of forecast ahead
+const LIVE = { level:null, sw:null, wind:null, rain:null, co2:null, quakes:null, sun:null, spoon:null, at:0, tried:false };
+const SRC = { hydro:"model", plant:"model", atmos:"model", litho:"model", animal:"model" };
+function series(ts, vs){ if (!ts || !vs) return null; const t = [], v = []; ts.forEach((x, i) => { const y = vs[i]; if (y !== null && Number.isFinite(y)){ t.push(x * 1000); v.push(y); } }); return t.length > 6 ? { t, v } : null; }
+function at(s, t){ const T = s.t; if (t <= T[0]) return s.v[0]; if (t >= T[T.length - 1]) return s.v[T.length - 1]; let a = 0, b = T.length - 1; while (b - a > 1){ const m = (a + b) >> 1; if (T[m] <= t) a = m; else b = m; } return s.v[a] + (s.v[b] - s.v[a]) * (t - T[a]) / (T[b] - T[a]); }
+const inS = (s, t) => !!s && t >= s.t[0] - 3 * H && t <= s.t[s.t.length - 1] + 3 * H;
+const lvl = t => inS(LIVE.level, t) ? at(LIVE.level, t) : tide(t) - 1.15;
+const swr = t => inS(LIVE.sw, t) ? at(LIVE.sw, t) : light(t);
+const wnd = t => inS(LIVE.wind, t) ? at(LIVE.wind, t) : 8 + 22 * snoise(t / (5 * H)) ** 3;
+const rn = t => inS(LIVE.rain, t) ? at(LIVE.rain, t) : 0;
+const cO2 = t => inS(LIVE.co2, t) ? at(LIVE.co2, t) : co2(t) + 3 - 6 * clamp(light(t - 2 * H) / 900);
+const kmTo = (lat, lon) => { const r = Math.PI / 180, a = Math.sin((lat - SITE.lat) * r / 2) ** 2 + Math.cos(lat * r) * Math.cos(SITE.lat * r) * Math.sin((lon - SITE.lon) * r / 2) ** 2; return 12742 * Math.asin(Math.sqrt(a)); };
+const getJSON = (u, ms = 9000) => Promise.race([fetch(u).then(r => { if (!r.ok) throw new Error(String(r.status)); return r.json(); }), new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), ms))]);
+async function fetchLive(){
+  const q = "past_days=5&forecast_days=2&timeformat=unixtime&timezone=Asia%2FShanghai", t0 = new Date(Date.now() - 5 * D).toISOString().slice(0, 19);
+  const jobs = [
+    getJSON(`https://marine-api.open-meteo.com/v1/marine?latitude=22.135,22.10&longitude=113.555,113.56&hourly=sea_level_height_msl&${q}`).then(r => { for (const x of (Array.isArray(r) ? r : [r])){ const s = series(x.hourly && x.hourly.time, x.hourly && x.hourly.sea_level_height_msl); if (s){ LIVE.level = s; SRC.hydro = "live"; return; } } }),
+    getJSON(`https://api.open-meteo.com/v1/forecast?latitude=${SITE.lat}&longitude=${SITE.lon}&hourly=shortwave_radiation,wind_speed_10m,precipitation&daily=sunrise,sunset&${q}`).then(r => { LIVE.sw = series(r.hourly.time, r.hourly.shortwave_radiation); LIVE.wind = series(r.hourly.time, r.hourly.wind_speed_10m); LIVE.rain = series(r.hourly.time, r.hourly.precipitation); LIVE.sun = r.daily || null; if (LIVE.sw) SRC.plant = "live"; }),
+    getJSON(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${SITE.lat}&longitude=${SITE.lon}&hourly=carbon_dioxide&${q}`).then(r => { LIVE.co2 = series(r.hourly.time, r.hourly.carbon_dioxide); if (LIVE.co2) SRC.atmos = "live"; }),
+    getJSON(`https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=${t0}&latitude=${SITE.lat}&longitude=${SITE.lon}&maxradiuskm=2500&minmagnitude=4`).then(r => { LIVE.quakes = r.features.map(f => ({ t:f.properties.time, mag:f.properties.mag, place:f.properties.place || "", km:Math.round(kmTo(f.geometry.coordinates[1], f.geometry.coordinates[0])) })).sort((a, b) => a.t - b.t); SRC.litho = "live"; }),
+    getJSON("https://api.inaturalist.org/v1/observations?taxon_name=Platalea%20minor&lat=22.15&lng=113.56&radius=25&order_by=observed_on&order=desc&per_page=20").then(r => { LIVE.spoon = r.results.map(o => ({ t:Date.parse(o.time_observed_at || o.observed_on), place:o.place_guess || "" })).filter(o => Number.isFinite(o.t)); SRC.animal = "record"; }),
+  ];
+  await Promise.allSettled(jobs); LIVE.at = Date.now(); LIVE.tried = true; showSources(); }
+function showSources(){ const ok = k => SRC[k] === "live" || SRC[k] === "record", nm = { hydro:"tide 潮汐", plant:"light 日照", atmos:"CO₂", litho:"quakes 地震", animal:"spoonbill 琵鹭" };
+  const live = Object.keys(nm).filter(ok), mod = Object.keys(nm).filter(k => !ok(k));
+  $("src").innerHTML = !LIVE.tried ? "Data · 数据: loading… 读取中" : live.length ? `<b>Live 实时</b> · ${live.map(k => nm[k]).join(" · ")}${mod.length ? ` &nbsp;|&nbsp; modelled 模型 · ${mod.map(k => nm[k]).join(" · ")}` : ""} &nbsp;·&nbsp; ${fmtTime(LIVE.at, 6e4).slice(6)}` : "<b>Offline 离线</b> · all layers modelled from the site's tide, sun and season · 全部为模型数据"; }
+
+/* the mudflat score: real conditions decide where each thread lies and where layers are stitched */
+let MUD = null;
+const isExt = (a, j, w, sgn) => { for (let d = -w; d <= w; d++){ const q = j + d; if (q < 0 || q >= a.length || d === 0) continue; if (sgn * (a[q] - a[j]) > 0 || (d < 0 && a[q] === a[j])) return false; } return true; };
+const hm = t => { const d = local(t); return `${p2(d.getUTCHours())}:${p2(d.getUTCMinutes())}`; };
+function buildMudflat(){
+  const L = S.L, nowIdx = PAST - 1, T0 = Math.floor(NOW / STEP) * STEP - nowIdx * STEP, t = new Float64Array(L);
+  for (let j = 0; j < L; j++) t[j] = T0 + j * STEP;
+  const lv = Array.from(t, lvl), sw = Array.from(t, swr), wd = Array.from(t, wnd), rr = Array.from(t, rn), cc = Array.from(t, cO2);
+  const llo = quant(lv, .02), lhi = quant(lv, .98), clo = quant(cc, .02), chi = quant(cc, .98), cmean = movAvg(cc, 96);
+  const ln = lv.map(x => clamp((x - llo) / (lhi - llo || 1))), edge = ln.map(x => .9 - .74 * x);
+  const seen = (LIVE.spoon || []).filter(o => o.t > NOW - 45 * D), p = clamp(Math.max(presence(NOW), seen.length ? .8 : 0));
+  const quakes = (LIVE.quakes || QUAKES.filter(q => q.t > t[0] && q.t < NOW).map((q, n) => ({ t:q.t, mag:q.mag, place:"modelled 模拟", km:Math.round(400 + 1900 * hash(n + q.mag)) })));
+  const R = { hydro:[], plant:[], animal:[], atmos:[], litho:[] }, REL = [], ANN = [], MID = [], FEED = [], DIST = [];
+  const note = (j, k, zh, en, pr = 1) => ANN.push({ j, k, zh, en, pr });
+  const sunr = LIVE.sun && LIVE.sun.sunrise ? LIVE.sun.sunrise.map(s => s * 1000) : null, suns = LIVE.sun && LIVE.sun.sunset ? LIVE.sun.sunset.map(s => s * 1000) : null;
+  let qi = 0, feedOpen = -1, distOpen = false;
+  for (let j = 0; j < L; j++){
+    const fc = j > nowIdx, tj = t[j], dl = local(tj), rel = []; MID[j] = dl.getUTCHours() === 0 && dl.getUTCMinutes() < 15;
+    // tide: the water's edge on the transect
+    const hiW = isExt(lv, j, 12, 1), loW = isExt(lv, j, 12, -1);
+    R.hydro.push({ t:tj, x:lv[j], v:.3 + .6 * ln[j], S:edge[j], ev:hiW || loW, evName: hiW ? "high water 高潮" : loW ? "low water 低潮" : "", fc });
+    if (hiW) note(j, "hydro", `高潮 ${lv[j].toFixed(2)} m`, "High water", 2); if (loW) note(j, "hydro", `低潮 ${lv[j].toFixed(2)} m`, "Low water", 2);
+    // mangroves: near the shore, taking in light
+    let rise = false, set = false; if (sunr){ rise = sunr.some(s => s >= tj && s < tj + STEP); set = suns.some(s => s >= tj && s < tj + STEP); } else { rise = j > 0 && sw[j - 1] < 8 && sw[j] >= 8; set = j > 0 && sw[j - 1] >= 8 && sw[j] < 8; }
+    R.plant.push({ t:tj, x:sw[j], v:clamp(sw[j] / 850), S:.15, ev:rise || set, evName: rise ? "sunrise 日出" : set ? "sunset 日落" : "", fc });
+    if (rise) note(j, "plant", "日出", "Sunrise", 1); if (set) note(j, "plant", "日落", "Sunset", 1);
+    // disturbance: strong wind or rain parts the layers
+    const dist = wd[j] > 30 || rr[j] > 2; DIST[j] = dist;
+    if (dist && !distOpen) note(j, "atmos", rr[j] > 2 ? `降雨 ${rr[j].toFixed(1)} mm/h` : `大风 ${Math.round(wd[j])} km/h`, rr[j] > 2 ? "Rain: layers part" : "Wind: layers part", 2); distOpen = dist;
+    // spoonbills: out on the mud at low water, back by the mangroves at high water
+    const feed = p > .3 && ln[j] < .42 && !dist; FEED[j] = feed;
+    R.animal.push({ t:tj, x: feed ? 1 : 0, v: feed ? .55 + .4 * p : .22 + .3 * p, S: feed ? clamp(edge[j] - .04) : .09, ev: feed && !FEED[j - 1], evName: "feeding 觅食", feeding:feed, fc });
+    if (feed && feedOpen < 0) feedOpen = j; if (!feed && feedOpen >= 0){ const n = j - feedOpen; if (n >= 3) note(feedOpen, "animal", `觅食窗口 ${fmtDur(n * STEP).zh}`, "Feeding window opens", 3); feedOpen = -1; }
+    if (feed) rel.push({ a:"animal", b:"hydro", type:"feed" });
+    if (!feed && p > .3 && ln[j] > .7) rel.push({ a:"animal", b:"plant", type:"roost" });
+    // high water reaches the mangroves
+    if (edge[j] < .27) rel.push({ a:"plant", b:"hydro", type:"submerge" });
+    // air: CO₂ drawn down while the mangroves are in strong light
+    const cv = clamp((cc[j] - clo) / (chi - clo || 1)), lowC = isExt(cc, j, 40, -1);
+    R.atmos.push({ t:tj, x:cc[j], v:.25 + .6 * cv, S:.32 + .5 * cv, ev:lowC, evName:"CO₂ low 最低", fc });
+    if (lowC) note(j, "atmos", `CO₂ 最低 ${cc[j].toFixed(1)} ppm`, "CO₂ at its lowest", 1);
+    if (sw[j] > 250 && cc[j] < cmean[j] && !dist) rel.push({ a:"plant", b:"atmos", type:"draw" });
+    // earthquakes: a far rupture runs through every layer
+    let qk = null; while (qi < quakes.length && quakes[qi].t < tj + STEP){ if (quakes[qi].t >= tj && (!qk || quakes[qi].mag > qk.mag)) qk = quakes[qi]; qi++; }
+    if (qk){ R.litho.push({ t:tj, x:qk.mag, v:clamp((qk.mag - 4) / 3), S:clamp(.1 + .8 * qk.km / 2500), ev:true, evName:`M${qk.mag.toFixed(1)}`, mag:qk.mag, place:qk.place, km:qk.km, fc }); rel.push({ type:"jolt" }); note(j, "litho", `M${qk.mag.toFixed(1)} · ${qk.km} km`, qk.place.replace(/^.* of /, "") || "Earthquake", 4); }
+    else R.litho.push({ t:tj, x:0, v:0, S:.5, blank:true, ev:false, fc });
+    REL[j] = rel; if (dist) REL[j] = rel.filter(r => r.type === "jolt");
+  }
+  if (feedOpen >= 0 && L - feedOpen >= 3) note(feedOpen, "animal", "觅食窗口", "Feeding window opens", 3);
+  note(nowIdx, "now", `此刻 ${hm(t[nowIdx])}`, "Now", 5);
+  for (const o of seen) if (o.t >= t[0] && o.t <= t[L - 1]) note(Math.floor((o.t - t[0]) / STEP), "animal", "记录到琵鹭", "Spoonbills recorded (iNaturalist)", 3);
+  for (const k of Object.keys(R)) SCORE.mudflat[k] = { t, x:Float64Array.from(R[k], r => r.x), rows:R[k], step:STEP };
+  MUD = { t, nowIdx, REL, ANN:ANN.sort((a, b) => b.pr - a.pr), MID, FEED, DIST, p, seen }; }
+
+/* ---------- agents ---------- */
+const AG = [
+  { key:"atmos", zh:"大气", sph:"大气圈", en:"Air · CO₂", period:YR, unit:"ppm", f:co2, rule:"resid", oct:0, dz:"CO₂", dfmt:v => `${v >= 0 ? "+" : ""}${v.toFixed(2)} ppm` },
+  { key:"plant", zh:"红树林", sph:"生物圈", en:"Mangroves · Kandelia", period:D, unit:"W/m²", f:light, rule:"low", oct:1, dz:"light 日照", dfmt:v => `${v >= 0 ? "+" : ""}${v.toFixed(0)} W/m²` },
+  { key:"animal", zh:"黑脸琵鹭", sph:"生物圈", en:"Spoonbills · black-faced", period:YR, unit:"index", f:spoon, rule:"arrival", oct:1, dz:"index 越冬指数", dfmt:v => `${v >= 0 ? "+" : ""}${v.toFixed(1)}` },
+  { key:"hydro", zh:"潮汐", sph:"水圈", en:"Tide · Cotai", period:12.4206 * H, unit:"m", f:tide, rule:"spring", oct:0, dz:"level 潮位", dfmt:v => `${v >= 0 ? "+" : ""}${(v * 100).toFixed(0)} cm` },
+  { key:"litho", zh:"地震", sph:"岩石圈", en:"Earthquakes", period:null, unit:"M", kind:"event", oct:-1, dz:"magnitude 震级", dfmt:null },
+  { key:"tech", zh:"仪器", sph:"技术圈", en:"Instruments", period:1000, unit:"jitter", kind:"live", oct:2, dz:"jitter 抖动", dfmt:v => `${v >= 0 ? "+" : ""}${v.toFixed(2)}` },
+  { key:"human", zh:"观众", sph:"人类", en:"Visitors", period:null, unit:"tempo", kind:"human", oct:1, dz:"", dfmt:null },
+];
+const AK = Object.fromEntries(AG.map(a => [a.key, a]));
+const ORDER = AG.map(a => a.key);
+
+
+const S = { k:24, L:480, ZW:24, mode:"mudflat" };
+const SEL = 4; let N = 0; const CEN = {};
+function layout(){ N = 2 * SEL + ORDER.length * S.ZW; ORDER.forEach((k, z) => CEN[k] = SEL + (z + .5) * S.ZW); }
+const AMP = () => 0.95 * S.ZW;
+const CUSTOM = {};
+const valOf = (a, t) => a.f(t);
+const eventsOf = () => QUAKES;
+/* ---------- stages 1–3: the score ---------- */
+function movAvg(x, w){ const n = x.length, o = new Float64Array(n), p = new Float64Array(n + 1); for (let i = 0; i < n; i++) p[i + 1] = p[i] + x[i]; const h = Math.floor(w / 2); for (let i = 0; i < n; i++){ const a = Math.max(0, i - h), b = Math.min(n, i + h + 1); o[i] = (p[b] - p[a]) / (b - a); } return o; }
+function decompose(x, P){ const n = x.length, trend = movAvg(x, P >= 2 ? P : Math.max(5, Math.round(n / 12))), seas = new Float64Array(n);
+  if (P >= 2){ const s = new Float64Array(P), c = new Float64Array(P); for (let i = 0; i < n; i++){ s[i % P] += x[i] - trend[i]; c[i % P]++; } let m = 0; for (let p = 0; p < P; p++){ s[p] /= c[p] || 1; m += s[p]; } m /= P; for (let i = 0; i < n; i++) seas[i] = s[i % P] - m; }
+  const res = new Float64Array(n); for (let i = 0; i < n; i++) res[i] = x[i] - trend[i] - seas[i]; return { trend, seas, res }; }
+const SCORE = { intrinsic:{}, common:{}, mudflat:{} };
+function buildAgent(a){
+  if (a.kind === "live" || a.kind === "human") return;
+  if (a.kind === "event") return buildEvents(a);
+  for (const mode of ["intrinsic","common"]){
+    const L = S.L, step = mode === "common" ? H : a.period / S.k, t = new Float64Array(L), x = new Float64Array(L);
+    for (let j = 0; j < L; j++){ t[j] = NOW - (L - 1 - j) * step; x[j] = valOf(a, t[j]); }
+    const P = mode === "intrinsic" ? S.k : (a.period / H <= L / 2 ? Math.round(a.period / H) : 0);
+    const { trend, seas, res } = decompose(x, P);
+    if (mode === "intrinsic"){ const lo = quant(x, .02); let hi = quant(x, .98); if (hi - lo < 1e-9) hi = lo + 1;
+      let tlo = quant(trend, .02), thi = quant(trend, .98); const span = hi - lo; if (thi - tlo < .25 * span){ const m = (thi + tlo) / 2; tlo = m - .125 * span; thi = m + .125 * span; }
+      a.norm = { lo, hi, tlo, thi, amp: quant(Array.from(seas, Math.abs), .98), rsd: std(res), q90: quant(x, .9) }; }
+    const nm = a.norm, rows = []; let lastEv = -99;
+    for (let j = 0; j < L; j++){
+      const v = clamp((x[j] - nm.lo) / (nm.hi - nm.lo)), Sh = nm.amp > 1e-12 ? clamp(.5 + seas[j] / (2 * nm.amp)) : .5, Th = clamp((trend[j] - nm.tlo) / (nm.thi - nm.tlo));
+      let ev = false, evName = "";
+      if (a.rule === "resid" && Math.abs(res[j]) > 2.6 * nm.rsd){ ev = true; evName = "anomaly 异常"; }
+      if (a.rule === "low" && res[j] < -2.2 * nm.rsd && x[j] > 0){ ev = true; evName = "cloud 阴云"; }
+      if (a.rule === "arrival" && j > 0 && presence(t[j - 1]) < .5 && presence(t[j]) >= .5){ ev = true; evName = "arrival 抵达"; }
+      if (a.rule === "spring" && j > 0 && j < L - 1 && x[j] >= x[j - 1] && x[j] >= x[j + 1] && x[j] > nm.q90){ ev = true; evName = "spring high 大潮"; }
+      if (ev && j - lastEv < 9) ev = false; if (ev) lastEv = j;
+      rows.push({ t:t[j], x:x[j], v, S:Sh, T:Th, ev, evName });
+    }
+    SCORE[mode][a.key] = { t, x, trend, seas, res, rows, step, P };
+  }
+}
+function buildEvents(a){
+  const evs = eventsOf(a), L = S.L;
+  { const last = evs.slice(-L); while (last.length < L) last.unshift({ t: last.length ? last[0].t - 2.5 * D : NOW, mag:4.5 });
+    const t = new Float64Array(L), x = new Float64Array(L), rows = []; for (let j = 0; j < L; j++){ t[j] = last[j].t; x[j] = last[j].mag; }
+    const trend = movAvg(x, 25), res = new Float64Array(L); for (let j = 0; j < L; j++) res[j] = x[j] - trend[j];
+    let lastEv = -99;
+    for (let j = 0; j < L; j++){ const v = clamp((x[j] - 4.5) / 2.5), gap = j > 0 ? t[j] - t[j - 1] : 2.5 * D; let ev = x[j] >= 5.5; if (ev && j - lastEv < 9) ev = false; if (ev) lastEv = j;
+      rows.push({ t:t[j], x:x[j], v, S: .5 + (v - .25) * .9, T: clamp(1 - gap / (6 * D)), ev, evName:`M${x[j].toFixed(1)}`, mag:x[j] }); }
+    SCORE.intrinsic[a.key] = { t, x, trend, seas:new Float64Array(L), res, rows, step:(t[L - 1] - t[0]) / (L - 1), P:0 }; }
+  { const t = new Float64Array(L), x = new Float64Array(L), rows = []; let ei = 0; for (let j = 0; j < L; j++) t[j] = NOW - (L - 1 - j) * H;
+    for (let j = 0; j < L; j++){ let m = 0; while (ei < evs.length && evs[ei].t <= t[j]){ if (evs[ei].t > t[j] - H) m = Math.max(m, evs[ei].mag); ei++; } x[j] = m; const has = m > 0, v = has ? clamp((m - 4.5) / 2.5) : 0;
+      rows.push({ t:t[j], x:m, v, S: has ? .5 + (v - .25) * .9 : .5, T:.2, ev:has, evName: has ? `M${m.toFixed(1)}` : "", mag:m }); }
+    const trend = movAvg(x, 25), res = new Float64Array(L); for (let j = 0; j < L; j++) res[j] = x[j] - trend[j];
+    SCORE.common[a.key] = { t, x, trend, seas:new Float64Array(L), res, rows, step:H, P:0 }; }
+}
+function buildAll(){ layout(); AG.forEach(buildAgent); buildMudflat(); }
+buildAll();
+
+/* ---------- live device ---------- */
+const frames = []; let lastF = performance.now();
+(function fr(t){ frames.push(t - lastF); lastF = t; if (frames.length > 48) frames.shift(); requestAnimationFrame(fr); })(lastF);
+function jitter(){ if (frames.length < 6) return .15; let m = 0; for (const f of frames) m += f; m /= frames.length; let v = 0; for (const f of frames) v += (f - m) ** 2; return clamp(Math.sqrt(v / frames.length) / 5); }
+
+/* ---------- layers: ordered by time scale, slow at the back, fast at the front, the visitor on top ---------- */
+const LAYERS = ["animal","atmos","litho","plant","hydro","tech","human"];
+const FOCUS = ["tech","hydro","plant","litho","atmos","animal","human"];
+const YARN = {
+  atmos:{ en:"Wool, grey-blue", zh:"灰蓝羊毛", float:4, hi:.22, fuzz:.55, slub:0, metal:0, w:.8 },
+  plant:{ en:"Ramie, weld yellow-green", zh:"木樨草黄绿苎麻", float:3, hi:.16, fuzz:0, slub:.4, metal:0, w:.7 },
+  animal:{ en:"Mohair, undyed", zh:"本白马海毛", float:5, hi:.18, fuzz:1, slub:.1, metal:0, w:.84 },
+  hydro:{ en:"Silk, indigo-teal", zh:"靛青丝", float:8, hi:.6, fuzz:0, slub:0, metal:0, w:.64 },
+  litho:{ en:"Cotton cord, walnut-rust", zh:"胡桃铁锈棉绳", float:3, hi:.14, fuzz:0, slub:.25, metal:0, w:.92 },
+  tech:{ en:"Metallic thread, silver", zh:"银色金属线", float:10, hi:.9, fuzz:0, slub:0, metal:1, w:.42 },
+  human:{ en:"Wool, madder red", zh:"茜草红羊毛", float:6, hi:.28, fuzz:.3, slub:0, metal:0, w:.86 } };
+const LOFF = { atmos:[0,0], plant:[2,1], animal:[1,3], hydro:[3,2], litho:[2,0], tech:[1,1], human:[0,2] };
+const BAYER = [0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5].map(v => (v + .5) / 16);
+const sat = (i, j, n) => (((i * 3 - j) % 8) + 8) % 8 < n;
+const INDIGO = ["#101A33", "#16264A", "#1D335F", "#264377", "#30548E"];
+const MADDER = [210, 78, 53];
+const rgb = hex => { const n = parseInt(hex.slice(1), 16); return [n >> 16, n >> 8 & 255, n & 255]; };
+const mix = (a, b, k) => [a[0] * (1 - k) + b[0] * k, a[1] * (1 - k) + b[1] * k, a[2] * (1 - k) + b[2] * k];
+const str = c => `rgb(${c[0] | 0},${c[1] | 0},${c[2] | 0})`;
+const stra = (c, a) => `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a})`;
+const LC = Object.fromEntries(ORDER.map(k => [k, rgb(css("--a-" + k))]));
+const WARP = [224, 211, 180];
+const nameOf = k => AK[k].en.split(" · ")[0];
+
+/* ---------- weaving state ---------- */
+let picks = [], rowCov = [], rowTop = [], rowSt = [], clothMode = "intrinsic";
+const HUM = { last:0, gap:2000, val:.5, presses:0 };
+function getRow(k, j){ if (j < 0 || j >= picks.length) return null; if (k === "tech") return picks[j].tech; if (k === "human") return picks[j].human; const base = SCORE[clothMode][k] && SCORE[clothMode][k].rows[j]; if (!base) return null; if (k === "plant" || k === "atmos"){ const over = fieldOverlay(k, j, base); if (over) return over; const live = usbOverlay(k, j, base); if (live) return live; } return base; }
+const bandX = r => SEL + 2 + clamp(r.S) * (N - 2 * SEL - 4);
+function density(k, j){ const r = getRow(k, j), d = new Float32Array(N); if (!r || r.blank) return d;
+  const c = bandX(r), w = k === "human" ? 3 + 5 * r.v : 2.4 + 9 * r.v;
+  for (let i = SEL; i < N - SEL; i++){ const x = i - c; d[i] = Math.exp(-(x * x) / (2 * w * w)) * (.62 + .38 * r.v); }
+  for (let dj = -4; dj <= 4; dj++){ const e = getRow(k, j + dj); if (!e || !e.ev || e.blank) continue; const ex = bandX(e);
+    for (let i = SEL; i < N - SEL; i++){ const q = Math.abs(i - ex) * .55 + Math.abs(dj); if (q >= 2.6 && q <= 3.6) d[i] = 1; else if (q < 2.6) d[i] = Math.min(d[i], .15); } }
+  return d; }
+function computeRow(j){ const cov = {}, den = {};
+  LAYERS.forEach(k => { const d = density(k, j), o = LOFF[k], c = new Uint8Array(N); for (let i = SEL; i < N - SEL; i++){ const dv = d[i]; c[i] = dv > .5 ? 1 : dv > .16 && dv > BAYER[((i + o[0]) & 3) + 4 * ((j + o[1]) & 3)] * .5 ? 1 : 0; } cov[k] = c; den[k] = d; });
+  const top = new Int8Array(N).fill(-1), st = [];
+  for (let i = 0; i < N; i++){ for (let q = LAYERS.length - 1; q >= 0; q--) if (cov[LAYERS[q]][i]){ top[i] = q; break; }
+    if (clothMode !== "mudflat" && i >= SEL && i < N - SEL && (i + 2 * j) % 4 === 0){ let a = -1, b = -1; for (let q = 0; q < 6; q++) if (den[LAYERS[q]][i] > .58){ if (b < 0) b = q; a = q; } if (a >= 0 && b >= 0 && a !== b) st.push({ i, a, b }); }
+    if (cov.human[i] && i % 5 === 0) st.push({ i, a:6, b:-1 }); }
+  if (clothMode === "mudflat" && MUD) for (const r of MUD.REL[j] || []){
+    if (r.type === "jolt"){ for (let i = SEL + 3; i < N - SEL; i += 6) for (let q = 0; q < 5; q++) st.push({ i, a:q, b:q + 1 }); continue; }
+    const a = LAYERS.indexOf(r.a), b = LAYERS.indexOf(r.b); let n = 0;
+    for (let i = SEL; i < N - SEL; i++) if ((i + 2 * j) % 3 === 0 && den[r.a][i] > .28 && den[r.b][i] > .28){ st.push({ i, a, b }); n++; }
+    if (!n && j % 2 === 0){ const ra = getRow(r.a, j), rb = getRow(r.b, j); if (ra && rb) st.push({ i:Math.round((bandX(ra) + bandX(rb)) / 2), a, b }); } }
+  rowCov[j] = cov; rowTop[j] = top; rowSt[j] = st; }
+function weftOf(j){ const vs = ["atmos","plant","animal","hydro","litho","tech"].map(k => getRow(k, j)).filter(r => r && !r.blank && Number.isFinite(r.v)).map(r => r.v); const c = vs.reduce((a, b) => a + b, 0) / (vs.length || 1); const p = picks[j], prev = picks[j - 1]; p.cs = prev && prev.cs !== undefined ? prev.cs * .78 + c * .22 : c; return clamp(Math.floor((p.cs - .22) / .09), 0, 4); }
+
+/* ---------- buffers: a detailed composite for the front, one sheet per layer ---------- */
+const C = 10, R = 200, CT = 4;
+const ring = document.createElement("canvas"), ringx = ring.getContext("2d"), sheetBuf = [], sheetBx = [];
+function yarn(x, k, X0, len, y, j){ const Y = YARN[k], c0 = LC[k].slice(); if (k === "atmos"){ const r = getRow(k, j); if (r && Number.isFinite(r.fieldTone)){ const warm = [186, 164, 142], cool = [132, 156, 176], tgt = r.fieldTone >= .5 ? warm : cool, kk = Math.abs(r.fieldTone - .5) * .22; for (let i = 0; i < 3; i++) c0[i] = c0[i] * (1 - kk) + tgt[i] * kk; } } const v = .9 + .16 * hash(X0 * .37 + j * 1.7 + k.length); const c = c0.map(z => Math.min(255, z * v)), Wd = len * C, th = C * Y.w, y0 = y + (C - th) / 2;
+  x.fillStyle = "rgba(0,0,0,.42)"; x.fillRect(X0 + 1.6, y0 + 1.8, Wd - .4, th);
+  if (Y.fuzz){ x.fillStyle = stra(mix(c, [255, 255, 255], .2), .22 * Y.fuzz); x.fillRect(X0 - .8, y0 - 1.3, Wd + 1.6, th + 2.6); }
+  x.fillStyle = str(mix(c, [0, 0, 0], .45)); x.fillRect(X0 + .5, y0, Wd - 1, th);
+  if (Y.slub){ for (let q = 0; q < len; q++){ const s = 1 + Y.slub * (hash(X0 + q * 9.1 + j * 2.3) - .5); x.fillStyle = str(c); x.fillRect(X0 + q * C + .6, y0 + th * (.5 - .36 * s), C - .2, th * .72 * s); } }
+  else { x.fillStyle = str(c); x.fillRect(X0 + .9, y0 + th * .14, Wd - 1.8, th * .72); }
+  x.fillStyle = stra(mix(c, [255, 255, 255], .7), Y.hi); x.fillRect(X0 + 1.4, y0 + th * .24, Wd - 2.8, Math.max(.8, th * .16));
+  if (Y.metal && hash(X0 * 1.3 + j) > .7){ x.fillStyle = "rgba(255,255,255,.9)"; x.fillRect(X0 + Wd * hash(j + X0), y0 + th * .2, 1.4, 1.4); }
+  x.fillStyle = "rgba(0,0,0,.35)"; x.fillRect(X0 + Wd - 1.1, y0, 1.1, th); }
+function groundCell(x, i, j, X, y, wc, bar){ const sel = i < SEL || i >= N - SEL, upg = sel ? (i + j) % 2 === 0 : (bar ? (i + j) % 2 === 0 : sat(i, j, 1));
+  if (upg){ const wr = sel ? WARP : mix(WARP, wc, .74); x.fillStyle = str(mix(wr, [0, 0, 0], .45)); x.fillRect(X, y, C, C); x.fillStyle = str(wr); x.fillRect(X + 1.6, y, C - 3.2, C); }
+  else { x.fillStyle = str(mix(wc, [0, 0, 0], .5)); x.fillRect(X, y, C, C); x.fillStyle = str(bar ? mix(wc, [0, 0, 0], .25) : wc); x.fillRect(X, y + 1.6, C, C - 3.2); x.fillStyle = str(mix(wc, [255, 255, 255], .14)); x.fillRect(X, y + 3.6, C, 1.3); } }
+function runs(c, fl, fn){ let i = SEL; while (i < N - SEL){ if (!c[i]){ i++; continue; } let e = i; while (e < N - SEL && c[e] && e - i < fl) e++; fn(i, e - i); i = e; } }
+function stitchMark(x, s, X, y){ const Y = y + C / 2; if (s.b < 0){ x.fillStyle = "rgba(0,0,0,.5)"; x.fillRect(X - 1.6, y - 1, 3.6, C + 2); x.fillStyle = str(MADDER); x.fillRect(X - 1.2, y - 1, 2.4, C + 2); return; }
+  const ca = LC[LAYERS[s.a]], cb = LC[LAYERS[s.b]]; x.lineCap = "round"; x.lineWidth = 3.2; x.strokeStyle = "rgba(0,0,0,.55)"; x.beginPath(); x.moveTo(X - 3.4, Y - 3.4); x.lineTo(X + 3.4, Y + 3.4); x.moveTo(X + 3.4, Y - 3.4); x.lineTo(X - 3.4, Y + 3.4); x.stroke();
+  x.lineWidth = 2; x.strokeStyle = str(cb); x.beginPath(); x.moveTo(X - 3, Y - 3); x.lineTo(X + 3, Y + 3); x.stroke(); x.strokeStyle = str(ca); x.beginPath(); x.moveTo(X + 3, Y - 3); x.lineTo(X - 3, Y + 3); x.stroke(); }
+function paintRow(j){ computeRow(j); const p = picks[j]; p.weft = weftOf(j);
+  const mud = clothMode === "mudflat" && MUD, fc = mud && j > MUD.nowIdx, wc = rgb(INDIGO[p.weft]).map(v => v * (.94 + .1 * hash(j * 3.3))), bar = mud ? !!(MUD.MID[j] || MUD.MID[j - 1]) : j > 0 && (j % S.k === 0 || j % S.k === 1), cov = rowCov[j], y = (j % R) * C, x = ringx;
+  for (let i = 0; i < N; i++) groundCell(x, i, j, i * C, y, wc, bar);
+  LAYERS.forEach(k => { const miss = k === "atmos" && fieldRowMissing(j); x.globalAlpha = (fc ? .42 : 1) * (miss ? .38 : 1); runs(cov[k], YARN[k].float, (i, n) => yarn(x, k, i * C, n, y, j)); });
+  x.globalAlpha = fc ? .42 : 1; for (const s of rowSt[j]) stitchMark(x, s, s.i * C + C / 2, y); x.globalAlpha = 1;
+  const yy = (j % R) * CT;
+  for (let q = 0; q <= LAYERS.length; q++){ const sx = sheetBx[q]; sx.clearRect(0, yy, N * CT, CT);
+    if (q === 0){ for (let i = 0; i < N; i++){ const g = i < SEL || i >= N - SEL ? WARP : mix(wc, WARP, sat(i, j, 1) ? .4 : .05); sx.fillStyle = str(bar ? mix(g, [0, 0, 0], .2) : g); sx.fillRect(i * CT, yy, CT, CT); } continue; }
+    const k = LAYERS[q - 1], c = cov[k], col = LC[k], miss = k === "atmos" && fieldRowMissing(j); sx.globalAlpha = miss ? .38 : 1; sx.fillStyle = stra(col, .07); sx.fillRect(SEL * CT, yy, (N - 2 * SEL) * CT, CT);
+    for (let i = SEL; i < N - SEL; i++){ if (!c[i]) continue; const v = .86 + .22 * hash(i * 1.7 + j * .9 + q); sx.fillStyle = str(col.map(z => Math.min(255, z * v))); sx.fillRect(i * CT, yy + .5, CT, CT - 1); } sx.globalAlpha = 1; }
+  sheetsKey = ""; }
+function resetBuffers(){ ring.width = N * C; ring.height = R * C; for (let q = 0; q <= LAYERS.length; q++){ if (!sheetBuf[q]){ sheetBuf[q] = document.createElement("canvas"); sheetBx[q] = sheetBuf[q].getContext("2d"); } sheetBuf[q].width = N * CT; sheetBuf[q].height = R * CT; } }
+function addPick(press, prefill, hold){ if (picks.length >= S.L) newBolt(); const j = picks.length; picks.push(mkPick(press, prefill, hold)); for (let q = Math.max(0, j - 4); q <= j; q++) paintRow(q); return j; }
+function mkPick(press, prefill, hold){ const j = picks.length, real = Date.now();
+  const human = press ? { v:clamp(.3 + (hold || 0) / 1400, .3, 1), S:clamp(.15 + .7 * hash(HUM.presses * 3.7 + 1)), T:.3, ev:false, blank:false, t:real } : { blank:true, v:0, S:.5, T:.3, ev:false, t:real };
+  const jt = prefill ? .1 + .3 * hash(j * 3.1) : jitter(); const tech = { v:jt, S:clamp(.5 + .45 * Math.sin(TAU * j / S.k + jt * 2)), T:.3, ev: jt > .85, evName:"spike 尖峰", t:real, x:jt };
+  return { press, human, tech, real }; }
+let bolt = 1;
+function rebuildScore(){ QUAKES = mkQuakes(); buildAll(); }
+function newBolt(){ NOW = Math.floor(Date.now() / 6e4) * 6e4; rebuildScore(); bolt++; newCloth(S.mode === "mudflat" ? PAST - 96 : 0); fetchLive().then(() => { rebuildScore(); repaintAll(); }); $("bolt").textContent = `Bolt ${bolt} · 第 ${bolt} 匹`; toast(`Bolt ${bolt - 1} is complete; bolt ${bolt} begins · 第 ${bolt - 1} 匹织完，开始第 ${bolt} 匹`); }
+function newCloth(prefill){ clothMode = S.mode; picks = []; rowCov = []; rowTop = []; rowSt = []; fieldDropAnchor(); resetBuffers(); for (let n = 0; n < prefill; n++) picks.push(mkPick(false, true)); repaintAll(); }
+function repaintAll(){ for (let j = Math.max(0, picks.length - R + 2); j < picks.length; j++) paintRow(j); sheetsKey = ""; if (Math.round(sPos) >= 2) fillInfo(FOCUS[Math.round(sPos) - 2]); }
+
+/* ---------- canvas, scenes and the continuous camera ---------- */
+const cv = $("stage"), ctx = cv.getContext("2d");
+let W = 0, Hh = 0, DPR = 1;
+function resize(){ DPR = Math.min(2, devicePixelRatio || 1); const vv = window.visualViewport; W = vv ? vv.width : innerWidth; Hh = vv ? vv.height : innerHeight; cv.width = Math.round(W * DPR); cv.height = Math.round(Hh * DPR); }
+addEventListener("resize", resize); if (window.visualViewport) visualViewport.addEventListener("resize", resize); resize();
+const NSC = 2 + FOCUS.length; let sPos = 0, sGoal = 0, sVel = 0, dragging = false;
+const V = () => Math.min(150, Math.max(1, picks.length));
+function base(){ const v = V(), cs = Math.min(W * .5 / N, (Hh - 260) / 150), w = N * cs, h = v * cs; return { x:(W - w) / 2, y:Math.max(118, (Hh - 150 * cs) / 2 + 10), w, h, cs }; }
+function pose(sc, q){ const B = base();
+  if (sc === 0) return { x:B.x, y:B.y, w:B.w, h:B.h, sl:0, a:1 };
+  if (sc === 1){ const z = q === 0 ? LAYERS.length + .7 : LAYERS.length - q, sc2 = 1 / (1 + z * .13), w = B.w * .66 * sc2, h = B.h * .9 * sc2; return { x: W * .1 + z * W * .085, y: Hh * .5 - h / 2 - z * 3 - 10, w, h, sl: .16, a: 1 - z * .045 }; }
+  const m = sc - 2, fq = 1 + LAYERS.indexOf(FOCUS[m]), F = { w: B.w * 1.02, h: B.h * 1.02 }; F.x = Math.max(24, W * .43 - F.w / 2); F.y = B.y;
+  if (q === 0 || q === fq) return { x:F.x, y:F.y, w:F.w, h:F.h, sl:0, a:1, focus: q === fq };
+  const off = FOCUS.indexOf(LAYERS[q - 1]) - m; return { x: F.x + off * W * .62, y: F.y + 20, w: F.w * .86, h: F.h * .86, sl: 0, a: 0 }; }
+const lerp = (a, b, t) => a + (b - a) * t;
+function poseAt(s, q){ const a = Math.floor(clamp(s, 0, NSC - 1)), b = Math.min(NSC - 1, a + 1), t = ease(clamp(s - a)); const P = pose(a, q), Q = pose(b, q);
+  return { x:lerp(P.x, Q.x, t), y:lerp(P.y, Q.y, t), w:lerp(P.w, Q.w, t), h:lerp(P.h, Q.h, t), sl:lerp(P.sl, Q.sl, t), a:lerp(P.a, Q.a, t), focus: t < .5 ? P.focus : Q.focus }; }
+
+/* sheets: the visible rows of each layer, newest at the top */
+let sheetsKey = ""; const sheetC = [];
+function buildSheets(){ const v = V(), jNew = picks.length - 1, key = `${jNew}|${v}`; if (key === sheetsKey) return; sheetsKey = key;
+  for (let q = 0; q <= LAYERS.length; q++){ let c = sheetC[q]; if (!c) c = sheetC[q] = document.createElement("canvas"); c.width = N * CT; c.height = v * CT; const x = c.getContext("2d");
+    for (let r = 0; r < v; r++){ const jj = jNew - r; if (jj < 0) break; x.drawImage(sheetBuf[q], 0, (jj % R) * CT, N * CT, CT, 0, r * CT, N * CT, CT); } } }
+function drawSheet(q, P){ const c = sheetC[q]; if (!c || P.a < .01) return; const a = P.w / c.width, d = P.h / c.height; ctx.save(); ctx.globalAlpha = clamp(P.a); ctx.setTransform(DPR * a, DPR * a * P.sl, 0, DPR * d, DPR * P.x, DPR * P.y); ctx.imageSmoothingEnabled = true; ctx.drawImage(c, 0, 0); ctx.restore(); }
+const ptOn = (P, i, r, v) => [P.x + (i + .5) / N * P.w, P.y + (i + .5) / N * P.w * P.sl + (r + .5) / v * P.h];
+
+/* one layer drawn thread by thread, with its path, events and stitches */
+function drawFocus(k, P){ const v = V(), jNew = picks.length - 1, sx = P.w / (N * C), sy = P.h / (v * C);
+  ctx.save(); ctx.globalAlpha = clamp(P.a); ctx.setTransform(DPR * sx, 0, 0, DPR * sy, DPR * P.x, DPR * P.y);
+  for (let r = 0; r < v; r++){ const jj = jNew - r; if (jj < 0 || !rowCov[jj]) break; runs(rowCov[jj][k], YARN[k].float, (i, n) => yarn(ctx, k, i * C, n, r * C, jj)); }
+  ctx.restore();
+  // path: the band centre through every pick
+  const col = LC[k]; ctx.save(); ctx.setTransform(DPR, 0, 0, DPR, 0, 0); ctx.globalAlpha = clamp(P.a); ctx.strokeStyle = stra(mix(col, [255, 255, 255], .35), .9); ctx.lineWidth = 1.4; ctx.beginPath(); let started = false;
+  for (let r = 0; r < v; r++){ const jj = jNew - r, row = getRow(k, jj); if (!row || row.blank){ started = false; continue; } const [px, py] = ptOn(P, bandX(row), r, v); if (!started){ ctx.moveTo(px, py); started = true; } else ctx.lineTo(px, py); }
+  ctx.stroke();
+  const li = LAYERS.indexOf(k);
+  for (let r = 0; r < v; r++){ const jj = jNew - r, row = getRow(k, jj); if (!row) continue;
+    if (row.ev && !row.blank){ const [px, py] = ptOn(P, bandX(row), r, v); ctx.strokeStyle = "#F4EEDC"; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.moveTo(px, py - 7); ctx.lineTo(px + 7, py); ctx.lineTo(px, py + 7); ctx.lineTo(px - 7, py); ctx.closePath(); ctx.stroke(); }
+    for (const s of rowSt[jj] || []){ if (s.a !== li && s.b !== li) continue; const other = s.b < 0 ? "human" : LAYERS[s.a === li ? s.b : s.a]; const [px, py] = ptOn(P, s.i, r, v); ctx.fillStyle = str(LC[other]); ctx.beginPath(); ctx.arc(px, py, 2.4, 0, TAU); ctx.fill(); } }
+  ctx.restore(); }
+
+/* ---------- the front: warp from above, the fell, a shuttle of light ---------- */
+let shuttle = { t:1, dir:1, press:false };
+/* the shuttle: a wooden boat carrying the weft across the fell, madder when a visitor threw it */
+function drawShuttle(x0, y0, w, a){ if (shuttle.t >= 1 || a < .02) return; const t = ease(shuttle.t), sx = x0 + (shuttle.dir > 0 ? t : 1 - t) * w, from = shuttle.dir > 0 ? x0 : x0 + w, col = shuttle.press ? [210, 78, 53] : [201, 180, 142];
+  ctx.save(); ctx.setTransform(DPR, 0, 0, DPR, 0, 0); ctx.globalAlpha = a;
+  ctx.strokeStyle = stra(col, .9); ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(from, y0 - 9); ctx.lineTo(sx, y0 - 9); ctx.stroke();
+  const L2 = 30, h2 = 6.5; ctx.translate(sx, y0 - 9); const g = ctx.createLinearGradient(0, -h2, 0, h2); g.addColorStop(0, "#E2BE86"); g.addColorStop(1, "#7E5630"); ctx.fillStyle = g;
+  ctx.beginPath(); ctx.moveTo(-L2, 0); ctx.quadraticCurveTo(-L2 * .5, -h2, 0, -h2); ctx.quadraticCurveTo(L2 * .5, -h2, L2, 0); ctx.quadraticCurveTo(L2 * .5, h2, 0, h2); ctx.quadraticCurveTo(-L2 * .5, h2, -L2, 0); ctx.fill();
+  ctx.fillStyle = "#2A1A0C"; ctx.fillRect(-11, -2.6, 22, 5.2); ctx.fillStyle = str(col); ctx.fillRect(-9, -1.7, 18, 3.4); ctx.restore(); }
+/* the treadle: always there, pressed by the visitor's foot (or the agents' own rhythm, lightly) */
+let treadleRect = null;
+function drawTreadle(){ const cx = W / 2, y = Hh - 88, w = Math.min(260, W * .22), h = 12; treadleRect = { x: cx - w / 2 - 20, y: y - 26, w: w + 40, h: 52 };
+  const dn = holdStart ? 1 : shuttle.t < .3 ? (shuttle.press ? 1 : .35) * (1 - shuttle.t / .3) : 0, tilt = dn * .07;
+  ctx.save(); ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  ctx.strokeStyle = "rgba(201,180,142,.35)"; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(cx, y - 30 + dn * 5); ctx.lineTo(cx, y - 4 + dn * 5); ctx.stroke();
+  ctx.translate(cx - w / 2, y); ctx.rotate(tilt); const g = ctx.createLinearGradient(0, 0, 0, h); g.addColorStop(0, holdStart ? "#E2B878" : "#B98A4E"); g.addColorStop(1, "#6E4C22"); ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+  ctx.fillStyle = "rgba(0,0,0,.35)"; ctx.fillRect(0, h, w, 3); ctx.fillStyle = "#3B2616"; ctx.beginPath(); ctx.arc(0, h / 2, 4, 0, TAU); ctx.fill(); ctx.restore();
+  ctx.save(); ctx.setTransform(DPR, 0, 0, DPR, 0, 0); ctx.font = `500 10px ${css("--mono")}`; ctx.fillStyle = "#8B909C"; ctx.textAlign = "center"; ctx.fillText(holdStart ? "PRESSED · 踩下" : "TREADLE · 踏板 · SPACE", cx, y + 30); ctx.restore(); }
+function drawFront(B, a){ if (a < .01) return; const v = V(), jNew = picks.length - 1, cs = B.h / v;
+  ctx.save(); ctx.setTransform(DPR, 0, 0, DPR, 0, 0); ctx.globalAlpha = a;
+  // warp ends rising to the top of the room
+  ctx.strokeStyle = "rgba(224,211,180,.12)"; ctx.lineWidth = 1; ctx.beginPath(); for (let i = 0; i < N; i += 2){ const X = B.x + (i + .5) / N * B.w, X0 = W / 2 + (X - W / 2) * .55; ctx.moveTo(X0, 0); ctx.lineTo(X, B.y - 4); } ctx.stroke();
+  ctx.fillStyle = "rgba(201,180,142,.55)"; ctx.fillRect(B.x - 8, B.y - 4, B.w + 16, 1.5);
+  ctx.imageSmoothingEnabled = cs < C * .9;
+  for (let r = 0; r < v; r++){ const jj = jNew - r; if (jj < 0) break; ctx.drawImage(ring, 0, (jj % R) * C, N * C, C, B.x, B.y + r * cs, B.w, cs + .5); }
+  const g = ctx.createLinearGradient(B.x, B.y, B.x + B.w, B.y + B.h); g.addColorStop(0, "rgba(255,240,215,.06)"); g.addColorStop(.6, "rgba(0,0,0,0)"); g.addColorStop(1, "rgba(0,0,0,.35)"); ctx.fillStyle = g; ctx.fillRect(B.x, B.y, B.w, B.h);
+  if (clothMode === "mudflat" && MUD) drawNotes(B, v, jNew, cs);
+  if (clothMode === "mudflat") drawFieldMarkers(B, v, jNew, cs);
+  drawShuttle(B.x, B.y, B.w, 1);
+  ctx.restore(); }
+const KCOL = k => k === "now" ? "#ECE6D6" : css("--a-" + k);
+function drawNotes(B, v, jNew, cs){ const A = ctx.globalAlpha, mono = css("--mono"), sans = css("--sans"), rowY = j => B.y + (jNew - j + .5) * cs, xOf = s => B.x + (SEL + 2 + s * (N - 2 * SEL - 4) + .5) / N * B.w;
+  // the transect across the top of the cloth
+  ctx.font = `500 9.5px ${mono}`; ctx.fillStyle = "rgba(201,180,142,.75)"; ctx.textAlign = "left"; ctx.fillText("SHORE 岸 · mangroves 红树", B.x, B.y - 14); ctx.textAlign = "center"; ctx.fillText("mudflat 泥滩", xOf(.55), B.y - 14); ctx.textAlign = "right"; ctx.fillText("channel 水道 · SEA 海", B.x + B.w, B.y - 14);
+  // time down the left edge
+  ctx.textAlign = "right"; ctx.font = `500 10px ${mono}`;
+  for (let r = 0; r < v; r++){ const j = jNew - r; if (j < 0) break; const d = local(MUD.t[j]), h = d.getUTCHours(), m = d.getUTCMinutes(); if (m >= 15 || h % 6) continue; const y = rowY(j);
+    ctx.fillStyle = h === 0 ? "#C9B48E" : "#5C616C"; ctx.fillRect(B.x - 8, y, h === 0 ? 6 : 3, 1); ctx.fillText(h === 0 ? `${p2(d.getUTCMonth() + 1)}-${p2(d.getUTCDate())}` : p2(h), B.x - 12, y + 3.5); }
+  // now: a line across the cloth; above it the forecast, woven sheer
+  if (MUD.nowIdx <= jNew && MUD.nowIdx > jNew - v){ const y = rowY(MUD.nowIdx) - cs / 2; ctx.strokeStyle = "rgba(236,230,214,.8)"; ctx.setLineDash([4, 3]); ctx.beginPath(); ctx.moveTo(B.x - 6, y); ctx.lineTo(B.x + B.w + 6, y); ctx.stroke(); ctx.setLineDash([]);
+    ctx.font = `500 9.5px ${mono}`; ctx.textAlign = "left"; const lw = ctx.measureText("FORECAST 预报 ↑").width + 10; ctx.fillStyle = "rgba(11,13,17,.82)"; ctx.fillRect(B.x + 4, y - 15, lw, 13); ctx.fillStyle = "#ECE6D6"; ctx.fillText("FORECAST 预报 ↑", B.x + 9, y - 5); }
+  // notes on the right selvedge, most important first, never overlapping
+  const placed = [], right = B.x + B.w + 14;
+  for (const n of MUD.ANN){ if (n.j > jNew || n.j <= jNew - v) continue; const y = rowY(n.j); if (placed.some(p => Math.abs(p - y) < 25)) continue; placed.push(y);
+    const col = KCOL(n.k), fc = n.j > MUD.nowIdx; ctx.globalAlpha = A * (fc ? .6 : 1); ctx.fillStyle = col; ctx.fillRect(B.x + B.w + 2, y - .5, 8, 1); ctx.beginPath(); ctx.arc(B.x + B.w + 2, y, 2.2, 0, TAU); ctx.fill();
+    ctx.textAlign = "left"; ctx.font = `500 10.5px ${mono}`; ctx.fillStyle = "#ECE6D6"; ctx.fillText(`${hm(MUD.t[n.j])}  ${n.zh}`, right, y + 1); ctx.font = `400 10.5px ${sans}`; ctx.fillStyle = "#8B909C"; ctx.fillText(n.en, right, y + 13); ctx.globalAlpha = A; }
+  // what the warp still holds: the next things to happen
+  const next = MUD.ANN.filter(n => n.j > jNew && n.k !== "now").sort((a, b) => a.j - b.j).slice(0, 3);
+  ctx.textAlign = "left"; next.forEach((n, i) => { const y = B.y - 34 - i * 15; ctx.globalAlpha = A * (.9 - i * .25); ctx.fillStyle = KCOL(n.k); ctx.beginPath(); ctx.arc(right - 6, y - 3.5, 2.2, 0, TAU); ctx.fill(); ctx.font = `500 10px ${mono}`; ctx.fillStyle = "#C9B48E"; ctx.fillText(`${i ? "" : "NEXT 将至  "}${hm(MUD.t[n.j])} ${n.zh}`, right, y); });
+  ctx.globalAlpha = A; }
+
+/* ---------- labels for the layered view ---------- */
+function drawLayerLabels(w1){ if (w1 < .02) return; ctx.save(); ctx.setTransform(DPR, 0, 0, DPR, 0, 0); ctx.globalAlpha = w1;
+  const Pf = poseAt(sPos, LAYERS.length), Pb = poseAt(sPos, 0); const y0 = Math.max(Pf.y + Pf.h + Pf.w * Pf.sl, Pb.y + Pb.h + Pb.w * Pb.sl) + 22;
+  ctx.strokeStyle = "rgba(201,180,142,.55)"; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(Pf.x, y0); ctx.lineTo(Pb.x + Pb.w, y0); ctx.lineTo(Pb.x + Pb.w - 8, y0 - 4); ctx.moveTo(Pb.x + Pb.w, y0); ctx.lineTo(Pb.x + Pb.w - 8, y0 + 4); ctx.stroke();
+  ctx.font = `500 10.5px ${css("--mono")}`; ctx.fillStyle = "#C9B48E"; ctx.textAlign = "right"; ctx.fillText("TIME SCALE · 时间尺度  →  ONE PICK HOLDS LONGER", Pb.x + Pb.w, y0 + 18);
+  ctx.textAlign = "left";
+  for (let q = 1; q <= LAYERS.length; q++){ const k = LAYERS[q - 1], P = poseAt(sPos, q), lx = P.x, ly = P.y - 10; const b = beatLabel(k);
+    ctx.fillStyle = css("--a-" + k); ctx.beginPath(); ctx.arc(lx + 4, ly - 3, 3, 0, TAU); ctx.fill(); ctx.font = `600 11.5px ${css("--sans")}`; ctx.fillStyle = "#ECE6D6"; ctx.fillText(nameOf(k), lx + 12, ly);
+    ctx.font = `500 10px ${css("--mono")}`; ctx.fillStyle = "#8B909C"; ctx.fillText(b, lx + 12, ly + 13); }
+  ctx.restore(); }
+function beatMs(k){ const a = AK[k]; if (k === "human") return null; if (clothMode === "mudflat") return STEP; if (clothMode === "common" && k !== "tech") return H; if (a.kind === "event"){ const t = SCORE.intrinsic.litho.t; return (t[t.length - 1] - t[0]) / (t.length - 1); } return a.period / S.k; }
+const beatLabel = k => k === "human" ? "1 pick = 1 press" : `1 pick = ${fmtDur(beatMs(k)).en}`;
+
+/* ---------- frame ---------- */
+let tPrev = performance.now(), lastAuto = 0, autoOn = !matchMedia("(prefers-reduced-motion: reduce)").matches, lastPress = 0;
+function frame(t){ requestAnimationFrame(frame); const dt = Math.min(.05, (t - tPrev) / 1000); tPrev = t;
+  if (FIELD.playing && S.mode === "mudflat") fieldAdvance(dt);
+  if (autoOn && !fieldHoldsCloth() && t - lastAuto > 1100 && t - lastPress > 2500){ lastAuto = t; weave(false); }
+  if (!dragging){ const k = 1 - Math.exp(-dt * 9); sPos += (sGoal - sPos) * k; if (Math.abs(sGoal - sPos) < .0005) sPos = sGoal; }
+  if (shuttle.t < 1) shuttle.t = Math.min(1, shuttle.t + dt * 1.9);
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.fillStyle = "#0B0D11"; ctx.fillRect(0, 0, cv.width, cv.height);
+  buildSheets(); const B = base(); const wFront = clamp(1 - sPos / .45), w1 = clamp(1 - Math.abs(sPos - 1) * 1.6);
+  // sheets: back to front while layered, ground → others → focus when looking at one layer
+  const order = []; for (let q = 0; q <= LAYERS.length; q++) order.push(q);
+  if (sPos > 1.5){ const m = Math.round(sPos) - 2, fq = 1 + LAYERS.indexOf(FOCUS[clamp(m, 0, FOCUS.length - 1)]); order.sort((a, b) => (a === 0 ? -2 : a === fq ? 1 : 0) - (b === 0 ? -2 : b === fq ? 1 : 0)); }
+  if (wFront < 1){ const sheetsAlpha = 1 - wFront; for (const q of order){ const P = poseAt(sPos, q); P.a *= q === 0 && sPos < 1.5 ? sheetsAlpha * .95 : sheetsAlpha; const k = LAYERS[q - 1];
+      if (sPos > 1.2 && q > 0 && P.sl < .02 && P.a > .02 && P.x < W && P.x + P.w > 0) drawFocus(k, P); else drawSheet(q, P); }
+    drawThreads(clamp(1 - Math.abs(sPos - 1) * 2)); }
+  drawFront(B, wFront); drawLayerLabels(w1);
+  if (sPos > 1.5){ const m = clamp(Math.round(sPos) - 2, 0, FOCUS.length - 1), P = poseAt(sPos, 1 + LAYERS.indexOf(FOCUS[m])); drawShuttle(P.x, P.y, P.w, clamp(P.a)); }
+  drawTreadle();
+  updateChrome(); drawPulses(dt); }
+function drawThreads(a){ if (a < .02) return; const v = V(), jNew = picks.length - 1, step = Math.max(1, Math.round(v / 70)); ctx.save(); ctx.setTransform(DPR, 0, 0, DPR, 0, 0); ctx.lineCap = "round";
+  const P = []; for (let q = 0; q <= LAYERS.length; q++) P[q] = poseAt(sPos, q);
+  for (let r = 0; r < v; r += step){ const st = rowSt[jNew - r]; if (!st) continue;
+    for (const s of st){ if (s.b < 0){ ctx.strokeStyle = `rgba(210,78,53,${.8 * a})`; ctx.lineWidth = 1.2; ctx.beginPath(); for (let q = LAYERS.length; q >= 0; q--){ const [px, py] = ptOn(P[q], s.i, r, v); q === LAYERS.length ? ctx.moveTo(px, py) : ctx.lineTo(px, py); } ctx.stroke(); continue; }
+      const c = LC[LAYERS[s.a]], [x1, y1] = ptOn(P[s.a + 1], s.i, r, v), [x2, y2] = ptOn(P[s.b + 1], s.i, r, v); ctx.strokeStyle = `rgba(${c[0]},${c[1]},${c[2]},${.55 * a})`; ctx.lineWidth = .8; ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); } }
+  ctx.restore(); }
+
+/* ---------- chrome follows the camera continuously ---------- */
+const navEl = $("nav");
+navEl.innerHTML = `<button type="button" class="sq" data-s="0" aria-label="Front"></button><button type="button" class="sq" data-s="1" aria-label="Layers"></button><span class="sep"></span>` + FOCUS.map((k, m) => `<button type="button" data-s="${m + 2}" style="--c:${css("--a-" + k)}" aria-label="${nameOf(k)}"></button>`).join("");
+navEl.querySelectorAll("button").forEach(b => b.addEventListener("click", () => go(+b.dataset.s)));
+let shownScene = -1;
+function sceneText(sc){ if (sc === 0) return clothMode === "mudflat" ? ["Front · 正面 · Cotai mudflat 路氹泥滩", "One mudflat, seven layers"] : ["Front · 正面", "Seven layers, one warp"]; if (sc === 1) return ["Layers by time scale · 按时间尺度分层", "Pulled apart: fast at the front, slow at the back"]; const k = FOCUS[sc - 2]; return [`Layer ${sc - 1} / 7 · 第 ${sc - 1} 层`, `${nameOf(k)} · ${AK[k].zh}`]; }
+function updateChrome(){ const sc = Math.round(sPos), d = Math.abs(sPos - sc);
+  if (sc !== shownScene){ shownScene = sc; const [a, b] = sceneText(sc); $("tSmall").textContent = a; $("tBig").textContent = b; navEl.querySelectorAll("button").forEach(x => x.setAttribute("aria-current", String(+x.dataset.s === sc))); if (sc >= 2) fillInfo(FOCUS[sc - 2]); }
+  $("title").style.opacity = String(clamp(1 - d * 2.4));
+  $("lede").style.opacity = String(clamp(1 - sPos * 2)); $("lede").style.transform = `translateX(${-sPos * 40}px)`;
+  const wi = sPos < 1.5 ? 0 : clamp(1 - d * 2.6); const info = $("info"); info.style.opacity = String(wi); info.style.transform = innerWidth > 900 ? `translate(${(1 - wi) * 30}px,-50%)` : `translateY(${(1 - wi) * 20}px)`; info.classList.toggle("on", wi > .5);
+  $("hint").style.opacity = String(sPos > NSC - 1.5 ? 0 : .8); $("hint").textContent = sPos < .5 ? "← swipe to separate the layers · 滑动分层" : sPos < 1.5 ? "← swipe to read one layer · 滑动看单层" : "← → swipe through the layers · 滑动切换"; }
+function go(s){ sGoal = clamp(Math.round(s), 0, NSC - 1); }
+
+/* ---------- one layer: its data, live ---------- */
+const SOURCE = k => clothMode !== "mudflat" ? "model 模型" : ({ hydro: SRC.hydro === "live" ? "Open-Meteo Marine, sea level incl. tide · live" : "harmonic tide model · 调和模型", plant: SRC.plant === "live" ? "Open-Meteo shortwave radiation · live" : "solar model · 日照模型", atmos: SRC.atmos === "live" ? "Open-Meteo / CAMS CO₂ near surface · live" : "CO₂ model · 模型", litho: SRC.litho === "live" ? "USGS, M≥4 within 2,500 km · live" : "modelled quakes · 模拟", animal: SRC.animal === "record" ? "season + iNaturalist records" : "wintering season model · 季节模型", tech:"this device · 本机", human:"treadle · 踏板" })[k];
+
+function fillInfo(k){ const a = AK[k], y = YARN[k]; $("info").style.setProperty("--c", css("--a-" + k));
+  $("iName").innerHTML = `<i></i><b>${nameOf(k)}</b><span class="en">${a.zh}</span>`; $("iYarn").textContent = `${y.en} · ${y.zh}`;
+  const per = a.period ? fmtDur(a.period) : null;
+  $("iKv").innerHTML = `<dt>Rhythm 节奏</dt><dd>${a.kind === "event" ? "event 事件" : a.kind === "human" ? "your presses 踩踏" : a.kind === "live" ? "live 实时" : "cycle 周期"}</dd><dt>Own period 自身周期</dt><dd>${per ? per.en : "—"}</dd><dt>One pick holds 一纬</dt><dd>${beatLabel(k).replace("1 pick = ", "")}</dd><dt>Source 来源</dt><dd>${SOURCE(k)}</dd>${k === "animal" && MUD && clothMode === "mudflat" ? `<dt>Last record 最近记录</dt><dd>${MUD.seen.length ? fmtTime(MUD.seen[0].t, D) : "none in 45 days"}</dd>` : ""}<dt>Layer depth 层位</dt><dd>${LAYERS.length - LAYERS.indexOf(k)} of 7 from front</dd><dt>Float 浮线</dt><dd>${y.float} ends</dd>`;
+  $("iVoice").textContent = recs[k] ? "Voice: your recording · 录音" : "Voice: synthesized · 合成声"; liveInfo(); }
+function liveInfo(){ const sc = Math.round(sPos); if (sc < 2) return; const k = FOCUS[sc - 2], a = AK[k], jVis = picks.length - 1, j = (fieldEngaged() && (k === "plant" || k === "atmos")) ? FIELD.playJ : jVis, r = getRow(k, j); if (!r) return;
+  let val, tm; if (r.liveUsb && k === "plant"){ val = Number.isFinite(r.lightRaw) ? String(Math.round(r.lightRaw)) : "—"; tm = "USB · relative light reading · 相对光线"; }
+  else if (r.liveUsb && k === "atmos"){ val = Number.isFinite(r.tempC) ? `${r.tempC.toFixed(2)} °C` : "—"; tm = "USB · local temperature at sampling point · 采样点温度"; }
+  else if (r.field && k === "plant"){ val = Number.isFinite(r.lightRaw) ? String(Math.round(r.lightRaw)) : "—"; tm = "relative light reading · " + fieldClock(r.fieldMs); }
+  else if (r.field && k === "atmos"){ val = Number.isFinite(r.tempC) ? `${r.tempC.toFixed(2)} °C` : "—"; tm = "local temperature at sampling point · " + fieldClock(r.fieldMs); }
+  else if (k === "human"){ val = `${HUM.presses} presses`; tm = HUM.last ? `last press ${new Date(HUM.last).toLocaleTimeString()}` : "press the treadle 踩下踏板"; }
+  else if (k === "tech"){ val = `jitter ${r.v.toFixed(2)}`; tm = fmtTime(r.t, 1); }
+  else if (k === "litho"){ val = r.x ? `M ${r.x.toFixed(1)}` : "no quake 无"; tm = clothMode === "mudflat" ? fmtTime(r.t, STEP) + (r.place ? ` · ${r.place}` : "") : fmtTime(r.t, D); }
+  else if (k === "animal" && clothMode === "mudflat"){ val = r.startled ? "startled 惊飞" : r.feeding ? "feeding 觅食" : "roosting 栖息"; tm = fmtTime(r.t, STEP); }
+  else { val = `${r.x.toFixed(k === "atmos" ? 2 : k === "hydro" ? 2 : 0)} ${a.unit}`; const st = SCORE[clothMode][k]; tm = fmtTime(r.t, st.step); }
+  $("iVal").textContent = val; $("iTime").textContent = tm + (r.ev && !r.blank ? ` · ${r.evName}` : "") + (r.fc ? " · forecast 预报" : "");
+  // sparkline: raw value and the value the loom used
+  const c = $("iSpark"), x = c.getContext("2d"), w = c.width, h = c.height, v = V(), col = css("--a-" + k); x.clearRect(0, 0, w, h); const xs = [], vs = [];
+  for (let q = v - 1; q >= 0; q--){ const rr = getRow(k, jVis - q); if (!rr){ xs.push(null); vs.push(null); continue; } const raw = rr.blank || rr.fieldMissing ? null : (rr.field ? (Number.isFinite(rr.x) ? rr.x : null) : (rr.x ?? rr.v)); xs.push(raw); vs.push(rr.blank ? null : rr.v); }
+  const fin = xs.filter(z => z !== null); const lo = Math.min(...fin), hi = Math.max(...fin), sp = hi - lo || 1;
+  x.strokeStyle = "rgba(139,144,156,.6)"; x.lineWidth = 2; x.beginPath(); xs.forEach((z, n) => { if (z === null) return; const X = n / Math.max(1, v - 1) * w, Y = h - 8 - (z - lo) / sp * (h - 16); n && xs[n - 1] !== null ? x.lineTo(X, Y) : x.moveTo(X, Y); }); x.stroke();
+  x.strokeStyle = col; x.lineWidth = 3; x.beginPath(); vs.forEach((z, n) => { if (z === null) return; const X = n / Math.max(1, v - 1) * w, Y = h - 8 - z * (h - 16); n && vs[n - 1] !== null ? x.lineTo(X, Y) : x.moveTo(X, Y); }); x.stroke();
+  // who this layer is stitched to, within the visible cloth
+  const li = LAYERS.indexOf(k), cnt = {}; for (let q = 0; q < v; q++) for (const s of rowSt[jVis - q] || []){ if (s.b < 0){ if (k === "human") cnt.ground = (cnt.ground || 0) + 1; else continue; } if (s.a !== li && s.b !== li) continue; const o = s.b < 0 ? "human" : LAYERS[s.a === li ? s.b : s.a]; cnt[o] = (cnt[o] || 0) + 1; }
+  const items = Object.entries(cnt).filter(([o]) => o !== "ground").sort((p, q) => q[1] - p[1]);
+  $("iMeets").innerHTML = items.length ? items.map(([o, n]) => `<li style="--c:${css("--a-" + o)}"><i></i><span>${nameOf(o)} <span class="en">${AK[o].zh}</span></span><span>${n}</span></li>`).join("") : `<li><span></span><span class="en">no stitches in view yet</span><span></span></li>`; }
+
+/* ---------- gestures: drag, trackpad, keys ---------- */
+let dx0 = 0, s0 = 0, vx = 0, lastX = 0, lastT = 0, moved = 0;
+cv.addEventListener("pointerdown", e => { if (e.cancelable) e.preventDefault(); if (treadleRect && e.clientX >= treadleRect.x && e.clientX <= treadleRect.x + treadleRect.w && e.clientY >= treadleRect.y && e.clientY <= treadleRect.y + treadleRect.h){ pressDown(); return; } dragging = true; try { cv.setPointerCapture(e.pointerId); } catch (_){} cv.classList.add("drag"); dx0 = e.clientX; s0 = sPos; lastX = e.clientX; lastT = performance.now(); vx = 0; moved = 0; }, { passive:false });
+document.addEventListener("touchmove", e => { if (e.cancelable) e.preventDefault(); }, { passive:false });
+cv.addEventListener("pointermove", e => { if (!dragging) return; const now = performance.now(); vx = (e.clientX - lastX) / Math.max(1, now - lastT); lastX = e.clientX; lastT = now; moved += Math.abs(e.movementX || 0); sPos = clamp(s0 - (e.clientX - dx0) / (W * .55), -.15, NSC - .85); });
+const endDrag = e => { if (!dragging) return; dragging = false; cv.classList.remove("drag"); const travel = Math.abs(e.clientX - dx0);
+  if (travel < 6){ tapAt(e.clientX, e.clientY); return; } const fling = -vx * 0.9; sGoal = clamp(Math.round(sPos + clamp(fling, -.6, .6) + (sPos - s0 > 0 ? .25 : -.25) * (travel > 40 ? 1 : 0)), 0, NSC - 1); };
+cv.addEventListener("pointerup", endDrag); cv.addEventListener("pointercancel", endDrag);
+let wheelAcc = 0, wheelT = 0;
+cv.addEventListener("wheel", e => { e.preventDefault(); const d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY; wheelAcc += d; clearTimeout(wheelT); sPos = clamp(sPos + d / (W * .9), 0, NSC - 1); sGoal = sPos; wheelT = setTimeout(() => { go(sPos + Math.sign(wheelAcc) * .3); wheelAcc = 0; }, 140); }, { passive:false });
+addEventListener("keydown", e => { if (/^[0-9]$/.test(e.key)){ const n = +e.key; go(n === 0 ? 0 : n === 9 ? 1 : n <= 7 ? n + 1 : sGoal); } if (e.key === "ArrowRight"){ e.preventDefault(); go(sGoal + 1); } if (e.key === "ArrowLeft"){ e.preventDefault(); go(sGoal - 1); } if (e.key === "Escape") go(0); });
+function tapAt(cx, cy){ if (hitFieldMarker(cx, cy)) return; const sc = Math.round(sPos); if (sc === 1){ for (let q = LAYERS.length; q >= 1; q--){ const P = pose(1, q); const u = (cx - P.x) / P.w, top = P.y + u * P.w * P.sl; if (u >= 0 && u <= 1 && cy >= top && cy <= top + P.h){ go(2 + FOCUS.indexOf(LAYERS[q - 1])); return; } } }
+  if (sc === 0){ go(1); } }
+
+/* ---------- treadle and hardware ---------- */
+let holdStart = 0;
+const PEDAL = { armed:false, code:"", key:"" };
+function pressDown(){ if (holdStart) return; holdStart = performance.now(); $("treadle").classList.add("down"); }
+function pressUp(){ if (!holdStart) return; const hold = performance.now() - holdStart; holdStart = 0; $("treadle").classList.remove("down"); const now = performance.now(); HUM.gap = HUM.last ? now - HUM.last : 2000; HUM.last = Date.now(); HUM.val = clamp(1 - HUM.gap / 2400, .2, 1); HUM.presses++; lastPress = now; weave(true, hold); }
+$("treadle").addEventListener("pointerdown", e => { e.preventDefault(); pressDown(); }); addEventListener("pointerup", pressUp);
+function treadleKey(e){ const el = document.activeElement, tag = el ? el.tagName : ""; if (tag === "INPUT" || tag === "TEXTAREA") return false; if (tag === "BUTTON" && el.id !== "treadle" && el.id !== "usb") return false; if (PEDAL.code && e.code === PEDAL.code) return true; return e.code === "Space" || e.key === "ArrowDown" || e.key === "Enter"; }
+addEventListener("keydown", e => { if (!PEDAL.armed || e.repeat || e.metaKey || e.ctrlKey || e.altKey) return; if (e.key === "Escape"){ PEDAL.armed = false; if (!PEDAL.code) $("usb").setAttribute("aria-pressed", "false"); refreshUsbStatus(); return; } const el = document.activeElement; if (el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA")) return; PEDAL.code = e.code; PEDAL.key = e.key || e.code; PEDAL.armed = false; try { sessionStorage.setItem("loomPedal", JSON.stringify({ code:PEDAL.code, key:PEDAL.key })); } catch (_){} $("usb").setAttribute("aria-pressed", "true"); refreshUsbStatus(); toast("这一下已经织进布里。再踩，继续织。"); }, true);
+addEventListener("keydown", e => { if (e.repeat || !treadleKey(e)) return; e.preventDefault(); pressDown(); });
+addEventListener("keyup", e => { if (treadleKey(e)) pressUp(); });
+let padDown = false; setInterval(() => { const pads = navigator.getGamepads ? navigator.getGamepads() : []; for (const p of pads){ if (!p) continue; const b = p.buttons.some(x => x.pressed); if (b && !padDown){ padDown = true; pressDown(); } if (!b && padDown){ padDown = false; pressUp(); } break; } }, 30);
+let lastStartle = -99;
+function startle(j){ if (clothMode !== "mudflat" || !MUD || !MUD.FEED[j] || j - lastStartle < 16) return; lastStartle = j; const rows = SCORE.mudflat.animal.rows;
+  for (let q = j + 1; q <= Math.min(S.L - 1, j + 8); q++){ rows[q] = Object.assign({}, rows[q], { S:.07, v:.25, feeding:false, startled:true, ev:false }); MUD.REL[q] = (MUD.REL[q] || []).filter(r => r.type !== "feed"); }
+  MUD.ANN.push({ j, k:"human", zh:"观众惊扰，琵鹭飞离", en:"A visitor startles the spoonbills", pr:4 }); MUD.ANN.sort((a, b) => b.pr - a.pr); toast("The spoonbills lift off the mud · 琵鹭被惊飞，离开泥滩"); }
+function weave(press, hold){ const j = addPick(press, false, hold); if (j < 0) return; if (press) startle(j); shuttle = { t:0, dir: -shuttle.dir || 1, press:!!press }; voicesOnPick(j, press); if (Math.round(sPos) >= 2) liveInfo(); }
+
+/* ---------- each agent's own voice ---------- */
+let AC = null, master = null, soundOn = false, noiseBuf = null, seaGain = null; const recs = {}, pulse = Object.fromEntries(ORDER.map(k => [k, 0]));
+function initAudio(){ if (AC) return true; try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch (_){ return false; }
+  master = AC.createGain(); master.gain.value = .7; master.connect(AC.destination); noiseBuf = AC.createBuffer(1, AC.sampleRate * 2, AC.sampleRate); const d = noiseBuf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+  const src = AC.createBufferSource(); src.buffer = noiseBuf; src.loop = true; const lp = AC.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 520; seaGain = AC.createGain(); seaGain.gain.value = 0; src.connect(lp).connect(seaGain).connect(master); src.start(); return true; }
+function gainFor(k){ const sc = Math.round(sPos); return sc >= 2 ? (FOCUS[sc - 2] === k ? 1.3 : .22) : 1; }
+function noiseHit(type, f, q, dur, g, delay = 0){ const t = AC.currentTime + delay, s = AC.createBufferSource(); s.buffer = noiseBuf; const fl = AC.createBiquadFilter(); fl.type = type; fl.frequency.value = f; fl.Q.value = q; const a = AC.createGain(); a.gain.setValueAtTime(0, t); a.gain.linearRampToValueAtTime(g, t + Math.min(.02, dur * .2)); a.gain.exponentialRampToValueAtTime(.0005, t + dur); s.connect(fl).connect(a).connect(master); s.start(t, Math.random()); s.stop(t + dur + .05); }
+function tone(type, f, dur, g, delay = 0, f2){ const t = AC.currentTime + delay, o = AC.createOscillator(), a = AC.createGain(); o.type = type; o.frequency.setValueAtTime(f, t); if (f2) o.frequency.exponentialRampToValueAtTime(f2, t + dur); a.gain.setValueAtTime(0, t); a.gain.linearRampToValueAtTime(g, t + .01); a.gain.exponentialRampToValueAtTime(.0005, t + dur); o.connect(a).connect(master); o.start(t); o.stop(t + dur + .05); }
+function playRec(k, g){ const b = recs[k]; if (!b) return false; const s = AC.createBufferSource(), a = AC.createGain(); s.buffer = b; a.gain.value = g; s.connect(a).connect(master); s.start(AC.currentTime, Math.random() * Math.max(0, b.duration - 2.5), Math.min(2.5, b.duration)); return true; }
+function voicesOnPick(j, press){ const R2 = k => getRow(k, j) || { v:0, S:.5 };
+  const speak = { hydro: j % 3 === 0 || R2("hydro").ev, plant: R2("plant").v > .25 && j % 2 === 0, atmos: j % 12 === 0 || R2("atmos").ev, animal: R2("animal").ev || (R2("animal").v > .5 && j % 16 === 0), litho: !!R2("litho").ev, tech: true, human: press };
+  ORDER.forEach(k => { if (speak[k]) pulse[k] = 1; });
+  if (!soundOn || !AC) return; const g = gainFor;
+  seaGain.gain.setTargetAtTime((.05 + .2 * R2("hydro").v) * g("hydro"), AC.currentTime, .6);
+  if (speak.hydro && !playRec("hydro", .5 * g("hydro"))) noiseHit("lowpass", 700 + 500 * R2("hydro").v, .7, 1.6, (.12 + .2 * R2("hydro").v) * g("hydro"));
+  if (speak.plant && !playRec("plant", .35 * g("plant"))){ const n = 1 + Math.round(R2("plant").v * 4); for (let q = 0; q < n; q++) noiseHit("bandpass", 4200 + Math.random() * 2400, 2.5, .07 + Math.random() * .06, .05 * g("plant"), Math.random() * .3); }
+  if (speak.atmos && !playRec("atmos", .4 * g("atmos"))) noiseHit("bandpass", R2("atmos").S > .5 ? 700 : 480, 1.1, 1.4, .1 * g("atmos"));
+  if (speak.animal && !playRec("animal", .5 * g("animal"))){ for (let q = 0; q < 5; q++) noiseHit("lowpass", 340, .8, .12, .15 * g("animal"), q * .11); if (R2("animal").ev) tone("sine", 170, .35, .06 * g("animal"), .6, 140); }
+  if (speak.litho && !playRec("litho", .7 * g("litho"))){ const m = R2("litho").x || 5; noiseHit("lowpass", 70, .9, 1.4 + (m - 4.5), (.25 + .08 * (m - 4.5)) * g("litho")); tone("sine", 42, 1.6, .18 * g("litho")); }
+  if (!playRec("tech", .2 * g("tech"))) tone("square", 1800 + 900 * R2("tech").v, .018, .022 * g("tech"));
+  if (press){ if (!playRec("human", .6)){ noiseHit("bandpass", 950, 1.6, .09, .28); tone("sine", 190, .16, .12); } } else noiseHit("bandpass", 1100, 2, .04, .04); }
+function drawPulses(dt){ navEl.querySelectorAll("button[data-s]").forEach(b => { const s = +b.dataset.s; if (s < 2) return; const k = FOCUS[s - 2]; pulse[k] *= Math.exp(-dt * 3); b.style.transform = `scale(${1 + pulse[k] * .55})`; }); }
+$("fieldFile").addEventListener("change", async e => { const f = e.target.files && e.target.files[0]; e.target.value = ""; if (!f) return; let text = ""; try { text = await f.text(); } catch (_){ FIELD.error = "Could not read that file. · 无法读取文件"; syncFieldUi(); return; } const parsed = parseFieldCsv(text); if (parsed.error){ FIELD.error = parsed.error + (FIELD.ok ? " The loaded field session is unchanged. · 已载入的记录未改动" : ""); syncFieldUi(); return; } acceptField(parsed, f.name); });
+$("fieldPlay").addEventListener("click", () => { if (!FIELD.ok || S.mode !== "mudflat") return; if (FIELD.playing){ FIELD.playing = false; $("fieldPlay").textContent = "Play 播放"; $("fieldPlay").setAttribute("aria-pressed", "false"); syncFieldUi(); return; } const atEnd = FIELD.durationMs > 0 && FIELD.cursorMs >= FIELD.durationMs; if (FIELD.j0 < 0 || FIELD.cursorMs <= 0 || atEnd){ const a = FIELD.j0, b = FIELD.j1; FIELD.cursorMs = 0; FIELD.playJ = -1; if (a >= 0) fieldRepaint(a, b); anchorField(); FIELD.cursorMs = 0; FIELD.playJ = fieldPlayIndex(); fieldRepaint(FIELD.j0, FIELD.playJ); } FIELD.playing = true; $("fieldPlay").textContent = "Pause 暂停"; $("fieldPlay").setAttribute("aria-pressed", "true"); syncFieldUi(); });
+$("fieldRate").querySelectorAll("button").forEach(b => b.addEventListener("click", () => { FIELD.rate = +b.dataset.rate; syncFieldUi(); }));
+
+$("sound").addEventListener("click", () => { if (!soundOn && !initAudio()){ toast("Sound is not available here · 此处无法播放声音"); return; } soundOn = !soundOn; AC.resume(); if (!soundOn) seaGain.gain.value = 0; $("sound").setAttribute("aria-pressed", String(soundOn)); });
+$("iRec").addEventListener("change", async e => { const f = e.target.files[0], sc = Math.round(sPos); if (!f || sc < 2) return; const k = FOCUS[sc - 2]; if (!initAudio()) return; try { recs[k] = await AC.decodeAudioData(await f.arrayBuffer()); toast(`${nameOf(k)} now speaks with ${f.name}`); fillInfo(k); } catch (_){ toast("Could not read that audio file · 无法读取音频"); } e.target.value = ""; });
+
+
+/* ---------- field session: local CSV only. Does not replace SCORE / MUD. Own time is never driven by it. ---------- */
+const FIELD = { ok:false, error:"", name:"", source:[], samples:[], events:[], channels:[], durationMs:0, sampleCount:0, norm:{ light:null, temp:null }, rate:1, playing:false, cursorMs:0, playJ:-1, j0:-1, j1:-1, selected:-1, hits:[] };
+function fieldNum(cell){ if (cell == null) return null; const t = String(cell).trim(); if (!t) return null; const n = Number(t); return Number.isFinite(n) ? n : null; }
+function splitCsvLine(line){ const out = []; let cur = "", q = false; for (let i = 0; i < line.length; i++){ const c = line[i]; if (q){ if (c === '"'){ if (line[i + 1] === '"'){ cur += '"'; i++; } else q = false; } else cur += c; } else if (c === '"') q = true; else if (c === ","){ out.push(cur); cur = ""; } else cur += c; } out.push(cur); return out; }
+function normRange(vals){ const fin = vals.filter(Number.isFinite); if (!fin.length) return { min:0, max:1, flat:true, empty:true }; const min = Math.min(...fin), max = Math.max(...fin); if (max - min < 1e-9) return { min, max:min + 1, flat:true, empty:false }; return { min, max, flat:false, empty:false }; }
+function norm01(v, range){ if (!Number.isFinite(v) || !range || range.empty) return null; if (range.flat) return .5; return clamp((v - range.min) / (range.max - range.min)); }
+function fieldDurLabel(ms){ const s = Math.max(0, Number(ms) || 0) / 1000; if (s < 90) return (Math.round(s * 10) / 10).toFixed(1).replace(/\.0$/, "") + " s"; const m = Math.floor(s / 60), r = Math.round(s - m * 60); return m + " min " + r + " s"; }
+function fieldClock(ms){ return fieldDurLabel(ms) + " since field session began"; }
+function parseFieldCsv(text){ const lines = String(text || "").replace(/^\uFEFF/, "").split(/\r?\n/).filter(line => line.trim()); if (!lines.length) return { error:"This file has no data rows. · 文件没有数据行" }; const headers = splitCsvLine(lines[0]).map(h => h.trim()); if (!headers.includes("elapsed_ms")) return { error:"This CSV has no elapsed_ms column, so the field session has no time. · 缺少 elapsed_ms，无法读取时间" }; const source = [], samples = [], events = []; for (let r = 1; r < lines.length; r++){ const cols = splitCsvLine(lines[r]); if (cols.every(c => !String(c).trim())) continue; const raw = {}; headers.forEach((h, i) => { if (h) raw[h] = cols[i] == null ? "" : cols[i]; }); source.push(raw); const elapsed = fieldNum(raw.elapsed_ms); if (elapsed == null) continue; const row = { elapsed_ms:elapsed, temperature_c:fieldNum(raw.temperature_c), light_raw:fieldNum(raw.light_raw), event_id:fieldNum(raw.event_id), local_time:raw.local_time ? String(raw.local_time).trim() : "", sound_activity:fieldNum(raw.sound_activity), distance_cm:fieldNum(raw.distance_cm), source:raw, attach:{ note:null, photo:null, audio:null } }; const kind = String(raw.type || "").trim().toLowerCase(); if (kind === "event" || row.event_id != null) events.push(row); else samples.push(row); } if (!samples.length && !events.length) return { error:"No readable time values in elapsed_ms. · elapsed_ms 里没有可读的时间" }; samples.sort((a, b) => a.elapsed_ms - b.elapsed_ms); events.sort((a, b) => a.elapsed_ms - b.elapsed_ms); const times = samples.concat(events).map(r => r.elapsed_ms); const channels = headers.filter(h => h && h !== "type"); return { source, samples, events, channels, durationMs:Math.max(...times), sampleCount:samples.length }; }
+function fieldHoldsCloth(){ return FIELD.ok && S.mode === "mudflat" && (FIELD.playing || FIELD.cursorMs > 0); }
+function fieldEngaged(){ return S.mode === "mudflat" && clothMode === "mudflat" && FIELD.ok && FIELD.j0 >= 0 && FIELD.playJ >= FIELD.j0; }
+function fieldFraction(){ if (!(FIELD.durationMs > 0)) return 1; return clamp(FIELD.cursorMs / FIELD.durationMs); }
+function fieldPlayIndex(){ if (FIELD.j0 < 0) return -1; const span = FIELD.j1 - FIELD.j0; return FIELD.j0 + Math.round(fieldFraction() * span); }
+function sessionMsForRow(j){ const span = FIELD.j1 - FIELD.j0; if (span <= 0) return FIELD.durationMs; return ((j - FIELD.j0) / span) * FIELD.durationMs; }
+function fieldRowForMs(ms){ const span = FIELD.j1 - FIELD.j0; if (span <= 0) return FIELD.j0; const u = FIELD.durationMs > 0 ? clamp(ms / FIELD.durationMs) : 1; return FIELD.j0 + Math.round(u * span); }
+function fieldSampleAt(ms){ const s = FIELD.samples; if (!s.length) return null; if (s[0].elapsed_ms > ms) return null; let lo = 0, hi = s.length - 1, ans = 0; while (lo <= hi){ const m = (lo + hi) >> 1; if (s[m].elapsed_ms <= ms){ ans = m; lo = m + 1; } else hi = m - 1; } return s[ans]; }
+function fieldOverlay(k, j, base){ if (!fieldEngaged() || j < FIELD.j0 || j > FIELD.playJ || j > FIELD.j1) return null; const ms = sessionMsForRow(j), sample = fieldSampleAt(ms); if (k === "plant"){ const light = sample ? sample.light_raw : null; if (!Number.isFinite(light)) return Object.assign({}, base, { blank:true, field:true, fieldMissing:true, fieldMs:ms, lightRaw:null, x:null, ev:false }); const nv = norm01(light, FIELD.norm.light); return Object.assign({}, base, { blank:false, field:true, fieldMissing:false, fieldMs:ms, lightRaw:light, x:light, v:nv == null ? base.v : nv, ev:false }); } const temp = sample ? sample.temperature_c : null; if (!Number.isFinite(temp)) return Object.assign({}, base, { field:true, fieldMissing:true, fieldMs:ms, tempC:null, fieldTone:null, x:null }); const nt = norm01(temp, FIELD.norm.temp); return Object.assign({}, base, { field:true, fieldMissing:false, fieldMs:ms, tempC:temp, fieldTone:nt, x:temp, v:clamp(base.v * .88 + (nt == null ? base.v : nt) * .12) }); }
+function fieldRowMissing(j){ if (!fieldEngaged() || j < FIELD.j0 || j > FIELD.playJ) return false; const r = getRow("atmos", j); return !!(r && r.fieldMissing); }
+function fieldDropAnchor(){ FIELD.playing = false; FIELD.cursorMs = 0; FIELD.playJ = -1; FIELD.j0 = -1; FIELD.j1 = -1; FIELD.hits = []; if ($("fieldPlay")){ $("fieldPlay").textContent = "Play 播放"; $("fieldPlay").setAttribute("aria-pressed", "false"); } }
+function anchorField(){ const jNew = picks.length - 1, v = Math.min(150, Math.max(1, picks.length)); FIELD.j0 = Math.max(0, jNew - v + 1); FIELD.j1 = jNew; }
+function fieldRepaint(a, b){ for (let j = a; j <= b; j++) if (j >= 0 && j < picks.length) paintRow(j); if (Math.round(sPos) >= 2) liveInfo(); }
+function fieldAdvance(dt){ if (!FIELD.playing || S.mode !== "mudflat" || FIELD.j0 < 0) return; const prev = FIELD.playJ, cap = Math.max(0, FIELD.durationMs); FIELD.cursorMs = cap === 0 ? cap : Math.min(cap, FIELD.cursorMs + dt * 1000 * FIELD.rate); FIELD.playJ = fieldPlayIndex(); if (FIELD.playJ !== prev){ const from = prev < 0 ? FIELD.playJ : Math.min(prev, FIELD.playJ), to = prev < 0 ? FIELD.playJ : Math.max(prev, FIELD.playJ); fieldRepaint(from, to); } if (cap === 0 || FIELD.cursorMs >= cap){ FIELD.playing = false; FIELD.playJ = fieldPlayIndex(); fieldRepaint(FIELD.playJ, FIELD.playJ); $("fieldPlay").textContent = "Play 播放"; $("fieldPlay").setAttribute("aria-pressed", "false"); syncFieldUi(); } }
+function syncFieldUi(){ const mud = S.mode === "mudflat", showPlay = FIELD.ok && mud; $("fieldBox").hidden = !showPlay; $("fieldState").hidden = !showPlay; $("fieldMeta").hidden = !(FIELD.ok || FIELD.error); $("fieldEvent").hidden = FIELD.selected < 0 || !FIELD.ok; $("fieldRate").querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.rate === FIELD.rate))); if (showPlay) $("fieldState").textContent = "Recorded field session · relative readings · replayed at " + FIELD.rate + "×" + (FIELD.playing ? "" : " · paused"); if (FIELD.error){ $("fieldMeta").textContent = FIELD.error; $("fieldMeta").style.color = "var(--ink)"; } else if (FIELD.ok){ const where = mud ? "" : " · playback is on Mudflat time 播放在泥滩时间"; $("fieldMeta").style.color = ""; $("fieldMeta").textContent = fieldDurLabel(FIELD.durationMs) + " · " + FIELD.sampleCount + " samples · " + (FIELD.channels.join(", ") || "elapsed_ms") + where; } if (FIELD.selected >= 0 && FIELD.events[FIELD.selected]){ const ev = FIELD.events[FIELD.selected]; $("fieldEvent").textContent = "Field note marker " + ev.event_id + " · " + fieldClock(ev.elapsed_ms); } }
+function drawFieldMarkers(B, v, jNew, cs){ FIELD.hits = []; if (!(clothMode === "mudflat" && FIELD.ok && FIELD.j0 >= 0 && FIELD.playJ >= FIELD.j0)) return; const rowY = j => B.y + (jNew - j + .5) * cs; if (FIELD.playJ >= jNew - v + 1 && FIELD.playJ <= jNew){ const y = rowY(FIELD.playJ); ctx.save(); ctx.strokeStyle = "rgba(201,180,142,.9)"; ctx.setLineDash([2, 3]); ctx.beginPath(); ctx.moveTo(B.x, y); ctx.lineTo(B.x + B.w, y); ctx.stroke(); ctx.setLineDash([]); ctx.font = "500 10px " + css("--mono"); ctx.fillStyle = "#ECE6D6"; ctx.textAlign = "left"; ctx.fillText(fieldDurLabel(FIELD.cursorMs), B.x + 8, y - 5); ctx.restore(); } FIELD.events.forEach((ev, n) => { const j = fieldRowForMs(ev.elapsed_ms); if (j < jNew - v + 1 || j > jNew) return; const y = rowY(j), x = B.x - 14, sel = FIELD.selected === n; ctx.beginPath(); ctx.fillStyle = sel ? "#ECE6D6" : "#C9B48E"; ctx.arc(x, y, sel ? 4.2 : 2.6, 0, TAU); ctx.fill(); ctx.font = "500 10px " + css("--mono"); ctx.fillStyle = "#ECE6D6"; ctx.textAlign = "right"; ctx.fillText(String(ev.event_id), x - 8, y + 3); FIELD.hits.push({ x:x - 22, y:y - 16, w:36, h:32, n }); }); }
+function hitFieldMarker(cx, cy){ if (Math.round(sPos) !== 0 || !FIELD.hits.length) return false; let best = null, bestD = 22; for (const m of FIELD.hits){ const d = Math.hypot(cx - (m.x + m.w / 2), cy - (m.y + m.h / 2)); if (d < bestD){ best = m; bestD = d; } } if (!best) return false; FIELD.selected = best.n; syncFieldUi(); return true; }
+function acceptField(parsed, name){ const a = FIELD.j0, b = FIELD.j1; fieldDropAnchor(); if (a >= 0) fieldRepaint(a, b); FIELD.source = parsed.source; FIELD.samples = parsed.samples; FIELD.events = parsed.events; FIELD.channels = parsed.channels; FIELD.durationMs = parsed.durationMs; FIELD.sampleCount = parsed.sampleCount; FIELD.norm = { light:normRange(parsed.samples.concat(parsed.events).map(r => r.light_raw)), temp:normRange(parsed.samples.concat(parsed.events).map(r => r.temperature_c)) }; FIELD.ok = true; FIELD.error = ""; FIELD.name = name || ""; FIELD.selected = -1; syncFieldUi(); }
+
+/* ---------- small controls ---------- */
+$("clock").querySelectorAll("button").forEach(b => b.addEventListener("click", () => { if (S.mode === b.dataset.v) return; S.mode = b.dataset.v; $("clock").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x === b))); newCloth(S.mode === "mudflat" ? PAST - 96 : 150); shownScene = -1; syncFieldUi(); toast(S.mode === "mudflat" ? "Mudflat clock: 1 pick = 15 minutes for every agent · 泥滩时钟" : "Own time: one cycle = 24 picks for each agent, modelled · 固有时间（模型）"); }));
+$("full").addEventListener("click", () => { if (document.fullscreenElement) document.exitFullscreen?.(); else document.documentElement.requestFullscreen?.().catch(() => toast("Full screen is not available here · 此处无法全屏")); });
+document.addEventListener("fullscreenchange", () => $("full").setAttribute("aria-pressed", String(!!document.fullscreenElement)));
+let tt; function toast(m){ const el = $("toast"); el.textContent = m; el.classList.add("on"); clearTimeout(tt); tt = setTimeout(() => el.classList.remove("on"), 2600); }
+
+const USB = { port:null, reader:null, buf:"", light:null, temp:null, seen:[], norm:{ light:null, temp:null }, on:false, lastEvent:null, lastTap:0, lastKind:"", lines:0 };
+function usbStatus(text){ const el = $("usbLive"); if (el) el.textContent = text; }
+function pedalName(){ if (PEDAL.code === "Space") return "空格"; if (PEDAL.code === "Enter") return "回车"; if (PEDAL.code === "ArrowDown") return "下箭头"; const k = (PEDAL.key || "").trim(); return k || PEDAL.code; }
+function refreshUsbStatus(){ if (PEDAL.armed){ usbStatus("踏板插在这台 iPad 上 · 点一下布 · 再踩一下"); return; } if (PEDAL.code && !USB.on){ usbStatus("踏板已记住 · " + pedalName() + " · 左右滑动看层"); return; } if (!USB.on){ usbStatus("点 USB 踏板，把踏板插在这台 iPad 上"); return; } const bits = ["踏板已连接"]; if (USB.lastKind === "event" && USB.lastEvent != null) bits.push("事件 " + USB.lastEvent); else if (!USB.lines) bits.push("等待事件键"); if (Number.isFinite(USB.temp)) bits.push(USB.temp.toFixed(1) + "°C"); if (Number.isFinite(USB.light)) bits.push("L" + Math.round(USB.light)); usbStatus(bits.join(" · ")); }
+function usbOverlay(k, j, base){ if (!USB.on || fieldEngaged() || S.mode !== "mudflat" || clothMode !== "mudflat" || j !== picks.length - 1) return null; if (k === "plant"){ const light = USB.light; if (!Number.isFinite(light)) return null; const nv = norm01(light, USB.norm.light); return Object.assign({}, base, { blank:false, liveUsb:true, fieldMissing:false, lightRaw:light, x:light, v:nv == null ? base.v : nv, ev:false }); } if (k === "atmos"){ const temp = USB.temp; if (!Number.isFinite(temp)) return null; const nt = norm01(temp, USB.norm.temp); return Object.assign({}, base, { liveUsb:true, fieldMissing:false, tempC:temp, fieldTone:nt, x:temp, v:clamp(base.v * .88 + (nt == null ? base.v : nt) * .12) }); } return null; }
+function noteUsb(temp, light){ if (Number.isFinite(temp)) USB.temp = temp; if (Number.isFinite(light)) USB.light = light; USB.seen.push({ temp:USB.temp, light:USB.light }); if (USB.seen.length > 40) USB.seen.shift(); USB.norm.light = normRange(USB.seen.map(s => s.light)); USB.norm.temp = normRange(USB.seen.map(s => s.temp)); const j = picks.length - 1; if (j >= 0 && !fieldEngaged() && S.mode === "mudflat") paintRow(j); if (Math.round(sPos) >= 2) liveInfo(); }
+function serialTap(){ const now = performance.now(); if (now - USB.lastTap < 280 || holdStart) return; USB.lastTap = now; pressDown(); setTimeout(() => { if (holdStart) pressUp(); }, 90); }
+function takeUsbLine(line){ const t = String(line || "").trim(); if (!t || t.startsWith("type,")) return; const c = splitCsvLine(t); if (c.length < 4) return; const kind = c[0].trim().toLowerCase(); if (kind !== "sample" && kind !== "event") return; USB.lastKind = kind; USB.lines++; noteUsb(fieldNum(c[2]), fieldNum(c[3])); const eventId = fieldNum(c[4]); if (kind === "event" && eventId != null && eventId !== USB.lastEvent){ USB.lastEvent = eventId; serialTap(); } refreshUsbStatus(); }
+async function stopUsb(){ USB.on = false; $("usb").setAttribute("aria-pressed", "false"); try { if (USB.reader){ await USB.reader.cancel(); } } catch (_){} try { if (USB.port) await USB.port.close(); } catch (_){} USB.reader = null; USB.port = null; USB.buf = ""; refreshUsbStatus(); }
+async function readUsb(){ const decoder = new TextDecoder(); try { while (USB.port && USB.port.readable && USB.on){ USB.reader = USB.port.readable.getReader(); try { while (USB.on){ const { value, done } = await USB.reader.read(); if (done) break; USB.buf += decoder.decode(value, { stream:true }); let n; while ((n = USB.buf.indexOf("\n")) >= 0){ const line = USB.buf.slice(0, n); USB.buf = USB.buf.slice(n + 1); takeUsbLine(line); } } } finally { try { USB.reader.releaseLock(); } catch (_){} USB.reader = null; } break; } } catch (_){ toast("串口中断。关掉 Arduino 的串口监视器后再按一次 USB 踏板。"); } if (USB.on) stopUsb(); }
+async function chooseUsbPort(){ const granted = await navigator.serial.getPorts(); if (granted.length === 1) return granted[0]; return navigator.serial.requestPort(); }
+if ("serial" in navigator){ navigator.serial.addEventListener("disconnect", ev => { if (USB.port && ev.target === USB.port){ stopUsb(); toast("踏板已拔出"); } }); }
+$("usb").addEventListener("click", () => { if (location.protocol === "file:"){ toast("用 Safari 打开电脑上的地址，不要从文件 App 打开"); return; } PEDAL.armed = true; $("usb").setAttribute("aria-pressed", "true"); refreshUsbStatus(); toast("踏板插到这台 iPad。点一下布，再踩一下，页面会记住那个键。"); });
+try { const saved = JSON.parse(sessionStorage.getItem("loomPedal") || "null"); if (saved && saved.code){ PEDAL.code = saved.code; PEDAL.key = saved.key || saved.code; $("usb").setAttribute("aria-pressed", "true"); } } catch (_){}
+refreshUsbStatus();
+
+newCloth(PAST - 96); showSources();
+fetchLive().then(() => { rebuildScore(); repaintAll(); });
+requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

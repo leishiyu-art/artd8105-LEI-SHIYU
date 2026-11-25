@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="860" viewBox="0 0 1600 860">
+<rect width="1600" height="860" fill="#F3EFE6"/>
+<g id="header">
+<text x="56.00" y="48.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="start" letter-spacing="2.4">TABLE 2</text>
+<text x="1544.00" y="48.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="end" letter-spacing="1.6">RELATIONS</text>
+<rect x="56.00" y="62.00" width="42.00" height="3.00" fill="#D24E35" stroke="none" stroke-width="1"/>
+</g>
+<g id="title">
+<text x="56.00" y="108.00" fill="#1A1714" font-family="'PingFang SC', 'Noto Sans SC', 'Hiragino Sans GB', Helvetica, sans-serif" font-size="52" font-weight="500" text-anchor="start" letter-spacing="6">关系</text>
+<text x="56.00" y="140.00" fill="#6E665C" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="1.8">The condition is the test in the prototype. The mark is what it writes.</text>
+</g>
+<g id="rules">
+<text x="56.00" y="226.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="start" letter-spacing="1">01</text>
+<rect x="120.00" y="210.00" width="18.00" height="18.00" fill="#EFE7D6" stroke="#1A1714" stroke-width="0.6"/>
+<line x1="144.00" y1="212.00" x2="162.00" y2="226.00" stroke="#1A1714" stroke-width="1.2" stroke-linecap="square"/>
+<line x1="162.00" y1="212.00" x2="144.00" y2="226.00" stroke="#D24E35" stroke-width="1.2" stroke-linecap="square"/>
+<rect x="168.00" y="210.00" width="18.00" height="18.00" fill="#4FB0BE" stroke="none" stroke-width="0.6"/>
+<text x="360.00" y="216.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="14" font-weight="400" text-anchor="start" letter-spacing="1.4">FEED</text>
+<text x="360.00" y="240.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="400" text-anchor="start">ln &lt; 0.42    presence &gt; 0.3    no wind or rain</text>
+<line x1="56.00" y1="262.00" x2="1544.00" y2="262.00" stroke="#D4CBBC" stroke-width="1" stroke-linecap="square"/>
+<text x="56.00" y="304.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="start" letter-spacing="1">02</text>
+<rect x="120.00" y="288.00" width="18.00" height="18.00" fill="#EFE7D6" stroke="#1A1714" stroke-width="0.6"/>
+<line x1="144.00" y1="290.00" x2="162.00" y2="304.00" stroke="#1A1714" stroke-width="1.2" stroke-linecap="square"/>
+<line x1="162.00" y1="290.00" x2="144.00" y2="304.00" stroke="#D24E35" stroke-width="1.2" stroke-linecap="square"/>
+<rect x="168.00" y="288.00" width="18.00" height="18.00" fill="#B4BC57" stroke="none" stroke-width="0.6"/>
+<text x="360.00" y="294.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="14" font-weight="400" text-anchor="start" letter-spacing="1.4">ROOST</text>
+<text x="360.00" y="318.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="400" text-anchor="start">not feeding    ln &gt; 0.7    presence &gt; 0.3</text>
+<line x1="56.00" y1="340.00" x2="1544.00" y2="340.00" stroke="#D4CBBC" stroke-width="1" stroke-linecap="square"/>
+<text x="56.00" y="382.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="start" letter-spacing="1">03</text>
+<rect x="120.00" y="366.00" width="18.00" height="18.00" fill="#B4BC57" stroke="none" stroke-width="0.6"/>
+<line x1="144.00" y1="368.00" x2="162.00" y2="382.00" stroke="#1A1714" stroke-width="1.2" stroke-linecap="square"/>
+<line x1="162.00" y1="368.00" x2="144.00" y2="382.00" stroke="#D24E35" stroke-width="1.2" stroke-linecap="square"/>
+<rect x="168.00" y="366.00" width="18.00" height="18.00" fill="#4FB0BE" stroke="none" stroke-width="0.6"/>
+<text x="360.00" y="372.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="14" font-weight="400" text-anchor="start" letter-spacing="1.4">SUBMERGE</text>
+<text x="360.00" y="396.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="400" text-anchor="start">water edge &lt; 0.27     edge = 0.9 − 0.74 ln</text>
+<line x1="56.00" y1="418.00" x2="1544.00" y2="418.00" stroke="#D4CBBC" stroke-width="1" stroke-linecap="square"/>
+<text x="56.00" y="460.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="start" letter-spacing="1">04</text>
+<rect x="120.00" y="444.00" width="18.00" height="18.00" fill="#B4BC57" stroke="none" stroke-width="0.6"/>
+<line x1="144.00" y1="446.00" x2="162.00" y2="460.00" stroke="#1A1714" stroke-width="1.2" stroke-linecap="square"/>
+<line x1="162.00" y1="446.00" x2="144.00" y2="460.00" stroke="#D24E35" stroke-width="1.2" stroke-linecap="square"/>
+<rect x="168.00" y="444.00" width="18.00" height="18.00" fill="#8FA6C6" stroke="none" stroke-width="0.6"/>
+<text x="360.00" y="450.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="14" font-weight="400" text-anchor="start" letter-spacing="1.4">DRAW</text>
+<text x="360.00" y="474.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="400" text-anchor="start">shortwave &gt; 250 W/m²    CO₂ below the 96-pick mean</text>
+<line x1="56.00" y1="496.00" x2="1544.00" y2="496.00" stroke="#D4CBBC" stroke-width="1" stroke-linecap="square"/>
+<text x="56.00" y="538.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="start" letter-spacing="1">05</text>
+<rect x="120.00" y="522.00" width="18.00" height="18.00" fill="#8FA6C6" stroke="none" stroke-width="0.6"/>
+<line x1="146.00" y1="531.00" x2="160.00" y2="531.00" stroke="#1A1714" stroke-width="1" stroke-linecap="square" stroke-dasharray="2 2"/>
+<rect x="168.00" y="522.00" width="18.00" height="18.00" fill="#4FB0BE" stroke="none" stroke-width="0.6"/>
+<text x="360.00" y="528.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="14" font-weight="400" text-anchor="start" letter-spacing="1.4">DISTURB</text>
+<text x="360.00" y="552.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="400" text-anchor="start">wind &gt; 30 km/h  or  rain &gt; 2 mm/h     jolt is kept</text>
+<line x1="56.00" y1="574.00" x2="1544.00" y2="574.00" stroke="#D4CBBC" stroke-width="1" stroke-linecap="square"/>
+<text x="56.00" y="616.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="start" letter-spacing="1">06</text>
+<rect x="120.00" y="600.00" width="12.00" height="18.00" fill="#EFE7D6" stroke="#1A1714" stroke-width="0.4"/>
+<rect x="136.00" y="600.00" width="12.00" height="18.00" fill="#8FA6C6" stroke="none" stroke-width="0.4"/>
+<rect x="152.00" y="600.00" width="12.00" height="18.00" fill="#B06A3C" stroke="none" stroke-width="0.4"/>
+<rect x="168.00" y="600.00" width="12.00" height="18.00" fill="#B4BC57" stroke="none" stroke-width="0.4"/>
+<rect x="184.00" y="600.00" width="12.00" height="18.00" fill="#4FB0BE" stroke="none" stroke-width="0.4"/>
+<rect x="200.00" y="600.00" width="12.00" height="18.00" fill="#C9CDD6" stroke="#1A1714" stroke-width="0.4"/>
+<text x="230.00" y="614.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="start">× 5 pairs</text>
+<text x="360.00" y="606.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="14" font-weight="400" text-anchor="start" letter-spacing="1.4">JOLT</text>
+<text x="360.00" y="630.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="400" text-anchor="start">strongest M ≥ 4 in the 15 min window, within 2500 km</text>
+<line x1="56.00" y1="652.00" x2="1544.00" y2="652.00" stroke="#D4CBBC" stroke-width="1" stroke-linecap="square"/>
+<text x="56.00" y="694.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="start" letter-spacing="1">07</text>
+<rect x="120.00" y="678.00" width="18.00" height="18.00" fill="#D24E35" stroke="none" stroke-width="1"/>
+<text x="360.00" y="684.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="14" font-weight="400" text-anchor="start" letter-spacing="1.4">PRESS</text>
+<text x="360.00" y="708.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="15" font-weight="400" text-anchor="start">v = clamp(0.3 + hold/1400, 0.3, 1)</text>
+<line x1="56.00" y1="730.00" x2="1544.00" y2="730.00" stroke="#D4CBBC" stroke-width="1" stroke-linecap="square"/>
+</g>
+<g id="footer">
+<text x="56.00" y="832.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="11" font-weight="400" text-anchor="start" letter-spacing="0.4">Disturbance removes ordinary stitches for that pick. Jolt writes 28 × 5 stitches and does not include the visitor. ln is tide normalised on the 480-pick score.</text>
+</g>
+</svg>

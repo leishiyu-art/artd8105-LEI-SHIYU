@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>怎么参与 · A4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: #2a2c31; font-family: "Noto Sans SC", "PingFang SC", sans-serif; color: #F4F1E6; }
+  .print-note { margin: 0; padding: 10px 16px; font: 500 13px/1.4 "Noto Sans SC", sans-serif; }
+  .print-note span { color: #D7E35C; }
+  .sheet {
+    width: 210mm; height: 297mm; margin: 0 auto 24px;
+    background: #07090D; overflow: hidden;
+    padding: 12mm 12mm 10mm;
+    display: flex; flex-direction: column; gap: 6mm;
+  }
+  header { display: flex; align-items: center; gap: 5mm; }
+  .blocks { display: grid; grid-template-columns: repeat(2, 4.2mm); gap: 1.1mm; flex: none; }
+  .blocks i { display: block; width: 4.2mm; height: 4.2mm; background: #F4F1E6; }
+  .blocks i:nth-child(2), .blocks i:nth-child(3) { background: #D7E35C; }
+  .kicker { margin: 0; font: 500 3.4mm/1 Archivo, sans-serif; letter-spacing: .18em; color: #D7E35C; }
+  h1 { margin: 1.6mm 0 0; font-weight: 500; font-size: 11mm; letter-spacing: .06em; line-height: 1; }
+  section { display: flex; flex-direction: column; gap: 3.5mm; min-height: 0; }
+  .label { margin: 0; font-weight: 500; font-size: 4.2mm; letter-spacing: .16em; color: #D7E35C; }
+  .label span { margin-left: 2mm; font-family: Archivo, sans-serif; font-weight: 500; letter-spacing: .14em; }
+  .row { display: grid; grid-template-columns: 86mm minmax(0, 1fr); gap: 5mm; align-items: center; }
+  figure { margin: 0; height: 40mm; background: #07090D; overflow: hidden; }
+  .play figure { height: 42mm; }
+  img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; display: block; }
+  .layers img { object-position: center 30%; }
+  .treadle figure { height: 34mm; }
+  .treadle img { object-position: left center; }
+  h2 { margin: 0; font-weight: 500; font-size: 7.2mm; letter-spacing: .04em; line-height: 1.15; }
+  .en { margin: 1.2mm 0 0; color: #B7B2A6; font: 400 3.6mm/1.35 Archivo, sans-serif; }
+  .more { margin: 2.4mm 0 0; font-size: 4mm; line-height: 1.4; }
+  .back { margin-top: 4mm; }
+  footer {
+    margin-top: auto;
+    border-top: .35mm solid rgba(215,227,92,.75);
+    padding-top: 3mm;
+    display: flex; justify-content: space-between;
+    font: 500 3.2mm/1 Archivo, "Noto Sans SC", sans-serif;
+    letter-spacing: .12em; color: #B7B2A6;
+  }
+  footer b { color: #F4F1E6; font-weight: 500; }
+  @media print {
+    .print-note { display: none; }
+    body { background: #07090D; }
+    .sheet { margin: 0; }
+  }
+</style>
+</head>
+<body>
+<p class="print-note">贴在展位。打印选 <span>A4 纵向</span>，边距选无。Paste at the booth. Print on A4, portrait, no margins.</p>
+<article class="sheet">
+  <header>
+    <div class="blocks" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div>
+      <p class="kicker">WEAVING WITH · COTAI MUDFLAT</p>
+      <h1>怎么参与</h1>
+    </div>
+  </header>
+
+  <section>
+    <p class="label">手势 <span>GESTURE</span></p>
+    <div class="row play">
+      <figure><img src="step-play.jpg" alt="布上的光点"></figure>
+      <div>
+        <h2>跟随光点</h2>
+        <p class="en">Follow a light with an open hand.</p>
+        <p class="more">点中，那一位行动者响一声。</p>
+        <p class="en">Meet it, and that actant sounds once.</p>
+      </div>
+    </div>
+    <div class="row layers">
+      <figure><img src="step-layers.jpg" alt="七层拉开"></figure>
+      <div>
+        <h2>抓住换页</h2>
+        <p class="en">Close your hand and move.</p>
+        <p class="more">左右移，换一层。松开，停在这一页。</p>
+        <p class="en">Move sideways to change the page. Release to stay.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="label">踏板 <span>TREADLE</span></p>
+    <div class="row treadle">
+      <figure><img src="step-treadle.jpg" alt="踩下踏板"></figure>
+      <div>
+        <h2>1 踩下编织</h2>
+        <p class="en">Step, and weave.</p>
+        <p class="more">这一下织进正在织的布里。</p>
+        <p class="en">That press is woven into the cloth.</p>
+      </div>
+    </div>
+    <div class="row treadle">
+      <figure><img src="step-score.jpg" alt="这一轮织进布里的轨迹"></figure>
+      <div>
+        <h2>2 生成自己的织物轨迹</h2>
+        <p class="en">Your own path, woven into the cloth.</p>
+        <p class="more">扫码保存。再踩踏板，回到编织页面。</p>
+        <p class="en">Scan to keep it. Step again to return to the loom.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>路氹泥滩 · 澳门</span>
+    <b>WEAVING WITH</b>
+  </footer>
+</article>
+</body>
+</html>

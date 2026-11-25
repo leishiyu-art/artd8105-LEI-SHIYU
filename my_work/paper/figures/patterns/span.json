@@ -1,0 +1,35 @@
+{
+  "drawn_by": "camera.html groundCell, yarn, stitchMark",
+  "cell_px": 10,
+  "ends": 176,
+  "picks": 96,
+  "orientation": "newest pick at the top, same as the screen",
+  "mudflat": {
+    "from": "2026-11-23 17:15 +08",
+    "to": "2026-11-24 17:00 +08",
+    "step": "15 min",
+    "picks_index": [288, 383],
+    "stitches": 329,
+    "sources": {
+      "hydro": "Open-Meteo Marine live",
+      "plant": "Open-Meteo shortwave live",
+      "atmos": "Open-Meteo CAMS CO2 live",
+      "litho": "USGS live",
+      "animal": "iNaturalist record plus season"
+    },
+    "litho": "no covered ends in this day",
+    "human": "no treadle press"
+  },
+  "intrinsic": {
+    "picks_index": [384, 479],
+    "stitches": 129,
+    "note": "96 picks ending at the same now. Each agent covers its own duration, not this mudflat day.",
+    "atmos": "2022-12-09 to 2026-11-24, one pick about 15 days",
+    "plant": "2026-11-20 18:01 to 2026-11-24 17:01, one pick 1 hour",
+    "animal": "2022-12-09 to 2026-11-24, one pick about 15 days",
+    "hydro": "2026-11-22 15:51 to 2026-11-24 17:01, one pick about 31 min",
+    "litho": "2026-04-10 to 2026-11-23, events, one step about 2.2 days",
+    "tech": "prefill jitter, not the 1 second score",
+    "human": "no treadle press"
+  }
+}

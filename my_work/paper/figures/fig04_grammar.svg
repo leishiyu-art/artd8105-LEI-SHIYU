@@ -1,0 +1,244 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1120" viewBox="0 0 1600 1120">
+<rect width="1600" height="1120" fill="#F3EFE6"/>
+<g id="header">
+<text x="56.00" y="48.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="start" letter-spacing="2.4">FIG. 4</text>
+<text x="1544.00" y="48.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="end" letter-spacing="1.6">WEAVING GRAMMAR</text>
+<rect x="56.00" y="62.00" width="42.00" height="3.00" fill="#D24E35" stroke="none" stroke-width="1"/>
+</g>
+<g id="title">
+<text x="56.00" y="108.00" fill="#1A1714" font-family="'PingFang SC', 'Noto Sans SC', 'Hiragino Sans GB', Helvetica, sans-serif" font-size="52" font-weight="500" text-anchor="start" letter-spacing="6">语法</text>
+<text x="56.00" y="140.00" fill="#6E665C" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="1.8">One measured tide value, followed into a draft. Yellow marks the step that becomes structure.</text>
+</g>
+<g id="step-1">
+<rect x="48.00" y="200.00" width="276.00" height="300.00" fill="#F3EFE6" stroke="#1A1714" stroke-width="1"/>
+<text x="62.00" y="224.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="13" font-weight="400" text-anchor="start" letter-spacing="1">01  数值</text>
+<text x="62.00" y="242.00" fill="#6E665C" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start" letter-spacing="1.2">VALUE</text>
+<text x="66.00" y="274.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="start">CO₂</text>
+<text x="306.00" y="274.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="16" font-weight="400" text-anchor="end">460.5 ppm</text>
+<text x="66.00" y="314.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="start">light</text>
+<text x="306.00" y="314.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="16" font-weight="400" text-anchor="end">549 W/m²</text>
+<rect x="58.00" y="332.00" width="256.00" height="32.00" fill="#D8E272" stroke="none" stroke-width="1"/>
+<text x="66.00" y="354.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="start">tide</text>
+<text x="306.00" y="354.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="16" font-weight="400" text-anchor="end">0.72 m</text>
+<text x="66.00" y="394.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="start">wind</text>
+<text x="306.00" y="394.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="16" font-weight="400" text-anchor="end">12.9 km/h</text>
+<text x="66.00" y="434.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="start">rain</text>
+<text x="306.00" y="434.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="16" font-weight="400" text-anchor="end">0 mm/h</text>
+</g>
+<rect x="325.00" y="347.00" width="16.00" height="6.00" fill="#D8E272" stroke="none" stroke-width="1"/>
+<g id="step-2">
+<rect x="342.00" y="200.00" width="276.00" height="300.00" fill="#F3EFE6" stroke="#1A1714" stroke-width="1"/>
+<text x="356.00" y="224.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="13" font-weight="400" text-anchor="start" letter-spacing="1">02  映射</text>
+<text x="356.00" y="242.00" fill="#6E665C" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start" letter-spacing="1.2">S AND V</text>
+<line x1="366.00" y1="350.00" x2="594.00" y2="350.00" stroke="#1A1714" stroke-width="1" stroke-linecap="square"/>
+<circle cx="499.22" cy="350.00" r="7.00" fill="#4FB0BE" stroke="#1A1714" stroke-width="1"/>
+<text x="366.00" y="380.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="16" font-weight="400" text-anchor="start">S  0.58</text>
+<rect x="366.00" y="410.00" width="228.00" height="10.00" fill="#D4CBBC" stroke="none" stroke-width="1"/>
+<rect x="366.00" y="410.00" width="126.76" height="10.00" fill="#4FB0BE" stroke="none" stroke-width="1"/>
+<text x="366.00" y="448.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="16" font-weight="400" text-anchor="start">v  0.56</text>
+</g>
+<rect x="619.00" y="347.00" width="16.00" height="6.00" fill="#D8E272" stroke="none" stroke-width="1"/>
+<g id="step-3">
+<rect x="628.00" y="192.00" width="292.00" height="316.00" fill="#D8E272" stroke="none" stroke-width="1"/>
+<rect x="636.00" y="200.00" width="276.00" height="300.00" fill="#F3EFE6" stroke="#1A1714" stroke-width="1"/>
+<text x="650.00" y="224.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="13" font-weight="400" text-anchor="start" letter-spacing="1">03  覆盖</text>
+<text x="650.00" y="242.00" fill="#6E665C" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start" letter-spacing="1.2">COVERAGE</text>
+<rect x="650.00" y="320.00" width="7.55" height="7.55" fill="none" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="658.55" y="320.00" width="7.55" height="7.55" fill="#4FB0BE" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="667.10" y="320.00" width="7.55" height="7.55" fill="none" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="675.66" y="320.00" width="7.55" height="7.55" fill="#4FB0BE" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="684.21" y="320.00" width="7.55" height="7.55" fill="#4FB0BE" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="692.76" y="320.00" width="7.55" height="7.55" fill="#4FB0BE" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="701.31" y="320.00" width="7.55" height="7.55" fill="#4FB0BE" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="709.86" y="320.00" width="7.55" height="7.55" fill="#4FB0BE" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="718.41" y="320.00" width="7.55" height="7.55" fill="#4FB0BE" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="726.97" y="320.00" width="7.55" height="7.55" fill="#4FB0BE" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="735.52" y="320.00" width="7.55" height="7.55" fill="#4FB0BE" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="744.07" y="320.00" width="7.55" height="7.55" fill="#4FB0BE" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="752.62" y="320.00" width="7.55" height="7.55" fill="#4FB0BE" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="761.17" y="320.00" width="7.55" height="7.55" fill="#4FB0BE" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="769.72" y="320.00" width="7.55" height="7.55" fill="#4FB0BE" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="778.28" y="320.00" width="7.55" height="7.55" fill="#4FB0BE" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="786.83" y="320.00" width="7.55" height="7.55" fill="#4FB0BE" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="795.38" y="320.00" width="7.55" height="7.55" fill="#4FB0BE" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="803.93" y="320.00" width="7.55" height="7.55" fill="#4FB0BE" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="812.48" y="320.00" width="7.55" height="7.55" fill="#4FB0BE" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="821.03" y="320.00" width="7.55" height="7.55" fill="#4FB0BE" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="829.59" y="320.00" width="7.55" height="7.55" fill="#4FB0BE" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="838.14" y="320.00" width="7.55" height="7.55" fill="#4FB0BE" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="846.69" y="320.00" width="7.55" height="7.55" fill="#4FB0BE" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="855.24" y="320.00" width="7.55" height="7.55" fill="#4FB0BE" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="863.79" y="320.00" width="7.55" height="7.55" fill="#4FB0BE" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="872.34" y="320.00" width="7.55" height="7.55" fill="none" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="880.90" y="320.00" width="7.55" height="7.55" fill="#4FB0BE" stroke="#1A1714" stroke-width="0.6"/>
+<rect x="889.45" y="320.00" width="7.55" height="7.55" fill="none" stroke="#1A1714" stroke-width="0.6"/>
+<text x="652.00" y="450.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="start">ends 88–116</text>
+<text x="652.00" y="470.00" fill="#6E665C" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start">1 = yarn present</text>
+</g>
+<rect x="913.00" y="347.00" width="16.00" height="6.00" fill="#D8E272" stroke="none" stroke-width="1"/>
+<g id="step-4">
+<rect x="930.00" y="200.00" width="276.00" height="300.00" fill="#F3EFE6" stroke="#1A1714" stroke-width="1"/>
+<text x="944.00" y="224.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="13" font-weight="400" text-anchor="start" letter-spacing="1">04  底组织</text>
+<text x="944.00" y="242.00" fill="#6E665C" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start" letter-spacing="1.2">GROUND</text>
+<rect x="996.00" y="280.00" width="17.40" height="17.40" fill="#E0D3B4" stroke="none" stroke-width="1"/>
+<rect x="1014.00" y="280.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1032.00" y="280.00" width="17.40" height="17.40" fill="#E0D3B4" stroke="none" stroke-width="1"/>
+<rect x="1050.00" y="280.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1068.00" y="280.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1086.00" y="280.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1104.00" y="280.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1122.00" y="280.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="996.00" y="298.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1014.00" y="298.00" width="17.40" height="17.40" fill="#E0D3B4" stroke="none" stroke-width="1"/>
+<rect x="1032.00" y="298.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1050.00" y="298.00" width="17.40" height="17.40" fill="#E0D3B4" stroke="none" stroke-width="1"/>
+<rect x="1068.00" y="298.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1086.00" y="298.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1104.00" y="298.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1122.00" y="298.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="996.00" y="316.00" width="17.40" height="17.40" fill="#E0D3B4" stroke="none" stroke-width="1"/>
+<rect x="1014.00" y="316.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1032.00" y="316.00" width="17.40" height="17.40" fill="#E0D3B4" stroke="none" stroke-width="1"/>
+<rect x="1050.00" y="316.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1068.00" y="316.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1086.00" y="316.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1104.00" y="316.00" width="17.40" height="17.40" fill="#E0D3B4" stroke="none" stroke-width="1"/>
+<rect x="1122.00" y="316.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="996.00" y="334.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1014.00" y="334.00" width="17.40" height="17.40" fill="#E0D3B4" stroke="none" stroke-width="1"/>
+<rect x="1032.00" y="334.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1050.00" y="334.00" width="17.40" height="17.40" fill="#E0D3B4" stroke="none" stroke-width="1"/>
+<rect x="1068.00" y="334.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1086.00" y="334.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1104.00" y="334.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1122.00" y="334.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="996.00" y="352.00" width="17.40" height="17.40" fill="#E0D3B4" stroke="none" stroke-width="1"/>
+<rect x="1014.00" y="352.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1032.00" y="352.00" width="17.40" height="17.40" fill="#E0D3B4" stroke="none" stroke-width="1"/>
+<rect x="1050.00" y="352.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1068.00" y="352.00" width="17.40" height="17.40" fill="#E0D3B4" stroke="none" stroke-width="1"/>
+<rect x="1086.00" y="352.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1104.00" y="352.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1122.00" y="352.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="996.00" y="370.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1014.00" y="370.00" width="17.40" height="17.40" fill="#E0D3B4" stroke="none" stroke-width="1"/>
+<rect x="1032.00" y="370.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1050.00" y="370.00" width="17.40" height="17.40" fill="#E0D3B4" stroke="none" stroke-width="1"/>
+<rect x="1068.00" y="370.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1086.00" y="370.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1104.00" y="370.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1122.00" y="370.00" width="17.40" height="17.40" fill="#E0D3B4" stroke="none" stroke-width="1"/>
+<rect x="996.00" y="388.00" width="17.40" height="17.40" fill="#E0D3B4" stroke="none" stroke-width="1"/>
+<rect x="1014.00" y="388.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1032.00" y="388.00" width="17.40" height="17.40" fill="#E0D3B4" stroke="none" stroke-width="1"/>
+<rect x="1050.00" y="388.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1068.00" y="388.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1086.00" y="388.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1104.00" y="388.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1122.00" y="388.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="996.00" y="406.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1014.00" y="406.00" width="17.40" height="17.40" fill="#E0D3B4" stroke="none" stroke-width="1"/>
+<rect x="1032.00" y="406.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1050.00" y="406.00" width="17.40" height="17.40" fill="#E0D3B4" stroke="none" stroke-width="1"/>
+<rect x="1068.00" y="406.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1086.00" y="406.00" width="17.40" height="17.40" fill="#E0D3B4" stroke="none" stroke-width="1"/>
+<rect x="1104.00" y="406.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1122.00" y="406.00" width="17.40" height="17.40" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="993.00" y="277.00" width="146.00" height="146.00" fill="none" stroke="#D8E272" stroke-width="2"/>
+<text x="946.00" y="460.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="13" font-weight="400" text-anchor="start">(3i − j) mod 8 &lt; 1</text>
+</g>
+<rect x="1207.00" y="347.00" width="16.00" height="6.00" fill="#D8E272" stroke="none" stroke-width="1"/>
+<g id="step-5">
+<rect x="1224.00" y="200.00" width="276.00" height="300.00" fill="#F3EFE6" stroke="#1A1714" stroke-width="1"/>
+<text x="1238.00" y="224.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="13" font-weight="400" text-anchor="start" letter-spacing="1">05  一纬</text>
+<text x="1238.00" y="242.00" fill="#6E665C" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start" letter-spacing="1.2">ONE PICK</text>
+<rect x="1250.00" y="290.00" width="13.16" height="13.16" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1264.00" y="290.00" width="13.16" height="13.16" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1278.00" y="290.00" width="13.16" height="13.16" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1292.00" y="290.00" width="13.16" height="13.16" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1306.00" y="290.00" width="13.16" height="13.16" fill="#E0D3B4" stroke="none" stroke-width="1"/>
+<rect x="1320.00" y="290.00" width="13.16" height="13.16" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1334.00" y="290.00" width="13.16" height="13.16" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1348.00" y="290.00" width="13.16" height="13.16" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1362.00" y="290.00" width="13.16" height="13.16" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1376.00" y="290.00" width="13.16" height="13.16" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1390.00" y="290.00" width="13.16" height="13.16" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1404.00" y="290.00" width="13.16" height="13.16" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1418.00" y="290.00" width="13.16" height="13.16" fill="#E0D3B4" stroke="none" stroke-width="1"/>
+<rect x="1432.00" y="290.00" width="13.16" height="13.16" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1446.00" y="290.00" width="13.16" height="13.16" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1460.00" y="290.00" width="13.16" height="13.16" fill="#1B3A6B" stroke="none" stroke-width="1"/>
+<rect x="1265.08" y="292.52" width="10.92" height="8.96" fill="#4FB0BE" stroke="none" stroke-width="0"/>
+<rect x="1293.08" y="292.52" width="108.92" height="8.96" fill="#4FB0BE" stroke="none" stroke-width="0"/>
+<rect x="1405.08" y="292.52" width="66.92" height="8.96" fill="#4FB0BE" stroke="none" stroke-width="0"/>
+<text x="1240.00" y="450.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="start">pick 156, ends 88–103</text>
+<text x="1240.00" y="470.00" fill="#6E665C" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start">tide float on the ground</text>
+</g>
+<g id="matrix">
+<text x="56.00" y="560.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="start" letter-spacing="1.4">WHICH OPERATION EACH YARN RECEIVES</text>
+<text x="420.00" y="600.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="start" letter-spacing="0.6">v  密度</text>
+<text x="680.00" y="600.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="start" letter-spacing="0.6">S  位置</text>
+<text x="940.00" y="600.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="start" letter-spacing="0.6">float  浮长</text>
+<text x="1200.00" y="600.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="12" font-weight="400" text-anchor="start" letter-spacing="0.6">stitch  缝合</text>
+<line x1="56.00" y1="664.00" x2="1500.00" y2="664.00" stroke="#D4CBBC" stroke-width="1" stroke-linecap="square"/>
+<rect x="56.00" y="632.00" width="16.00" height="24.00" fill="#8FA6C6" stroke="none" stroke-width="0.6"/>
+<text x="84.00" y="650.00" fill="#1A1714" font-family="'PingFang SC', 'Noto Sans SC', 'Hiragino Sans GB', Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start">大气</text>
+<text x="170.00" y="650.00" fill="#6E665C" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start">Air</text>
+<circle cx="448.00" cy="644.00" r="6.00" fill="#1A1714" stroke="none" stroke-width="1"/>
+<circle cx="708.00" cy="644.00" r="6.00" fill="#1A1714" stroke="none" stroke-width="1"/>
+<text x="948.00" y="650.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="18" font-weight="400" text-anchor="start">4</text>
+<circle cx="1227.00" cy="644.00" r="6.00" fill="#1A1714" stroke="none" stroke-width="1"/>
+<line x1="56.00" y1="712.00" x2="1500.00" y2="712.00" stroke="#D4CBBC" stroke-width="1" stroke-linecap="square"/>
+<rect x="56.00" y="680.00" width="16.00" height="24.00" fill="#B4BC57" stroke="none" stroke-width="0.6"/>
+<text x="84.00" y="698.00" fill="#1A1714" font-family="'PingFang SC', 'Noto Sans SC', 'Hiragino Sans GB', Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start">红树</text>
+<text x="170.00" y="698.00" fill="#6E665C" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start">Mangrove</text>
+<circle cx="448.00" cy="692.00" r="6.00" fill="#1A1714" stroke="none" stroke-width="1"/>
+<circle cx="708.00" cy="692.00" r="6.00" fill="#1A1714" stroke="none" stroke-width="1"/>
+<text x="948.00" y="698.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="18" font-weight="400" text-anchor="start">3</text>
+<circle cx="1227.00" cy="692.00" r="6.00" fill="#1A1714" stroke="none" stroke-width="1"/>
+<line x1="56.00" y1="760.00" x2="1500.00" y2="760.00" stroke="#D4CBBC" stroke-width="1" stroke-linecap="square"/>
+<rect x="56.00" y="728.00" width="16.00" height="24.00" fill="#EFE7D6" stroke="#1A1714" stroke-width="0.6"/>
+<text x="84.00" y="746.00" fill="#1A1714" font-family="'PingFang SC', 'Noto Sans SC', 'Hiragino Sans GB', Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start">琵鹭</text>
+<text x="170.00" y="746.00" fill="#6E665C" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start">Spoonbill</text>
+<circle cx="448.00" cy="740.00" r="6.00" fill="#1A1714" stroke="none" stroke-width="1"/>
+<circle cx="708.00" cy="740.00" r="6.00" fill="#1A1714" stroke="none" stroke-width="1"/>
+<text x="948.00" y="746.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="18" font-weight="400" text-anchor="start">5</text>
+<circle cx="1227.00" cy="740.00" r="6.00" fill="#1A1714" stroke="none" stroke-width="1"/>
+<line x1="56.00" y1="808.00" x2="1500.00" y2="808.00" stroke="#D4CBBC" stroke-width="1" stroke-linecap="square"/>
+<rect x="56.00" y="776.00" width="16.00" height="24.00" fill="#4FB0BE" stroke="none" stroke-width="0.6"/>
+<text x="84.00" y="794.00" fill="#1A1714" font-family="'PingFang SC', 'Noto Sans SC', 'Hiragino Sans GB', Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start">潮汐</text>
+<text x="170.00" y="794.00" fill="#6E665C" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start">Tide</text>
+<circle cx="448.00" cy="788.00" r="6.00" fill="#1A1714" stroke="none" stroke-width="1"/>
+<circle cx="708.00" cy="788.00" r="6.00" fill="#1A1714" stroke="none" stroke-width="1"/>
+<text x="948.00" y="794.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="18" font-weight="400" text-anchor="start">8</text>
+<circle cx="1227.00" cy="788.00" r="6.00" fill="#1A1714" stroke="none" stroke-width="1"/>
+<line x1="56.00" y1="856.00" x2="1500.00" y2="856.00" stroke="#D4CBBC" stroke-width="1" stroke-linecap="square"/>
+<rect x="56.00" y="824.00" width="16.00" height="24.00" fill="#B06A3C" stroke="none" stroke-width="0.6"/>
+<text x="84.00" y="842.00" fill="#1A1714" font-family="'PingFang SC', 'Noto Sans SC', 'Hiragino Sans GB', Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start">地震</text>
+<text x="170.00" y="842.00" fill="#6E665C" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start">Quake</text>
+<circle cx="448.00" cy="836.00" r="6.00" fill="none" stroke="#1A1714" stroke-width="1.3"/>
+<circle cx="708.00" cy="836.00" r="6.00" fill="none" stroke="#1A1714" stroke-width="1.3"/>
+<text x="948.00" y="842.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="18" font-weight="400" text-anchor="start">3</text>
+<circle cx="1227.00" cy="836.00" r="6.00" fill="#1A1714" stroke="none" stroke-width="1"/>
+<line x1="56.00" y1="904.00" x2="1500.00" y2="904.00" stroke="#D4CBBC" stroke-width="1" stroke-linecap="square"/>
+<rect x="56.00" y="872.00" width="16.00" height="24.00" fill="#C9CDD6" stroke="#1A1714" stroke-width="0.6"/>
+<text x="84.00" y="890.00" fill="#1A1714" font-family="'PingFang SC', 'Noto Sans SC', 'Hiragino Sans GB', Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start">仪器</text>
+<text x="170.00" y="890.00" fill="#6E665C" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start">Instrument</text>
+<circle cx="448.00" cy="884.00" r="6.00" fill="#1A1714" stroke="none" stroke-width="1"/>
+<circle cx="708.00" cy="884.00" r="6.00" fill="#1A1714" stroke="none" stroke-width="1"/>
+<text x="948.00" y="890.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="18" font-weight="400" text-anchor="start">10</text>
+<circle cx="1227.00" cy="884.00" r="6.00" fill="#1A1714" stroke="none" stroke-width="1"/>
+<line x1="56.00" y1="952.00" x2="1500.00" y2="952.00" stroke="#D4CBBC" stroke-width="1" stroke-linecap="square"/>
+<rect x="56.00" y="920.00" width="16.00" height="24.00" fill="#D24E35" stroke="none" stroke-width="0.6"/>
+<text x="84.00" y="938.00" fill="#1A1714" font-family="'PingFang SC', 'Noto Sans SC', 'Hiragino Sans GB', Helvetica, sans-serif" font-size="16" font-weight="400" text-anchor="start">观众</text>
+<text x="170.00" y="938.00" fill="#6E665C" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start">Visitor</text>
+<circle cx="448.00" cy="932.00" r="6.00" fill="none" stroke="#1A1714" stroke-width="1.3"/>
+<circle cx="708.00" cy="932.00" r="6.00" fill="none" stroke="#1A1714" stroke-width="1.3"/>
+<text x="948.00" y="938.00" fill="#1A1714" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="18" font-weight="400" text-anchor="start">6</text>
+<rect x="1220.00" y="924.00" width="14.00" height="14.00" fill="none" stroke="#D24E35" stroke-width="1.4"/>
+<text x="56.00" y="980.00" fill="#6E665C" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start">Open dot: only when a quake is in the window, or on a press. Open square: the visitor mark, not a pair.</text>
+</g>
+<g id="footer">
+<text x="56.00" y="1092.00" fill="#6E665C" font-family="'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace" font-size="11" font-weight="400" text-anchor="start" letter-spacing="0.4">bandX = 6 + S × 168     w = 2.4 + 9v     d = exp(−(i−bandX)² / 2w²) × (0.62 + 0.38v)     cov = 1 if d &gt; 0.5</text>
+</g>
+</svg>

@@ -1,0 +1,5 @@
+type,elapsed_ms,temperature_c,light_raw,event_id
+sample,730000,30.00,15,
+sample,740000,30.50,17,
+sample,750000,31.19,16,
+sample,760000,31.50,18,
