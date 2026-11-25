@@ -1,13 +1,15 @@
 ARTD8105 · Session 2 · wall labels
 ISO portrait · one A2 + two A4
 Every mark from my_work/tools/tool.html. No post-processing.
-Fill the name. Fill seed and slider values from the tool readout at the moment you press Download SVG.
-The three sheets must be three different points in the parameter space, not three seeds of one setting.
+姓名按展签。滑杆只写能从 SVG 对上的读数。对不上的不填猜测值。
+The name is the exhibition name. Slider values are written only where the SVG matches the generator. Unmatched shape sliders are not guessed.
+三份导出文件都是 420×594 mm。哪一张印成 A2、哪两张印成 A4，文件里没有记录。
+All three downloads are 420×594 mm. Which sheet was printed at A2 and which two at A4 was not recorded.
 ------------------------------------------------
 共用 / Shared
 姓名 / Name
-[填写你的姓名]
-[YOUR NAME]
+雷詩語
+Lei Shiyu
 标题 / Title
 triangles, overlaping, reverse once
 triangles, overlapping, reverse once
@@ -26,53 +28,106 @@ drawing a patterns: triangles, overlaping, draw at random but in consequences, r
 画面铺满可印区域（10 mm 边距内） / fills the drawable page inside a 10 mm margin
 后处理：无 / Post-processing: none — every mark from the generator
 ------------------------------------------------
-印张 1 · A2 竖版 / Print 1 · A2 portrait
+印张 1 / Print 1
 文件 / File
-[ ]  my_work/prints/
+my_work/prints/triangles_seed-1_n-125.svg
 seed
+1
 count
+125
 size min–max
+0.010–0.100（页面宽度的 1/100–1/10）
+0.010–0.100 of page width (1/100–1/10)
 overlap last N
+2
 overlap amount
+0.40
 colour run (1 = one by one, 2 = two by two)
+1
 correlation
+0.72
 max turn (degrees)
+180
 trace weight (mm)
+1.2
 outline weight (mm)
+0.35
 fade
+0.50
 composition beat
+4（每第 4 个更大）
+4 (every 4th larger)
 reverse (on/off)
+on（数量过半后反向）
+on (after half the count)
+核对 / Check
+用 tool.html 的这组读数重画，125 个三角形的坐标与这份 SVG 一致。这是工具打开时的初始滑杆。seed 打开时就是 1，数量是 125。
+Regenerated with tool.html at these values. All 125 triangles match this SVG. These are the sliders the tool opens with. The seed opens at 1 and the count is 125.
 ------------------------------------------------
-印张 2 · A4 竖版 / Print 2 · A4 portrait
+印张 2 / Print 2
 文件 / File
-[ ]  my_work/prints/
+my_work/prints/triangles_seed-1_n-137.svg
 seed
+1
 count
+137
 size min–max
+未写入文件。按这个 seed 和数量、用现在的工具重画，第一个三角形就对不上，所以不填猜测值。
+Not stored in the file. Regenerating with this seed and count does not match the first triangle, so no guessed value is written.
 overlap last N
+未还原 / not recovered
 overlap amount
-colour run
+未还原 / not recovered
+colour run (1 = one by one, 2 = two by two)
+1
 correlation
+未还原 / not recovered
 max turn (degrees)
+未还原 / not recovered
 trace weight (mm)
+2.5
 outline weight (mm)
+0.15
 fade
+0.22
 composition beat
+未还原 / not recovered
 reverse (on/off)
+未还原 / not recovered
+核对 / Check
+描边、痕迹、渐隐、逐个变色是从 SVG 的线宽和透明度读出的。形状滑杆没有存进文件。
+Outline, trace, fade and one-by-one colour are read from the SVG stroke and opacity. The shape sliders were not saved in the file.
 ------------------------------------------------
-印张 3 · A4 竖版 / Print 3 · A4 portrait
+印张 3 / Print 3
 文件 / File
-[ ]  my_work/prints/
+my_work/prints/triangles_seed-68574_n-137.svg
 seed
+68574
 count
+137
 size min–max
+未写入文件。和印张 2 一样，重画对不上，不填猜测值。
+Not stored in the file. As with print 2, a regeneration does not match, so no guessed value is written.
 overlap last N
+未还原 / not recovered
 overlap amount
-colour run
+未还原 / not recovered
+colour run (1 = one by one, 2 = two by two)
+1
 correlation
+未还原 / not recovered
 max turn (degrees)
+未还原 / not recovered
 trace weight (mm)
+2.5
 outline weight (mm)
+0.15
 fade
+0.22
 composition beat
+未还原 / not recovered
 reverse (on/off)
+未还原 / not recovered
+核对 / Check
+描边、痕迹、渐隐、逐个变色是从 SVG 的线宽和透明度读出的。颜色从黑色开始，和 seed 68574 的第一下随机一致。
+Outline, trace, fade and one-by-one colour are read from the SVG. The first fill is black, which matches the first random step of seed 68574.
