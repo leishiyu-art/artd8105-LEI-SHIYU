@@ -5,7 +5,7 @@ year: 2003
 venue: "GA2003 / Generative Art Conference, Milan"
 venue_type: "conference"
 doi_or_url: "https://philipgalanter.com/downloads/ga2003_paper.pdf"
-verified: false        # 你自己打开 PDF 之后改成 true
+verified: false
 stream: "canon"
 topic_tags: []         # 你来填，例如 generative-art / complexity / systems
 subconversation: ""    # 有了 territory_map.md 再填

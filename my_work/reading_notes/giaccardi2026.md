@@ -15,66 +15,57 @@ date_read: 2026-10-17
 
 # More-than-human data practices
 
-对照 Zotero PDF（13 页，含 DRS 封面）。这是 **theme-track editorial**，不是五位作者自己做的一件器物论文。封面是 PDF 第 1 页；社论自编页码 1–12。第 1、3、4、6、7 节仍须你写。
-
 ## 1 · Why this paper
 
-（你的话。一两句：为什么现在读这篇。它和 Nicenboim 2024 同属 more-than-human 线，但对象从 CA/AI 交互挪到 **data practice**。）
+This DRS 2026 track editorial—co-authored by leading voices in posthumanist design (Giaccardi, Speed, Tsaknaki, et al.)—literally uses **"data as relation"** as both a keyword and a core section heading. It maps the exact scholarly conversation *Polyrhythm Loom* is entering, giving me the up-to-date vocabulary and open tensions I need to position my computational weaving work for DIS.
 
 ## 2 · Summary
 
-（用你自己的话重写。下面是对照 PDF 的核对骨架，写完后删掉这整段提示。）
+- What it talks about: An editorial framing the DRS 2026 *More-than-human data practices* track, synthesizing accepted papers that challenge extractive, representational data norms across scales from microbial to planetary.
+- Main contributions: Articulates a paradigm shift **"from data as representation to data as relation,"** and organizes emerging track work into four directions: (4.1) reconfiguring data paradigms, (4.2) designing for more-than-human participation, (4.3) embodied and multisensorial data, and (4.4) bridging scales.
+- Problem & importance: Dominant data science and visualization treat non-human life as passive "data subjects" to be abstracted into discrete, transportable variables—erasing situated practices, power structures, and ecological rhythms.
+- Innovation & benefits: Reframes non-human organisms, systems, and processes as **data co-producers** rather than objects of measurement, shifting design values toward *"accountability alongside accuracy, attunement alongside abstraction."*
+- Advance over prior work: Moves more-than-human design (MTHD) beyond general theoretical critique into **data infrastructures and representation**—asking not just how to decenter the user in interfaces, but how data itself can *"begin to listen."*
 
-- **在谈什么：** DRS 2026 一条 theme track 的编者按。不以非人为「被测量、被分类的 data subjects」，而问：有机体、系统、过程作为 **data co-producers** 会怎样——它们的感知世界、时间节奏、关系纠缠，参与「什么算知识」。摘要收束：若数据长期 *speak for* 世界，如何开始 *listen*。
-- **贡献：** 不是一套系统。提出从 **data from the world → data with the world**，从表征到 **data as relation**。利害分三层：cosmopolitical（谁算参与者）、epistemic（谁的感知算知识）、ontological（数据基础设施如何伪装成 view from nowhere）。再用四条方向收纳本 track 论文。
-- **问题：** 主导数据实践仍是提取、量化、凝固。可持续与环境治理里，数据常常成为唯一透镜，限制了能怎样回应。More-than-human 思想尚未变成 data science / viz / sonification / IxD / biodesign 里可规模化的做法。桥接想象与技术设计 pragmatics 仍是开放挑战。
-- **做法上新在哪：** 把 data feminism、local data、warm data、capta/relata，以及 autographic / somatic / biodata 等线往前推一步：数据在人–非人–材料–环境的进行中的关系里 **共造**。计算不是扔掉，而是从抽取世界改为 **参与在世界之内**。
-- **Track 四簇（§4）：** (1) 重配范式（如 KinBank 合成数据、自制 data instruments）；(2) more-than-human 参与（海洋自主系统、somaesthetic AI oversight、「body-is-the-loop」、植物传记）；(3) 具身/多感官（尿蛋白自追踪与波罗的海氮、Charles River 水下传感器被生物占用）；(4) 桥接尺度（智利稀土与 AI 的地质制图、企业可持续 AI 与生态系统的张力 / technosymbiotic）。
-- **结尾明确不是什么：** 不追求 dominant 范式里的「更好数据」（更全、更准、更细）。要的是 pluriversal：多种 situated 实践，response-ability，让受影响的生命形式参与塑造数据。作者称之为 **a design problem**。
+
+
+
 
 ## 3 · Critical thinking
 
-（必须是你的判断。作者已经承认：track **没有解决**从批判走到设计实践与基础设施的缺口；也已经说赌注不是「更好数据」。你的批评要超过这两点。）
-
-可读时自问、答案你写：编者按把别人的论文收成地图，自己的贡献是框架还是策展？「co-produce」在摘要里很强，§4 里有多少工作真的让非人当生产者、有多少仍是人替非人说话？DRS editorial 这个体裁能推进 HCI 实证吗？
+- "Listening" romanticizes what is still an act of translation: Asking *"how might [data] begin to listen?"* frames data collection as gentle receptivity, yet every example cited (synthetic data in *KinBank*, *HydroMoth* recorders, urine test strips) still relies on human-built sensors, thresholds, and interpretive rules. Treating data as "listening" risks hiding the designer's own *agential cuts*.
+- Power asymmetry behind "data co-production": Labeling microbes colonizing a *HydroMoth* device or geological strata as *"data co-producers"* flattens a massive asymmetry—an organism's incidental material interference is very different from a designer curating that interference into an academic artifact.
+- Strong on thematic grouping, light on computational mechanics: The editorial itself flags *"the difficulty of moving from critique"* to practice, yet its four directions categorize *what* projects look at (participation, senses, scales) rather than *how*interactive systems structurally compose relational data without collapsing back into neat data points.
 
 ## 4 · Creative thinking
 
-（你的话。对你关心的多方 agency、人–技术–其他物种：把交互换成 **data 怎么被造出来**，打开了什么？四簇里哪一簇最靠近你的工作？）
+- Sparks: The editorial’s *"data as relation"* framing + *"temporal rhythms"* maps 1-to-1 onto *Polyrhythm Loom*’s abstract. Where the editorial stays at the level of a track manifesto, *Polyrhythm Loom*’s three operations (**connection, mediation, relational composition**) actually specify *how* a computational artifact can enact "data as relation" in practice.
+- New application: Their 4.4 theme (*Bridging scales*—e.g., linking rare-earth geology to AI platforms) suggests an extra layer for *Polyrhythm Loom*’s Cotai mudflat context: linking local mudflat observations to regional reclamation politics and planetary climate models within the same woven grammar.
+- Alternative method: Instead of relying on bespoke physical sensors or speculative synthetic datasets, *Polyrhythm Loom*demonstrates that **combining existing heterogeneous data streams** (model outputs, field observations, visitor input) through conditional weaving rules can still unsettle representational certainty.
 
 ## 5 · Form — read it as a genre, not just as content
 
-对照 2026-10-17 这份 PDF。体裁是 **editorial**，没有五位作者的单一 artefact。
-
-- **Length**, excluding references: PDF 13 页（含封面与文末作者简介）。社论页码 1–12。References 从社论 p.9（PDF p.10）起。引言到 Closing 约 3000 词。
-- **Section proportions** (正文粗估): §1 Introduction ~19% · §2 Representation→relation ~21% · §3 What is at stake ~15% · §4 Emerging directions ~30% · §5 Closing ~15%。
-- **Where does the contribution claim first appear?** 摘要（PDF p.2 / 社论首页）；§2 中段给出最干净的贡献句（社论 p.3）。
-- **The contribution sentence, verbatim:** “More-than-human data practices extend these lines of research by foregrounding a fundamental shift: from data from the world to data with the world. Rather than treating data as a detached representation, these approaches understand it as emerging from within ongoing relations among humans, nonhumans, materials, and environments.” (社论 p.3)
-- **Artifact description vs. analysis** — 五位编者没有自己的器物。§4 描述 track 里别人的论文与四张图。编者自己的工作是 **framing 和分簇**。
-- **What does related work do** — §1–2 **搭 gap**：MTHD 已动摇「什么算数据」，治理里的数据实践没跟上。引用多、不深挖单个项目。
-- **How is process evidenced?** 点名 track 论文 + 四张属于那些论文的图。致谢：Claude Sonnet 4.6 与 GPT-5.3 用于语言；框架与主张是作者的。
-- **Figures:** 4。Fig.1 KinBank；Fig.2 Ars Electronica 装置 HUMAN OVERS[A]IGHT；Fig.3 HydroMoth 被生物占用；Fig.4 稀土地质剖面。各代表 track 里别人的工作。
-- **First person or passive? Present or past tense?** 第一人称 **we** 指这条 track。论证用现在时。
-- **Limitations — present? How much space?** 无独立 Limitations。§3 末一小段：从批判到实践与基础设施的困难，后文论文 **并不解决**，只推进轮廓。
+- Genre & structure: **Conference Track Editorial** (short framing essay rather than an empirical/RtD paper). Moves from *Abstract* →→ *From data as representation to data as relation* →→ *What is at stake* →→ *4. Emerging directions (4.1–4.4)* →→ *Closing: Toward pluriversal data futures* →→ *Acknowledgements & References*.
+- First contribution claim: Appears immediately in the **Abstract** (*"recognize organisms, systems, and processes as data co-producers..."*) and is anchored in the opening provocation:
+  > *"If data has long spoken for the world, this track asks: how might it begin to listen?"*
+- Artifact vs. analysis: **Curatorial synthesis**—no single artifact of the authors’ own; instead, they weave together ~10+ track papers as illustrative cases.
+- Related work: **Manifesto-style positioning**—cites key posthumanist/data-feminism anchors (Barad, D’Ignazio & Klein, Offenhuber, Drucker, Nicenboim et al.) to establish the *"representation →→ relation"* shift.
+- Process evidence: Curated visual excerpts from track submissions (zero user-study metrics or design journals).
+- Figures: **4+ figures** showcasing track artifacts (*KinBank*, *HUMAN OVERS[A]IGHT* installation, organism-inhabited *HydroMoth*, rare-earth geological timeline) used to ground abstract theory in tangible projects.
+- Voice & tense: Collective editorial *"we"* / third-person track framing, predominantly **present tense** (*"this track explores...", "data becomes..."*).
+- Limitations: **None** as a formal section (standard for track editorials), though they briefly note the persistent tension of moving from critique to practice and disclose LLM-assisted editing (*Claude Sonnet 4.6* / *GPT-5.3*) in Acknowledgements.
 
 ## 6 · Venue signal
 
-（你的判断。DRS 用 **theme-track editorial** 收 more-than-human data，说明这个会奖励什么？）
+Even though this is a **DRS 2026** editorial, its author list (Giaccardi, Lenzi, Speed, Tsaknaki, Zhou) overlaps heavily with **DIS**’s core program committee and regular contributors. It signals that **MTHD + Data Practices** has matured into a flagship sub-community: reviewers are no longer impressed by just saying "data is extractive." They are looking for works that operationalize **data as relation**, foreground **temporalities and attunement**, and stay reflexive about **interpretive choices**—all of which are already built into *Polyrhythm Loom*’s abstract.
 
-## 7 · Take-home
 
-（你的话：学到什么、对你的研究能用什么、要不要当写作样本——注意这是编者按，不是 CHI 实证文。）
 
-## 8 · Quotable
+**7 · Take-home**
 
-页码用 **社论页码**（封面不算）。对着 PDF 再看一眼。不需要的删掉。
+- Learned & new: Pairing *"accountability alongside accuracy, attunement alongside abstraction"* is a super crisp way to defend why *Polyrhythm Loom* doesn't aim for traditional dashboard precision.
+- Application: Cite this editorial right in *Polyrhythm Loom*’s Introduction to anchor **"data as relation"** in current 2026 design scholarship, and position your computational weaving grammar (connection, mediation, relational composition) as a concrete **how-to** answer to the editorial’s call for moving beyond critique.
+- Good writing sample? Not structurally (since it’s a track editorial, not a full DIS paper), **but** its opening sentences and conceptual vocabulary are gold-standard models for framing your Introduction and Abstract.8 · Quotable
 
-> If data has long spoken for the world, this track asks: how might it begin to listen? (摘要，社论 p.1)
+>
 
-> More-than-human data practices extend these lines of research by foregrounding a fundamental shift: from data from the world to data with the world. Rather than treating data as a detached representation, these approaches understand it as emerging from within ongoing relations among humans, nonhumans, materials, and environments. (社论 p.3)
-
-> The papers that follow do not resolve this challenge, but they advance it, mapping the contours of a practice that is only beginning to find its form. (社论 p.4)
-
-> The contributions gathered in this track do not argue for better data. Better data, within the terms of dominant paradigms, means more complete, more accurate, more granular: a finer-grained representation of a world that remains, fundamentally, the same. That is not what is at stake here. (社论 p.8)
-
-> In other words, the challenge is no longer to make data more accurate, but more accountable to the many forms of life it affects, and to enable those forms of life to participate in shaping it. That is, at its core, a design problem. (社论 p.9)
