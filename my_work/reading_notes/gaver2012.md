@@ -43,8 +43,11 @@ date_read:
 
 ## 5 · Form — read it as a genre, not just as content
 
-- **An Annotated Portfolio figure for *Polyrhythm Loom*:** Instead of treating your woven pieces as isolated illustrations, build one key figure as a Gaver-style **annotated portfolio** of 3–4 swatches/runs (e.g., shared environmental timeline vs. agent-specific generative rhythms vs. hybrid interference), using concise callout notes to map your design space (*connection, mediation, relational composition*) and surface where translation broke down.
-- **Framing Cotai through *ontological politics*:** Gaver's borrowing of Law & Urry—that generative practices make *"multiple worlds... equally valid, equally true, but simply unlike one another"*—gives you sharp language to position *Polyrhythm Loom* alongside coastal ecology: not competing to model Cotai "accurately," but enacting one situated, material-temporal world.
+- **Length & proportions:** 10 pages total (pp. 937–946); **~8.5 pages excluding references** (36 references on pp. 945–946). Unnumbered sections: *Introduction* (~1.1 pp.), *Theory in Research Through Design* (~1.1 pp.), *Scientific and Design Theories* (~2.7 pp.), *Convergence in Research Through Design* (~2.1 pp.), *Theory as Annotation* (~1.6 pp.), *Conclusion + Acknowledgements* (~0.7 p.).
+- **First contribution claim & verbatim sentence:** Appears in the Introduction (p. 937): *"In this essay, my intention is to temper calls for disciplinary consolidation with remarks on what we might reasonably expect from research through design."* (Later operationalized in *Theory as Annotation*: *"I am suggesting, however, that we develop annotated portfolios as a serious form of theoretical contribution appropriate to research through design."*)
+- **Artifact vs. analysis balance:** 100% meta-theoretical essay with zero original artifacts by the author; grounded instead by **1 figure** (Fig. 1: a sketch of an annotated portfolio of Dieter Rams' Braun/Vitsoe designs) and short canonical examples.
+- **Related work style:** No dedicated "Related Work" section; HCI/RtD debates (Zimmerman, Forlizzi, Stolterman, Fallman, Sengers) and Philosophy of Science/STS (Popper, Kuhn, Lakatos, Latour, Law & Urry) are woven directly into each argumentative section.
+- **Voice, tense & limitations:** Single-author first-person *"I"* throughout—conversational, wry, and polemical yet measured. Present tense for philosophical claims, past tense in the Conclusion. No standalone "Limitations" section; instead, Gaver hedges his own scope inline (*"I am not presenting Popper's and Lakatos' accounts as particularly representative..."* and *"I am not proposing here that annotated portfolios subsume all other forms of design theory"*).
 
 ## 6 · Venue signal
 
