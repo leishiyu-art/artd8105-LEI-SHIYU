@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="520" viewBox="0 0 1600 520">
+  <rect width="1600" height="520" fill="#F3EFE6"/>
+  <text x="48" y="44" fill="#6E665C" font-family="Menlo, monospace" font-size="12" letter-spacing="2.4">FIG. 9</text>
+  <text x="1552" y="44" fill="#6E665C" font-family="Helvetica, sans-serif" font-size="12" letter-spacing="1.6" text-anchor="end">DATA AS RELATION</text>
+  <rect x="48" y="58" width="42" height="3" fill="#D24E35"/>
+  <g font-family="PingFang SC, Hiragino Sans GB, sans-serif" font-size="28" font-weight="500" fill="#1A1714">
+    <text x="48" y="118">连接</text>
+    <text x="560" y="118">中介</text>
+    <text x="1072" y="118">构成</text>
+  </g>
+  <g font-family="Helvetica, sans-serif" font-size="12" letter-spacing="1.8" fill="#6E665C">
+    <text x="48" y="146">CONNECTION</text>
+    <text x="560" y="146">MEDIATOR</text>
+    <text x="1072" y="146">COMPOSITION</text>
+  </g>
+  <line x1="520" y1="168" x2="520" y2="470" stroke="#D4CBBC" stroke-width="1"/>
+  <line x1="1032" y1="168" x2="1032" y2="470" stroke="#D4CBBC" stroke-width="1"/>
+  <rect x="72" y="300" width="400" height="16" fill="#D8E272"/>
+  <rect x="248" y="200" width="16" height="250" fill="#4FB0BE"/>
+  <rect x="230" y="286" width="52" height="44" fill="#D8E272"/>
+  <rect x="584" y="210" width="150" height="14" fill="#8FA6C6"/>
+  <rect x="860" y="210" width="140" height="14" fill="#B4BC57"/>
+  <rect x="760" y="190" width="48" height="54" fill="#D8E272"/>
+  <rect x="620" y="340" width="250" height="14" fill="#4FB0BE"/>
+  <rect x="860" y="390" width="120" height="14" fill="#EFE7D6"/>
+  <rect x="1096" y="196" width="440" height="14" fill="#D8E272"/>
+  <rect x="1096" y="222" width="440" height="14" fill="#F3EFE6" stroke="#1A1714" stroke-width="1"/>
+  <rect x="1096" y="248" width="440" height="14" fill="#4FB0BE"/>
+  <rect x="1096" y="274" width="440" height="14" fill="#B4BC57"/>
+  <rect x="1096" y="300" width="440" height="14" fill="#B06A3C"/>
+  <rect x="1096" y="326" width="440" height="14" fill="#EFE7D6" stroke="#1A1714" stroke-width="1"/>
+  <rect x="1096" y="352" width="440" height="14" fill="#8FA6C6"/>
+  <rect x="1288" y="262" width="40" height="40" fill="#D8E272"/>
+</svg>

@@ -1,0 +1,10 @@
+Monitor port settings:
+  baudrate=115200
+  bits=8
+  dtr=on
+  parity=none
+  rts=on
+  stop_bits=1
+
+Connecting to /dev/cu.usbmodemE072A1E315E42. Press CTRL-C to exit.
+sample,160000,28.44,57,

@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="980" viewBox="0 0 1440 980" role="img">
+<title>Reading across the three probes</title>
+<rect width="1440" height="980" fill="#FFFFFF"/>
+<defs>
+  <marker id="arr" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M1 1.6 L8.2 5 L1 8.4" fill="none" stroke="#1A1A1A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+  <marker id="arrA" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M1 1.6 L8.2 5 L1 8.4" fill="none" stroke="#1F5C57" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+</defs>
+
+<text x="40" y="42" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="1.6" fill="#1F5C57">READING ACROSS</text>
+<text x="40" y="76" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#1A1A1A">Naming an agent is not giving a trace an effect</text>
+<text x="40" y="104" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#5E5E5E">Three configurations. Not three stages.</text>
+<line x1="40" y1="128" x2="1400" y2="128" stroke="#1A1A1A" stroke-width="1"/>
+
+<text x="40" y="176" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#1A1A1A">Speaking-for</text>
+<text x="40" y="202" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1F5C57">proxy</text>
+<line x1="40" y1="250" x2="400" y2="250" stroke="#1F5C57" stroke-width="1.25"/>
+
+<line x1="60" y1="238" x2="60" y2="262" stroke="#1A1A1A" stroke-width="1.25"/>
+<text x="60" y="300" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1A1A1A">Soil</text>
+<text x="60" y="320" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5E5E5E">a signal</text>
+
+<line x1="190" y1="238" x2="190" y2="262" stroke="#1A1A1A" stroke-width="1.25"/>
+<text x="190" y="300" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1A1A1A">Proxy</text>
+<text x="190" y="320" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5E5E5E">I author the voice</text>
+
+<line x1="320" y1="238" x2="320" y2="262" stroke="#1A1A1A" stroke-width="1.25"/>
+<text x="320" y="300" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1A1A1A">Turn</text>
+<text x="320" y="320" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5E5E5E">a civic position</text>
+
+<text x="40" y="400" font-family="Helvetica, Arial, sans-serif" font-size="11" letter-spacing="1.1" fill="#5E5E5E">NARRATIVE</text>
+<text x="40" y="428" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#1A1A1A">Take a turn</text>
+<text x="40" y="480" font-family="Helvetica, Arial, sans-serif" font-size="11" letter-spacing="1.1" fill="#5E5E5E">WHAT THE TRACE DOES</text>
+<text x="40" y="508" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1A1A1A">Soil becomes available for deliberation.</text>
+<text x="40" y="560" font-family="Helvetica, Arial, sans-serif" font-size="11" letter-spacing="1.1" fill="#5E5E5E">THE CUT</text>
+<text x="40" y="588" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1A1A1A">The cut is the voice I write.</text>
+
+<text x="500" y="176" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#1A1A1A">Listening-with</text>
+<text x="500" y="202" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1F5C57">instrument</text>
+<line x1="500" y1="250" x2="860" y2="250" stroke="#1F5C57" stroke-width="1.25"/>
+
+<line x1="520" y1="238" x2="520" y2="262" stroke="#1A1A1A" stroke-width="1.25"/>
+<text x="520" y="300" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1A1A1A">Sea</text>
+<text x="520" y="320" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5E5E5E">one hydrophone</text>
+
+<line x1="650" y1="238" x2="650" y2="262" stroke="#1A1A1A" stroke-width="1.25"/>
+<text x="650" y="300" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1A1A1A">Sound</text>
+<text x="650" y="320" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5E5E5E">an interior</text>
+
+<line x1="780" y1="238" x2="780" y2="262" stroke="#1A1A1A" stroke-width="1.25"/>
+<text x="780" y="300" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1A1A1A">Listener</text>
+<text x="780" y="320" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5E5E5E">waits</text>
+
+<path d="M780 262 C780 360, 520 360, 520 270" fill="none" stroke="#8A8A8A" stroke-width="1.1" stroke-dasharray="2 4"/>
+<circle cx="520" cy="270" r="3.5" fill="#FFFFFF" stroke="#8A8A8A" stroke-width="1.1"/>
+
+<text x="500" y="400" font-family="Helvetica, Arial, sans-serif" font-size="11" letter-spacing="1.1" fill="#5E5E5E">NARRATIVE</text>
+<text x="500" y="428" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#1A1A1A">Wait</text>
+<text x="500" y="480" font-family="Helvetica, Arial, sans-serif" font-size="11" letter-spacing="1.1" fill="#5E5E5E">WHAT THE TRACE DOES</text>
+<text x="500" y="508" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1A1A1A">Presence and action come apart.</text>
+<text x="500" y="560" font-family="Helvetica, Arial, sans-serif" font-size="11" letter-spacing="1.1" fill="#5E5E5E">THE CUT</text>
+<text x="500" y="588" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1A1A1A">The return path is left open.</text>
+
+<text x="960" y="176" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#1A1A1A">Weaving-with</text>
+<text x="960" y="202" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1F5C57">dependency</text>
+<line x1="960" y1="250" x2="1320" y2="250" stroke="#1F5C57" stroke-width="1.25"/>
+
+<line x1="980" y1="238" x2="980" y2="262" stroke="#1A1A1A" stroke-width="1.25"/>
+<text x="980" y="300" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1A1A1A">Traces</text>
+<text x="980" y="320" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5E5E5E">seven rhythms</text>
+
+<line x1="1110" y1="238" x2="1110" y2="262" stroke="#1A1A1A" stroke-width="1.25"/>
+<text x="1110" y="300" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1A1A1A">Grammar</text>
+<text x="1110" y="320" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5E5E5E">rules I wrote</text>
+
+<line x1="1240" y1="238" x2="1240" y2="262" stroke="#1A1A1A" stroke-width="1.25"/>
+<text x="1240" y="300" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1A1A1A">Field</text>
+<text x="1240" y="320" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5E5E5E">a pattern accumulates</text>
+
+<text x="960" y="400" font-family="Helvetica, Arial, sans-serif" font-size="11" letter-spacing="1.1" fill="#5E5E5E">NARRATIVE</text>
+<text x="960" y="428" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#1A1A1A">Follow an accumulation</text>
+<text x="960" y="480" font-family="Helvetica, Arial, sans-serif" font-size="11" letter-spacing="1.1" fill="#5E5E5E">WHAT THE TRACE DOES</text>
+<text x="960" y="508" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1A1A1A">A tide can change a pick.</text>
+<text x="960" y="560" font-family="Helvetica, Arial, sans-serif" font-size="11" letter-spacing="1.1" fill="#5E5E5E">THE CUT</text>
+<text x="960" y="588" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1A1A1A">The cut is which rules count.</text>
+<line x1="40" y1="650" x2="1400" y2="650" stroke="#1A1A1A" stroke-width="1"/>
+<text x="40" y="680" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="1.1" fill="#1F5C57">TIME</text>
+<text x="40" y="704" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1A1A1A">A human clock contains the soil.</text>
+<text x="500" y="704" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1A1A1A">The listener waits on the feed.</text>
+<text x="960" y="704" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1A1A1A">Each rhythm keeps its own period.</text>
+
+<text x="40" y="760" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="1.1" fill="#1F5C57">ACTION</text>
+<text x="40" y="784" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1A1A1A">People can take a turn.</text>
+<text x="500" y="784" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1A1A1A">People can listen, not reply.</text>
+<text x="960" y="784" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1A1A1A">The field goes on without a press.</text>
+
+<text x="40" y="840" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="1.1" fill="#1F5C57">AUTHORITY</text>
+<text x="40" y="864" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1A1A1A">I choose the spokesperson.</text>
+<text x="500" y="864" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1A1A1A">I choose the source and the gain.</text>
+<text x="960" y="864" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1A1A1A">I choose the grammar.</text>
+
+<text x="40" y="940" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#5E5E5E">Speaking-for, listening-with, and weaving-with are configurations for comparing practice, not stages toward a complete interface.</text>
+</svg>

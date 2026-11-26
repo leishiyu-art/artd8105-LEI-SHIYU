@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="520" viewBox="0 0 1440 520" role="img">
+<title>Listening Sea, listening-with</title>
+<rect width="1440" height="520" fill="#FFFFFF"/>
+<defs>
+  <marker id="arr" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M1 1.6 L8.2 5 L1 8.4" fill="none" stroke="#1A1A1A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+  <marker id="arrA" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M1 1.6 L8.2 5 L1 8.4" fill="none" stroke="#1F5C57" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+</defs>
+
+<text x="40" y="40" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="1.6" fill="#1F5C57">LISTENING-WITH</text>
+<text x="40" y="72" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#1A1A1A">Listening Sea</text>
+<text x="40" y="98" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#5E5E5E">A distant sea is heard through an instrument. The way back is left open.</text>
+
+<line x1="80" y1="250" x2="1320" y2="250" stroke="#1F5C57" stroke-width="1.25" marker-end="url(#arrA)"/>
+
+<line x1="80" y1="238" x2="80" y2="262" stroke="#1A1A1A" stroke-width="1.25"/>
+<text x="80" y="200" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1A1A1A">Hydrophone</text>
+<text x="80" y="290" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5E5E5E">Orcasound</text>
+<text x="80" y="308" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5E5E5E">one point in the sea</text>
+<text x="80" y="332" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#1F5C57">documented</text>
+
+<line x1="360" y1="238" x2="360" y2="262" stroke="#1A1A1A" stroke-width="1.25"/>
+<text x="360" y="200" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1A1A1A">Stream</text>
+<text x="360" y="290" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5E5E5E">orca calls · ships</text>
+<text x="360" y="308" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5E5E5E">tide</text>
+<text x="360" y="332" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#1F5C57">documented</text>
+
+<line x1="640" y1="238" x2="640" y2="262" stroke="#1A1A1A" stroke-width="1.25"/>
+<text x="640" y="200" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1A1A1A">Infrastructure</text>
+<text x="640" y="290" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5E5E5E">capture · transmit</text>
+<text x="640" y="308" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5E5E5E">playback, kept visible</text>
+<text x="640" y="332" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#1F5C57">documented</text>
+
+<line x1="960" y1="238" x2="960" y2="262" stroke="#1A1A1A" stroke-width="1.25" stroke-dasharray="3 3"/>
+<text x="960" y="200" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1A1A1A">Interior</text>
+<text x="960" y="290" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5E5E5E">sound</text>
+<text x="960" y="308" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5E5E5E">tactile translation</text>
+<text x="960" y="332" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#1F5C57">sound made · touch proposed</text>
+
+<line x1="1220" y1="238" x2="1220" y2="262" stroke="#1A1A1A" stroke-width="1.25"/>
+<text x="1220" y="200" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1A1A1A">Listener</text>
+<text x="1220" y="290" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5E5E5E">tunes source and gain</text>
+<text x="1220" y="308" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5E5E5E">waits</text>
+<text x="1220" y="332" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#1F5C57">may hear nothing</text>
+
+<path d="M1220 270 C1220 400, 140 400, 80 290" fill="none" stroke="#8A8A8A" stroke-width="1.15" stroke-dasharray="2 5" stroke-linecap="round"/>
+<circle cx="80" cy="290" r="4" fill="#FFFFFF" stroke="#8A8A8A" stroke-width="1.15"/>
+<text x="430" y="388" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5E5E5E">Return to the marine source: unconnected.</text>
+
+<line x1="40" y1="452" x2="64" y2="452" stroke="#1F5C57" stroke-width="1.25"/>
+<text x="76" y="456" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5E5E5E">forward path, documented</text>
+<line x1="280" y1="452" x2="304" y2="452" stroke="#1A1A1A" stroke-width="1.25" stroke-dasharray="3 3"/>
+<text x="316" y="456" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5E5E5E">proposed tactile channel</text>
+<line x1="520" y1="452" x2="544" y2="452" stroke="#8A8A8A" stroke-width="1.15" stroke-dasharray="2 4"/>
+<text x="556" y="456" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#5E5E5E">open return</text>
+</svg>
