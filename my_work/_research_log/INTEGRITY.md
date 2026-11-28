@@ -1,21 +1,41 @@
 # Integrity report
 
-Generated 2026-11-25 from the files in `my_work/_research_log/`. This report states the gaps it can see. It does not say the log is complete.
+Generated 2026-11-25 from the files in `my_work/_research_log/`. Recounted 2026-11-28. This report states the gaps it can see. It does not say the log is complete.
 
 Week numbers: WK-01 is Monday 24 August 2026 through Sunday 30 August 2026. Later weeks are the next Monday–Sunday blocks. The first session file is 26 August, inside WK-01.
 
 ## Counts
 
-- Session files: 27
-- Exchange records: 170
+Recounted 2026-11-28 from the session files then on disk:
+
+- Session files: 31
+- Exchange records: 201
+- Disposition records: 186
 - Decision files: 23 (DEC-001–DEC-023)
 - Correction records: 5
 - Records with `reconstructed: true`, or the `reconstructed` flag: 0
-- none found
+
+The 2026-11-25 counts (27 sessions, 170 exchanges) are the earlier pass. They are not deleted.
 
 ## Exchanges with no disposition
 
-15 of 170 exchanges (9%). The spec asks for a flag above 20%. This rate is under that line.
+19 of 201 exchanges (9%). The spec asks for a flag above 20%. This rate is under that line.
+
+Turns with no disposition on 2026-11-28:
+
+- 2026-08-26_1255 turns 1, 2, 8, 16, 18, 19
+- 2026-10-13_2200 turn 1
+- 2026-11-11_0018 turn 5
+- 2026-11-15_1848 turn 30
+- 2026-11-16_1333 turn 1
+- 2026-11-17_1545 turn 3
+- 2026-11-18_0017 turn 3
+- 2026-11-22_2224 turn 2
+- 2026-11-25_1037 turns 29, 30
+- 2026-11-26_1216 turn 3
+- 2026-11-26_2356 turn 5
+- 2026-11-27_1131 turn 1
+- 2026-11-28_1208 turn 1
 
 The missing turns are listed in the weekly files. Several are the last turn of a session, which cannot have a disposition until a later turn. They stay pending. Silence is not treated as acceptance.
 
@@ -113,3 +133,17 @@ Written for weeks that have session files: WK-01, WK-07, WK-08, WK-12, WK-13, WK
 Not written for the empty weeks above. An empty summary would invent a week of work.
 
 Every summary leaves both review boxes unticked. The student has not signed them.
+
+## Update 2026-11-28
+
+Commits after the 25 November pass, on the student's origin:
+
+- `179acd8` and `1c993da` tagged `[log:2026-11-26_2356]`
+- `56245a0` tagged `[log:2026-11-28_1208]`
+
+Session files added since 25 November with no commit tagged for that session:
+
+- 2026-11-26_1216
+- 2026-11-27_1131
+
+WK-14 was recounted the same day. Its review boxes stay unticked. No weekly file was added for WK-02–WK-06 or WK-09–WK-11. Those weeks still have no session files.
