@@ -162,9 +162,13 @@ refs_html = "\n".join(
 author_name = re.search(r"\\author\{(.+)\}", TEX).group(1)
 author_email = re.search(r"\\email\{(.+)\}", TEX).group(1)
 institution = re.search(r"\\institution\{(.+)\}", TEX).group(1)
-author_html = "<br>".join(
-    html.escape(bit) for bit in (author_name, institution, author_email)
-)
+class_opts = re.search(r"\\documentclass\[([^\]]+)\]", TEX).group(1)
+if "anonymous" in [opt.strip() for opt in class_opts.split(",")]:
+    author_html = "Anonymous Author(s)"
+else:
+    author_html = "<br>".join(
+        html.escape(bit) for bit in (author_name, institution, author_email)
+    )
 
 doc = f"""<!doctype html>
 <html lang="en">

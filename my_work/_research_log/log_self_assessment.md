@@ -5,12 +5,12 @@ One page. Counts below were read from `my_work/_research_log/` on 28 November 20
 ## Coverage
 
 - Session files: 31
-- Exchange records: 201
-- Disposition records: 186
+- Exchange records: 202
+- Disposition records: 187
 - Decision files: 23, DEC-001 through DEC-023
 - Correction records: 5
 - Records marked reconstructed: 0
-- Exchanges with no disposition: 19 of 201 (9%). Listed in `INTEGRITY.md`.
+- Exchanges with no disposition: 19 of 202. Listed in `INTEGRITY.md`.
 - Weekly summaries on disk: WK-01, WK-07, WK-08, WK-12, WK-13, WK-14
 - Weeks with no session file, and therefore no summary: WK-02, WK-03, WK-04, WK-05, WK-06, WK-09, WK-10, WK-11
 - Every weekly summary still has both review boxes unticked

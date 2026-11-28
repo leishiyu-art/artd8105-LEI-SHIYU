@@ -4,13 +4,13 @@
 
 ## 1. 成稿
 
-在。`main.tex` 用了 `acmart` 的 `manuscript,review`。阅读稿 PDF 在同一目录，也已推到 GitHub。没有在这台机器上跑出官方 acmart 编译。
+在。`main.tex` 用了 `acmart` 的 `manuscript,review,anonymous`。阅读稿 PDF 在同一目录。没有在这台机器上跑出官方 acmart 编译。
 
-正文去掉图注后大约 7,700 词。这个数字是去掉 LaTeX 命令后的粗算，落在 4,000–12,000 里，也靠近征稿写的常见 7,000–8,000。摘要是 171 词。征稿上限是 150。摘要没有改，因为那是你的句子。
+正文去掉图之后大约 8,100 词。这个数字是去掉 LaTeX 命令后按空格切开的粗算，落在 4,000–12,000 里，高于征稿写的常见 7,000–8,000。摘要是 171 词。征稿上限是 150。摘要没有改短，因为那是你的句子。
 
 第 3.5 节有一句在 “weaving-insp” 处断掉。源稿里就是断的，没有补完。
 
-匿名：征稿要求拿掉作者栏、致谢和能认出作者的图像。你 11 月 27 日要求把 LEI SHIYU、University of Macau 和邮箱印在阅读稿上，所以 `anonymous` 被拿掉了。这篇阅读稿现在不符合匿名。要改回匿名，需要你明确说一声。图 8 的展场照片里有人，匿名审查时也要单独看。
+匿名：2026-11-28 按这份提交清单，阅读稿改回不印姓名。`main.tex` 的文档类是 `manuscript,review,anonymous`。姓名、学校和邮箱仍留在源文件里，阅读稿首页印的是 Anonymous Author(s)。图 8 的展场照片里有人，匿名审查时要单独处理，这张图没有换成别的。
 
 ## 2. 图和说明
 
@@ -26,7 +26,7 @@
 
 过程日记：`my_work/process_journal/` 里没有一篇日记。`GAP.md` 只说明这个缺口。没有按决策记录回写成日记。
 
-研究日志在 `my_work/_research_log/`。2026-11-28 重数：31 个 session，201 条 exchange，23 份决策，5 条 correction，0 条标明 reconstructed。周记有 WK-01、07、08、12、13、14。WK-02 到 WK-06、WK-09 到 WK-11 没有 session，也就没有周记。六份周记的审阅框都还是空的，没有代勾。
+研究日志在 `my_work/_research_log/`。2026-11-28 重数：31 个 session，202 条 exchange，187 条 disposition，23 份决策，5 条 correction，0 条标明 reconstructed。19 条 exchange 还没有 disposition。周记有 WK-01、07、08、12、13、14。WK-02 到 WK-06、WK-09 到 WK-11 没有 session，也就没有周记。六份周记的审阅框都还是空的，没有代勾。
 
 ## 5. 一页日志自评
 
